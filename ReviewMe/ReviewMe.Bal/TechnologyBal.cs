@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
+using ReviewMe.ViewModel;
 
 namespace ReviewMe.Bal
 {
@@ -13,12 +14,27 @@ namespace ReviewMe.Bal
     {
         private readonly Repository<Technology> _technologyRepository = new Repository<Technology>(new EntityContext());
 
-        public List<Technology> GetAllTechnologies()
+        // Get All Technologies
+        public TechnologyViewModelLong GetAllTechnologies()
         {
             try
             {
-                List<Technology> technologyList = _technologyRepository.GetAll();
-                return technologyList;
+                List<Technology> technologyList = _technologyRepository.GetAll().Where(m => m.IsActive).ToList();
+                var technologyViewModelLong = new TechnologyViewModelLong();
+                foreach (Technology technology in technologyList)
+                {
+                    technologyViewModelLong.TechnologyViewModelList.Add(new TechnologyViewModel()
+                    {
+                        Id = technology.Id,
+                        TechnologyName = technology.TechnologyName,
+                        CreatedBy = technology.CreatedBy,
+                        ModifiedBy = technology.ModifiedBy,
+                        CreatedOn = technology.CreatedOn,
+                        ModifiedOn = technology.ModifiedOn,
+                        IsActive = technology.IsActive
+                    });
+                }
+                return technologyViewModelLong;
             }
             catch (Exception ex)
             {
@@ -26,12 +42,23 @@ namespace ReviewMe.Bal
             }
         }
 
-        public Technology GetTechnologyById(long id)
+        // Get Technology By Id
+        public TechnologyViewModel GetTechnologyById(long id)
         {
             try
             {
                 Technology technology = _technologyRepository.GetById(id);
-                return technology;
+                var technologyViewModel = new TechnologyViewModel()
+                {
+                    Id = technology.Id,
+                    TechnologyName = technology.TechnologyName,
+                    CreatedBy = technology.CreatedBy,
+                    ModifiedBy = technology.ModifiedBy,
+                    CreatedOn = technology.CreatedOn,
+                    ModifiedOn = technology.ModifiedOn,
+                    IsActive = technology.IsActive,
+                };
+                return technologyViewModel;
             }
             catch (Exception ex)
             {
@@ -39,14 +66,27 @@ namespace ReviewMe.Bal
             }
         }
 
-        public bool AddTechnology(Technology technology)
+        // Add new Technology
+        public bool AddTechnology(TechnologyViewModel technologyViewModel)
         {
             try
             {
-                var model = _technologyRepository.Add(technology);
-                if (model != null)
+                var technologyModel = new Technology()
+                {
+                    Id = technologyViewModel.Id,
+                    TechnologyName = technologyViewModel.TechnologyName,
+                    CreatedBy = 1,
+                    ModifiedBy = 1,
+                    CreatedOn = DateTime.Now,
+                    ModifiedOn = DateTime.Now,
+                    IsActive = true
+                };
+                Technology responseModel = _technologyRepository.Add(technologyModel);
+                if (responseModel != null)
+                {
+                    _technologyRepository.SaveChanges();
                     return true;
-                else
+                }
                     return false;
             }
             catch (Exception ex)
@@ -55,12 +95,28 @@ namespace ReviewMe.Bal
             }
         }
 
-        public Technology SaveOrUpdateTechnology(Technology technology)
+        // Update Technology
+        public bool SaveOrUpdateTechnology(TechnologyViewModel technologyViewModel)
         {
             try
             {
-                Technology entity = _technologyRepository.SaveOrUpdate(technology);
-                return entity;
+                var technologyModel = new Technology()
+                {
+                    Id = technologyViewModel.Id,
+                    TechnologyName = technologyViewModel.TechnologyName,
+                    CreatedBy = 1,
+                    ModifiedBy = 1,
+                    CreatedOn = DateTime.Now,
+                    ModifiedOn = DateTime.Now,
+                    IsActive = true
+                };
+                Technology responseModel = _technologyRepository.SaveOrUpdate(technologyModel);
+                if (responseModel != null)
+                {
+                    _technologyRepository.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch (Exception ex)
             {
@@ -68,11 +124,13 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Delete Technology
         public bool DeleteTechnology(long id)
         {
             try
             {
                 var response = _technologyRepository.Delete(id);
+                _technologyRepository.SaveChanges();
                 return response;
             }
             catch (Exception ex)

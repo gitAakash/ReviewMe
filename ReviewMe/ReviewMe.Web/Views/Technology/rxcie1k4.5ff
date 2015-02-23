@@ -1,0 +1,82 @@
+﻿@using ReviewMe.ViewModel
+@model ReviewMe.ViewModel.TechnologyViewModelLong
+@{
+    ViewBag.Title = "Technology-Management";
+}
+<div class="page-header">
+    <h1>Technology Management</h1>
+</div>
+<div class="row">
+    @Html.Partial("AddEditTechnology", Model.TechnologyViewModel)
+    <div class="col-sm-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Roles</span>
+            </div>
+            <div class="panel-body ">
+                <div class="table-info">
+                    <div class="table-header">
+                        <div class="table-caption">
+                            Technology Table
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Technology Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (TechnologyViewModel item in Model.TechnologyViewModelList)
+                            {
+                                <tr>
+                                    <td>@item.TechnologyName</td>
+                                    <td>@item.TechnologyName</td>
+                                    <td>
+                                        <a href="@Url.Action("Index", "Technology", new { id = item.Id })" class="btn btn-primary btn-labeled ">
+                                            <span class="btn-label icon fa fa-edit"></span> Edit
+                                        </a>
+
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-labeled " id="@(item.Id)_@(item.TechnologyName)" onclick=" DeleteTechnology(this) ">
+                                            <span class=" btn-label icon fa fa-warning">
+                                            </span> Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript" charset="utf-8">
+    function DeleteTechnology(element) {
+        var TechnologyId = $(element).attr('id').split('_')[0];
+        bootbox.confirm({
+            message: "Do you want to delete \"" + $(element).attr('id').split('_')[1] + "\" ?",
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "/Role/DeleteTechnology",
+                        type: "POST",
+                        data: { 'id': TechnologyId },
+                        success: function (data) {
+                            debugger;
+                            element.parentElement.parentElement.remove();
+                        },
+                        error: function (data) {
+                        }
+                    });
+                }
+            },
+            className: "bootbox-sm"
+        });
+
+    }
+</script>
+

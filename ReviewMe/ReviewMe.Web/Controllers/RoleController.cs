@@ -7,7 +7,6 @@ namespace ReviewMe.Web.Controllers
 {
     public class RoleController : Controller
     {
-        //
         // GET: /Role/
         public ActionResult Index(Int64? id)
         {
@@ -26,16 +25,14 @@ namespace ReviewMe.Web.Controllers
             if (ModelState.IsValid)
             {
                 if (roleViewModel.Id != 0)
-                    new RoleBal().SaveOrUpdateRole(roleViewModel);
+                {
+                    bool status = new RoleBal().SaveOrUpdateRole(roleViewModel);
+                }
                 else
-                    new RoleBal().AddRole(roleViewModel);
-                
+                {
+                    bool status = new RoleBal().AddRole(roleViewModel);
+                }
             }
-            //var roleViewModelLong = new RoleViewModelLong()
-            //{
-            //    RoleViewModel = roleViewModel
-            //};
-            //return View(roleViewModel);
             return RedirectToAction("Index", "Role");
         }
 
