@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
+using ReviewMe.ViewModel;
 
 namespace ReviewMe.Bal
 {
@@ -14,12 +12,25 @@ namespace ReviewMe.Bal
     {
         private readonly Repository<Role> _roleRepository = new Repository<Role>(new EntityContext());
 
-        public List<Role> GetAllRoles()
+        public RoleViewModelLong GetAllRoles()
         {
             try
             {
-                List<Role> roleList = _roleRepository.GetAll();
-                return roleList;
+                List<Role> roleList = _roleRepository.GetAll().Where(a=>a.IsActive).ToList();
+                var roleViewModelLong = new RoleViewModelLong();
+                foreach (Role role in roleList)
+                {
+                    roleViewModelLong.RoleViewModelList.Add(new RoleViewModel
+                    {
+                        Id = role.Id,
+                        RoleName = role.RoleName,
+                        CreatedBy = role.CreatedBy,
+                        ModifiedBy = role.ModifiedBy,
+                        CreatedOn = role.CreatedOn,
+                        ModifiedOn = role.ModifiedOn,
+                    });
+                }
+                return roleViewModelLong;
             }
             catch (Exception ex)
             {
@@ -27,11 +38,22 @@ namespace ReviewMe.Bal
             }
         }
 
-        public Role GetRoleById(long id)
+        public RoleViewModel GetRoleById(long id)
         {
-            try { 
-            Role role = _roleRepository.GetById(id);
-            return role;
+            try
+            {
+                Role role = _roleRepository.GetById(id);
+                var roleModel = new RoleViewModel
+                {
+                    Id = role.Id,
+                    RoleName = role.RoleName,
+                    CreatedBy = role.CreatedBy,
+                    ModifiedBy = role.ModifiedBy,
+                    CreatedOn = role.CreatedOn,
+                    ModifiedOn = role.ModifiedOn,
+                    IsActive = role.IsActive
+                };
+                return roleModel;
             }
             catch (Exception ex)
             {
@@ -39,15 +61,26 @@ namespace ReviewMe.Bal
             }
         }
 
-        public bool AddRole(Role role)
+        public bool AddRole(RoleViewModel roleviewModel)
         {
             try
             {
-                var model = _roleRepository.Add(role);
-                if (model!= null)
+                var roleModel = new Role
+                {
+                    Id = roleviewModel.Id,
+                    RoleName = roleviewModel.RoleName,
+                    CreatedBy = 1,
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = 1,
+                    ModifiedOn = DateTime.Now,
+                    IsActive = true
+                };
+                Role responseModel = _roleRepository.Add(roleModel);
+                _roleRepository.SaveChanges();
+
+                if (responseModel != null)
                     return true;
-                else
-                    return false;
+                return false;
             }
             catch (Exception ex)
             {
@@ -55,12 +88,26 @@ namespace ReviewMe.Bal
             }
         }
 
-        public Role SaveOrUpdateRole(Role role)
+        public bool SaveOrUpdateRole(RoleViewModel roleviewModel)
         {
             try
             {
-                Role entity = _roleRepository.SaveOrUpdate(role);
-                return entity;
+                var roleModel = new Role
+                {
+                    Id = roleviewModel.Id,
+                    RoleName = roleviewModel.RoleName,
+                    CreatedBy = 1,
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = 1,
+                    ModifiedOn = DateTime.Now,
+                    IsActive = true
+                };
+                Role responseModel = _roleRepository.SaveOrUpdate(roleModel);
+                _roleRepository.SaveChanges();
+
+                if (responseModel != null)
+                    return true;
+                return false;
             }
             catch (Exception ex)
             {
@@ -72,7 +119,8 @@ namespace ReviewMe.Bal
         {
             try
             {
-                var response = _roleRepository.Delete(id);
+                bool response = _roleRepository.Delete(id);
+                _roleRepository.SaveChanges();
                 return response;
             }
             catch (Exception ex)

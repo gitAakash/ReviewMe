@@ -219,6 +219,8 @@
     <Content Include="fonts\font-awesome\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\Actions\delete.png" />
+    <Content Include="images\Actions\edit.png" />
     <Content Include="images\msdropdown\icons\blank.gif" />
     <Content Include="images\msdropdown\icons\flagssprite_small.png" />
     <Content Include="images\msdropdown\skin1\dd_arrow.gif" />
@@ -238,6 +240,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.dd.js" />
     <Content Include="Scripts\jquery.dd.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -290,6 +293,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\AddEditRole.cshtml" />
+    <Content Include="Views\Role\RoleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,9 +309,9 @@
       <Project>{f6bbdc1e-438a-4fe0-80b3-d25799762178}</Project>
       <Name>ReviewMe.Bal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ReviewMe.Model\ReviewMe.Model.csproj">
-      <Project>{8e8e18be-9c94-4bff-9c86-25ef8869dab0}</Project>
-      <Name>ReviewMe.Model</Name>
+    <ProjectReference Include="..\ReviewMe.ViewModel\ReviewMe.ViewModel.csproj">
+      <Project>{3e6adc4f-ce08-4bfb-93a2-1e2afc9d1080}</Project>
+      <Name>ReviewMe.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

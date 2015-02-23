@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ReviewMe.Bal;
-using ReviewMe.Model;
 using ReviewMe.Web.Models;
 
 namespace ReviewMe.Web.Controllers
@@ -46,9 +45,9 @@ namespace ReviewMe.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            var userBal = new UserBal();
-            List<User> allUsers = userBal.GetAllUsers();
-            ViewBag.ReturnUrl = returnUrl;
+            //var userBal = new UserBal();
+            //List<User> allUsers = userBal.GetAllUsers();
+            //ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
