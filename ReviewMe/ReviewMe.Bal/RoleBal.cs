@@ -12,6 +12,7 @@ namespace ReviewMe.Bal
     {
         private readonly Repository<Role> _roleRepository = new Repository<Role>(new EntityContext());
 
+        // Get All Roles
         public RoleViewModelLong GetAllRoles()
         {
             try
@@ -38,6 +39,7 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Get Role By Id
         public RoleViewModel GetRoleById(long id)
         {
             try
@@ -61,6 +63,7 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Add new Role
         public bool AddRole(RoleViewModel roleviewModel)
         {
             try
@@ -88,6 +91,7 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Update Role
         public bool SaveOrUpdateRole(RoleViewModel roleviewModel)
         {
             try
@@ -115,6 +119,7 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Delete Role
         public bool DeleteRole(long id)
         {
             try
