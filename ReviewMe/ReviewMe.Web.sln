@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMe.Web", "ReviewMe.Web\ReviewMe.Web.csproj", "{F872CF5C-D67D-49FC-857F-556E17AA10A5}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMe.Model", "ReviewMe.Model\ReviewMe.Model.csproj", "{8E8E18BE-9C94-4BFF-9C86-25EF8869DAB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMe.Bal", "ReviewMe.Bal\ReviewMe.Bal.csproj", "{F6BBDC1E-438A-4FE0-80B3-D25799762178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewMe.ViewModel", "ReviewMe.ViewModel\ReviewMe.ViewModel.csproj", "{3E6ADC4F-CE08-4BFB-93A2-1E2AFC9D1080}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F6BBDC1E-438A-4FE0-80B3-D25799762178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6BBDC1E-438A-4FE0-80B3-D25799762178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6BBDC1E-438A-4FE0-80B3-D25799762178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E6ADC4F-CE08-4BFB-93A2-1E2AFC9D1080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E6ADC4F-CE08-4BFB-93A2-1E2AFC9D1080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E6ADC4F-CE08-4BFB-93A2-1E2AFC9D1080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E6ADC4F-CE08-4BFB-93A2-1E2AFC9D1080}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

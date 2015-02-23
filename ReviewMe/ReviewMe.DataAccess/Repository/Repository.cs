@@ -45,7 +45,8 @@ namespace ReviewMe.DataAccess.Repository
         {
             try
             {
-                _context.Set<T>().Attach(entity);
+                //_context.Set<T>().Attach(entity);
+                _context.Entry(entity).State = EntityState.Modified;
                 _context.SaveChanges();
                 return entity;
             }

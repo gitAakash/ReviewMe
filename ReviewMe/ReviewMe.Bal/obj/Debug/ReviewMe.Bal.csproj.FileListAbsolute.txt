@@ -31,3 +31,16 @@ E:\Projects\ReviewMe.Web\ReviewMe.Bal\bin\Debug\EntityFramework.xml
 E:\Projects\ReviewMe.Web\ReviewMe.Bal\obj\Debug\ReviewMe.Bal.csprojResolveAssemblyReference.cache
 E:\Projects\ReviewMe.Web\ReviewMe.Bal\obj\Debug\ReviewMe.Bal.dll
 E:\Projects\ReviewMe.Web\ReviewMe.Bal\obj\Debug\ReviewMe.Bal.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\ReviewMe.Bal.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\ReviewMe.Bal.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\EntityFramework.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\ReviewMe.DataAccess.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\ReviewMe.Model.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\ReviewMe.DataAccess.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\ReviewMe.Model.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\EntityFramework.xml
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\obj\Debug\ReviewMe.Bal.csprojResolveAssemblyReference.cache
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\obj\Debug\ReviewMe.Bal.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\obj\Debug\ReviewMe.Bal.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\ReviewMe.ViewModel.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.Bal\bin\Debug\ReviewMe.ViewModel.pdb

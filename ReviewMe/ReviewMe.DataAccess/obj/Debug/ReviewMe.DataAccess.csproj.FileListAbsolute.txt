@@ -36,3 +36,15 @@ E:\Projects\ReviewMe.Web\ReviewMe.DataAccess\bin\Debug\EntityFramework.SqlServer
 E:\Projects\ReviewMe.Web\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.csprojResolveAssemblyReference.cache
 E:\Projects\ReviewMe.Web\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.dll
 E:\Projects\ReviewMe.Web\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.DataAccess.dll.config
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.DataAccess.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.DataAccess.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\EntityFramework.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.Model.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.Model.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\EntityFramework.xml
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.csprojResolveAssemblyReference.cache
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.pdb

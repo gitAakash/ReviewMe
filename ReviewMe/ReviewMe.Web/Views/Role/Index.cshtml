@@ -1,7 +1,82 @@
-﻿
+﻿@using ReviewMe.ViewModel
+@model ReviewMe.ViewModel.RoleViewModelLong
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Role Management";
 }
 
-<h2>Index</h2>
+<div class="page-header">
+    <h1>Role Management</h1>
+</div>
+<div class="row">
+    @Html.Partial("AddEditRole", Model.RoleViewModel)
+    <div class="col-sm-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Roles</span>
+            </div>
+            <div class="panel-body ">
+                <div class="table-info">
+                    <div class="table-header">
+                        <div class="table-caption">
+                            Roles Table
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Role Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (RoleViewModel item in Model.RoleViewModelList)
+                            {
+                                <tr>
+                                    <td>@item.RoleName</td>
+                                    <td>@item.RoleName</td>
+                                    <td>
+                                        <a href="@Url.Action("Index", "Role", new {id = item.Id})" class="btn btn-primary btn-labeled " >
+                                            <span class="btn-label icon fa fa-edit"></span> Edit
+                                        </a>
 
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-labeled " id="@(item.Id)_@(item.RoleName)" onclick=" DeleteRole(this) ">
+                                            <span class=" btn-label icon fa fa-warning">
+                                            </span> Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                   </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript" charset="utf-8">
+    function DeleteRole(element) {
+        var roleId = $(element).attr('id').split('_')[0];
+            bootbox.confirm({
+                message: "Do you want to delete \"" + $(element).attr('id').split('_')[1] + "\" ?",
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Role/DeleteRole",
+                            type: "POST",
+                            data: { 'id': roleId },
+                            success: function (data) {
+                                debugger;
+                                element.parentElement.parentElement.remove();
+                            },
+                            error: function (data) {
+                            }
+                        });
+                    }
+                },
+                className: "bootbox-sm"
+            });
+       
+        }
+</script>

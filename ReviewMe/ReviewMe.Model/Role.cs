@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using System.ComponentModel.DataAnnotations;
 
 namespace ReviewMe.Model
 {
@@ -9,7 +10,7 @@ namespace ReviewMe.Model
         {
             Users = new List<User>();
         }
-
+        [Required]
         public string RoleName { get; set; }
 
         public List<User> Users { get; set; }

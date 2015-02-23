@@ -1,0 +1,7 @@
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\ReviewMe.ViewModel.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\ReviewMe.ViewModel.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.csprojResolveAssemblyReference.cache
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.pdb
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\Microsoft.DataAnnotations.dll
+E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\Microsoft.DataAnnotations.xml
