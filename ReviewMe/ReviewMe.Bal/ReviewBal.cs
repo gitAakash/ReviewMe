@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
+using ReviewMe.ViewModel;
 
 namespace ReviewMe.Bal
 {
@@ -13,12 +14,38 @@ namespace ReviewMe.Bal
     {
         private readonly Repository<Review> _reviewRepository = new Repository<Review>(new EntityContext());
 
-        public List<Review> GetAllReviews()
+        // Get All Reviews
+        public ReviewViewModelLong GetAllReviews()
         {
             try
             {
                 List<Review> reviewList = _reviewRepository.GetAll();
-                return reviewList;
+                var reviewViewModelLong = new ReviewViewModelLong();
+                foreach (Review review in reviewList)
+                {
+                    reviewViewModelLong.ReviewViewModelList.Add(new ReviewViewModel()
+                    {
+                        Id = review.Id,
+                        UserId = review.UserId,
+                        ReviewDate = review.ReviewDate,
+                        ProjectId = review.ProjectId,
+                        ModuleName = review.ModuleName,
+                        FileReviewed = review.FileReviewed,
+                        MethodsReviewed = review.MethodsReviewed,
+                        Remarks = review.Remarks,
+                        Status = review.Status,
+                        CodeOptimizationRating = review.CodeOptimizationRating,
+                        CodingStandardRating = review.CodingStandardRating,
+                        QueryOptimizationRating = review.QueryOptimizationRating,
+                        ProjectArchitecture = review.ProjectArchitecture,
+                        CreatedBy = review.CreatedBy,
+                        CreatedOn = review.CreatedOn,
+                        ModifiedBy = review.ModifiedBy,
+                        ModifiedOn = review.ModifiedOn,
+                        IsActive = review.IsActive
+                    });
+                }
+                return reviewViewModelLong;
             }
             catch (Exception ex)
             {
@@ -26,12 +53,34 @@ namespace ReviewMe.Bal
             }
         }
 
-        public Review GetReviewById(long id)
+        // Get ReviewModel by Id
+        public ReviewViewModel GetReviewById(long id)
         {
             try
             {
                 Review review = _reviewRepository.GetById(id);
-                return review;
+                var reviewViewModel = new ReviewViewModel()
+                {
+                    Id = review.Id,
+                    UserId = review.UserId,
+                    ReviewDate = review.ReviewDate,
+                    ProjectId = review.ProjectId,
+                    ModuleName = review.ModuleName,
+                    FileReviewed = review.FileReviewed,
+                    MethodsReviewed = review.MethodsReviewed,
+                    Remarks = review.Remarks,
+                    Status = review.Status,
+                    CodeOptimizationRating = review.CodeOptimizationRating,
+                    CodingStandardRating = review.CodingStandardRating,
+                    QueryOptimizationRating = review.QueryOptimizationRating,
+                    ProjectArchitecture = review.ProjectArchitecture,
+                    CreatedBy = review.CreatedBy,
+                    ModifiedBy = review.ModifiedBy,
+                    CreatedOn = review.CreatedOn,
+                    ModifiedOn = review.ModifiedOn,
+                    IsActive = review.IsActive,
+                };
+                return reviewViewModel;
             }
             catch (Exception ex)
             {
@@ -39,12 +88,35 @@ namespace ReviewMe.Bal
             }
         }
 
-        public bool AddTechnology(Review review)
+        // Add New Review
+        public bool AddReview(ReviewViewModel reviewViewModel)
         {
             try
             {
-                var model = _reviewRepository.Add(review);
-                if (model != null)
+                var review = new Review()
+                {
+                    Id = reviewViewModel.Id,
+                    UserId = 1,
+                    ReviewDate = reviewViewModel.ReviewDate,
+                    ProjectId = 1,
+                    ModuleName = reviewViewModel.ModuleName,
+                    FileReviewed = reviewViewModel.FileReviewed,
+                    MethodsReviewed = reviewViewModel.MethodsReviewed,
+                    Remarks = reviewViewModel.Remarks,
+                    Status = reviewViewModel.Status,
+                    CodeOptimizationRating = reviewViewModel.CodeOptimizationRating,
+                    CodingStandardRating = reviewViewModel.CodingStandardRating,
+                    QueryOptimizationRating = reviewViewModel.QueryOptimizationRating,
+                    ProjectArchitecture = reviewViewModel.ProjectArchitecture,
+                    CreatedBy = 1,
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = 1,
+                    ModifiedOn = DateTime.Now,
+                    IsActive = true
+                };
+
+                var responsemodel = _reviewRepository.Add(review);
+                if (responsemodel != null)
                     return true;
                 else
                     return false;
@@ -55,12 +127,39 @@ namespace ReviewMe.Bal
             }
         }
 
-        public Review SaveOrUpdateReview(Review review)
+        // Update Review 
+        public bool SaveOrUpdateReview(ReviewViewModel reviewViewModel)
         {
             try
             {
-            Review entity = _reviewRepository.SaveOrUpdate(review);
-            return entity;
+                var review = new Review()
+                {
+                    Id = reviewViewModel.Id,
+                    UserId = 1,
+                    ReviewDate = reviewViewModel.ReviewDate,
+                    ProjectId = 1,
+                    ModuleName = reviewViewModel.ModuleName,
+                    FileReviewed = reviewViewModel.FileReviewed,
+                    MethodsReviewed = reviewViewModel.MethodsReviewed,
+                    Remarks = reviewViewModel.Remarks,
+                    Status = reviewViewModel.Status,
+                    CodeOptimizationRating = reviewViewModel.CodeOptimizationRating,
+                    CodingStandardRating = reviewViewModel.CodingStandardRating,
+                    QueryOptimizationRating = reviewViewModel.QueryOptimizationRating,
+                    ProjectArchitecture = reviewViewModel.ProjectArchitecture,
+                    CreatedBy = 1,
+                    CreatedOn = DateTime.Now,
+                    ModifiedBy = 1,
+                    ModifiedOn = DateTime.Now,
+                    IsActive = true 
+                };
+                Review responseModel = _reviewRepository.SaveOrUpdate(review);
+                if (responseModel != null)
+                {
+                    _reviewRepository.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch (Exception ex)
             {
@@ -68,6 +167,7 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Delete Review
         public bool DeleteReview(long id)
         {
             try

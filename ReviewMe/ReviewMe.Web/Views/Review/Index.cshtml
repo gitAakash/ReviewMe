@@ -1,0 +1,77 @@
+﻿@using ReviewMe.ViewModel
+@model ReviewMe.ViewModel.ReviewViewModelLong
+@{
+    ViewBag.Title = "Review-Management";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/Custom/Review.js"></script>
+
+<div class="page-header">
+    <h1>Review Management</h1>
+</div>
+<div class="row">
+    @Html.Partial("AddEditReview", Model.ReviewViewModel)
+    <div class="col-sm-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Review</span>
+            </div>
+            <div class="panel-body ">
+                <div class="table-info">
+                    <div class="table-header">
+                        <div class="table-caption">
+                            Review Table
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Review Date</th>
+                                <th>FileReviewed</th>
+                                <th>ModuleName</th>
+                                <th>MethodsReviewed</th>
+                                <th>Status</th>
+                                <th>CodeOptimizationRating</th>
+                                <th>CodingStandardRating</th>
+                                <th>ProjectArchitecture</th>
+                                <th>QueryOptimizationRating</th>
+                                <th>Remarks</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (ReviewViewModel item in Model.ReviewViewModelList)
+                            {
+                                <tr>
+                                    <td>@item.ReviewDate</td>
+                                    <td>@item.FileReviewed</td>
+                                    <td>@item.ModuleName</td>
+                                    <td>@item.MethodsReviewed</td>
+                                    <td>@item.Status</td>
+                                    <td>@item.CodeOptimizationRating</td>
+                                    <td>@item.CodingStandardRating</td>
+                                    <td>@item.ProjectArchitecture</td>
+                                    <td>@item.QueryOptimizationRating</td>
+                                    <td>@item.Remarks</td>
+                                    <td>
+                                        <a href="@Url.Action("Index", "Review", new { id = item.Id })" class="btn btn-primary btn-labeled ">
+                                            <span class="btn-label icon fa fa-edit"></span> Edit
+                                        </a>
+
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-labeled " id="@(item.Id)" onclick=" DeleteReview(this) ">
+                                            <span class=" btn-label icon fa fa-warning">
+                                            </span> Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

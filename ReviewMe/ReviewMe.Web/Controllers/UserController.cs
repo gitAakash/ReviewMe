@@ -4,35 +4,57 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReviewMe.Bal;
+using ReviewMe.ViewModel;
 
 namespace ReviewMe.Web.Controllers
 {
     public class UserController : Controller
     {
-        //
         // GET: /User/
         public ActionResult Index()
         {
-            var userBal = new UserBal();
-            //List<User> allUsers = userBal.GetAllUsers();
-            //var user = new User();
-            //user.FName = "abc";
-            //user.LName = "abc";
-            //user.Dob = DateTime.Now;
-            //user.Gender = true;
-            //user.TechnologyId = 1;
-            //user.TeamLeaderId = 1;
-            //user.RoleId = 1;
-            //user.OnClient = false;
-            //user.OnProject = true;
-            //user.OnTask = true;
-            //user.CreatedBy = 1;
-            //user.CreatedOn = DateTime.Now;
-            //user.ModifiedBy = 1;
-            //user.ModifiedOn = DateTime.Now;
+            UserViewModelLong userViewModelLong = new UserBal().GetAllUsers();
+            userViewModelLong.UserViewModel = new UserViewModel();
+         
+            return View(userViewModelLong);
+        }
 
-            //var response = userBal.AddUser(user);
-            return View();
+        [HttpGet]
+        public ActionResult AddEditUser(Int64? userId)
+        {
+            var userViewModel = new UserViewModel();
+            if (userId != null && userId != 0)
+            {
+                userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));
+            }
+            return PartialView("AddEditUser", userViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddEditUser(UserViewModel userViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (userViewModel.Id != 0)
+                {
+                    bool status = new UserBal().SaveOrUpdateUser(userViewModel);
+                }
+                else
+                {
+                    bool status = new UserBal().AddUser(userViewModel);
+                }
+            }
+            return RedirectToAction("Index", "User");
+        }
+
+        [HttpPost]
+        public string DeleteUser(long id)
+        {
+            var status = new UserBal().DeleteUser(Convert.ToInt64(id));
+            if (status)
+                return "Data deleted successfully.";
+            else
+                return "Some error has occurred";
         }
 	}
 }

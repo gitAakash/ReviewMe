@@ -4,6 +4,9 @@
     ViewBag.Title = "Role Management";
 }
 
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/Custom/Role.js"></script>
+
 <div class="page-header">
     <h1>Role Management</h1>
 </div>
@@ -54,29 +57,3 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script type="text/javascript" charset="utf-8">
-    function DeleteRole(element) {
-        var roleId = $(element).attr('id').split('_')[0];
-            bootbox.confirm({
-                message: "Do you want to delete \"" + $(element).attr('id').split('_')[1] + "\" ?",
-                callback: function (result) {
-                    if (result) {
-                        $.ajax({
-                            url: "/Role/DeleteRole",
-                            type: "POST",
-                            data: { 'id': roleId },
-                            success: function (data) {
-                                debugger;
-                                element.parentElement.parentElement.remove();
-                            },
-                            error: function (data) {
-                            }
-                        });
-                    }
-                },
-                className: "bootbox-sm"
-            });
-       
-        }
-</script>
