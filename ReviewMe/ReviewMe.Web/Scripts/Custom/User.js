@@ -21,3 +21,22 @@
         className: "bootbox-sm"
     });
 }
+
+$(function() {
+$('#AddUser').click(function () {
+    debugger;
+    $('#userAddDetails').modal('show');
+    $.ajax({
+        url: "/User/AddEditUser",
+        type: "GET",
+        data: { },
+        success: function (data) {
+            debugger;
+            $('#userAddEditModalBody').empty();
+            $('#userAddEditModalBody').append(data);
+        },
+        error: function (data) {
+        }
+    });
+});
+});

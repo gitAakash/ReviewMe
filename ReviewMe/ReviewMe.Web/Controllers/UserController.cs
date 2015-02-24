@@ -11,15 +11,23 @@ namespace ReviewMe.Web.Controllers
     public class UserController : Controller
     {
         // GET: /User/
-        public ActionResult Index(Int64? id)
+        public ActionResult Index()
         {
             UserViewModelLong userViewModelLong = new UserBal().GetAllUsers();
             userViewModelLong.UserViewModel = new UserViewModel();
-            if (id != null)
-            {
-                userViewModelLong.UserViewModel = new UserBal().GetUserById(Convert.ToInt64(id));
-            }
+         
             return View(userViewModelLong);
+        }
+
+        [HttpGet]
+        public ActionResult AddEditUser(Int64? userId)
+        {
+            var userViewModel = new UserViewModel();
+            if (userId != null && userId != 0)
+            {
+                userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));
+            }
+            return PartialView("AddEditUser", userViewModel);
         }
 
         [HttpPost]
