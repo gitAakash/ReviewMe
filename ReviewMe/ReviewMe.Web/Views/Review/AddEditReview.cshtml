@@ -1,0 +1,24 @@
+﻿@model ReviewMe.ViewModel.ReviewViewModel
+<div class="panel-heading">
+    <span class="panel-title">Create Review</span>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm("AddEditReview", "Review", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            <div class="panel-body">
+                <form class="form-inline">
+                    @*<div class="form-group">
+                        <label class="sr-only">Role Name</label>
+                        @Html.TextBoxFor(model => model.TechnologyName, new { @placeholder = "Enter Technology", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.TechnologyName)
+                    </div>*@
+                    <button type="submit" class="btn btn-primary btn-labeled"><span class="btn-label icon fa fa-plus"></span> Add</button>
+                </form>
+            </div>
+        }
+    </div>
+</div>

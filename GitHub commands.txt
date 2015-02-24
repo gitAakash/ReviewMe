@@ -1,0 +1,20 @@
+To Initialize -- git init
+
+To check status -- git status
+
+To add code on bash -- git add .
+
+TO commit code -- git commit -m "Comment" 
+		eg: git commit -m "First-code"
+
+To push on server -- git push origin branch_name
+
+To take merge into master -- 
+
+To switch into master -- git checkout master
+
+To take update from master -- git pull origin master
+
+To create new branch -- git checkout -b branchName 
+
+To delete branch -- git branch -d branchName

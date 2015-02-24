@@ -1,11 +1,64 @@
-﻿@model IEnumerable<ReviewMe.Model.User>
+﻿@using ReviewMe.ViewModel
+@model ReviewMe.ViewModel.UserViewModelLong
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "User-Management";
 }
 
-<h2>Index</h2>
-@using (Html.BeginForm("GetApplicant", "Applicant", FormMethod.Get))
-{
-    
-}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/Custom/User.js"></script>
+
+<div class="page-header">
+    <h1>User Management</h1>
+</div>
+<div class="row">
+    @Html.Partial("AddEditUser", Model.UserViewModel)
+    <div class="col-sm-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">User</span>
+            </div>
+            <div class="panel-body ">
+                <div class="table-info">
+                    <div class="table-header">
+                        <div class="table-caption">
+                            User Table
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (UserViewModel item in Model.UserViewModelList)
+                            {
+                                <tr>
+                                    <td>@item.FName</td>
+                                    <td>@item.LName</td>
+                                    <td>@item.EmailId</td>
+                                    <td>@item.MobileNo</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Dob</td>
+                                    <td>
+                                        <a href="@Url.Action("Index", "User", new { id = item.Id })" class="btn btn-primary btn-labeled ">
+                                            <span class="btn-label icon fa fa-edit"></span> Edit
+                                        </a>
+
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-labeled " id="@(item.Id)_@(item.FName)" onclick=" DeleteUser(this) ">
+                                            <span class=" btn-label icon fa fa-warning">
+                                            </span> Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
