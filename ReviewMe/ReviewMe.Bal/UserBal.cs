@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ReviewMe.Common.Extensions;
 using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
@@ -23,7 +23,7 @@ namespace ReviewMe.Bal
                 var userViewModelLong = new UserViewModelLong();
                 foreach (User user in userList)
                 {
-                    userViewModelLong.UserViewModelList.Add(new UserViewModel()
+                    userViewModelLong.UserViewModelList.Add(new UserViewModel
                     {
                         Id = user.Id,
                         FName = user.FName,
@@ -36,12 +36,12 @@ namespace ReviewMe.Bal
                         ConfirmPassword = user.ConfirmPassword,
                         MobileNo = user.MobileNo,
                         AlternateContactNo = user.AlternateContactNo,
-                        UserImage = user.UserImage, 
+                        UserImage = user.UserImage,
                         Address = user.Address,
-                        EmployeeCode =  user.EmployeeCode,
-                        TeamLeaderId = user.TeamLeaderId,
-                        RoleId = user.RoleId,
-                        TechnologyId = user.TechnologyId,
+                        EmployeeCode = user.EmployeeCode,
+                        SelectedTeamLeadId = user.TeamLeaderId,
+                        SelectedRoleId = user.RoleId,
+                        SelectedTechnologyId = user.TechnologyId,
                         OnClient = user.OnClient,
                         OnProject = user.OnProject,
                         OnTask = user.OnTask,
@@ -61,13 +61,35 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Get List of all TeamLeaders
+        public UserViewModelLong GetAllTeamLeaders()
+        {
+            List<User> userList = _userRepository.GetAll().Where(m => m.RoleId == 2).ToList();
+            var userViewModelLong = new UserViewModelLong();
+            foreach (User user in userList)
+            {
+                userViewModelLong.UserViewModelList.Add(new UserViewModel
+                {
+                    Id = user.Id,
+                    FName = user.FName,
+                    LName = user.FName,
+                    MName = user.MName
+                });
+            }
+            return userViewModelLong;
+        }
+
         // Get User By Id
         public UserViewModel GetUserById(long id)
         {
             try
             {
                 User user = _userRepository.GetById(id);
-                var userViewModel = new UserViewModel()
+                RoleViewModelLong roleViewModelLong = new RoleBal().GetAllRoles();
+                UserViewModelLong userViewModelLong = GetAllTeamLeaders();
+
+                TechnologyViewModelLong technologyViewModelLong = new TechnologyBal().GetAllTechnologies();
+                var userViewModel = new UserViewModel
                 {
                     Id = user.Id,
                     FName = user.FName,
@@ -80,12 +102,12 @@ namespace ReviewMe.Bal
                     ConfirmPassword = user.ConfirmPassword,
                     MobileNo = user.MobileNo,
                     AlternateContactNo = user.AlternateContactNo,
-                    UserImage = user.UserImage, 
+                    UserImage = user.UserImage,
                     Address = user.Address,
-                    EmployeeCode =  user.EmployeeCode,
-                    TeamLeaderId = user.TeamLeaderId,
-                    RoleId = user.RoleId,
-                    TechnologyId = user.TechnologyId,
+                    EmployeeCode = user.EmployeeCode,
+                    SelectedTeamLeadId = user.TeamLeaderId,
+                    SelectedRoleId = user.RoleId,
+                    SelectedTechnologyId = user.TechnologyId,
                     OnClient = user.OnClient,
                     OnProject = user.OnProject,
                     OnTask = user.OnTask,
@@ -94,15 +116,69 @@ namespace ReviewMe.Bal
                     ModifiedBy = user.ModifiedBy,
                     CreatedOn = user.CreatedOn,
                     ModifiedOn = user.ModifiedOn,
-                    IsActive = user.IsActive
+                    IsActive = user.IsActive,
+                    DropDownForRoles = roleViewModelLong.RoleViewModelList.Select(c => new SerializableSelectListItem
+                    {
+                        Text = c.RoleName,
+                        Value = c.Id.ToString(CultureInfo.InvariantCulture)
+                    }),
+                    DropDownForTechnology =
+                        technologyViewModelLong.TechnologyViewModelList.Select(c => new SerializableSelectListItem
+                        {
+                            Text = c.TechnologyName,
+                            Value = c.Id.ToString(CultureInfo.InvariantCulture)
+                        }),
+                    DropDownForTeamLeader =
+                        userViewModelLong.UserViewModelList.Select(c => new SerializableSelectListItem()
+                        {
+                            Text = c.FName,
+                            Value = c.Id.ToString(CultureInfo.InvariantCulture)
+                        })
                 };
+
                 return userViewModel;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            
+        }
+        
+        public UserViewModel GetAddUserViewModel()
+        {
+            try
+            {
+                RoleViewModelLong roleViewModelLong = new RoleBal().GetAllRoles();
+                TechnologyViewModelLong technologyViewModelLong = new TechnologyBal().GetAllTechnologies();
+                UserViewModelLong userViewModelLong = GetAllTeamLeaders();
+
+                var userViewModel = new UserViewModel
+                {
+                    DropDownForRoles = roleViewModelLong.RoleViewModelList.Select(c => new SerializableSelectListItem
+                    {
+                        Text = c.RoleName,
+                        Value = c.Id.ToString(CultureInfo.InvariantCulture)
+                    }),
+                    DropDownForTechnology =
+                        technologyViewModelLong.TechnologyViewModelList.Select(c => new SerializableSelectListItem
+                        {
+                            Text = c.TechnologyName,
+                            Value = c.Id.ToString(CultureInfo.InvariantCulture)
+                        }),
+                    DropDownForTeamLeader = 
+                        userViewModelLong.UserViewModelList.Select(c=> new SerializableSelectListItem()
+                        {
+                            Text = c.FName,
+                            Value = c.Id.ToString(CultureInfo.InvariantCulture)
+                        })
+                };
+
+                return userViewModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // Add User
@@ -110,13 +186,14 @@ namespace ReviewMe.Bal
         {
             try
             {
-                var user = new User()
+                var user = new User
                 {
                     Id = userViewModel.Id,
                     FName = userViewModel.FName,
                     LName = userViewModel.FName,
                     MName = userViewModel.MName,
-                    Dob = userViewModel.Dob,
+                   // Dob = userViewModel.Dob,
+                    Dob = DateTime.Now,
                     Gender = userViewModel.Gender,
                     EmailId = userViewModel.EmailId,
                     Password = userViewModel.Password,
@@ -126,9 +203,9 @@ namespace ReviewMe.Bal
                     UserImage = userViewModel.UserImage,
                     Address = userViewModel.Address,
                     EmployeeCode = userViewModel.EmployeeCode,
-                    TeamLeaderId = userViewModel.TeamLeaderId,
-                    RoleId = userViewModel.RoleId,
-                    TechnologyId = userViewModel.TechnologyId,
+                    TeamLeaderId = userViewModel.SelectedTeamLeadId,
+                    RoleId = userViewModel.SelectedRoleId,
+                    TechnologyId = userViewModel.SelectedTechnologyId,
                     OnClient = userViewModel.OnClient,
                     OnProject = userViewModel.OnProject,
                     OnTask = userViewModel.OnTask,
@@ -139,7 +216,7 @@ namespace ReviewMe.Bal
                     ModifiedOn = DateTime.Now,
                     IsActive = true
                 };
-                var responsemodel = _userRepository.Add(user);
+                User responsemodel = _userRepository.Add(user);
                 if (responsemodel != null)
                     return true;
                 return false;
@@ -155,7 +232,7 @@ namespace ReviewMe.Bal
         {
             try
             {
-                var user = new User()
+                var user = new User
                 {
                     Id = userViewModel.Id,
                     FName = userViewModel.FName,
@@ -171,9 +248,9 @@ namespace ReviewMe.Bal
                     UserImage = userViewModel.UserImage,
                     Address = userViewModel.Address,
                     EmployeeCode = userViewModel.EmployeeCode,
-                    TeamLeaderId = userViewModel.TeamLeaderId,
-                    RoleId = userViewModel.RoleId,
-                    TechnologyId = userViewModel.TechnologyId,
+                    TeamLeaderId = userViewModel.SelectedTeamLeadId,
+                    RoleId = userViewModel.SelectedRoleId,
+                    TechnologyId = userViewModel.SelectedTechnologyId,
                     OnClient = userViewModel.OnClient,
                     OnProject = userViewModel.OnProject,
                     OnTask = userViewModel.OnTask,
@@ -200,7 +277,7 @@ namespace ReviewMe.Bal
         {
             try
             {
-                var response = _userRepository.Delete(id);
+                bool response = _userRepository.Delete(id);
                 _userRepository.SaveChanges();
                 return response;
             }
