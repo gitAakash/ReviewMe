@@ -324,6 +324,10 @@
       <Project>{f6bbdc1e-438a-4fe0-80b3-d25799762178}</Project>
       <Name>ReviewMe.Bal</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReviewMe.Common\ReviewMe.Common.csproj">
+      <Project>{49ab3b16-2a21-43b9-ada2-c205c398a2a6}</Project>
+      <Name>ReviewMe.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReviewMe.ViewModel\ReviewMe.ViewModel.csproj">
       <Project>{3e6adc4f-ce08-4bfb-93a2-1e2afc9d1080}</Project>
       <Name>ReviewMe.ViewModel</Name>

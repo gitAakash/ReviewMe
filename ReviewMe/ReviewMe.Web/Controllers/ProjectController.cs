@@ -16,7 +16,7 @@ namespace ReviewMe.Web.Controllers
         {
             ProjectViewModelLong projectViewModelLong = new ProjectBal().GetAllProjects();
             projectViewModelLong.ProjectViewModel = new ProjectViewModel();
-            if (id != null)
+            if (id != null && id != 0)
             {
                 projectViewModelLong.ProjectViewModel = new ProjectBal().GetProjectById(Convert.ToInt64(id));
             }

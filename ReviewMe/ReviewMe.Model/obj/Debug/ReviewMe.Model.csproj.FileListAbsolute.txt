@@ -19,3 +19,10 @@ E:\Projects\ReviewMe\ReviewMe\ReviewMe.Model\obj\Debug\ReviewMe.Model.pdb
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.Model\obj\Debug\ReviewMe.Model.csprojResolveAssemblyReference.cache
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.Model\bin\Debug\Microsoft.DataAnnotations.dll
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.Model\bin\Debug\Microsoft.DataAnnotations.xml
+E:\Aakash\ReviewMe\ReviewMe\ReviewMe.Model\bin\Debug\ReviewMe.Model.dll
+E:\Aakash\ReviewMe\ReviewMe\ReviewMe.Model\bin\Debug\ReviewMe.Model.pdb
+E:\Aakash\ReviewMe\ReviewMe\ReviewMe.Model\bin\Debug\Microsoft.DataAnnotations.dll
+E:\Aakash\ReviewMe\ReviewMe\ReviewMe.Model\bin\Debug\Microsoft.DataAnnotations.xml
+E:\Aakash\ReviewMe\ReviewMe\ReviewMe.Model\obj\Debug\ReviewMe.Model.csprojResolveAssemblyReference.cache
+E:\Aakash\ReviewMe\ReviewMe\ReviewMe.Model\obj\Debug\ReviewMe.Model.dll
+E:\Aakash\ReviewMe\ReviewMe\ReviewMe.Model\obj\Debug\ReviewMe.Model.pdb

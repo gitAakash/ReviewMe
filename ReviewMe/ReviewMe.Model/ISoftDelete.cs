@@ -1,9 +1,7 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace ReviewMe.Model
+﻿namespace ReviewMe.Model
 {
     public interface ISoftDelete
     {
-       bool IsActive { get; set; }
+        bool IsActive { get; set; }
     }
 }

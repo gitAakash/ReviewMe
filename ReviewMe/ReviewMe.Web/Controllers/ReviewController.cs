@@ -16,7 +16,7 @@ namespace ReviewMe.Web.Controllers
         {
             ReviewViewModelLong reviewViewModelLong = new ReviewBal().GetAllReviews();
             reviewViewModelLong.ReviewViewModel = new ReviewViewModel();
-            if (id != null)
+            if (id != null && id != 0)
             {
                 reviewViewModelLong.ReviewViewModel = new ReviewBal().GetReviewById(Convert.ToInt64(id));
             }

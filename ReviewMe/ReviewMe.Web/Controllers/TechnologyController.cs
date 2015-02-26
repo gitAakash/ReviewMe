@@ -16,7 +16,7 @@ namespace ReviewMe.Web.Controllers
         {
             TechnologyViewModelLong technologyViewModelLong = new TechnologyBal().GetAllTechnologies();
             technologyViewModelLong.TechnologyViewModel = new TechnologyViewModel();
-            if (id != null)
+            if (id != null && id != 0)
             {
                 technologyViewModelLong.TechnologyViewModel = new TechnologyBal().GetTechnologyById(Convert.ToInt64(id));
             }
