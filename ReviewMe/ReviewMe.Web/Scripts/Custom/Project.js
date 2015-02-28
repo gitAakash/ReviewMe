@@ -12,6 +12,7 @@
                     success: function (data) {
                         debugger;
                         element.parentElement.parentElement.remove();
+                        $('#uidemo-modals-alerts-success').modal('show');
                     },
                     error: function (data) {
                     }

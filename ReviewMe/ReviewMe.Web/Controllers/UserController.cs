@@ -14,19 +14,21 @@ namespace ReviewMe.Web.Controllers
         public ActionResult Index()
         {
             UserViewModelLong userViewModelLong = new UserBal().GetAllUsers();
-            userViewModelLong.UserViewModel = new UserViewModel();
-         
+          
             return View(userViewModelLong);
         }
 
         [HttpGet]
         public ActionResult AddEditUser(Int64? userId)
         {
-            var userViewModel = new UserViewModel();
+            UserViewModel userViewModel;
             if (userId != null && userId != 0)
             {
                 userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));
             }
+            else
+                userViewModel = new UserBal().GetAddUserViewModel();
+
             return PartialView("AddEditUser", userViewModel);
         }
 

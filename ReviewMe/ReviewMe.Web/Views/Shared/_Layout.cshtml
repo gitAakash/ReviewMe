@@ -285,7 +285,7 @@
                 <div class="navbar-header">
 
                     <!-- Logo -->
-                    <a href="index.html" class="navbar-brand">
+                    <a href="/" class="navbar-brand">
                         <div><img alt="Pixel Admin" src="~/assets/images/pixel-admin/main-navbar-logo.png"></div>
 
                         PixelAdmin
@@ -300,7 +300,7 @@
 
                 <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
                     <div>
-                        <ul class="nav navbar-nav">
+                        @* <ul class="nav navbar-nav">
                             <li>
                                 <a href="#">Home</a>
                             </li>
@@ -313,7 +313,7 @@
                                     <li><a href="#">Third item</a></li>
                                 </ul>
                             </li>
-                        </ul> <!-- / .navbar-nav -->
+                        </ul> <!-- / .navbar-nav -->*@
 
                         <div class="right clearfix">
                             <ul class="nav navbar-nav pull-right right-navbar-nav">
@@ -761,8 +761,80 @@
             @RenderBody()
         </div> <!-- / #content-wrapper -->
         <div id="main-menu-bg"></div>
+        <div class="container body-content">
+
+            <hr />
+            <footer class="pull-right">
+                <p>&copy; @DateTime.Now.Year - ReviewMe </p>
+            </footer>
+        </div>
+        <div id="demo-settings">
+        </div>
+    </div>
+    <!-- Success -->
+    <div id="uidemo-modals-alerts-success" class="modal modal-alert modal-success fade in" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fa fa-check-circle"></i>
+                </div>
+                <div class="modal-title" id="AlertSuccessTitle"></div>
+                <div class="modal-body" id="AlertSuccessBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Danger -->
+    <div id="uidemo-modals-alerts-danger" class="modal modal-alert modal-danger fade" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fa fa-times-circle"></i>
+                </div>
+                <div class="modal-title" id="AlertDangerTitle"></div>
+                <div class="modal-body" id="AlertDangerBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+                </div>
+            </div> 
+        </div> 
     </div>
 
+    <!-- Warning -->
+    <div id="uidemo-modals-alerts-warning" class="modal modal-alert modal-warning fade" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fa fa-warning"></i>
+                </div>
+                <div class="modal-title" id="AlertWarningTitle"></div>
+                <div class="modal-body" id="AlertWarningTitle"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div> 
+    </div>
+    
+    <!-- Info -->
+    <div id="uidemo-modals-alerts-info" class="modal modal-alert modal-info fade" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fa fa-info-circle"></i>
+                </div>
+                <div class="modal-title" id="AlertInfoTitle"></div>
+                <div class="modal-body" id="AlertInfoTitle"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                </div>
+            </div> 
+        </div> 
+    </div>
+    
     @* <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -783,105 +855,8 @@
                 </div>
             </div>
         </div>*@
-    <div class="container body-content">
-
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-    <div id="demo-settings">
-        <a href="#" id="demo-settings-toggler" class="fa fa-cogs"></a>
-        <h5 class="header">SETTINGS</h5>
-        <div>
-            <ul id="demo-settings-list">
-                <li class="clearfix">
-                    <span>Fixed navbar</span>
-                    <div class="demo-checkbox">
-                        <div class="switcher switcher-theme-square switcher-sm">
-                            <input type="checkbox" id="demo-fixed-navbar" class="demo-settings-switcher" data-class="switcher-sm">
-                            <div class="switcher-toggler"></div>
-                            <div class="switcher-inner">
-                                <div class="switcher-state-on">
-                                    <span class="fa fa-check" style="font-size: 11px;"></span>
-                                </div>
-                                <div class="switcher-state-off">
-                                    <span class="fa fa-times" style="font-size: 11px;"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <span>Fixed main menu</span>
-                    <div class="demo-checkbox">
-                        <div class="switcher switcher-theme-square switcher-sm">
-                            <input type="checkbox" id="demo-fixed-menu" class="demo-settings-switcher" data-class="switcher-sm">
-                            <div class="switcher-toggler"></div>
-                            <div class="switcher-inner">
-                                <div class="switcher-state-on">
-                                    <span class="fa fa-check" style="font-size: 11px;"></span>
-                                </div><div class="switcher-state-off"><span class="fa fa-times" style="font-size: 11px;"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <span>Right-to-left direction</span>
-                    <div class="demo-checkbox">
-                        <div class="switcher switcher-theme-square switcher-sm">
-                            <input type="checkbox" id="demo-rtl" class="demo-settings-switcher" data-class="switcher-sm">
-                            <div class="switcher-toggler"></div>
-                            <div class="switcher-inner">
-                                <div class="switcher-state-on">
-                                    <span class="fa fa-check" style="font-size: 11px;"></span>
-                                </div>
-                                <div class="switcher-state-off">
-                                    <span class="fa fa-times" style="font-size: 11px;"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <span>Main menu on the right</span>
-                    <div class="demo-checkbox">
-                        <div class="switcher switcher-theme-square switcher-sm">
-                            <input type="checkbox" id="demo-menu-rigth" class="demo-settings-switcher" data-class="switcher-sm">
-                            <div class="switcher-toggler">
-
-                            </div>
-                            <div class="switcher-inner">
-                                <div class="switcher-state-on">
-                                    <span class="fa fa-check" style="font-size: 11px;"></span>
-                                </div>
-                                <div class="switcher-state-off">
-                                    <span class="fa fa-times" style="font-size: 11px;"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <span>Hide main menu</span>
-                    <div class="demo-checkbox">
-                        <div class="switcher switcher-theme-square switcher-sm">
-                            <input type="checkbox" id="demo-no-menu" class="demo-settings-switcher" data-class="switcher-sm">
-                            <div class="switcher-toggler"></div>
-                            <div class="switcher-inner">
-                                <div class="switcher-state-on">
-                                    <span class="fa fa-check" style="font-size: 11px;"></span>
-                                </div>
-                                <div class="switcher-state-off"><span class="fa fa-times" style="font-size: 11px;"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-    <script src="~/Scripts/Custom/demo.js"></script>
+    
+   @* <script src="~/Scripts/Custom/demo.js"></script>*@
 
 </body>
 </html>
