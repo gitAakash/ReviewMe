@@ -36,6 +36,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +58,10 @@
     <Compile Include="UserBal.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ReviewMe.Common\ReviewMe.Common.csproj">
+      <Project>{49ab3b16-2a21-43b9-ada2-c205c398a2a6}</Project>
+      <Name>ReviewMe.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReviewMe.DataAccess\ReviewMe.DataAccess.csproj">
       <Project>{fdc30ddf-53e4-433e-96eb-c4fa82167fa1}</Project>
       <Name>ReviewMe.DataAccess</Name>
