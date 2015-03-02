@@ -72,7 +72,7 @@
                                     <td>@item.Address</td>
                                     <td>@item.Dob</td>
                                     <td>
-                                        <a href="@Url.Action("Index", "User", new { id = item.Id })" class="btn btn-primary btn-labeled ">
+                                        <a href="javascript:void(0)" id="@(item.Id)" class="btn btn-primary btn-labeled " onclick=" EditUser(this) ">
                                             <span class="btn-label icon fa fa-edit"></span> Edit
                                         </a>
 
