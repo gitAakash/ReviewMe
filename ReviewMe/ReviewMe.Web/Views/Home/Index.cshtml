@@ -12,7 +12,7 @@
     <li class="active"><a href="#">Dashboard</a></li>
 </ul>
 <div class="page-header">
-    <select onchange="print_state('state',this.selectedIndex);" name="countriesAAAA" id="countriesAAAA" style="width:300px;"></select>
+    
     <div class="row">
         <!-- Page header, center on small screens -->
         <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;Dashboard</h1>
@@ -52,7 +52,7 @@
         <script>
             $(document).ready(function() {
 
-                print_country('countriesAAAA');
+               // print_country('countriesAAAA');
             });
 
             window.init.push(function() {
@@ -111,12 +111,9 @@
                 <!-- Primary background, small padding, vertically centered text -->
                 <div class="stat-cell col-sm-8 bg-primary padding-sm valign-middle">
                     <div id="hero-graph" class="graph" style="height: 230px;">
-                        <svg height="230" version="1.1" width="442" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="26.5" y="191" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#ffffff" d="M39,191H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="26.5" y="149.5" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">5</tspan></text><path fill="none" stroke="#ffffff" d="M39,149.5H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="26.5" y="108" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">10</tspan></text><path fill="none" stroke="#ffffff" d="M39,108H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="26.5" y="66.49999999999999" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="3.999999999999986" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">15</tspan></text><path fill="none" stroke="#ffffff" d="M39,66.49999999999999H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="26.5" y="25" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">20</tspan></text><path fill="none" stroke="#ffffff" d="M39,25H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="417" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 16</tspan></text><text x="354" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 15</tspan></text><text x="291" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 14</tspan></text><text x="228" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 13</tspan></text><text x="165" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 12</tspan></text><text x="102" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 11</tspan></text><text x="39" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 10</tspan></text><path fill="none" stroke="#ffffff" d="M39,25C54.75,45.75,86.25,102.8125,102,108C117.75,113.1875,149.25,68.57499999999999,165,66.49999999999999C180.75,64.42499999999998,212.25,81.02499999999999,228,91.39999999999999C243.75,101.77499999999999,275.25,142.2375,291,149.5C306.75,156.7625,338.25,165.0625,354,149.5C369.75,133.9375,401.25,56.125,417,25" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="39" cy="25" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="102" cy="108" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="165" cy="66.49999999999999" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="228" cy="91.39999999999999" r="7" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="291" cy="149.5" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="354" cy="149.5" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="417" cy="25" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle></svg><div class="morris-hover morris-default-style" style="left: 189.5px; top: 33px;">
-                            <div class="morris-hover-row-label">2014-03-13</div><div class="morris-hover-point" style="color: #fff">
-                                Value:
-                                12
-                            </div>
-                        </div>
+                        <svg height="230" version="1.1" width="442" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;">
+                            <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="26.5" y="191" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#ffffff" d="M39,191H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="26.5" y="149.5" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">5</tspan></text><path fill="none" stroke="#ffffff" d="M39,149.5H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="26.5" y="108" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">10</tspan></text><path fill="none" stroke="#ffffff" d="M39,108H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="26.5" y="66.49999999999999" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="3.999999999999986" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">15</tspan></text><path fill="none" stroke="#ffffff" d="M39,66.49999999999999H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="26.5" y="25" text-anchor="end" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: end;" font-size="12px" font-family="sans-serif" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">20</tspan></text><path fill="none" stroke="#ffffff" d="M39,25H417" stroke-opacity="0.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="417" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 16</tspan></text><text x="354" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 15</tspan></text><text x="291" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 14</tspan></text><text x="228" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 13</tspan></text><text x="165" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 12</tspan></text><text x="102" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 11</tspan></text><text x="39" y="203.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); font-family: sans-serif; font-size: 12px; font-stretch: normal; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-anchor: middle;" font-size="12px" font-family="sans-serif" font-weight="normal" transform="matrix(1,0,0,1,0,7)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Mar 10</tspan></text><path fill="none" stroke="#ffffff" d="M39,25C54.75,45.75,86.25,102.8125,102,108C117.75,113.1875,149.25,68.57499999999999,165,66.49999999999999C180.75,64.42499999999998,212.25,81.02499999999999,228,91.39999999999999C243.75,101.77499999999999,275.25,142.2375,291,149.5C306.75,156.7625,338.25,165.0625,354,149.5C369.75,133.9375,401.25,56.125,417,25" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="39" cy="25" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="102" cy="108" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="165" cy="66.49999999999999" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="228" cy="91.39999999999999" r="7" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="291" cy="149.5" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="354" cy="149.5" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="417" cy="25" r="4" fill="#ffffff" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -164,9 +161,8 @@
                     <div class="stat-row">
                         <!-- Bordered, without top border, without horizontal padding -->
                         <div class="stat-cell bordered no-border-t no-padding-hr">
-                            <div class="pie-chart" data-percent="43" id="easy-pie-chart-1">
-                                <div class="pie-chart-label">12.3TB</div>
-                                <canvas height="90" width="90"></canvas>
+                            <div class="pie-chart"  data-percent="93" id="easy-pie-chart-1">
+                                <div class="pie-chart-label">12.3TB</div>  
                             </div>
                         </div>
                     </div> <!-- /.stat-row -->
@@ -185,7 +181,7 @@
                         <div class="stat-cell bordered no-border-t no-padding-hr">
                             <div class="pie-chart" data-percent="93" id="easy-pie-chart-2">
                                 <div class="pie-chart-label">93%</div>
-                                <canvas height="90" width="90"></canvas>
+                               
                             </div>
                         </div>
                     </div> <!-- /.stat-row -->
@@ -204,7 +200,7 @@
                         <div class="stat-cell bordered no-border-t no-padding-hr">
                             <div class="pie-chart" data-percent="75" id="easy-pie-chart-3">
                                 <div class="pie-chart-label">12GB</div>
-                                <canvas height="90" width="90"></canvas>
+                               
                             </div>
                         </div>
                     </div> <!-- /.stat-row -->
@@ -374,8 +370,8 @@
             </div> <!-- / .panel-heading -->
             <div class="panel-body tab-content-padding">
                 <!-- Panel padding, without vertical padding -->
-                <div class="slimScrollDiv" style="height: 300px; overflow: hidden; position: relative; width: auto;">
-                    <div class="panel-padding no-padding-vr" style="height: 300px; overflow: hidden; width: auto;">
+              
+                    <div class="panel-padding no-padding-vr" >
 
                         <div class="ticket">
                             <span class="label label-success ticket-label">Completed</span>
@@ -502,8 +498,8 @@
                                 Opened by <a href="#">Timothy Owens</a> 5 days ago
                             </span>
                         </div> <!-- / .ticket -->
-                    </div><div class="slimScrollBar" style="background: rgb(136, 136, 136); border-radius: 7px; display: block; height: 93.5550935550936px; opacity: 0.4; position: absolute; right: 1px; top: 95px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-                </div>
+                    </div>
+               
             </div> <!-- / .panel-body -->
         </div> <!-- / .panel -->
     </div>
@@ -541,8 +537,8 @@
                 <!-- Without padding -->
                 <div class="widget-comments panel-body tab-pane no-padding fade active in" id="dashboard-recent-comments">
                     <!-- Panel padding, without vertical padding -->
-                    <div class="slimScrollDiv" style="height: 300px; overflow: hidden; position: relative; width: auto;">
-                        <div class="panel-padding no-padding-vr" style="height: 300px; overflow: hidden; width: auto;">
+                  
+                        <div class="panel-padding no-padding-vr" >
                             <div class="comment">
                                 <img src="~/assets/demo/avatars/5.jpg" alt="" class="comment-avatar">
                                 <div class="comment-body">
@@ -712,14 +708,14 @@
                                     </div>
                                 </div> <!-- / .comment-body -->
                             </div> <!-- / .comment -->
-                        </div><div class="slimScrollBar" style="background: rgb(136, 136, 136); border-radius: 7px; display: block; height: 91.9305413687436px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-                    </div>
+                        </div>
+                  
                 </div> <!-- / .widget-comments -->
                 <!-- Threads widget -->
                 <!-- Without padding -->
                 <div class="widget-threads panel-body tab-pane no-padding fade" id="dashboard-recent-threads">
-                    <div class="slimScrollDiv" style="height: 300px; overflow: hidden; position: relative; width: auto;">
-                        <div class="panel-padding no-padding-vr" style="height: 300px; overflow: hidden; width: auto;">
+                 
+                        <div class="panel-padding no-padding-vr" >
                             <div class="thread">
                                 <img src="~/assets/demo/avatars/2.jpg" alt="" class="thread-avatar">
                                 <div class="thread-body">
@@ -809,6 +805,7 @@
                                     <div class="thread-info">started by <a href="#" title="">Robert Jang</a> in <a href="#" title="">Forum name</a></div>
                                 </div> <!-- / .thread-body -->
                             </div> <!-- / .thread -->
+                        
                             <div class="thread">
                                 <img src="~/assets/demo/avatars/2.jpg" alt="" class="thread-avatar">
                                 <div class="thread-body">
@@ -853,8 +850,8 @@
                                     <div class="thread-info">started by <a href="#" title="">Robert Jang</a> in <a href="#" title="">Forum name</a></div>
                                 </div> <!-- / .thread-body -->
                             </div> <!-- / .thread -->
-                        </div><div class="slimScrollBar" style="background: rgb(136, 136, 136); border-radius: 7px; display: block; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-                    </div>
+                        </div>
+                   
                 </div> <!-- / .panel-body -->
             </div>
         </div> <!-- / .widget-threads -->
