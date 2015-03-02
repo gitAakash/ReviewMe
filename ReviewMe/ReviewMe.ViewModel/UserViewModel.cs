@@ -46,7 +46,7 @@ namespace ReviewMe.ViewModel
         [Required(ErrorMessage = "Please select Role")]
         public long SelectedRoleId { get; set; }
 
-        public long SelectedTeamLeadId { get; set; }
+        public long? SelectedTeamLeadId { get; set; }
 
         public IEnumerable<SerializableSelectListItem> DropDownForRoles { get; set; }
         public IEnumerable<SerializableSelectListItem> DropDownForTechnology { get; set; }
