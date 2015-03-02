@@ -3,14 +3,18 @@
 @{
     Layout = null;
 }
-<link href="~/CSS/datepicker.css" rel="stylesheet" />
+
+
 @Scripts.Render("~/bundles/jqueryval")
+<link href="~/CSS/datepicker.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-datepicker.js"></script>
 
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h4 class="modal-title">Add User</h4>
+    @if(Model.Id != 0)
+    {<h4 class="modal-title">Edit User</h4>}
+    else { <h4 class="modal-title">Add User</h4>}    
 </div>
 @using (Html.BeginForm("AddEditUser", "User", FormMethod.Post, new {@class = "form-horizontal"}))
       {

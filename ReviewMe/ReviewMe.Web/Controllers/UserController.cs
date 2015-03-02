@@ -14,7 +14,6 @@ namespace ReviewMe.Web.Controllers
         public ActionResult Index()
         {
             UserViewModelLong userViewModelLong = new UserBal().GetAllUsers();
-          
             return View(userViewModelLong);
         }
 
