@@ -27,7 +27,7 @@ namespace ReviewMe.Bal
                     {
                         Id = user.Id,
                         FName = user.FName,
-                        LName = user.FName,
+                        LName = user.LName,
                         MName = user.MName,
                         Dob = user.Dob,
                         Gender = user.Gender,
@@ -72,7 +72,7 @@ namespace ReviewMe.Bal
                 {
                     Id = user.Id,
                     FName = user.FName,
-                    LName = user.FName,
+                    LName = user.LName,
                     MName = user.MName
                 });
             }
@@ -93,7 +93,7 @@ namespace ReviewMe.Bal
                 {
                     Id = user.Id,
                     FName = user.FName,
-                    LName = user.FName,
+                    LName = user.LName,
                     MName = user.MName,
                     Dob = user.Dob,
                     Gender = user.Gender,
@@ -143,7 +143,7 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
-        
+
         public UserViewModel GetAddUserViewModel()
         {
             try
@@ -165,8 +165,8 @@ namespace ReviewMe.Bal
                             Text = c.TechnologyName,
                             Value = c.Id.ToString(CultureInfo.InvariantCulture)
                         }),
-                    DropDownForTeamLeader = 
-                        userViewModelLong.UserViewModelList.Select(c=> new SerializableSelectListItem()
+                    DropDownForTeamLeader =
+                        userViewModelLong.UserViewModelList.Select(c => new SerializableSelectListItem()
                         {
                             Text = c.FName,
                             Value = c.Id.ToString(CultureInfo.InvariantCulture)
@@ -190,10 +190,9 @@ namespace ReviewMe.Bal
                 {
                     Id = userViewModel.Id,
                     FName = userViewModel.FName,
-                    LName = userViewModel.FName,
+                    LName = userViewModel.LName,
                     MName = userViewModel.MName,
-                   // Dob = userViewModel.Dob,
-                    Dob = DateTime.Now,
+                    Dob = userViewModel.Dob,
                     Gender = userViewModel.Gender,
                     EmailId = userViewModel.EmailId,
                     Password = userViewModel.Password,
@@ -203,7 +202,7 @@ namespace ReviewMe.Bal
                     UserImage = userViewModel.UserImage,
                     Address = userViewModel.Address,
                     EmployeeCode = userViewModel.EmployeeCode,
-                    TeamLeaderId = Convert.ToInt64(userViewModel.SelectedTeamLeadId),
+                    TeamLeaderId = userViewModel.SelectedTeamLeadId,
                     RoleId = userViewModel.SelectedRoleId,
                     TechnologyId = userViewModel.SelectedTechnologyId,
                     OnClient = userViewModel.OnClient,
@@ -236,7 +235,7 @@ namespace ReviewMe.Bal
                 {
                     Id = userViewModel.Id,
                     FName = userViewModel.FName,
-                    LName = userViewModel.FName,
+                    LName = userViewModel.LName,
                     MName = userViewModel.MName,
                     Dob = userViewModel.Dob,
                     Gender = userViewModel.Gender,
@@ -248,7 +247,7 @@ namespace ReviewMe.Bal
                     UserImage = userViewModel.UserImage,
                     Address = userViewModel.Address,
                     EmployeeCode = userViewModel.EmployeeCode,
-                    TeamLeaderId = Convert.ToInt64(userViewModel.SelectedTeamLeadId),
+                    TeamLeaderId = userViewModel.SelectedTeamLeadId,
                     RoleId = userViewModel.SelectedRoleId,
                     TechnologyId = userViewModel.SelectedTechnologyId,
                     OnClient = userViewModel.OnClient,

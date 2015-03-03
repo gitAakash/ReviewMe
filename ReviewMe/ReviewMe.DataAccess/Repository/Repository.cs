@@ -96,8 +96,7 @@ namespace ReviewMe.DataAccess.Repository
                     _context.SaveChanges();
                     return response;
                 }
-                else
-                    return null;
+                return null;
             }
             catch (Exception ex)
             {
