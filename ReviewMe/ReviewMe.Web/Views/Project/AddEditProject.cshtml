@@ -15,6 +15,7 @@
                         <label class="sr-only">Project Name</label>
                         @Html.TextBoxFor(model => model.ProjectTitle, new { @placeholder = "Enter Project", @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.ProjectTitle)
+                        @Html.TextBoxFor(model => model.Description, new { @placeholder = "Enter Description", @class = "form-control" })
                     </div>
                     <button type="submit" class="btn btn-primary btn-labeled"><span class="btn-label icon fa fa-plus"></span> Add</button>
                 </form>
