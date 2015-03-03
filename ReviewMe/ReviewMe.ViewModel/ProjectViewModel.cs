@@ -12,5 +12,6 @@ namespace ReviewMe.ViewModel
         public long UserId { get; set; }
         [Required(ErrorMessage = "Project Title is required")]
         public string ProjectTitle { get; set; }
+        public string Description { get; set; }
     }
 }

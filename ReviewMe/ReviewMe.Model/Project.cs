@@ -11,6 +11,7 @@ namespace ReviewMe.Model
 
         public long UserId { get; set; }
         public string ProjectTitle { get; set; }
+        public string Description { get; set; }
 
         public virtual User User { get; set; }
 

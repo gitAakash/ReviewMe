@@ -7,25 +7,25 @@ namespace ReviewMe.ViewModel
 {
     public class UserViewModel : EntityBaseView
     {
-        [Required(ErrorMessage = "First Name is required")]
+        [Required(ErrorMessage = "Please enter First Name")]
         public string FName { get; set; }
 
         public string LName { get; set; }
         public string MName { get; set; }
 
-        [Required(ErrorMessage = "Birth date is required")]
+        [Required(ErrorMessage = "Please enter Birth date")]
         public DateTime Dob { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]
         public bool Gender { get; set; }
 
-        [Required(ErrorMessage = "EmailId is required")]
+        [Required(ErrorMessage = "Please enter EmailId")]
         public string EmailId { get; set; }
 
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "MobileNo is required")]
+        [Required(ErrorMessage = "Please enter MobileNo")]
         [RegularExpression(@"^[0-9]\d{9}$", ErrorMessage = "Invalid Mobile Number")]
         public string MobileNo { get; set; }
 
@@ -46,7 +46,7 @@ namespace ReviewMe.ViewModel
         [Required(ErrorMessage = "Please select Role")]
         public long SelectedRoleId { get; set; }
 
-        public long SelectedTeamLeadId { get; set; }
+        public long? SelectedTeamLeadId { get; set; }
 
         public IEnumerable<SerializableSelectListItem> DropDownForRoles { get; set; }
         public IEnumerable<SerializableSelectListItem> DropDownForTechnology { get; set; }

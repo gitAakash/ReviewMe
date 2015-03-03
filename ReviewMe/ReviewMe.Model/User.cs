@@ -28,7 +28,7 @@ namespace ReviewMe.Model
         public string UserImage { get; set; }
         public string Address { get; set; }
         public string EmployeeCode { get; set; }
-        public long TeamLeaderId { get; set; }
+        public long? TeamLeaderId { get; set; }
         public long RoleId { get; set; }
         public long TechnologyId { get; set; }
         public bool OnClient { get; set; }
