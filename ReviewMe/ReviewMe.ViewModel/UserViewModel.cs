@@ -14,7 +14,7 @@ namespace ReviewMe.ViewModel
         public string MName { get; set; }
 
         [Required(ErrorMessage = "Please enter Birth date")]
-        public DateTime Dob { get; set; }
+        public DateTimeOffset Dob { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]
         public bool Gender { get; set; }

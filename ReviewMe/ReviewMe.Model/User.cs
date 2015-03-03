@@ -18,7 +18,7 @@ namespace ReviewMe.Model
         public string FName { get; set; }
         public string LName { get; set; }
         public string MName { get; set; }
-        public DateTime Dob { get; set; }
+        public DateTimeOffset Dob { get; set; }
         public bool Gender { get; set; }
         public string EmailId { get; set; }
         public string Password { get; set; }
