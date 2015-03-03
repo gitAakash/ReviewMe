@@ -174,7 +174,6 @@ namespace ReviewMe.DataAccess
                     m.MapRightKey("ProjectId");
                 });
 
-
             base.OnModelCreating(modelBuilder);
         }
 

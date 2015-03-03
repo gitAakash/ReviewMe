@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ReviewMe.Model
 {
@@ -36,6 +37,7 @@ namespace ReviewMe.Model
         public bool OnTask { get; set; }
         public double Rating { get; set; }
 
+        [ForeignKey("TeamLeaderId")]
         public virtual User TeamLeader { get; set; }
         public virtual Role Role { get; set; }
         public virtual Technology Technology { get; set; }

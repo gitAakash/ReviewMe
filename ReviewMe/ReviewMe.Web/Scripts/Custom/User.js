@@ -39,7 +39,6 @@ function EditUser(element) {
     });
 }
 
-
 $(function() {
     $('#AddUser').click(function() {
         debugger;

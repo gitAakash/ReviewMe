@@ -10,6 +10,7 @@ namespace ReviewMe.ViewModel
         [Required(ErrorMessage = "Please enter First Name")]
         public string FName { get; set; }
 
+        [Required(ErrorMessage = "Please enter Last Name")]
         public string LName { get; set; }
         public string MName { get; set; }
 
@@ -20,6 +21,7 @@ namespace ReviewMe.ViewModel
         public bool Gender { get; set; }
 
         [Required(ErrorMessage = "Please enter EmailId")]
+        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",ErrorMessage = "Invalid Email")]
         public string EmailId { get; set; }
 
         public string Password { get; set; }

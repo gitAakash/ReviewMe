@@ -1,4 +1,6 @@
-﻿@using ReviewMe.ViewModel
+﻿@using ReviewMe.Common.Extensions
+@using ReviewMe.ViewModel
+@using ReviewMe.Web.Controllers
 @model ReviewMe.ViewModel.UserViewModelLong
 @{
     ViewBag.Title = "User-Management";
@@ -8,11 +10,15 @@
 @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
 <script src="~/Scripts/Custom/User.js"></script>
 
+<ul class="breadcrumb breadcrumb-page">
+    <div class="breadcrumb-label text-light-gray">You are here: </div>
+    <li><a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">Home</a></li>
+    <li class="active"><a href="#">User</a></li>
+</ul>
 <div class="page-header">
-    
     <div class="row">
         <!-- Page header, center on small screens -->
-        <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;User Management</h1>
+        <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="menu-icon fa fa-th"></i>&nbsp;&nbsp;User Management</h1>
 
         <div class="col-xs-12 col-sm-8">
             <div class="row">
@@ -56,8 +62,11 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>User Name</th>
-                                <th>Description</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Date of Birth</th>
+                                <th>Email</th>
+                                <th>Contact Number</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -65,12 +74,13 @@
                             @foreach (UserViewModel item in Model.UserViewModelList)
                             {
                                 <tr>
-                                    <td>@item.FName</td>
-                                    <td>@item.LName</td>
+                                    <td>@item.FName @item.LName</td>
+                                    <td style="word-break:break-all;width: 313px;">
+                                        @item.Address
+                                    </td>
+                                    <td>@item.Dob</td>
                                     <td>@item.EmailId</td>
                                     <td>@item.MobileNo</td>
-                                    <td>@item.Address</td>
-                                    <td>@item.Dob</td>
                                     <td>
                                         <a href="javascript:void(0)" id="@(item.Id)" class="btn btn-primary btn-labeled " onclick=" EditUser(this) ">
                                             <span class="btn-label icon fa fa-edit"></span> Edit
