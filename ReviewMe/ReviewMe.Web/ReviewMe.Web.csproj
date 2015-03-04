@@ -169,11 +169,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502161218448_abc.cs" />
-    <Compile Include="Migrations\201502161218448_abc.Designer.cs">
-      <DependentUpon>201502161218448_abc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -334,11 +329,6 @@
       <Project>{3e6adc4f-ce08-4bfb-93a2-1e2afc9d1080}</Project>
       <Name>ReviewMe.ViewModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201502161218448_abc.resx">
-      <DependentUpon>201502161218448_abc.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

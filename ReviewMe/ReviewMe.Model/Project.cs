@@ -14,7 +14,6 @@ namespace ReviewMe.Model
         public string Description { get; set; }
 
         public virtual User User { get; set; }
-
         public List<User> Users { get; set; }
     }
 }

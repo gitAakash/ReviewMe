@@ -10,7 +10,6 @@ namespace ReviewMe.DataAccess.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ReviewMe.DataAccess.EntityContext context)
