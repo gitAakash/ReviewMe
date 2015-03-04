@@ -25,7 +25,6 @@ namespace ReviewMe.Bal
                     {
                         Id = project.Id,
                         UserId =  project.UserId,
-                        ProjectTitle = project.ProjectTitle,
                         Description = project.Description,
                         CreatedBy = project.CreatedBy,
                         ModifiedBy = project.ModifiedBy,
@@ -53,7 +52,7 @@ namespace ReviewMe.Bal
                 {
                     Id = project.Id,
                     UserId = project.UserId,
-                    ProjectTitle = project.ProjectTitle,
+                    
                     Description = project.Description,
                     CreatedBy = project.CreatedBy,
                     ModifiedBy = project.ModifiedBy,
@@ -78,7 +77,6 @@ namespace ReviewMe.Bal
                 {
                     Id = projectViewModel.Id,
                     UserId = 4,
-                    ProjectTitle = projectViewModel.ProjectTitle,
                     Description = projectViewModel.Description,
                     CreatedBy = 1,
                     ModifiedBy = 1,
@@ -106,7 +104,6 @@ namespace ReviewMe.Bal
                 {
                     Id = projectViewModel.Id,
                     UserId = 1,
-                    ProjectTitle = projectViewModel.ProjectTitle,
                     Description = projectViewModel.Description,
                     CreatedBy = 1,
                     ModifiedBy = 1,
