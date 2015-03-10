@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ReviewMe.Common.Extensions;
+using System.Web;
 
 namespace ReviewMe.ViewModel
 {
@@ -35,6 +36,8 @@ namespace ReviewMe.ViewModel
         public string AlternateContactNo { get; set; }
 
         public string UserImage { get; set; }
+
+        public HttpPostedFileBase FilePath { get; set; }
         public string Address { get; set; }
         public string EmployeeCode { get; set; }
         public bool OnClient { get; set; }

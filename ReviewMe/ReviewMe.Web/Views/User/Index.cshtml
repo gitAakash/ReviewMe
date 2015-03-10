@@ -75,10 +75,10 @@
                             {
                                 <tr>
                                     <td>@item.FName @item.LName</td>
-                                    <td style="word-break:break-all;width: 313px;">
+                                    <td style="word-break:break-all;width: 300px;">
                                         @item.Address
                                     </td>
-                                    <td>@item.Dob</td>
+                                    <td>@String.Format("{0:d}", item.Dob)</td>
                                     <td>@item.EmailId</td>
                                     <td>@item.MobileNo</td>
                                     <td>
@@ -95,6 +95,17 @@
                             }
                         </tbody>
                     </table>
+                    <div>
+                        <ul class="pagination pagination-xs">
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
