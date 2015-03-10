@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.IO;
 using System.Web.Mvc;
 using ReviewMe.Bal;
 using ReviewMe.ViewModel;
@@ -24,6 +22,7 @@ namespace ReviewMe.Web.Controllers
             if (userId != null && userId != 0)
             {
                 userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));
+                
             }
             else
                 userViewModel = new UserBal().GetAddUserViewModel();
@@ -36,6 +35,14 @@ namespace ReviewMe.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (userViewModel.FilePath.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(userViewModel.FilePath.FileName);
+                    fileName += DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(userViewModel.FilePath.FileName);
+                    string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
+                    userViewModel.FilePath.SaveAs(fileSavePath);
+                    userViewModel.UserImage = fileName;
+                }
                 if (userViewModel.Id != 0)
                 {
                     bool status = new UserBal().SaveOrUpdateUser(userViewModel);
@@ -51,11 +58,11 @@ namespace ReviewMe.Web.Controllers
         [HttpPost]
         public string DeleteUser(long id)
         {
-            var status = new UserBal().DeleteUser(Convert.ToInt64(id));
+            bool status = new UserBal().DeleteUser(Convert.ToInt64(id));
             if (status)
                 return "Data deleted successfully.";
-            else
-                return "Some error has occurred";
+
+            return "Some error has occurred";
         }
-	}
+    }
 }

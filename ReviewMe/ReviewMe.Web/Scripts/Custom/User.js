@@ -25,7 +25,10 @@
 function EditUser(element) {
     debugger;
     var userId = $(element).attr('id');
-    $('#userAddDetails').modal('show');
+    $('#userAddDetails').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
     $.ajax({
         url: "/User/AddEditUser",
         type: "GET",
@@ -42,7 +45,12 @@ function EditUser(element) {
 $(function() {
     $('#AddUser').click(function() {
         debugger;
-        $('#userAddDetails').modal('show');
+   
+        $('#userAddDetails').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        
         $.ajax({
             url: "/User/AddEditUser",
             type: "GET",
@@ -57,3 +65,17 @@ $(function() {
         });
     });
 });
+
+function readURL(input) {
+    debugger;
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#profileImage').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+        //$('#UserImage').val(input.files[0].name);
+    }
+}
