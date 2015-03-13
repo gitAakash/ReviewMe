@@ -10,6 +10,7 @@ namespace ReviewMe.Model
             Comments = new List<Comment>();
         }
 
+
         public long UserId { get; set; }
         public DateTime ReviewDate { get; set; }
         public long ProjectId { get; set; }
