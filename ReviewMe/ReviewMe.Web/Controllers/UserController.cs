@@ -3,9 +3,11 @@ using System.IO;
 using System.Web.Mvc;
 using ReviewMe.Bal;
 using ReviewMe.ViewModel;
+using ReviewMe.Web.Attributes;
 
 namespace ReviewMe.Web.Controllers
 {
+    [ReviewMeAuthorize]
     public class UserController : Controller
     {
         // GET: /User/
@@ -21,8 +23,7 @@ namespace ReviewMe.Web.Controllers
             UserViewModel userViewModel;
             if (userId != null && userId != 0)
             {
-                userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));
-                
+                userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));                
             }
             else
                 userViewModel = new UserBal().GetAddUserViewModel();

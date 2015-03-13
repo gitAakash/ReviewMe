@@ -100,21 +100,17 @@ namespace ReviewMe.Bal
         {
             try
             {
-                var technologyModel = new Technology()
+                Technology technology = _technologyRepository.GetById(technologyViewModel.Id);
+                if(technology != null)
                 {
-                    Id = technologyViewModel.Id,
-                    TechnologyName = technologyViewModel.TechnologyName,
-                    CreatedBy = 1,
-                    ModifiedBy = 1,
-                    CreatedOn = DateTime.Now,
-                    ModifiedOn = DateTime.Now,
-                    IsActive = true
-                };
-                Technology responseModel = _technologyRepository.SaveOrUpdate(technologyModel);
-                if (responseModel != null)
-                {
-                    _technologyRepository.SaveChanges();
-                    return true;
+                    technology.Id = technologyViewModel.Id;
+                    technology.TechnologyName = technologyViewModel.TechnologyName;                    
+                    technology.ModifiedBy = 1;
+                    technology.ModifiedOn = DateTime.Now;
+
+                    Technology responseModel = _technologyRepository.SaveOrUpdate(technology);
+                    if (responseModel != null)
+                        return true;
                 }
                 return false;
             }

@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using ReviewMe.Bal;
 using ReviewMe.ViewModel;
+using ReviewMe.Web.Attributes;
 
 namespace ReviewMe.Web.Controllers
 {
+    [ReviewMeAuthorize]
     public class TechnologyController : Controller
     {
         //

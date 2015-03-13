@@ -182,6 +182,51 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Get UserModel according to Email and Password for Authentication
+        public UserViewModel GetAuthenticateUserViewModel(string email, string password)
+        {
+            try
+            {
+                var userViewModel = new UserViewModel();
+                //User user = _userRepository.GetAll();
+                User user = _userRepository.GetAll().SingleOrDefault(m => m.EmailId == email && m.Password == password);
+                if (user != null)
+                {
+                    userViewModel.Id = user.Id;
+                    userViewModel.FName = user.FName;
+                    userViewModel.LName = user.LName;
+                    userViewModel.MName = user.MName;
+                    userViewModel.Dob = user.Dob;
+                    userViewModel.Gender = user.Gender;
+                    userViewModel.EmailId = user.EmailId;
+                    userViewModel.Password = user.Password;
+                    userViewModel.ConfirmPassword = user.ConfirmPassword;
+                    userViewModel.MobileNo = user.MobileNo;
+                    userViewModel.AlternateContactNo = user.AlternateContactNo;
+                    userViewModel.UserImage = user.UserImage;
+                    userViewModel.Address = user.Address;
+                    userViewModel.EmployeeCode = user.EmployeeCode;
+                    userViewModel.SelectedTeamLeadId = user.TeamLeaderId;
+                    userViewModel.SelectedRoleId = user.RoleId;
+                    userViewModel.SelectedTechnologyId = user.TechnologyId;
+                    userViewModel.OnClient = user.OnClient;
+                    userViewModel.OnProject = user.OnProject;
+                    userViewModel.OnTask = user.OnTask;
+                    userViewModel.Rating = user.Rating;
+                    userViewModel.CreatedBy = user.CreatedBy;
+                    userViewModel.ModifiedBy = user.ModifiedBy;
+                    userViewModel.CreatedOn = user.CreatedOn;
+                    userViewModel.ModifiedOn = user.ModifiedOn;
+                    userViewModel.IsActive = user.IsActive;
+                }
+                return userViewModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         // Add User
         public bool AddUser(UserViewModel userViewModel)
         {
@@ -232,38 +277,35 @@ namespace ReviewMe.Bal
         {
             try
             {
-                var user = new User
-                {
-                    Id = userViewModel.Id,
-                    FName = userViewModel.FName,
-                    LName = userViewModel.LName,
-                    MName = userViewModel.MName,
-                    Dob = userViewModel.Dob,
-                    Gender = userViewModel.Gender,
-                    EmailId = userViewModel.EmailId,
-                    Password = userViewModel.Password,
-                    ConfirmPassword = userViewModel.ConfirmPassword,
-                    MobileNo = userViewModel.MobileNo,
-                    AlternateContactNo = userViewModel.AlternateContactNo,
-                    UserImage = userViewModel.UserImage,
-                    Address = userViewModel.Address,
-                    EmployeeCode = userViewModel.EmployeeCode,
-                    TeamLeaderId = userViewModel.SelectedTeamLeadId,
-                    RoleId = userViewModel.SelectedRoleId,
-                    TechnologyId = userViewModel.SelectedTechnologyId,
-                    OnClient = userViewModel.OnClient,
-                    OnProject = userViewModel.OnProject,
-                    OnTask = userViewModel.OnTask,
-                    Rating = userViewModel.Rating,
-                    CreatedBy = 1,
-                    ModifiedBy = 1,
-                    CreatedOn = DateTime.Now,
-                    ModifiedOn = DateTime.Now,
-                    IsActive = true
-                };
-                User responsemodel = _userRepository.SaveOrUpdate(user);
-                if (responsemodel != null)
+                User user = _userRepository.GetById(userViewModel.Id);
+
+                if (user != null) { 
+                    user.FName = userViewModel.FName;
+                    user.LName = userViewModel.LName;
+                    user.MName = userViewModel.MName;
+                    user.Dob = userViewModel.Dob;
+                    user.Gender = userViewModel.Gender;
+                    user.EmailId = userViewModel.EmailId;
+                    user.MobileNo = userViewModel.MobileNo;
+                    user.AlternateContactNo = userViewModel.AlternateContactNo;
+                    user.UserImage = userViewModel.UserImage;
+                    user.Address = userViewModel.Address;
+                    user.TeamLeaderId = userViewModel.SelectedTeamLeadId;
+                    user.RoleId = userViewModel.SelectedRoleId;
+                    user.TechnologyId = userViewModel.SelectedTechnologyId;
+                    user.OnClient = userViewModel.OnClient;
+                    user.OnProject = userViewModel.OnProject;
+                    user.OnTask = userViewModel.OnTask;
+                    user.Rating = userViewModel.Rating;
+                    user.ModifiedBy = 1;
+                    user.ModifiedOn = DateTime.Now;
+
+                    User responsemodel = _userRepository.SaveOrUpdate(user);
+
+                    if (responsemodel != null)
                     return true;
+                };
+                
                 return false;
             }
             catch (Exception ex)
