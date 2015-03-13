@@ -96,21 +96,18 @@ namespace ReviewMe.Bal
         {
             try
             {
-                var roleModel = new Role
+                Role role = _roleRepository.GetById(roleviewModel.Id);
+                if (role != null)
                 {
-                    Id = roleviewModel.Id,
-                    RoleName = roleviewModel.RoleName,
-                    CreatedBy = 1,
-                    CreatedOn = DateTime.Now,
-                    ModifiedBy = 1,
-                    ModifiedOn = DateTime.Now,
-                    IsActive = true
-                };
-                Role responseModel = _roleRepository.SaveOrUpdate(roleModel);
-                _roleRepository.SaveChanges();
+                    role.RoleName = roleviewModel.RoleName;
+                    role.ModifiedBy = 1;
+                    role.ModifiedOn = DateTime.Now;
 
-                if (responseModel != null)
-                    return true;
+                    Role responseModel = _roleRepository.SaveOrUpdate(role);                  
+
+                    if (responseModel != null)
+                        return true;
+                }
                 return false;
             }
             catch (Exception ex)

@@ -73,6 +73,18 @@ namespace ReviewMe.DataAccess.Repository
             }
         }
 
+        public T GetAuthenticateUser(string email, string password)
+        {
+            try
+            {
+                return _context.Set<T>().Find(email, password);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public T Single(Func<T, bool> predicate)
         {
             throw new NotImplementedException();

@@ -1,21 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Newtonsoft.Json;
 using ReviewMe.Bal;
+using ReviewMe.Common.Authorization;
+using ReviewMe.Common.Enums;
+using ReviewMe.Common.Helpers;
+using ReviewMe.ViewModel;
+using ReviewMe.Web.Attributes;
 using ReviewMe.Web.Models;
 
 namespace ReviewMe.Web.Controllers
 {
-    [Authorize]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        public string UrlAfterLogin = null;
 
         public AccountController()
         {
@@ -45,41 +55,131 @@ namespace ReviewMe.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            //var userBal = new UserBal();
-            //List<User> allUsers = userBal.GetAllUsers();
-            //ViewBag.ReturnUrl = returnUrl;
-            return View();
+            try
+            {
+                //var userBal = new UserBal();
+                //List<User> allUsers = userBal.GetAllUsers();
+                //ViewBag.ReturnUrl = returnUrl;
+                var filterContext = new AuthorizationContext(ControllerContext);
+                var reviewMeAuthentication = new ReviewMeAuthentication(filterContext);
+                reviewMeAuthentication.Authorize();
+                SessionInformation sessionInformation = SessionManager.GetSessionInformation();
+                if (sessionInformation != null)
+                {
+                    if (returnUrl != null)
+                        return Redirect(returnUrl);
+                    if (SessionManager.GetUserRoleIdOfCurrentlyLoggedInUser().Equals(UserRoleEnum.Admin))
+                        return RedirectToAction("Index", "Home");
+                    if (SessionManager.GetUserRoleIdOfCurrentlyLoggedInUser().Equals(UserRoleEnum.TeamLeader))
+                        return RedirectToAction("Index", "Home");
+                    if (SessionManager.GetUserRoleIdOfCurrentlyLoggedInUser().Equals(UserRoleEnum.Developer))
+                        return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    UrlAfterLogin = Request.QueryString["ReturnUrl"];
+                    var loginViewModel = new LoginViewModel();
+                    return View(loginViewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                Uri url = HttpContext.Request.UrlReferrer;
+               // var encryptionHelper = new EncryptionHelper();
+               // model.Password = encryptionHelper.Encrypt(model.Password);
+
+                var userModel = new UserBal().GetAuthenticateUserViewModel(model.Email, model.Password);
+                var roleModel = new RoleBal().GetRoleById(userModel.SelectedRoleId);
+
+                if (SessionManager.GetSessionInformation() == null)
+                {
+                    if (userModel != null)
+                    {
+                        if (userModel.IsActive)
+                        {
+                            var sessionInfo = new SessionInformation
+                            {
+                                UserId = userModel.Id,
+                                UserRole = UserRoleHelper.GetUserRole(roleModel.RoleName),
+                                UserName = userModel.FName,
+                                FullName = userModel.FName + " " + userModel.LName,
+                                EmailId = userModel.EmailId,
+                                UserLogo = userModel.UserImage,
+                                UserRoleId = userModel.SelectedRoleId,
+                                //CanCreateUser = userModel.CanCreateUser,
+                                //CanDeleteUser = userModel.CanDeleteUser,
+                                TechnologyId = userModel.SelectedTechnologyId
+                            };
+                            SessionManager.SetSessionInformation(sessionInfo);
+                            if (model.RememberMe)
+                            {
+                                var cookieInformation = new CookieInformation
+                                {
+                                    Email = model.Email,
+                                    Password = model.Password
+                                };
+                                string cookie = JsonConvert.SerializeObject(cookieInformation);
+                                FormsAuthentication.SetAuthCookie(cookie, model.RememberMe);
+                            }
+                            if (!string.IsNullOrEmpty(url.Query))
+                            {
+                                return Redirect(returnUrl);
+                            }
+                            return RedirectToAction("Index", "Home");
+                        }
+                        Session["LOGIN_FAILED"] = "Oops!!! Your account is not active. Please Contact Admin.";
+                        return View(model);
+                    }
+                    /*Session["LOGIN_FAILED"] = "Oops!!! Invalid username or password, Please Try Again.";
+                    return View(model);*/
+                }
+                else
+                {
+                    SessionManager.RemoveSessionInformation();
+                }
+                ViewBag.ReturnUrl = returnUrl;
                 return View(model);
             }
-
+            catch (Exception ex)
+            {
+                return View("Login");
+            }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            SignInStatus result =
-                await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new {ReturnUrl = returnUrl, model.RememberMe});
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            //SignInStatus result =
+            //    await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            //switch (result)
+            //{
+            //    case SignInStatus.Success:
+            //        return RedirectToLocal(returnUrl);
+            //    case SignInStatus.LockedOut:
+            //        return View("Lockout");
+            //    case SignInStatus.RequiresVerification:
+            //        return RedirectToAction("SendCode", new {ReturnUrl = returnUrl, model.RememberMe});
+            //    case SignInStatus.Failure:
+            //    default:
+            //        ModelState.AddModelError("", "Invalid login attempt.");
+            //        return View(model);
+            //}
         }
 
         //
@@ -390,14 +490,13 @@ namespace ReviewMe.Web.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+      
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            SessionManager.RemoveSessionInformation();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Account");
         }
 
         //

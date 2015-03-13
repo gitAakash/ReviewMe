@@ -132,33 +132,28 @@ namespace ReviewMe.Bal
         {
             try
             {
-                var review = new Review()
-                {
-                    Id = reviewViewModel.Id,
-                    UserId = 1,
-                    ReviewDate = reviewViewModel.ReviewDate,
-                    ProjectId = 1,
-                    ModuleName = reviewViewModel.ModuleName,
-                    FileReviewed = reviewViewModel.FileReviewed,
-                    MethodsReviewed = reviewViewModel.MethodsReviewed,
-                    Remarks = reviewViewModel.Remarks,
-                    Status = reviewViewModel.Status,
-                    CodeOptimizationRating = reviewViewModel.CodeOptimizationRating,
-                    CodingStandardRating = reviewViewModel.CodingStandardRating,
-                    QueryOptimizationRating = reviewViewModel.QueryOptimizationRating,
-                    ProjectArchitecture = reviewViewModel.ProjectArchitecture,
-                    CreatedBy = 1,
-                    CreatedOn = DateTime.Now,
-                    ModifiedBy = 1,
-                    ModifiedOn = DateTime.Now,
-                    IsActive = true 
-                };
-                Review responseModel = _reviewRepository.SaveOrUpdate(review);
-                if (responseModel != null)
-                {
-                    _reviewRepository.SaveChanges();
-                    return true;
-                }
+                Review review = _reviewRepository.GetById(reviewViewModel.Id);
+                if( review!= null)
+                {                    
+                    review.UserId = 1;
+                    review.ReviewDate = reviewViewModel.ReviewDate;
+                    review.ProjectId = 1;
+                    review.ModuleName = reviewViewModel.ModuleName;
+                    review.FileReviewed = reviewViewModel.FileReviewed;
+                    review.MethodsReviewed = reviewViewModel.MethodsReviewed;
+                    review.Remarks = reviewViewModel.Remarks;
+                    review.Status = reviewViewModel.Status;
+                    review.CodeOptimizationRating = reviewViewModel.CodeOptimizationRating;
+                    review.CodingStandardRating = reviewViewModel.CodingStandardRating;
+                    review.QueryOptimizationRating = reviewViewModel.QueryOptimizationRating;
+                    review.ProjectArchitecture = reviewViewModel.ProjectArchitecture;
+                    review.ModifiedBy = 1;
+                    review.ModifiedOn = DateTime.Now;                    
+                
+                    Review responseModel = _reviewRepository.SaveOrUpdate(review);
+                    if (responseModel != null)                   
+                        return true;
+                }                
                 return false;
             }
             catch (Exception ex)

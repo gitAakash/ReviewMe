@@ -100,20 +100,19 @@ namespace ReviewMe.Bal
         {
             try 
             {
-                var project = new Project()
+                Project project = _projectRepository.GetById(projectViewModel.Id);
+                if (project != null)
                 {
-                    Id = projectViewModel.Id,
-                    UserId = 1,
-                    Description = projectViewModel.Description,
-                    CreatedBy = 1,
-                    ModifiedBy = 1,
-                    CreatedOn = DateTime.Now,
-                    ModifiedOn = DateTime.Now,
-                    IsActive = true
-                };
-                Project responsemodel = _projectRepository.SaveOrUpdate(project);
-                if (responsemodel != null)
-                    return true;
+                    project.UserId = 1;
+                    project.Description = projectViewModel.Description;
+                    project.ModifiedBy = 1;
+                    project.ModifiedOn = DateTime.Now;
+
+                    Project responsemodel = _projectRepository.SaveOrUpdate(project);
+
+                    if (responsemodel != null)
+                        return true;
+                }
                 return false;
             }
             catch (Exception ex)

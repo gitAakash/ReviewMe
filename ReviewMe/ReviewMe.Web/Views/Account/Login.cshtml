@@ -1,54 +1,55 @@
-﻿@{
+﻿@model ReviewMe.Web.Models.LoginViewModel
+@{
     Layout = null;
 }
 
 <html class="gt-ie8 gt-ie9 not-ie pxajs">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Sign In - PixelAdmin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Sign In - PixelAdmin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&amp;subset=latin" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&amp;subset=latin" rel="stylesheet" type="text/css">
 
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/pixel-admin.min.css" rel="stylesheet" />
-    <link href="~/Content/pages.min.css" rel="stylesheet" />
-    @* <link href="~/Content/widgets.min.css" rel="stylesheet" />*@
-    <link href="~/Content/rtl.min.css" rel="stylesheet" />
-    <link href="~/Content/themes.min.css" rel="stylesheet" />
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
-    <!--[if lt IE 9]>
-        <script src="assets/javascripts/ie.min.js"></script>
-    <![endif]-->
-    <!-- $DEMO =========================================================================================
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/pixel-admin.min.css" rel="stylesheet" />
+        <link href="~/Content/pages.min.css" rel="stylesheet" />
+        @* <link href="~/Content/widgets.min.css" rel="stylesheet" />*@
+        <link href="~/Content/rtl.min.css" rel="stylesheet" />
+        <link href="~/Content/themes.min.css" rel="stylesheet" />
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/bootstrap")
+        <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
+        <!--[if lt IE 9]>
+            <script src="assets/javascripts/ie.min.js"></script>
+        <![endif]-->
+        <!-- $DEMO =========================================================================================
 
-        Remove this section on production
-        -->
-    <style>
-        #signin-demo {
-            background: rgba(0, 0, 0, .6);
-            border-radius: 3px;
-            bottom: 0;
-            padding: 6px;
-            position: fixed;
-            right: 0;
-            z-index: 10000;
-        }
+            Remove this section on production
+            -->
+        <style>
+            #signin-demo {
+                background: rgba(0, 0, 0, .6);
+                border-radius: 3px;
+                bottom: 0;
+                padding: 6px;
+                position: fixed;
+                right: 0;
+                z-index: 10000;
+            }
 
             #signin-demo img {
                 cursor: pointer;
                 height: 40px;
             }
 
-                #signin-demo img:hover {
-                    opacity: .5;
-                }
+            #signin-demo img:hover {
+                opacity: .5;
+            }
 
             #signin-demo div {
                 color: #fff;
@@ -56,42 +57,42 @@
                 font-weight: 600;
                 padding-bottom: 6px;
             }
-    </style>
-    <!-- / $DEMO -->
+        </style>
+        <!-- / $DEMO -->
 
-    <style type="text/css">
-        .jqstooltip {
-            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
-            background: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.6);
-            border: 1px solid white;
-            color: white;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
-            font: 10px arial, san serif;
-            left: 0px;
-            padding: 5px;
-            position: absolute;
-            text-align: left;
-            top: 0px;
-            visibility: hidden;
-            white-space: nowrap;
-            z-index: 10000;
-        }
+        <style type="text/css">
+            .jqstooltip {
+                -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+                background: rgb(0, 0, 0);
+                background-color: rgba(0, 0, 0, 0.6);
+                border: 1px solid white;
+                color: white;
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+                font: 10px arial, san serif;
+                left: 0px;
+                padding: 5px;
+                position: absolute;
+                text-align: left;
+                top: 0px;
+                visibility: hidden;
+                white-space: nowrap;
+                z-index: 10000;
+            }
 
-        .jqsfield {
-            color: white;
-            font: 10px arial, san serif;
-            text-align: left;
-        }
-    </style>
-    <style>
-        #demo-themes {
-            border-bottom-left-radius: 5px;
-            display: table;
-            overflow: hidden;
-            table-layout: fixed;
-            width: 100%;
-        }
+            .jqsfield {
+                color: white;
+                font: 10px arial, san serif;
+                text-align: left;
+            }
+        </style>
+        <style>
+            #demo-themes {
+                border-bottom-left-radius: 5px;
+                display: table;
+                overflow: hidden;
+                table-layout: fixed;
+                width: 100%;
+            }
 
             #demo-themes .demo-themes-row {
                 display: block;
@@ -108,9 +109,9 @@
                 width: 50%;
             }
 
-                #demo-themes .demo-theme:hover {
-                    color: #fff;
-                }
+            #demo-themes .demo-theme:hover {
+                color: #fff;
+            }
 
             #demo-themes .theme-preview {
                 bottom: 0;
@@ -121,13 +122,13 @@
                 width: 100%;
             }
 
-                #demo-themes .theme-preview img {
-                    display: block;
-                    left: 0;
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                }
+            #demo-themes .theme-preview img {
+                display: block;
+                left: 0;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
 
             #demo-themes .demo-theme .overlay {
                 background: #1d1d1d;
@@ -165,27 +166,27 @@
                 left: 0;
             }
 
-        #demo-settings {
-            -khtml-user-select: none;
-            -moz-transition: all .3s;
-            -moz-user-select: none;
-            -ms-transition: all .3s;
-            -ms-user-select: none;
-            -o-transition: all .3s;
-            -webkit-touch-callout: none;
-            -webkit-transition: all .3s;
-            -webkit-user-select: none;
-            background: #333;
-            border-radius: 5px;
-            padding-right: 10px;
-            position: fixed;
-            right: -270px;
-            top: 70px;
-            transition: all .3s;
-            user-select: none;
-            width: 270px;
-            z-index: 999998;
-        }
+            #demo-settings {
+                -khtml-user-select: none;
+                -moz-transition: all .3s;
+                -moz-user-select: none;
+                -ms-transition: all .3s;
+                -ms-user-select: none;
+                -o-transition: all .3s;
+                -webkit-touch-callout: none;
+                -webkit-transition: all .3s;
+                -webkit-user-select: none;
+                background: #333;
+                border-radius: 5px;
+                padding-right: 10px;
+                position: fixed;
+                right: -270px;
+                top: 70px;
+                transition: all .3s;
+                user-select: none;
+                width: 270px;
+                z-index: 999998;
+            }
 
             #demo-settings.open {
                 right: -10px;
@@ -211,32 +212,32 @@
                 z-index: 100000;
             }
 
-        #demo-settings-toggler {
-            -moz-transition: color .3s;
-            -ms-transition: color .3s;
-            -o-transition: color .3s;
-            -webkit-transition: color .3s;
-            background: #444;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 21px;
-            height: 40px;
-            left: -40px;
-            line-height: 40px;
-            padding-right: 10px;
-            position: absolute;
-            text-align: center;
-            text-decoration: none !important;
-            top: 0;
-            transition: color .3s;
-            width: 50px;
-            z-index: 99999;
-        }
+            #demo-settings-toggler {
+                -moz-transition: color .3s;
+                -ms-transition: color .3s;
+                -o-transition: color .3s;
+                -webkit-transition: color .3s;
+                background: #444;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 21px;
+                height: 40px;
+                left: -40px;
+                line-height: 40px;
+                padding-right: 10px;
+                position: absolute;
+                text-align: center;
+                text-decoration: none !important;
+                top: 0;
+                transition: color .3s;
+                width: 50px;
+                z-index: 99999;
+            }
 
-        #demo-settings.open #demo-settings-toggler {
-            color: #888;
-            font-size: 16px;
-        }
+            #demo-settings.open #demo-settings-toggler {
+                color: #888;
+                font-size: 16px;
+            }
 
             #demo-settings.open #demo-settings-toggler:hover {
                 color: #fff;
@@ -246,10 +247,10 @@
                 content: "\f00d";
             }
 
-        #demo-settings-list {
-            margin: 0;
-            padding: 0;
-        }
+            #demo-settings-list {
+                margin: 0;
+                padding: 0;
+            }
 
             #demo-settings-list li {
                 list-style: none;
@@ -258,62 +259,62 @@
                 position: relative;
             }
 
-                #demo-settings-list li > span {
-                    color: #fff;
-                    cursor: pointer;
-                    display: block;
-                    line-height: 20px;
-                    padding: 12px 20px;
-                }
+            #demo-settings-list li > span {
+                color: #fff;
+                cursor: pointer;
+                display: block;
+                line-height: 20px;
+                padding: 12px 20px;
+            }
 
-                #demo-settings-list li + li {
-                    border-top: 1px solid #333;
-                }
+            #demo-settings-list li + li {
+                border-top: 1px solid #333;
+            }
 
-        #demo-settings .demo-checkbox {
-            position: absolute;
-            right: 20px;
-            top: 12px;
-        }
+            #demo-settings .demo-checkbox {
+                position: absolute;
+                right: 20px;
+                top: 12px;
+            }
 
-        .right-to-left #demo-settings {
-            left: -270px;
-            padding-left: 10px;
-            padding-right: 0;
-            right: auto;
-        }
+            .right-to-left #demo-settings {
+                left: -270px;
+                padding-left: 10px;
+                padding-right: 0;
+                right: auto;
+            }
 
             .right-to-left #demo-settings.open {
                 left: -10px;
                 right: auto;
             }
 
-        .right-to-left #demo-settings-toggler {
-            left: auto;
-            padding-left: 10px;
-            padding-right: 0;
-            right: -40px;
-        }
+            .right-to-left #demo-settings-toggler {
+                left: auto;
+                padding-left: 10px;
+                padding-right: 0;
+                right: -40px;
+            }
 
-        .right-to-left #demo-settings .demo-checkbox {
-            left: 20px;
-            right: auto;
-        }
-    </style>
-</head>
+            .right-to-left #demo-settings .demo-checkbox {
+                left: 20px;
+                right: auto;
+            }
+        </style>
+    </head>
 
 
-<!-- 1. $BODY ======================================================================================
+    <!-- 1. $BODY ======================================================================================
 
-    Body
+        Body
 
-    Classes:
-    * 'theme-{THEME NAME}'
-    * 'right-to-left'     - Sets text direction to right-to-left
-    -->
-<body class="theme-default page-signin" style="">
+        Classes:
+        * 'theme-{THEME NAME}'
+        * 'right-to-left'     - Sets text direction to right-to-left
+        -->
+    <body class="theme-default page-signin" style="">
 
-    <script>
+        <script>
             var init = [];
             init.push(function() {
                 var $div = $('<div id="signin-demo" class="hidden-xs"><div>PAGE BACKGROUND</div></div>'),
@@ -333,19 +334,19 @@
                 });
                 $('body').append($div);
             });
-    </script>
-    <!-- Demo script -->
-    <script src="~/Scripts/Custom/demo.js"></script> <!-- / Demo script -->
-    <!-- Page background -->
-    <div id="page-signin-bg">
-        <!-- Background overlay -->
-        <div class="overlay"></div>
-        <!-- Replace this with your bg image -->
-        <img src="http://infinite-woodland-5276.herokuapp.com/assets/demo/signin-bg-8.jpg" alt="" style="">
-    </div>
-    <!-- / Page background -->
-    <!-- Container -->
-    @* <div class="signin-container">
+        </script>
+        <!-- Demo script -->
+        <script src="~/Scripts/Custom/demo.js"></script> <!-- / Demo script -->
+        <!-- Page background -->
+        <div id="page-signin-bg">
+            <!-- Background overlay -->
+            <div class="overlay"></div>
+            <!-- Replace this with your bg image -->
+            <img src="http://infinite-woodland-5276.herokuapp.com/assets/demo/signin-bg-8.jpg" alt="" style="">
+        </div>
+        <!-- / Page background -->
+        <!-- Container -->
+        @* <div class="signin-container">
 
             <!-- Left side -->
             <div class="signin-info">
@@ -421,49 +422,64 @@
             <!-- Right side -->
         </div>*@
 
-    <div class="signin-container">
+        <div class="signin-container">
 
-        <!-- Left side -->
-        <div class="signin-info">
-            <a href="index.html" class="logo">
-                <img src="~/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
-                <strong><span style="color: red">Neo</span>Daily</strong> Reviews
-            </a> <!-- / .logo -->
-            <div class="slogan">
-                <i> Happy Coding.</i>
-            </div> <!-- / .slogan -->
-            <ul>
-                <li><i class="fa fa-sitemap signin-icon"></i> Flexible modular structure</li>
-                <li><i class="fa fa-file-text-o signin-icon"></i> LESS &amp; SCSS source files</li>
-                <li><i class="fa fa-outdent signin-icon"></i> RTL direction support</li>
-                <li><i class="fa fa-heart signin-icon"></i> Crafted with love</li>
-            </ul> <!-- / Info list -->
-        </div>
-        <!-- / Left side -->
-        <!-- Right side -->
-        <div class="signin-form">
+            <!-- Left side -->
+            <div class="signin-info">
+                <a href="Login.html" class="logo">
+                    <img src="~/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
+                    <strong><span style="color: red">Neo</span>Daily</strong> Reviews
+                </a> <!-- / .logo -->
+                <div class="slogan">
+                    <i> Happy Coding.</i>
+                </div> <!-- / .slogan -->
+                <ul>
+                    <li><i class="fa fa-sitemap signin-icon"></i> Flexible modular structure</li>
+                    <li><i class="fa fa-file-text-o signin-icon"></i> LESS &amp; SCSS source files</li>
+                    <li><i class="fa fa-outdent signin-icon"></i> RTL direction support</li>
+                    <li><i class="fa fa-heart signin-icon"></i> Crafted with love</li>
+                </ul> <!-- / Info list -->
+            </div>
+            <!-- / Left side -->
+            <!-- Right side -->
+            <div class="signin-form">
 
-            <!-- Form -->
-            <form action="index.html" id="signin-form_id" novalidate="novalidate">
-                <div class="signin-text">
-                    <span>Sign In to your account</span>
-                </div> <!-- / .signin-text -->
+                <!-- Form -->
+                @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post))
+                {
+                @*<form action="index.html" id="signin-form_id" novalidate="novalidate">*@
+                   @* @Html.AntiForgeryToken()*@
+                    if (HttpContext.Current.Session["LOGIN_FAILED"] != null)
+                    {
+                        @Session["LOGIN_FAILED"].ToString()
+                        Session["LOGIN_FAILED"] = null;
+                    }
+                    <div class="signin-text">
+                        <span>Sign In to your account</span>
+                    </div>
+                    <!-- / .signin-text -->
 
-                <div class="form-group w-icon">
-                    <input type="text" name="signin_username" id="username_id" class="form-control input-lg" placeholder="Username or email">
-                    <span class="fa fa-user signin-form-icon"></span>
-                </div> <!-- / Username -->
+                    <div class="form-group w-icon">
+                        @*<input type="text" name="signin_username" id="username_id" class="form-control input-lg" placeholder="Username or email">*@
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeHolder = "Username or email" })
+                        <span class="fa fa-user signin-form-icon"></span>
+                    </div>
+                    <!-- / Username -->
 
-                <div class="form-group w-icon">
-                    <input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="Password">
-                    <span class="fa fa-lock signin-form-icon"></span>
-                </div> <!-- / Password -->
+                    <div class="form-group w-icon">
+                        @*<input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="Password">*@
+                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control input-lg", @placeHolder = "Password" })
+                        <span class="fa fa-lock signin-form-icon"></span>
+                    </div>
+                    <!-- / Password -->
 
-                <div class="form-actions">
-                    <input type="submit" value="SIGN IN" class="signin-btn bg-primary">
-                    <a href="#" class="forgot-password" id="forgot-password-link">Forgot your password?</a>
-                </div> <!-- / .form-actions -->
-            </form>
+                    <div class="form-actions">
+                        <input type="submit" value="SIGN IN" class="signin-btn bg-primary">
+                        <a href="" class="forgot-password" id="forgot-password-link">Forgot your password?</a>
+                    </div>
+                    <!-- / .form-actions -->
+            @*</form>*@
+                }
             <!-- / Form -->
             <!-- "Sign In with" block -->
             <div class="signin-with">
@@ -487,7 +503,7 @@
                     </div> <!-- / Email -->
 
                     <div class="form-actions">
-                        <input type="submit" value="SEND PASSWORD RESET LINK" class="signin-btn bg-primary">
+                        <input type="submit" value="SEND PASSWORD RESET LINK" class="signin-btn btn-block bg-primary">
                     </div> <!-- / .form-actions -->
                 </form>
                 <!-- / Form -->
@@ -512,6 +528,7 @@
     <!-- Pixel Admin's javascripts -->
     @*    <script src="~/assets/javascripts/bootstrap.min.js"></script>
         <script src="~/assets/javascripts/pixel-admin.min.js"></script>*@
+                    }
 
     <script type="text/javascript">
             // Resize BG
