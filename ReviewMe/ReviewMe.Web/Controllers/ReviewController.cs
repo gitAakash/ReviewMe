@@ -9,7 +9,7 @@ using ReviewMe.Web.Attributes;
 
 namespace ReviewMe.Web.Controllers
 {
-    [ReviewMeAuthorize]
+    //[ReviewMeAuthorize]
     public class ReviewController : Controller
     {
         //
@@ -51,5 +51,11 @@ namespace ReviewMe.Web.Controllers
             else
                 return "Some error has occurred";
         }
-	}
+
+        public ActionResult FullCalendar()
+        {
+
+            return View();
+        }
+    }
 }

@@ -9,7 +9,9 @@ namespace ReviewMe.DataAccess
     {
         static EntityContext()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityContext>());
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<EntityContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EntityContext, Migrations.Configuration>());
         }
 
         public EntityContext()
@@ -22,37 +24,37 @@ namespace ReviewMe.DataAccess
         public IQueryable<Role> Rolees
         {
             get { return Roles; }
-            set { Roles = (IDbSet<Role>) value; }
+            set { Roles = (IDbSet<Role>)value; }
         }
 
         public IQueryable<Review> Remaarks
         {
             get { return Remarks; }
-            set { Remarks = (IDbSet<Review>) value; }
+            set { Remarks = (IDbSet<Review>)value; }
         }
 
         public IQueryable<Project> Projectss
         {
             get { return Projects; }
-            set { Projects = (IDbSet<Project>) value; }
+            set { Projects = (IDbSet<Project>)value; }
         }
 
         public IQueryable<Comment> Commentss
         {
             get { return Comments; }
-            set { Comments = (IDbSet<Comment>) value; }
+            set { Comments = (IDbSet<Comment>)value; }
         }
 
         public IQueryable<Technology> Technologiess
         {
             get { return Technologies; }
-            set { Technologies = (IDbSet<Technology>) value; }
+            set { Technologies = (IDbSet<Technology>)value; }
         }
 
         public IQueryable<ReviewSetting> ReviewSettingss
         {
             get { return ReviewSettings; }
-            set { ReviewSettings = (IDbSet<ReviewSetting>) value; }
+            set { ReviewSettings = (IDbSet<ReviewSetting>)value; }
         }
 
         public IQueryable<User> Userss
@@ -61,7 +63,7 @@ namespace ReviewMe.DataAccess
             set { Users = (IDbSet<User>)value; }
         }
 
-        #endregion 
+        #endregion
 
         #region IDbSet
         public IDbSet<Role> Roles { get; set; }
@@ -120,7 +122,7 @@ namespace ReviewMe.DataAccess
             modelBuilder.Entity<User>().HasKey(x => x.Id).Property(x => x.Id)
             .HasColumnName("Id");
 
-           // User and Technology
+            // User and Technology
             modelBuilder.Entity<User>()
                 .HasRequired<Technology>(s => s.Technology)
                 .WithMany(s => s.Users)
