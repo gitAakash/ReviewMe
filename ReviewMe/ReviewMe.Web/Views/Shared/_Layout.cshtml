@@ -1,311 +1,298 @@
 ﻿@using ReviewMe.Common.Authorization
 @using ReviewMe.Common.Extensions
+@using ReviewMe.Common.Helpers
 @using ReviewMe.Web.Controllers
 <!DOCTYPE html>
 <html class="gt-ie8 gt-ie9 not-ie pxajs">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - ReviewMe</title>
-    @Styles.Render("~/Content/css")
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&amp;subset=latin" rel="stylesheet" type="text/css">
-    <link href="~/Content/pixel-admin.min.css" rel="stylesheet" />
-    <link href="~/Content/widgets.min.css" rel="stylesheet" />
-    <link href="~/Content/rtl.min.css" rel="stylesheet" />
-    <link href="~/Content/themes.min.css" rel="stylesheet" />
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - ReviewMe</title>
+        @Styles.Render("~/Content/css")
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&amp;subset=latin" rel="stylesheet" type="text/css">
+        <link href="~/Content/pixel-admin.min.css" rel="stylesheet" />
+        <link href="~/Content/widgets.min.css" rel="stylesheet" />
+        <link href="~/Content/rtl.min.css" rel="stylesheet" />
+        <link href="~/Content/themes.min.css" rel="stylesheet" />
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
 
-    <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
-    @RenderSection("scripts", false)
-    <style type="text/css">
-        .jqstooltip {
-            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
-            background: rgb(0, 0, 0) transparent;
-            background-color: rgba(0, 0, 0, 0.6);
-            border: 1px solid white;
-            color: white;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
-            font: 10px arial, san serif;
-            left: 0px;
-            padding: 5px;
-            position: absolute;
-            text-align: left;
-            top: 0px;
-            visibility: hidden;
-            white-space: nowrap;
-            z-index: 10000;
-        }
+        <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
+        @RenderSection("scripts", false)
+        <style type="text/css">
+            .jqstooltip {
+                -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+                background: rgb(0, 0, 0) transparent;
+                background-color: rgba(0, 0, 0, 0.6);
+                border: 1px solid white;
+                color: white;
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+                font: 10px arial, san serif;
+                left: 0px;
+                padding: 5px;
+                position: absolute;
+                text-align: left;
+                top: 0px;
+                visibility: hidden;
+                white-space: nowrap;
+                z-index: 10000;
+            }
 
-        .jqsfield {
-            color: white;
-            font: 10px arial, san serif;
-            text-align: left;
-        }
-    </style>
-    <style>
-        #demo-themes {
-            border-bottom-left-radius: 5px;
-            display: table;
-            overflow: hidden;
-            table-layout: fixed;
-            width: 100%;
-        }
+            .jqsfield {
+                color: white;
+                font: 10px arial, san serif;
+                text-align: left;
+            }
+        </style>
+        <style>
+            #demo-themes {
+                border-bottom-left-radius: 5px;
+                display: table;
+                overflow: hidden;
+                table-layout: fixed;
+                width: 100%;
+            }
 
-        #demo-themes .demo-themes-row {
-            display: block;
-        }
+            #demo-themes .demo-themes-row { display: block; }
 
-        #demo-themes .demo-theme {
-            color: #888;
-            display: block;
-            float: left;
-            overflow: hidden;
-            padding: 25px 0;
-            position: relative;
-            text-align: center;
-            width: 50%;
-        }
+            #demo-themes .demo-theme {
+                color: #888;
+                display: block;
+                float: left;
+                overflow: hidden;
+                padding: 25px 0;
+                position: relative;
+                text-align: center;
+                width: 50%;
+            }
 
-        #demo-themes .demo-theme:hover {
-            color: #fff;
-        }
+            #demo-themes .demo-theme:hover { color: #fff; }
 
-        #demo-themes .theme-preview {
-            bottom: 0;
-            left: 0;
-            overflow: hidden !important;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
+            #demo-themes .theme-preview {
+                bottom: 0;
+                left: 0;
+                overflow: hidden !important;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
 
-        #demo-themes .theme-preview img {
-            display: block;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
+            #demo-themes .theme-preview img {
+                display: block;
+                left: 0;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
 
-        #demo-themes .demo-theme .overlay {
-            background: #1d1d1d;
-            background: rgba(0, 0, 0, .8);
-            bottom: 0;
-            left: -100%;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
+            #demo-themes .demo-theme .overlay {
+                background: #1d1d1d;
+                background: rgba(0, 0, 0, .8);
+                bottom: 0;
+                left: -100%;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
 
-        #demo-themes .demo-theme span {
-            color: #fff;
-            color: rgba(255, 255, 255, 0);
-            position: relative;
-        }
+            #demo-themes .demo-theme span {
+                color: #fff;
+                color: rgba(255, 255, 255, 0);
+                position: relative;
+            }
 
-        #demo-themes .demo-theme span,
-        #demo-themes .demo-theme .overlay {
-            -moz-transition: all .3s;
-            -ms-transition: all .3s;
-            -o-transition: all .3s;
-            -webkit-transition: all .3s;
-            transition: all .3s;
-        }
+            #demo-themes .demo-theme span,
+            #demo-themes .demo-theme .overlay {
+                -moz-transition: all .3s;
+                -ms-transition: all .3s;
+                -o-transition: all .3s;
+                -webkit-transition: all .3s;
+                transition: all .3s;
+            }
 
-        #demo-themes .demo-theme.active span,
-        #demo-themes .demo-theme:hover span {
-            color: #fff;
-            color: rgba(255, 255, 255, 1);
-        }
+            #demo-themes .demo-theme.active span,
+            #demo-themes .demo-theme:hover span {
+                color: #fff;
+                color: rgba(255, 255, 255, 1);
+            }
 
-        #demo-themes .demo-theme.active .overlay,
-        #demo-themes .demo-theme:hover .overlay {
-            left: 0;
-        }
+            #demo-themes .demo-theme.active .overlay,
+            #demo-themes .demo-theme:hover .overlay { left: 0; }
 
-        #demo-settings {
-            -khtml-user-select: none;
-            -moz-transition: all .3s;
-            -moz-user-select: none;
-            -ms-transition: all .3s;
-            -ms-user-select: none;
-            -o-transition: all .3s;
-            -webkit-touch-callout: none;
-            -webkit-transition: all .3s;
-            -webkit-user-select: none;
-            background: #333;
-            border-radius: 5px;
-            padding-right: 10px;
-            position: fixed;
-            right: -270px;
-            top: 70px;
-            transition: all .3s;
-            user-select: none;
-            width: 270px;
-            z-index: 999998;
-        }
+            #demo-settings {
+                -khtml-user-select: none;
+                -moz-transition: all .3s;
+                -moz-user-select: none;
+                -ms-transition: all .3s;
+                -ms-user-select: none;
+                -o-transition: all .3s;
+                -webkit-touch-callout: none;
+                -webkit-transition: all .3s;
+                -webkit-user-select: none;
+                background: #333;
+                border-radius: 5px;
+                padding-right: 10px;
+                position: fixed;
+                right: -270px;
+                top: 70px;
+                transition: all .3s;
+                user-select: none;
+                width: 270px;
+                z-index: 999998;
+            }
 
-        #demo-settings.open {
-            right: -10px;
-        }
+            #demo-settings.open { right: -10px; }
 
-        #demo-settings > .header {
-            background: #444;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 600;
-            line-height: 20px;
-            margin: 0;
-            padding: 10px 20px;
-            position: relative;
-            z-index: 100000;
-        }
+            #demo-settings > .header {
+                background: #444;
+                color: #fff;
+                font-size: 11px;
+                font-weight: 600;
+                line-height: 20px;
+                margin: 0;
+                padding: 10px 20px;
+                position: relative;
+                z-index: 100000;
+            }
 
-        #demo-settings > div {
-            background: #282828;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            position: relative;
-            z-index: 100000;
-        }
+            #demo-settings > div {
+                background: #282828;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                position: relative;
+                z-index: 100000;
+            }
 
-        #demo-settings-toggler {
-            -moz-transition: color .3s;
-            -ms-transition: color .3s;
-            -o-transition: color .3s;
-            -webkit-transition: color .3s;
-            background: #444;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 21px;
-            height: 40px;
-            left: -40px;
-            line-height: 40px;
-            padding-right: 10px;
-            position: absolute;
-            text-align: center;
-            text-decoration: none !important;
-            top: 0;
-            transition: color .3s;
-            width: 50px;
-            z-index: 99999;
-        }
+            #demo-settings-toggler {
+                -moz-transition: color .3s;
+                -ms-transition: color .3s;
+                -o-transition: color .3s;
+                -webkit-transition: color .3s;
+                background: #444;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 21px;
+                height: 40px;
+                left: -40px;
+                line-height: 40px;
+                padding-right: 10px;
+                position: absolute;
+                text-align: center;
+                text-decoration: none !important;
+                top: 0;
+                transition: color .3s;
+                width: 50px;
+                z-index: 99999;
+            }
 
-        #demo-settings.open #demo-settings-toggler {
-            color: #888;
-            font-size: 16px;
-        }
+            #demo-settings.open #demo-settings-toggler {
+                color: #888;
+                font-size: 16px;
+            }
 
-        #demo-settings.open #demo-settings-toggler:hover {
-            color: #fff;
-        }
+            #demo-settings.open #demo-settings-toggler:hover { color: #fff; }
 
-        #demo-settings.open #demo-settings-toggler:before {
-            content: "\f00d";
-        }
+            #demo-settings.open #demo-settings-toggler:before { content: "\f00d"; }
 
-        #demo-settings-list {
-            margin: 0;
-            padding: 0;
-        }
+            #demo-settings-list {
+                margin: 0;
+                padding: 0;
+            }
 
-        #demo-settings-list li {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            position: relative;
-        }
+            #demo-settings-list li {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                position: relative;
+            }
 
-        #demo-settings-list li > span {
-            color: #fff;
-            cursor: pointer;
-            display: block;
-            line-height: 20px;
-            padding: 12px 20px;
-        }
+            #demo-settings-list li > span {
+                color: #fff;
+                cursor: pointer;
+                display: block;
+                line-height: 20px;
+                padding: 12px 20px;
+            }
 
-        #demo-settings-list li + li {
-            border-top: 1px solid #333;
-        }
+            #demo-settings-list li + li { border-top: 1px solid #333; }
 
-        #demo-settings .demo-checkbox {
-            position: absolute;
-            right: 20px;
-            top: 12px;
-        }
+            #demo-settings .demo-checkbox {
+                position: absolute;
+                right: 20px;
+                top: 12px;
+            }
 
-        .right-to-left #demo-settings {
-            left: -270px;
-            padding-left: 10px;
-            padding-right: 0;
-            right: auto;
-        }
+            .right-to-left #demo-settings {
+                left: -270px;
+                padding-left: 10px;
+                padding-right: 0;
+                right: auto;
+            }
 
-        .right-to-left #demo-settings.open {
-            left: -10px;
-            right: auto;
-        }
+            .right-to-left #demo-settings.open {
+                left: -10px;
+                right: auto;
+            }
 
-        .right-to-left #demo-settings-toggler {
-            left: auto;
-            padding-left: 10px;
-            padding-right: 0;
-            right: -40px;
-        }
+            .right-to-left #demo-settings-toggler {
+                left: auto;
+                padding-left: 10px;
+                padding-right: 0;
+                right: -40px;
+            }
 
-        .right-to-left #demo-settings .demo-checkbox {
-            left: 20px;
-            right: auto;
-        }
-    </style>
+            .right-to-left #demo-settings .demo-checkbox {
+                left: 20px;
+                right: auto;
+            }
+        </style>
     
-@{
-    var sessionInfo = SessionManager.GetSessionInformation();
-}
-</head>
-<body class="theme-default main-menu-animated animate-mm-sm animate-mm-md animate-mm-lg">
-    <script> var init = []; </script>
-    <script type="text/javascript">
-        window.init.push(function () {
-            // Javascript code here
-        });
-        window.PixelAdmin.start(init);
-    </script>
+        @{
+            SessionInformation sessionInfo = SessionManager.GetSessionInformation();
+        }
+    </head>
+    <body class="theme-default main-menu-animated animate-mm-sm animate-mm-md animate-mm-lg">
+        <script> var init = []; </script>
+        <script type="text/javascript">
+            window.init.push(function() {
+                // Javascript code here
+            });
+            window.PixelAdmin.start(init);
+        </script>
 
-    <div id="main-wrapper">
+        <div id="main-wrapper">
 
 
-        <!-- 2. $MAIN_NAVIGATION ===========================================================================
+            <!-- 2. $MAIN_NAVIGATION ===========================================================================
 
-            Main navigation
-            -->
-        <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
-            <!-- Main menu toggle -->
-            <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+                Main navigation
+                -->
+            <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+                <!-- Main menu toggle -->
+                <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
 
-            <div class="navbar-inner">
-                <!-- Main navbar header -->
-                <div class="navbar-header">
+                <div class="navbar-inner">
+                    <!-- Main navbar header -->
+                    <div class="navbar-header">
 
-                    <!-- Logo -->
-                    <a href="/" class="navbar-brand">
-                        <div><img alt="Pixel Admin" src="~/assets/images/pixel-admin/main-navbar-logo.png"></div>
+                        <!-- Logo -->
+                        <a href="/" class="navbar-brand">
+                            <div><img alt="Pixel Admin" src="~/assets/images/pixel-admin/main-navbar-logo.png"></div>
 
-                        ReviewMe
-                    </a>
+                            ReviewMe
+                        </a>
 
-                    <!-- Main navbar toggle -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
-                        <i class="navbar-icon fa fa-bars"></i>
-                    </button>
+                        <!-- Main navbar toggle -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
+                            <i class="navbar-icon fa fa-bars"></i>
+                        </button>
 
-                </div> <!-- / .navbar-header -->
+                    </div> <!-- / .navbar-header -->
 
-                <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
-                    <div>
-                        @* <ul class="nav navbar-nav">
+                    <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+                        <div>
+                            @* <ul class="nav navbar-nav">
                             <li>
                                 <a href="#">Home</a>
                             </li>
@@ -320,571 +307,580 @@
                             </li>
                         </ul> <!-- / .navbar-nav -->*@
 
-                        <div class="right clearfix">
-                            <ul class="nav navbar-nav pull-right right-navbar-nav">
+                            <div class="right clearfix">
+                                <ul class="nav navbar-nav pull-right right-navbar-nav">
 
-                                <!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
+                                    <!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
 
-                                    Navbar Icon Buttons
+                                        Navbar Icon Buttons
 
-                                    NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
+                                        NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
 
-                                    Classes:
-                                    * 'nav-icon-btn-info'
-                                    * 'nav-icon-btn-success'
-                                    * 'nav-icon-btn-warning'
-                                    * 'nav-icon-btn-danger'
-                                    -->
-                                <li class="nav-icon-btn nav-icon-btn-danger dropdown">
-                                    <a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
-                                        <span class="label">5</span>
-                                        <i class="nav-icon fa fa-bullhorn"></i>
-                                        <span class="small-screen-text">Notifications</span>
-                                    </a>
+                                        Classes:
+                                        * 'nav-icon-btn-info'
+                                        * 'nav-icon-btn-success'
+                                        * 'nav-icon-btn-warning'
+                                        * 'nav-icon-btn-danger'
+                                        -->
+                                    <li class="nav-icon-btn nav-icon-btn-danger dropdown">
+                                        <a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
+                                            <span class="label">5</span>
+                                            <i class="nav-icon fa fa-bullhorn"></i>
+                                            <span class="small-screen-text">Notifications</span>
+                                        </a>
 
-                                    <!-- NOTIFICATIONS -->
-                                    <!-- Javascript -->
-                                    <script>
-                                        init.push(function () {
-                                            $('#main-navbar-notifications').slimScroll({ height: 250 });
-                                        });
-                                    </script>
-                                    <!-- / Javascript -->
+                                        <!-- NOTIFICATIONS -->
+                                        <!-- Javascript -->
+                                        <script>
+                                            init.push(function() {
+                                                $('#main-navbar-notifications').slimScroll({ height: 250 });
+                                            });
+                                        </script>
+                                        <!-- / Javascript -->
 
-                                    <div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
-                                        <div class="slimScrollDiv" style="height: 250px; overflow: hidden; position: relative; width: auto;">
-                                            <div class="notifications-list" id="main-navbar-notifications" style="height: 250px; overflow: hidden; width: auto;">
+                                        <div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
+                                            <div class="slimScrollDiv" style="height: 250px; overflow: hidden; position: relative; width: auto;">
+                                                <div class="notifications-list" id="main-navbar-notifications" style="height: 250px; overflow: hidden; width: auto;">
 
-                                                <div class="notification">
-                                                    <div class="notification-title text-danger">SYSTEM</div>
-                                                    <div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-hdd-o bg-danger"></div>
-                                                </div> <!-- / .notification -->
+                                                    <div class="notification">
+                                                        <div class="notification-title text-danger">SYSTEM</div>
+                                                        <div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
+                                                        <div class="notification-ago">12h ago</div>
+                                                        <div class="notification-icon fa fa-hdd-o bg-danger"></div>
+                                                    </div> <!-- / .notification -->
 
-                                                <div class="notification">
-                                                    <div class="notification-title text-info">STORE</div>
-                                                    <div class="notification-description">You have <strong>9</strong> new orders.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-truck bg-info"></div>
-                                                </div> <!-- / .notification -->
+                                                    <div class="notification">
+                                                        <div class="notification-title text-info">STORE</div>
+                                                        <div class="notification-description">You have <strong>9</strong> new orders.</div>
+                                                        <div class="notification-ago">12h ago</div>
+                                                        <div class="notification-icon fa fa-truck bg-info"></div>
+                                                    </div> <!-- / .notification -->
 
-                                                <div class="notification">
-                                                    <div class="notification-title text-default">CRON DAEMON</div>
-                                                    <div class="notification-description">Job <strong>"Clean DB"</strong> has been completed.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-clock-o bg-default"></div>
-                                                </div> <!-- / .notification -->
+                                                    <div class="notification">
+                                                        <div class="notification-title text-default">CRON DAEMON</div>
+                                                        <div class="notification-description">Job <strong>"Clean DB"</strong> has been completed.</div>
+                                                        <div class="notification-ago">12h ago</div>
+                                                        <div class="notification-icon fa fa-clock-o bg-default"></div>
+                                                    </div> <!-- / .notification -->
 
-                                                <div class="notification">
-                                                    <div class="notification-title text-success">SYSTEM</div>
-                                                    <div class="notification-description">Server <strong>up</strong>.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-hdd-o bg-success"></div>
-                                                </div> <!-- / .notification -->
+                                                    <div class="notification">
+                                                        <div class="notification-title text-success">SYSTEM</div>
+                                                        <div class="notification-description">Server <strong>up</strong>.</div>
+                                                        <div class="notification-ago">12h ago</div>
+                                                        <div class="notification-icon fa fa-hdd-o bg-success"></div>
+                                                    </div> <!-- / .notification -->
 
-                                                <div class="notification">
-                                                    <div class="notification-title text-warning">SYSTEM</div>
-                                                    <div class="notification-description"><strong>Warning</strong>: Processor load <strong>92%</strong>.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-hdd-o bg-warning"></div>
-                                                </div> <!-- / .notification -->
+                                                    <div class="notification">
+                                                        <div class="notification-title text-warning">SYSTEM</div>
+                                                        <div class="notification-description"><strong>Warning</strong>: Processor load <strong>92%</strong>.</div>
+                                                        <div class="notification-ago">12h ago</div>
+                                                        <div class="notification-icon fa fa-hdd-o bg-warning"></div>
+                                                    </div> <!-- / .notification -->
 
-                                            </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: block; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-                                        </div> <!-- / .notifications-list -->
-                                        <a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
-                                    </div> <!-- / .dropdown-menu -->
-                                </li>
-                                <li class="nav-icon-btn nav-icon-btn-success dropdown">
-                                    <a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
-                                        <span class="label">10</span>
-                                        <i class="nav-icon fa fa-envelope"></i>
-                                        <span class="small-screen-text">Income messages</span>
-                                    </a>
+                                                </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: block; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
+                                            </div> <!-- / .notifications-list -->
+                                            <a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
+                                        </div> <!-- / .dropdown-menu -->
+                                    </li>
+                                    <li class="nav-icon-btn nav-icon-btn-success dropdown">
+                                        <a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
+                                            <span class="label">10</span>
+                                            <i class="nav-icon fa fa-envelope"></i>
+                                            <span class="small-screen-text">Income messages</span>
+                                        </a>
 
-                                    <!-- MESSAGES -->
-                                    <!-- Javascript -->
-                                    <script>
-                                        init.push(function () {
-                                            $('#main-navbar-messages').slimScroll({ height: 250 });
-                                        });
-                                    </script>
-                                    <!-- / Javascript -->
+                                        <!-- MESSAGES -->
+                                        <!-- Javascript -->
+                                        <script>
+                                            init.push(function() {
+                                                $('#main-navbar-messages').slimScroll({ height: 250 });
+                                            });
+                                        </script>
+                                        <!-- / Javascript -->
 
-                                    <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
-                                        <div class="slimScrollDiv" style="height: 250px; overflow: hidden; position: relative; width: auto;">
-                                            <div class="messages-list" id="main-navbar-messages" style="height: 250px; overflow: hidden; width: auto;">
+                                        <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
+                                            <div class="slimScrollDiv" style="height: 250px; overflow: hidden; position: relative; width: auto;">
+                                                <div class="messages-list" id="main-navbar-messages" style="height: 250px; overflow: hidden; width: auto;">
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Robert Jang</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Robert Jang</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/3.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Michelle Bortz</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Michelle Bortz</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/4.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Timothy Owens</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Timothy Owens</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/5.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Denise Steiner</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Denise Steiner</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Robert Jang</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Robert Jang</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Robert Jang</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Robert Jang</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/3.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Michelle Bortz</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/3.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Michelle Bortz</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/4.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Timothy Owens</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/4.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Timothy Owens</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/5.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Denise Steiner</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/5.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Denise Steiner</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Robert Jang</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                                    <div class="message">
+                                                        <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
+                                                        <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
+                                                        <div class="message-description">
+                                                            from <a href="#">Robert Jang</a>
+                                                            &nbsp;&nbsp;·&nbsp;&nbsp;
+                                                            2h ago
+                                                        </div>
+                                                    </div> <!-- / .message -->
 
-                                            </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 109.841827768014px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-                                        </div> <!-- / .messages-list -->
-                                        <a href="#" class="messages-link">MORE MESSAGES</a>
-                                    </div> <!-- / .dropdown-menu -->
-                                </li>
-                                <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+                                                </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 109.841827768014px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
+                                            </div> <!-- / .messages-list -->
+                                            <a href="#" class="messages-link">MORE MESSAGES</a>
+                                        </div> <!-- / .dropdown-menu -->
+                                    </li>
+                                    <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
 
-                                <li>
-                                    <form class="navbar-form pull-left">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </form>
-                                </li>
+                                    <li>
+                                        <form class="navbar-form pull-left">
+                                            <input type="text" class="form-control" placeholder="Search">
+                                        </form>
+                                    </li>
 
-                                <li class="dropdown">
-                                    @if (sessionInfo != null)
-                                    {
-                                        <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                                            @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
-                                            {
-                                                dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
-                                                if (File.Exists(path))
+                                    <li class="dropdown">
+                                        @if (sessionInfo != null)
+                                        {
+                                            <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                                @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
                                                 {
-                                                    <img src="/ProfileImages/@sessionInfo.UserLogo"  />
+                                                    dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
+                                                    if (File.Exists(path))
+                                                    {
+                                                        <img src="/ProfileImages/@sessionInfo.UserLogo"  />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/ProfileImages/default.jpg"  />
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    <img src="~/ProfileImages/default.jpg"  />
+                                                    <img src="~/ProfileImages/default.jpg" />
                                                 }
-                                            }
-                                            else
-                                            {
-                                                <img src="~/ProfileImages/default.jpg" />
-                                            }
-                                            @*<img src="~/assets/demo/avatars/1.jpg" alt="">*@
-                                            <span>@sessionInfo.UserName</span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="javascript:void(0)">Profile</a></li>
-                                            <li><a href="javascript:void(0)">Account</a></li>
-                                           @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
-                                            <li class="divider"></li>
-                                            <li><a href="@(Url.ActionLink<AccountController>(controller => controller.LogOff()))"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
-                                        </ul>
-                                    }
-                                    else
-                                    {
-                                        <a href="@(Url.ActionLink<AccountController>(controller => controller.Login(null)))" class="user-menu" data-toggle=""> Login</a>
-                                    }
-                                </li>
-                            </ul> <!-- / .navbar-nav -->
-                        </div> <!-- / .right -->
-                    </div>
-                </div> <!-- / #main-navbar-collapse -->
-            </div> <!-- / .navbar-inner -->
-        </div> <!-- / #main-navbar -->
-        <!-- /2. $END_MAIN_NAVIGATION -->
-        <!-- 4. $MAIN_MENU =================================================================================
+                                                @*<img src="~/assets/demo/avatars/1.jpg" alt="">*@
+                                                <span>@sessionInfo.UserName</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="@(Url.ActionLink<UserController>(controller => controller.Profile(sessionInfo.UserId)))">Profile</a>
+                                                    @*@{
+                                                        string encryptId = "";
+                                                        var encryptHelper = new EncryptionHelper();
+                                                        encryptId = encryptHelper.Encrypt(Convert.ToString(SessionManager.GetCurrentlyLoggedInUserId()));
+                                                    }*@
 
-            Main menu
+                                                </li>
+                                                <li><a href="javascript:void(0)">Account</a></li>
+                                                @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
+                                                <li class="divider"></li>
+                                                <li><a href="@(Url.ActionLink<AccountController>(controller => controller.LogOff()))"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <a href="@(Url.ActionLink<AccountController>(controller => controller.Login(null)))" class="user-menu" data-toggle=""> Login</a>
+                                        }
+                                    </li>
+                                </ul> <!-- / .navbar-nav -->
+                            </div> <!-- / .right -->
+                        </div>
+                    </div> <!-- / #main-navbar-collapse -->
+                </div> <!-- / .navbar-inner -->
+            </div> <!-- / #main-navbar -->
+            <!-- /2. $END_MAIN_NAVIGATION -->
+            <!-- 4. $MAIN_MENU =================================================================================
 
-            Notes:
-            * to make the menu item active, add a class 'active' to the <li>
-            example: <li class="active">...</li>
-            * multilevel submenu example:
-            <li class="mm-dropdown">
-                <a href="#"><span class="mm-text">Submenu item text 1</span></a>
-                <ul>
-                    <li>...</li>
-                    <li class="mm-dropdown">
-                        <a href="#"><span class="mm-text">Submenu item text 2</span></a>
-                        <ul>
-                            <li>...</li>
-                            ...
-                        </ul>
-                    </li>
-                    ...
-                </ul>
-            </li>
-            -->
-        <div id="main-menu" role="navigation">
-            <div class="slimScrollDiv" style="height: 100%; overflow: hidden; position: relative; width: auto;">
-                <div id="main-menu-inner" style="height: 100%; overflow: hidden; width: auto;">
-                    <div class="menu-content top animated fadeIn" id="menu-content-demo">
-                        <!-- Menu custom content demo
-                            CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
-                            Javascript: html/assets/demo/demo.js
-                            -->
-                        @if (sessionInfo != null) { 
-                            <div>
+                Main menu
+
+                Notes:
+                * to make the menu item active, add a class 'active' to the <li>
+                example: <li class="active">...</li>
+                * multilevel submenu example:
+                <li class="mm-dropdown">
+                    <a href="#"><span class="mm-text">Submenu item text 1</span></a>
+                    <ul>
+                        <li>...</li>
+                        <li class="mm-dropdown">
+                            <a href="#"><span class="mm-text">Submenu item text 2</span></a>
+                            <ul>
+                                <li>...</li>
+                                ...
+                            </ul>
+                        </li>
+                        ...
+                    </ul>
+                </li>
+                -->
+            <div id="main-menu" role="navigation">
+                <div class="slimScrollDiv" style="height: 100%; overflow: hidden; position: relative; width: auto;">
+                    <div id="main-menu-inner" style="height: 100%; overflow: hidden; width: auto;">
+                        <div class="menu-content top animated fadeIn" id="menu-content-demo">
+                            <!-- Menu custom content demo
+                                CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+                                Javascript: html/assets/demo/demo.js
+                                -->
+                            @if (sessionInfo != null)
+                            {
+                                <div>
                             
-                                <div class="text-bg"><span class="text-slim">Welcome,</span> 
-                                    <div class="text-semibold" style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">@sessionInfo.UserName</div></div>
-                                @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
-                                {
-                                    dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
-                                    if (File.Exists(path))
+                                    <div class="text-bg"><span class="text-slim">Welcome,</span> 
+                                        <div class="text-semibold" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%;">@sessionInfo.UserName</div></div>
+                                    @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
                                     {
-                                        <img src="/ProfileImages/@sessionInfo.UserLogo" />
+                                        dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
+                                        if (File.Exists(path))
+                                        {
+                                            <img src="/ProfileImages/@sessionInfo.UserLogo" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/ProfileImages/default.jpg" />
+                                        }
                                     }
                                     else
                                     {
                                         <img src="~/ProfileImages/default.jpg" />
                                     }
-                                }
-                                else
-                                {
-                                    <img src="~/ProfileImages/default.jpg" />
-                                }
                                 
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
-                                    <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
-                                    <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
-                                    <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+                                        <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+                                    </div>
+                                    <a href="#" class="close">×</a>
                                 </div>
-                                <a href="#" class="close">×</a>
-                            </div>
-                        }
-                    </div>
-                    <ul class="navigation">
-                        <li class=" active">
-                            <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
-                                <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
-                                <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
-                        </li>
-                        <li class="mm-dropdown mm-dropdown-root">
-                            <a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>
+                            }
+                        </div>
+                        <ul class="navigation">
+                            <li class=" active">
+                                <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                    <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
+                                    <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
+                                    <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
+                            </li>
+                            <li class="mm-dropdown mm-dropdown-root">
+                                <a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>
                      
-                        </li>
-                        <li class="mm-dropdown mm-dropdown-root">
-                            <a href="#"><i class="menu-icon fa fa-check-square"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Form components</span></a>
-                            <ul class="mmc-dropdown-delay animated fadeInLeft">
-                                <li>
-                                    <a tabindex="-1" href="forms-layouts.html"><span class="mm-text">Layouts</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="forms-general.html"><span class="mm-text">General</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="forms-advanced.html"><span class="mm-text">Advanced</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="forms-pickers.html"><span class="mm-text">Pickers</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="forms-validation.html"><span class="mm-text">Validation</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="forms-editors.html"><span class="mm-text">Editors</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="tables.html"><i class="menu-icon fa fa-table"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Tables</span></a>
-                        </li>
-                        <li>
-                            <a href="charts.html"><i class="menu-icon fa fa-bar-chart-o"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Charts</span></a>
-                        </li>
-                        <li class="mm-dropdown mm-dropdown-root">
-                            <a href="#"><i class="menu-icon fa fa-files-o"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Pages</span><span class="label label-success">16</span></a>
-                            <ul class="mmc-dropdown-delay animated fadeInLeft">
-                                <li>
-                                    <a tabindex="-1" href="pages-search.html"><span class="mm-text">Search results</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-pricing.html"><span class="mm-text">Plans &amp; pricing</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-faq.html"><span class="mm-text">FAQ</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-profile.html"><span class="mm-text">Profile</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-timeline.html"><span class="mm-text">Timeline</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-signin.html"><span class="mm-text">Sign In</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-signup.html"><span class="mm-text">Sign Up</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-signin-alt.html"><span class="mm-text">Sign In Alt</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-signup-alt.html"><span class="mm-text">Sign Up Alt</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-invoice.html"><span class="mm-text">Invoice</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-404.html"><span class="mm-text">Error 404</span></a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-500.html"><span class="mm-text">Error 500</span></a>
-                                </li>
-                                <li class="mm-dropdown">
-                                    <a href="#"><i class="menu-icon fa fa-envelope"></i><span class="mm-text">Messages</span></a>
-                                    <ul>
-                                        <li>
-                                            <a tabindex="-1" href="pages-inbox.html"><span class="mm-text">Inbox</span></a>
-                                        </li>
-                                        <li>
-                                            <a tabindex="-1" href="pages-show-email.html"><span class="mm-text">Show message</span></a>
-                                        </li>
-                                        <li>
-                                            <a tabindex="-1" href="pages-new-email.html"><span class="mm-text">New message</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="pages-blank.html"><span class="mm-text">Blank page</span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="complete-ui.html"><i class="menu-icon fa fa-briefcase"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Complete UI</span></a>
-                        </li>
-                        <li>
-                            <a href="color-builder.html"><i class="menu-icon fa fa-tint"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Color Builder</span></a>
-                        </li>
-                        <li class="mm-dropdown mm-dropdown-root">
-                            <a href="#">
-                                <i class="menu-icon fa fa-sitemap"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Menu levels</span>
-                                <span class="badge badge-primary">6</span>
-                            </a>
-                            <ul class="mmc-dropdown-delay animated fadeInLeft">
-                                <li>
-                                    <a tabindex="-1" href="#">
-                                        <span class="mm-text">Menu level 1.1</span><span class="badge badge-danger">12</span>
-                                        <span class="label label-info">21</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a tabindex="-1" href="#"><span class="mm-text">Menu level 1.2</span></a>
-                                </li>
-                                <li class="mm-dropdown">
-                                    <a tabindex="-1" href="#"><span class="mm-text">Menu level 1.3</span><span class="label label-warning">5</span></a>
-                                    <ul>
-                                        <li>
-                                            <a tabindex="-1" href="#"><span class="mm-text">Menu level 2.1</span></a>
-                                        </li>
-                                        <li class="mm-dropdown">
-                                            <a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
-                                            <ul>
-                                                <li class="mm-dropdown">
-                                                    <a tabindex="-1" href="#"><span class="mm-text">Menu level 3.1</span></a>
-                                                    <ul>
-                                                        <li>
-                                                            <a tabindex="-1" href="#"><span class="mm-text">Menu level 4.1</span></a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a tabindex="-1" href="#"><span class="mm-text">Menu level 3.2</span></a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul> <!-- / .navigation -->
-                    <div class="menu-content animated fadeIn">
-                        <a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a>
+                            </li>
+                            <li class="mm-dropdown mm-dropdown-root">
+                                <a href="#"><i class="menu-icon fa fa-check-square"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Form components</span></a>
+                                <ul class="mmc-dropdown-delay animated fadeInLeft">
+                                    <li>
+                                        <a tabindex="-1" href="forms-layouts.html"><span class="mm-text">Layouts</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="forms-general.html"><span class="mm-text">General</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="forms-advanced.html"><span class="mm-text">Advanced</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="forms-pickers.html"><span class="mm-text">Pickers</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="forms-validation.html"><span class="mm-text">Validation</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="forms-editors.html"><span class="mm-text">Editors</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="tables.html"><i class="menu-icon fa fa-table"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Tables</span></a>
+                            </li>
+                            <li>
+                                <a href="charts.html"><i class="menu-icon fa fa-bar-chart-o"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Charts</span></a>
+                            </li>
+                            <li class="mm-dropdown mm-dropdown-root">
+                                <a href="#"><i class="menu-icon fa fa-files-o"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Pages</span><span class="label label-success">16</span></a>
+                                <ul class="mmc-dropdown-delay animated fadeInLeft">
+                                    <li>
+                                        <a tabindex="-1" href="pages-search.html"><span class="mm-text">Search results</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-pricing.html"><span class="mm-text">Plans &amp; pricing</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-faq.html"><span class="mm-text">FAQ</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-profile.html"><span class="mm-text">Profile</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-timeline.html"><span class="mm-text">Timeline</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-signin.html"><span class="mm-text">Sign In</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-signup.html"><span class="mm-text">Sign Up</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-signin-alt.html"><span class="mm-text">Sign In Alt</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-signup-alt.html"><span class="mm-text">Sign Up Alt</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-invoice.html"><span class="mm-text">Invoice</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-404.html"><span class="mm-text">Error 404</span></a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-500.html"><span class="mm-text">Error 500</span></a>
+                                    </li>
+                                    <li class="mm-dropdown">
+                                        <a href="#"><i class="menu-icon fa fa-envelope"></i><span class="mm-text">Messages</span></a>
+                                        <ul>
+                                            <li>
+                                                <a tabindex="-1" href="pages-inbox.html"><span class="mm-text">Inbox</span></a>
+                                            </li>
+                                            <li>
+                                                <a tabindex="-1" href="pages-show-email.html"><span class="mm-text">Show message</span></a>
+                                            </li>
+                                            <li>
+                                                <a tabindex="-1" href="pages-new-email.html"><span class="mm-text">New message</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="pages-blank.html"><span class="mm-text">Blank page</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="complete-ui.html"><i class="menu-icon fa fa-briefcase"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Complete UI</span></a>
+                            </li>
+                            <li>
+                                <a href="color-builder.html"><i class="menu-icon fa fa-tint"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Color Builder</span></a>
+                            </li>
+                            <li class="mm-dropdown mm-dropdown-root">
+                                <a href="#">
+                                    <i class="menu-icon fa fa-sitemap"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Menu levels</span>
+                                    <span class="badge badge-primary">6</span>
+                                </a>
+                                <ul class="mmc-dropdown-delay animated fadeInLeft">
+                                    <li>
+                                        <a tabindex="-1" href="#">
+                                            <span class="mm-text">Menu level 1.1</span><span class="badge badge-danger">12</span>
+                                            <span class="label label-info">21</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a tabindex="-1" href="#"><span class="mm-text">Menu level 1.2</span></a>
+                                    </li>
+                                    <li class="mm-dropdown">
+                                        <a tabindex="-1" href="#"><span class="mm-text">Menu level 1.3</span><span class="label label-warning">5</span></a>
+                                        <ul>
+                                            <li>
+                                                <a tabindex="-1" href="#"><span class="mm-text">Menu level 2.1</span></a>
+                                            </li>
+                                            <li class="mm-dropdown">
+                                                <a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+                                                <ul>
+                                                    <li class="mm-dropdown">
+                                                        <a tabindex="-1" href="#"><span class="mm-text">Menu level 3.1</span></a>
+                                                        <ul>
+                                                            <li>
+                                                                <a tabindex="-1" href="#"><span class="mm-text">Menu level 4.1</span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <a tabindex="-1" href="#"><span class="mm-text">Menu level 3.2</span></a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a tabindex="-1" href="#"><span class="mm-text">Menu level 2.2</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul> <!-- / .navigation -->
+                        <div class="menu-content animated fadeIn">
+                            <a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a>
+                        </div>
+                    </div>
+                    <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 741px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
+                </div> <!-- / #main-menu-inner -->
+            </div> <!-- / #main-menu -->
+            <!-- /4. $MAIN_MENU -->
+
+            <div id="content-wrapper">
+                @RenderBody()
+            </div> <!-- / #content-wrapper -->
+            <div id="main-menu-bg"></div>
+            <div class="container body-content">
+
+                <hr />
+                <footer class="pull-right">
+                    <p>&copy; @DateTime.Now.Year - ReviewMe </p>
+                </footer>
+            </div>
+            <div id="demo-settings">
+            </div>
+        </div>
+        <!-- Success -->
+        <div id="uidemo-modals-alerts-success" class="modal modal-alert modal-success fade in" aria-hidden="false" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                    <div class="modal-title" id="AlertSuccessTitle"></div>
+                    <div class="modal-body" id="AlertSuccessBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
                     </div>
                 </div>
-                <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 741px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-            </div> <!-- / #main-menu-inner -->
-        </div> <!-- / #main-menu -->
-        <!-- /4. $MAIN_MENU -->
-
-        <div id="content-wrapper">
-            @RenderBody()
-        </div> <!-- / #content-wrapper -->
-        <div id="main-menu-bg"></div>
-        <div class="container body-content">
-
-            <hr />
-            <footer class="pull-right">
-                <p>&copy; @DateTime.Now.Year - ReviewMe </p>
-            </footer>
-        </div>
-        <div id="demo-settings">
-        </div>
-    </div>
-    <!-- Success -->
-    <div id="uidemo-modals-alerts-success" class="modal modal-alert modal-success fade in" aria-hidden="false" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-check-circle"></i>
-                </div>
-                <div class="modal-title" id="AlertSuccessTitle"></div>
-                <div class="modal-body" id="AlertSuccessBody"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
-                </div>
             </div>
         </div>
-    </div>
     
-    <!-- Danger -->
-    <div id="uidemo-modals-alerts-danger" class="modal modal-alert modal-danger fade" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-times-circle"></i>
-                </div>
-                <div class="modal-title" id="AlertDangerTitle"></div>
-                <div class="modal-body" id="AlertDangerBody"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+        <!-- Danger -->
+        <div id="uidemo-modals-alerts-danger" class="modal modal-alert modal-danger fade" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-times-circle"></i>
+                    </div>
+                    <div class="modal-title" id="AlertDangerTitle"></div>
+                    <div class="modal-body" id="AlertDangerBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+
+        <!-- Warning -->
+        <div id="uidemo-modals-alerts-warning" class="modal modal-alert modal-warning fade" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-warning"></i>
+                    </div>
+                    <div class="modal-title" id="AlertWarningTitle"></div>
+                    <div class="modal-body" id="AlertWarningTitle"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
+                    </div>
                 </div>
             </div> 
-        </div> 
-    </div>
-
-    <!-- Warning -->
-    <div id="uidemo-modals-alerts-warning" class="modal modal-alert modal-warning fade" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-warning"></i>
-                </div>
-                <div class="modal-title" id="AlertWarningTitle"></div>
-                <div class="modal-body" id="AlertWarningTitle"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div> 
-    </div>
+        </div>
     
-    <!-- Info -->
-    <div id="uidemo-modals-alerts-info" class="modal modal-alert modal-info fade" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-info-circle"></i>
-                </div>
-                <div class="modal-title" id="AlertInfoTitle"></div>
-                <div class="modal-body" id="AlertInfoTitle"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
-                </div>
+        <!-- Info -->
+        <div id="uidemo-modals-alerts-info" class="modal modal-alert modal-info fade" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-info-circle"></i>
+                    </div>
+                    <div class="modal-title" id="AlertInfoTitle"></div>
+                    <div class="modal-body" id="AlertInfoTitle"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                    </div>
+                </div> 
             </div> 
-        </div> 
-    </div>
+        </div>
     
     
     
-    <script src="~/Scripts/Custom/demo.js"></script>
+        <script src="~/Scripts/Custom/demo.js"></script>
 
-</body>
+    </body>
 </html>

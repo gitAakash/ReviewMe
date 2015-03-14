@@ -65,5 +65,12 @@ namespace ReviewMe.Web.Controllers
 
             return "Some error has occurred";
         }
+
+        [HttpGet]
+        public ActionResult Profile(Int64 userId)
+        {
+            UserViewModel userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));
+            return View(userViewModel);
+        }
     }
 }
