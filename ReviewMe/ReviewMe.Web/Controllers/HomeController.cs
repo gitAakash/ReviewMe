@@ -13,7 +13,7 @@ namespace ReviewMe.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your app description page.";
 
             return View();
         }
