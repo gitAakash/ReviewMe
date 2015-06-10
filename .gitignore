@@ -29,15 +29,15 @@
 *.sdf
 *.pyc
 *.xml
-ipch/
-obj/
-[Bb]in
-[Dd]ebug*/
-[Rr]elease*/
+ipch/*
+obj/*
+[Bb]in/*
+[Dd]ebug*/*
+[Rr]elease*/*
 Ankh.NoLoad
 
 #Tooling
-_ReSharper*/
+_ReSharper*/*
 *.resharper
 [Tt]est[Rr]esult*
 
