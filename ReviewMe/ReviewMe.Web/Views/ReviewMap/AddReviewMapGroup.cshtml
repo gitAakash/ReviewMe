@@ -1,0 +1,82 @@
+﻿@using ReviewMe.ViewModel;
+@Model ReviewMapViewModel;
+
+<script type="text/javascript">
+    var config = {
+        '.chosen-select-width': { width: "75%" }
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+    $(document).ready(function () {
+
+        $("#test").change(function () {
+            var a = $("#test :selected").text();
+            $("#selectedlist").html(a);
+        });
+
+        $("#s-all").click(function () {
+
+            var a = $("#test option");
+
+            $.each(a, function (i, val) {
+                $(val).change();
+            });
+
+            var b = $("#test option").text();
+            $("#selectedlist").html(b);
+
+        });
+
+        $("#c-all").click(function () {
+
+            $("#test option:selected").removeAttr("selected");
+
+            var a = $("#test :selected").text();
+            $("#selectedlist").html(a);
+            $(".chosen-choices").find("li.search-choice").remove();
+
+        });
+
+    });
+</script>
+
+<style>
+    #selectedlist {
+        border: solid 1px #eee;
+        margin-top: 20px;
+        padding: 10px;
+    }
+
+        #selectedlist span {
+            width: 100%;
+            float: left;
+        }
+</style>
+
+<div class="modal-body">
+    <div class="col-sm-9">
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label">Reviewer<span style="color: red;">*</span></label>
+                @Html.DropdownListFor(m => m.ReviewerId, Model.DropDownForReviewer.ToSelectList(a => a.Value, a => a.Text, a => a.Selected), "Select Reviewer", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReviewerId)
+            </div>
+            <div class="form-control">
+                <label class="control-label">Reviewee</label>
+                <select data-placeholder="Your Favorite Types of Bear" multiple class="chosen-select-width" tabindex="16" id="test">
+                    <option value="" disable></option>
+                    @foreach (var item in Model.DropDownForReviewee.ToSelectList(a => a.Value, a => a.Text, a => a.Selected))
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</div>

@@ -11,7 +11,7 @@ namespace ReviewMe.DataAccess
         IDbSet<Comment> Comments { get; set; }
         IDbSet<Technology> Technologies { get; set; }
         //IDbSet<ReviewTechnology> ReviewTechnologies { get; set; }
-        IDbSet<ReviewSetting> ReviewSettings { get; set; }
+       // IDbSet<ReviewSetting> ReviewSettings { get; set; }
         IDbSet<User> Users { get; set; }
         void Add<T>(T obj) where T : EntityBase;
         void Save();
