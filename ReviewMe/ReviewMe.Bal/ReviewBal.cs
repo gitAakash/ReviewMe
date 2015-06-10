@@ -7,6 +7,7 @@ using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
+using ReviewMe.Common.Authorization;
 
 namespace ReviewMe.Bal
 {
@@ -96,9 +97,9 @@ namespace ReviewMe.Bal
                 var review = new Review()
                 {
                     Id = reviewViewModel.Id,
-                    UserId = 1,
+                    UserId = 1, // Need to discuss
                     ReviewDate = reviewViewModel.ReviewDate,
-                    ProjectId = 1,
+                    ProjectId = 1, // Need to discuss
                     ModuleName = reviewViewModel.ModuleName,
                     FileReviewed = reviewViewModel.FileReviewed,
                     MethodsReviewed = reviewViewModel.MethodsReviewed,
@@ -108,10 +109,10 @@ namespace ReviewMe.Bal
                     CodingStandardRating = reviewViewModel.CodingStandardRating,
                     QueryOptimizationRating = reviewViewModel.QueryOptimizationRating,
                     ProjectArchitecture = reviewViewModel.ProjectArchitecture,
-                    CreatedBy = 1,
+                    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
                     CreatedOn = DateTime.Now,
-                    ModifiedBy = 1,
-                    ModifiedOn = DateTime.Now,
+                    //ModifiedBy = 1,
+                    //ModifiedOn = DateTime.Now,
                     IsActive = true
                 };
 
@@ -135,9 +136,9 @@ namespace ReviewMe.Bal
                 Review review = _reviewRepository.GetById(reviewViewModel.Id);
                 if( review!= null)
                 {                    
-                    review.UserId = 1;
+                    review.UserId = 1; // Need to discuss
                     review.ReviewDate = reviewViewModel.ReviewDate;
-                    review.ProjectId = 1;
+                    review.ProjectId = 1; // Need to discuss
                     review.ModuleName = reviewViewModel.ModuleName;
                     review.FileReviewed = reviewViewModel.FileReviewed;
                     review.MethodsReviewed = reviewViewModel.MethodsReviewed;
@@ -147,7 +148,7 @@ namespace ReviewMe.Bal
                     review.CodingStandardRating = reviewViewModel.CodingStandardRating;
                     review.QueryOptimizationRating = reviewViewModel.QueryOptimizationRating;
                     review.ProjectArchitecture = reviewViewModel.ProjectArchitecture;
-                    review.ModifiedBy = 1;
+                    review.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
                     review.ModifiedOn = DateTime.Now;                    
                 
                     Review responseModel = _reviewRepository.SaveOrUpdate(review);

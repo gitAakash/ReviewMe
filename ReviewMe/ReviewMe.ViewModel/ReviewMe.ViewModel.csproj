@@ -48,6 +48,8 @@
     <Compile Include="ProjectViewModel.cs" />
     <Compile Include="ProjectViewModelLong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewMapViewModel.cs" />
+    <Compile Include="ReviewMapViewModelLong.cs" />
     <Compile Include="ReviewViewModel.cs" />
     <Compile Include="ReviewViewModelLong.cs" />
     <Compile Include="RoleViewModel.cs" />
