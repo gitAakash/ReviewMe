@@ -41,6 +41,7 @@ namespace ReviewMe.Model
         public virtual User TeamLeader { get; set; }
         public virtual Role Role { get; set; }
         public virtual Technology Technology { get; set; }
+        
 
         public List<Review> Reviews { get; set; }
         public List<Comment> Comments { get; set; }
@@ -48,6 +49,8 @@ namespace ReviewMe.Model
         public List<ReviewSetting> UsersToBeReviewed { get; set; }
         public List<ReviewSetting> ReviewerUsers { get; set; }
         public List<ReviewSetting> ReviewSettings { get; set; }
+        public List<ReviewMap> ReviewerMapUsers { get; set; }
+        public List<ReviewMap> DeveloperMapUsers { get; set; }
 
     }
 }

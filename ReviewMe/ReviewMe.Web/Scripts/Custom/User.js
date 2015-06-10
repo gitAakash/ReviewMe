@@ -60,7 +60,8 @@ $(function() {
                 $('#userAddEditModalBody').empty();
                 $('#userAddEditModalBody').append(data);
             },
-            error: function(data) {
+            error: function (data) {
+                debugger;
             }
         });
     });
