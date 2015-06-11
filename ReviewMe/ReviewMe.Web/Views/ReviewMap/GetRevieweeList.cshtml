@@ -1,0 +1,81 @@
+﻿@model ReviewMe.ViewModel.ReviewMapViewModel
+
+@{
+    Layout = null;
+}
+
+<link href="~/Content/prism.css" rel="stylesheet" />
+<link href="~/Content/chosen.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/prism.js"></script>
+
+<style type="text/css">
+    <!-- this will set our autocomplete width -->
+    #jacComplete {
+        width: 400px;
+        display: block;
+    }
+</style>
+
+<script type="text/javascript">
+    var config = {
+        '.chosen-select-width': { width: "75%" }
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+    $(document).ready(function () {
+
+        $("#test").change(function () {
+            var a = $("#test :selected").text();
+            $("#selectedlist").html(a);
+        });
+
+        $("#s-all").click(function () {
+
+            var a = $("#test option");
+
+            $.each(a, function (i, val) {
+                $(val).change();
+            });
+
+            var b = $("#test option").text();
+            $("#selectedlist").html(b);
+
+        });
+
+        $("#c-all").click(function () {
+
+            $("#test option:selected").removeAttr("selected");
+
+            var a = $("#test :selected").text();
+            $("#selectedlist").html(a);
+            $(".chosen-choices").find("li.search-choice").remove();
+
+        });
+    });
+</script>
+
+<select data-placeholder="Select Reviewee" multiple class="chosen-select-width" tabindex="16" id="RevieweeList">
+    <option value="" disable></option>
+    @foreach (var item in Model.DropDownForReviewee)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+</select>
+
+
+<script type="text/javascript">
+
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': { allow_single_deselect: true },
+        '.chosen-select-no-single': { disable_search_threshold: 10 },
+        '.chosen-select-no-results': { no_results_text: 'oops, nothing found!' },
+        '.chosen-select-width': { width: "95%" }
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+</script>
