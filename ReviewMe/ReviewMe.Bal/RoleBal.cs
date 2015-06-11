@@ -5,6 +5,7 @@ using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
+using ReviewMe.Common.Authorization;
 
 namespace ReviewMe.Bal
 {
@@ -72,10 +73,10 @@ namespace ReviewMe.Bal
                 {
                     Id = roleviewModel.Id,
                     RoleName = roleviewModel.RoleName,
-                    CreatedBy = 1,
+                    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
                     CreatedOn = DateTime.Now,
-                    ModifiedBy = 1,
-                    ModifiedOn = DateTime.Now,
+                    //ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId(),
+                    //ModifiedOn = DateTime.Now,
                     IsActive = true
                 };
                 Role responseModel = _roleRepository.Add(roleModel);
@@ -100,7 +101,7 @@ namespace ReviewMe.Bal
                 if (role != null)
                 {
                     role.RoleName = roleviewModel.RoleName;
-                    role.ModifiedBy = 1;
+                    role.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
                     role.ModifiedOn = DateTime.Now;
 
                     Role responseModel = _roleRepository.SaveOrUpdate(role);                  

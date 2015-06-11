@@ -7,6 +7,7 @@ using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
+using ReviewMe.Common.Authorization;
 
 namespace ReviewMe.Bal
 {
@@ -75,10 +76,10 @@ namespace ReviewMe.Bal
                 {
                     Id = technologyViewModel.Id,
                     TechnologyName = technologyViewModel.TechnologyName,
-                    CreatedBy = 1,
-                    ModifiedBy = 1,
+                    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
+                    //ModifiedBy = 1,
                     CreatedOn = DateTime.Now,
-                    ModifiedOn = DateTime.Now,
+                    //ModifiedOn = DateTime.Now,
                     IsActive = true
                 };
                 Technology responseModel = _technologyRepository.Add(technologyModel);
@@ -104,8 +105,8 @@ namespace ReviewMe.Bal
                 if(technology != null)
                 {
                     technology.Id = technologyViewModel.Id;
-                    technology.TechnologyName = technologyViewModel.TechnologyName;                    
-                    technology.ModifiedBy = 1;
+                    technology.TechnologyName = technologyViewModel.TechnologyName;
+                    technology.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
                     technology.ModifiedOn = DateTime.Now;
 
                     Technology responseModel = _technologyRepository.SaveOrUpdate(technology);

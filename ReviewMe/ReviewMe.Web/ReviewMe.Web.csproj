@@ -165,6 +165,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\ReviewMapController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TechnologyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -207,10 +208,12 @@
     <Content Include="assets\images\pixel-admin\main-navbar-logo.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\dd.css" />
     <Content Include="Content\flags.css" />
     <Content Include="Content\pages.min.css" />
     <Content Include="Content\pixel-admin.min.css" />
+    <Content Include="Content\prism.css" />
     <Content Include="Content\rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes.min.css" />
@@ -237,17 +240,21 @@
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\countries.js" />
     <Content Include="Scripts\Custom\demo.js" />
     <Content Include="Scripts\Custom\pixel-admin.min.js" />
+    <Content Include="Content\chosen.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom\Project.js" />
     <Content Include="Scripts\Custom\Review.js" />
+    <Content Include="Scripts\Custom\ReviewMap.js" />
     <Content Include="Scripts\Custom\Role.js" />
     <Content Include="Scripts\Custom\Technology.js" />
     <Content Include="Scripts\Custom\User.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.ajax.chosen.min.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.dd.js" />
     <Content Include="Scripts\jquery.dd.min.js" />
@@ -257,6 +264,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
@@ -310,6 +318,9 @@
     <Content Include="Views\User\AddEditUser.cshtml" />
     <Content Include="Views\Project\AddEditProject.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\ReviewMap\Index.cshtml" />
+    <Content Include="Views\ReviewMap\AddEditGroup.cshtml" />
+    <Content Include="Views\ReviewMap\GetRevieweeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
