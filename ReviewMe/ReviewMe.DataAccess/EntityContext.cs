@@ -9,7 +9,8 @@ namespace ReviewMe.DataAccess
     {
         static EntityContext()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityContext>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<EntityContext>());
         }
 
         public EntityContext()
@@ -61,6 +62,12 @@ namespace ReviewMe.DataAccess
             set { Users = (IDbSet<User>)value; }
         }
 
+        public IQueryable<ReviewMap> ReviewMapss
+        {
+            get { return ReviewMaps; }
+            set { ReviewMaps = (IDbSet<ReviewMap>)value; }
+        }
+
         #endregion 
 
         #region IDbSet
@@ -71,6 +78,7 @@ namespace ReviewMe.DataAccess
         public IDbSet<Technology> Technologies { get; set; }
         public IDbSet<ReviewSetting> ReviewSettings { get; set; }
         public IDbSet<User> Users { get; set; }
+        public IDbSet<ReviewMap> ReviewMaps { get; set; }
         #endregion
 
         #region Besic Methods
@@ -90,12 +98,6 @@ namespace ReviewMe.DataAccess
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //TODO : For Reference only 
-            /*modelBuilder.Entity<PersoHn>()
-                .HasKey(x => x.ID)
-                .Property(x => x.ID)
-                .HasColumnName("MyId");*/
-
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
@@ -120,6 +122,27 @@ namespace ReviewMe.DataAccess
             modelBuilder.Entity<User>().HasKey(x => x.Id).Property(x => x.Id)
             .HasColumnName("Id");
 
+            modelBuilder.Entity<ReviewMap>().HasKey(x => x.Id).Property(x => x.Id)
+                .HasColumnName("Id");
+
+            //// User and ReviewMap
+            modelBuilder.Entity<ReviewMap>()
+                .HasRequired(s => s.ReviewerUser)
+                .WithMany(s => s.ReviewerMapUsers)
+                .HasForeignKey(s => s.ReviewerId);
+
+            modelBuilder.Entity<ReviewMap>()
+                .HasRequired(s => s.DeveloperUser)
+                .WithMany(s => s.DeveloperMapUsers)
+                .HasForeignKey(s => s.DevloperId);
+                
+
+            //// User and ReviewMap
+            //modelBuilder.Entity<ReviewMap>()
+            //    .HasMany<ReviewMap>(s => s.ReviewerUsers)
+            //    .WithRequired(s => s.Users)
+            //    .HasForeignKey(s => s.Id);
+
            // User and Technology
             modelBuilder.Entity<User>()
                 .HasRequired<Technology>(s => s.Technology)
@@ -133,35 +156,35 @@ namespace ReviewMe.DataAccess
                 HasForeignKey(x => x.RoleId);
 
             // User and Comment
-            modelBuilder.Entity<Comment>().
+            modelBuilder.Entity<Comment>(). 
                 HasRequired(x => x.User).
                 WithMany(x => x.Comments).
                 HasForeignKey(x => x.UserId);
 
             // Review and comment
-            modelBuilder.Entity<Comment>().
-                HasRequired(x => x.Review).
-                WithMany(x => x.Comments).
-                HasForeignKey(x => x.ReviewId);
+            //modelBuilder.Entity<Comment>().
+            //    HasRequired(x => x.Review).
+            //    WithMany(x => x.Comments).
+            //    HasForeignKey(x => x.ReviewId);
 
-            // User and Review
-            modelBuilder.Entity<User>().
-                HasMany(x => x.Reviews).
-                WithRequired(x => x.User).
-                HasForeignKey(x => x.UserId);
+            //// User and Review
+            //modelBuilder.Entity<User>().
+            //    HasMany(x => x.Reviews).
+            //    WithRequired(x => x.User).
+            //    HasForeignKey(x => x.UserId);
 
             // User and ReviewSettings
-            modelBuilder.Entity<ReviewSetting>()
-                .HasRequired(m => m.UserToBeReviewed)
-                .WithMany(t => t.UsersToBeReviewed)
-                .HasForeignKey(m => m.UserToBeReviewedId)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<ReviewSetting>()
+            //    .HasRequired(m => m.UserToBeReviewed)
+            //    .WithMany(t => t.UsersToBeReviewed)
+            //    .HasForeignKey(m => m.UserToBeReviewedId)
+            //    .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<ReviewSetting>()
-                .HasRequired(m => m.Reviewer)
-                .WithMany(t => t.ReviewerUsers)
-                .HasForeignKey(m => m.ReviewerId)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<ReviewSetting>()
+            //    .HasRequired(m => m.Reviewer)
+            //    .WithMany(t => t.ReviewerUsers)
+            //    .HasForeignKey(m => m.ReviewerId)
+            //    .WillCascadeOnDelete(false);
 
             // Many to Many mapping Users and Projects of table UsersProjects
             modelBuilder.Entity<User>().

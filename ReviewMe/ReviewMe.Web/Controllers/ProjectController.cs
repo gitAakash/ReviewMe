@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,7 +22,9 @@ namespace ReviewMe.Web.Controllers
             if (id != null && id != 0)
             {
                 projectViewModelLong.ProjectViewModel = new ProjectBal().GetProjectById(Convert.ToInt64(id));
+                ViewBag.ineditmode = true;
             }
+            else { ViewBag.ineditmode = false; }
             return View(projectViewModelLong);
         }
 

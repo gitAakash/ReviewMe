@@ -468,7 +468,8 @@
 
                     <div class="form-group w-icon">
                         @*<input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="Password">*@
-                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control input-lg", @placeHolder = "Password" })
+                        @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control input-lg", @placeHolder = "Password" })*@
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", @placeHolder = "Password" })
                         <span class="fa fa-lock signin-form-icon"></span>
                     </div>
                     <!-- / Password -->

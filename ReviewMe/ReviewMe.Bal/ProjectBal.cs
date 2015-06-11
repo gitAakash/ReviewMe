@@ -5,6 +5,7 @@ using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
+using ReviewMe.Common.Authorization;
 
 namespace ReviewMe.Bal
 {
@@ -25,6 +26,7 @@ namespace ReviewMe.Bal
                     {
                         Id = project.Id,
                         UserId =  project.UserId,
+                        ProjectTitle = project.ProjectTitle,
                         Description = project.Description,
                         CreatedBy = project.CreatedBy,
                         ModifiedBy = project.ModifiedBy,
@@ -52,7 +54,7 @@ namespace ReviewMe.Bal
                 {
                     Id = project.Id,
                     UserId = project.UserId,
-                    
+                    ProjectTitle = project.ProjectTitle,
                     Description = project.Description,
                     CreatedBy = project.CreatedBy,
                     ModifiedBy = project.ModifiedBy,
@@ -76,12 +78,13 @@ namespace ReviewMe.Bal
                 var project = new Project()
                 {
                     Id = projectViewModel.Id,
-                    UserId = 4,
+                    UserId = SessionManager.GetCurrentlyLoggedInUserId(),
                     Description = projectViewModel.Description,
-                    CreatedBy = 1,
-                    ModifiedBy = 1,
+                    ProjectTitle = projectViewModel.ProjectTitle,
+                    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
+                    //ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId(),
                     CreatedOn = DateTime.Now,
-                    ModifiedOn = DateTime.Now,
+                    //ModifiedOn = DateTime.Now,
                     IsActive = true
                 };
                 var responsemodel = _projectRepository.Add(project);
@@ -103,9 +106,10 @@ namespace ReviewMe.Bal
                 Project project = _projectRepository.GetById(projectViewModel.Id);
                 if (project != null)
                 {
-                    project.UserId = 1;
+                    project.UserId = SessionManager.GetCurrentlyLoggedInUserId();
+                    project.ProjectTitle = projectViewModel.ProjectTitle;
                     project.Description = projectViewModel.Description;
-                    project.ModifiedBy = 1;
+                    project.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
                     project.ModifiedOn = DateTime.Now;
 
                     Project responsemodel = _projectRepository.SaveOrUpdate(project);

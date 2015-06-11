@@ -8,6 +8,7 @@ using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
+using ReviewMe.Common.Authorization;
 
 namespace ReviewMe.Bal
 {
@@ -255,10 +256,10 @@ namespace ReviewMe.Bal
                     OnProject = userViewModel.OnProject,
                     OnTask = userViewModel.OnTask,
                     Rating = userViewModel.Rating,
-                    CreatedBy = 1,
-                    ModifiedBy = 1,
+                    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
+                    //ModifiedBy = 1,
                     CreatedOn = DateTime.Now,
-                    ModifiedOn = DateTime.Now,
+                    //ModifiedOn = DateTime.Now,
                     IsActive = true
                 };
                 User responsemodel = _userRepository.Add(user);
@@ -297,7 +298,7 @@ namespace ReviewMe.Bal
                     user.OnProject = userViewModel.OnProject;
                     user.OnTask = userViewModel.OnTask;
                     user.Rating = userViewModel.Rating;
-                    user.ModifiedBy = 1;
+                    user.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
                     user.ModifiedOn = DateTime.Now;
 
                     User responsemodel = _userRepository.SaveOrUpdate(user);
@@ -306,6 +307,45 @@ namespace ReviewMe.Bal
                     return true;
                 };
                 
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool UpdateUser(UserViewModel userViewModel)
+        {
+            try
+            {
+                User user = _userRepository.GetById(userViewModel.Id);
+
+                if (user != null)
+                {
+                    user.FName = userViewModel.FName;
+                    user.LName = userViewModel.LName;
+                    user.MName = userViewModel.MName;
+                    user.Dob = userViewModel.Dob;
+                    user.Gender = userViewModel.Gender;
+                    user.EmailId = userViewModel.EmailId;
+                    user.MobileNo = userViewModel.MobileNo;
+                    user.AlternateContactNo = userViewModel.AlternateContactNo;
+                    user.UserImage = userViewModel.UserImage;
+                    user.Address = userViewModel.Address;
+
+                    user.OnClient = userViewModel.OnClient;
+                    user.OnProject = userViewModel.OnProject;
+                    user.OnTask = userViewModel.OnTask;
+
+                    user.ModifiedBy = 1;
+                    user.ModifiedOn = DateTime.Now;
+
+                    User responsemodel = _userRepository.SaveOrUpdate(user);
+
+                    if (responsemodel != null)
+                        return true;
+                };
+
                 return false;
             }
             catch (Exception ex)
@@ -324,6 +364,21 @@ namespace ReviewMe.Bal
                 return response;
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // Get ReviewerList By TeamLeaderId
+        public List<User> GetListOfUserByTeamLeadId(long id)
+        {
+            try
+            {
+                List<User> lstReviewer = _userRepository.GetAll().Where(m => m.IsActive && (m.TeamLeaderId == id || m.Id == id)).ToList();
+                //List<User> lstReviewer = _userRepository.GetAll().Where(m => m.IsActive).ToList();
+                return lstReviewer;
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

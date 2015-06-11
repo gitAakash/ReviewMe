@@ -16,7 +16,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
+    @*<script src="~/Scripts/chosen.jquery.min.js"></script>*@   
     <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
     @RenderSection("scripts", false)
     <style type="text/css">
@@ -552,7 +552,7 @@
                                             <span>@sessionInfo.UserName</span>
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="javascript:void(0)">Profile</a></li>
+                                            <li><a href="../Profile/Myprofile">Profile</a></li>
                                             <li><a href="javascript:void(0)">Account</a></li>
                                            @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
                                             <li class="divider"></li>
@@ -654,8 +654,10 @@
                             <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
                         </li>
                         <li class="mm-dropdown mm-dropdown-root">
-                            <a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>
-                     
+                            @*<a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>*@
+                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
+                                <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
+                            </a>
                         </li>
                         <li class="mm-dropdown mm-dropdown-root">
                             <a href="#"><i class="menu-icon fa fa-check-square"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Form components</span></a>
