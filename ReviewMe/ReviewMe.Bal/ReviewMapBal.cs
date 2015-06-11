@@ -47,6 +47,31 @@ namespace ReviewMe.Bal
             }
         }
 
+        // Get Reviewee List
+        public ReviewMapViewModel GetRevieweeBalList(Int64 ReviewerId)
+        {
+            try
+            {
+                List<User> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
+                List<Int64> lstDevelopers = new ReviewMapBal().GetAlreadyReviewedList();
+
+                var reviewMapViewModel = new ReviewMapViewModel()
+                {
+                    DropDownForReviewee = userList.Where(p => p.Id != ReviewerId && !lstDevelopers.Contains(p.Id)).Select(p => new SerializableSelectListItem()
+                    {
+                        Text = p.FName,
+                        Value = p.Id.ToString(CultureInfo.InvariantCulture)
+                    })
+                };
+
+                return reviewMapViewModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         // Get all ReviewMaps
         public ReviewMapViewModelLong GetAllReviewMaps()
         {
@@ -204,6 +229,59 @@ namespace ReviewMe.Bal
                         return true;
                 }
                 return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // Get List of Developers who already got Reviewer assigned.
+        public List<Int64> GetAlreadyReviewedList()
+        {
+            try
+            {
+                List<Int64> lstReviewer = _reviewMapRepository.GetAll().Where(m => m.IsActive == true).Select(p => p.DevloperId).ToList();
+                return lstReviewer;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // Get ReviewGroup Details
+        public List<ReviewGroupViewModel> GetReviewGroupDetails()
+        {
+            try
+            {
+                List<ReviewGroupViewModel> lstReviewGroupDetails = new List<ViewModel.ReviewGroupViewModel>();
+                List<ReviewMap> lstReviewer = _reviewMapRepository.GetAll();
+
+                foreach (ReviewMap item in lstReviewer)
+                {
+                    if (lstReviewGroupDetails.Select(p => p.Reviewer.Id).Contains(item.ReviewerId))
+                    {
+                        lstReviewGroupDetails.FirstOrDefault(p => p.Reviewer.Id == item.ReviewerId).Reviewees.Add(new UserGroupViewModel { Id = item.Id, Name = item.DeveloperUser.FName+" "+item.DeveloperUser.LName });
+                    }
+                    else
+                    {
+                        lstReviewGroupDetails.Add(new ReviewGroupViewModel { Reviewer = new UserGroupViewModel { Id = item.ReviewerUser.Id, Name = item.ReviewerUser.FName + " " + item.ReviewerUser.LName }, Reviewees = new List<ViewModel.UserGroupViewModel>() { new UserGroupViewModel { Id = item.DeveloperUser.Id, Name = item.DeveloperUser.FName + " " + item.DeveloperUser.LName } } });
+                    }
+                }
+
+                //EntityContext entity = new EntityContext();
+                //var v = (from t in entity.ReviewMaps
+                //         group t by t.ReviewerId into rg
+                //        join t1 in entity.Users
+                //        on rg.FirstOrDefault().ReviewerId equals t1.Id
+                //        select new 
+                //        { 
+                //            Id = rg.FirstOrDefault().ReviewerId,
+                //            Name = t1.FName+" "+t1.LName
+                //        }).ToList();
+
+                return lstReviewGroupDetails;
             }
             catch (Exception ex)
             {

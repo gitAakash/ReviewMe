@@ -320,6 +320,7 @@
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\ReviewMap\Index.cshtml" />
     <Content Include="Views\ReviewMap\AddEditGroup.cshtml" />
+    <Content Include="Views\ReviewMap\GetRevieweeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

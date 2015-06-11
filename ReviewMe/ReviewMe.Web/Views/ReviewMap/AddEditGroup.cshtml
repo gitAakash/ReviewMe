@@ -3,7 +3,8 @@
 @{
     Layout = null;
 }
-<link href="~/Content/prism.css" rel="stylesheet" />
+@*Test*@
+@*<link href="~/Content/prism.css" rel="stylesheet" />
 <link href="~/Content/chosen.css" rel="stylesheet" />
 <script src="~/Scripts/chosen.jquery.js"></script>
 <script src="~/Scripts/prism.js"></script>
@@ -14,45 +15,47 @@
         width: 400px;
         display: block;
     }
-</style>
+</style>*@
 
 <script type="text/javascript">
-    var config = {
-        '.chosen-select-width': { width: "75%" }
-    }
-    for (var selector in config) {
-        $(selector).chosen(config[selector]);
-    }
+     @*Test*@
+    //var config = {
+    //    '.chosen-select-width': { width: "75%" }
+    //}
+    //for (var selector in config) {
+    //    $(selector).chosen(config[selector]);
+    //}
 
     $(document).ready(function () {
 
-        $("#test").change(function () {
-            var a = $("#test :selected").text();
-            $("#selectedlist").html(a);
-        });
+         @*Test*@
+        //$("#test").change(function () {
+        //    var a = $("#test :selected").text();
+        //    $("#selectedlist").html(a);
+        //});
 
-        $("#s-all").click(function () {
+        //$("#s-all").click(function () {
 
-            var a = $("#test option");
+        //    var a = $("#test option");
 
-            $.each(a, function (i, val) {
-                $(val).change();
-            });
+        //    $.each(a, function (i, val) {
+        //        $(val).change();
+        //    });
 
-            var b = $("#test option").text();
-            $("#selectedlist").html(b);
+        //    var b = $("#test option").text();
+        //    $("#selectedlist").html(b);
 
-        });
+        //});
 
-        $("#c-all").click(function () {
+        //$("#c-all").click(function () {
 
-            $("#test option:selected").removeAttr("selected");
+        //    $("#test option:selected").removeAttr("selected");
 
-            var a = $("#test :selected").text();
-            $("#selectedlist").html(a);
-            $(".chosen-choices").find("li.search-choice").remove();
+        //    var a = $("#test :selected").text();
+        //    $("#selectedlist").html(a);
+        //    $(".chosen-choices").find("li.search-choice").remove();
 
-        });
+        //});
 
         $("#ReviewerId").change(function () {
             debugger;
@@ -66,12 +69,30 @@
             //    }
             //});
             var ReviewerId = $(this).val();
-            $("#RevieweeList").find('option').each(function () {
-                debugger;
-                if ($(this).val() == ReviewerId)
-                {
+            if (ReviewerId == "")
+            {
+                $('#RevieweeId').empty();
+                return;
+            }
+
+            //$("#RevieweeList").find('option').each(function () {
+            //    debugger;
+            //    if ($(this).val() == ReviewerId)
+            //    {
+            //        debugger;
+            //        $(this).remove();
+            //    }
+            //});
+            $.ajax({
+                url: "/ReviewMap/GetRevieweeList/" + ReviewerId,
+                type: "GET",
+                success: function (data) {
                     debugger;
-                    $(this).remove();
+                    $('#RevieweeId').empty();
+                    $('#RevieweeId').append(data);
+                },
+                error: function (response) {
+                    debugger;
                 }
             });
 
@@ -90,25 +111,18 @@
             <div class="col-sm-9">
 
                 <div>
-                    <div class="form-group">
-                        <label class="control-label">Reviewer<span style="color: red;">*</span></label>
-                        @Html.DropDownListFor(m => m.ReviewerId, new SelectList(Model.DropDownForReviewer, "Value", "Text"), "Select Reviewer", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.ReviewerId)
-                    </div>
+                    <label class="control-label">Reviewer<span style="color: red;">*</span></label>
                 </div>
+                @Html.DropDownListFor(m => m.ReviewerId, new SelectList(Model.DropDownForReviewer, "Value", "Text"), "Select Reviewer", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ReviewerId)
+
                 <div>
                     <label class="control-label">Reviewee<span style="color: red;">*</span></label>
                 </div>
-                
-                
-                <select data-placeholder="Select Reviewee" multiple class="chosen-select-width" tabindex="16" id="RevieweeList">
-                    <option value="" disable></option>
-                    @foreach (var item in Model.DropDownForReviewee)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(m => m.DevloperId)
+
+                <div id="RevieweeId">
+                </div>
+
                 <br />
                 <span class="RevieweeErrorMessage" style="color: red;">
                 </span>
@@ -122,7 +136,8 @@
     }
 </div>
 
-<script type="text/javascript">
+ @*Test*@
+@*<script type="text/javascript">
 
     var config = {
         '.chosen-select': {},
@@ -134,9 +149,9 @@
     for (var selector in config) {
         $(selector).chosen(config[selector]);
     }
-</script>
+</script>*@
 <script type="text/javascript">
-    var selectList="";
+    var selectList = "";
     $("#btnSave").click(function () {
         //debugger;
         var revieweeList = "";
@@ -148,8 +163,7 @@
         revieweeList = revieweeList.substring(0, revieweeList.length - 1);
         $('#SelectedListValues').val(revieweeList);
         debugger;
-        if (revieweeList.length == 0)
-        {
+        if (revieweeList.length == 0) {
             $('.RevieweeErrorMessage').html("Please select alteast one Reviewee.");
             return false;
         }
