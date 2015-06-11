@@ -86,5 +86,22 @@
         </div>
     </div>
 </div>
+<script>
+
+    $(document).ready(function () {
+
+
+        if ('@ViewBag.ineditmode' == "True") {
+            $("#btnaction").addClass('btn-label icon fa fa-edit');
+            $("#btnaction").text("Update");
+        }
+
+        else {
+            $("#btnaction").addClass('btn-label icon fa fa-plus');
+            $("#btnaction").text("Add");
+        }
+
+    });
+</script>
 
 

@@ -26,6 +26,7 @@ namespace ReviewMe.Bal
                     {
                         Id = project.Id,
                         UserId =  project.UserId,
+                        ProjectTitle = project.ProjectTitle,
                         Description = project.Description,
                         CreatedBy = project.CreatedBy,
                         ModifiedBy = project.ModifiedBy,
@@ -53,7 +54,7 @@ namespace ReviewMe.Bal
                 {
                     Id = project.Id,
                     UserId = project.UserId,
-                    
+                    ProjectTitle = project.ProjectTitle,
                     Description = project.Description,
                     CreatedBy = project.CreatedBy,
                     ModifiedBy = project.ModifiedBy,
@@ -77,7 +78,7 @@ namespace ReviewMe.Bal
                 var project = new Project()
                 {
                     Id = projectViewModel.Id,
-                    UserId = 1, // Need to discuss
+                    UserId = SessionManager.GetCurrentlyLoggedInUserId(),
                     Description = projectViewModel.Description,
                     ProjectTitle = projectViewModel.ProjectTitle,
                     CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
@@ -105,7 +106,8 @@ namespace ReviewMe.Bal
                 Project project = _projectRepository.GetById(projectViewModel.Id);
                 if (project != null)
                 {
-                    project.UserId = projectViewModel.UserId;
+                    project.UserId = SessionManager.GetCurrentlyLoggedInUserId();
+                    project.ProjectTitle = projectViewModel.ProjectTitle;
                     project.Description = projectViewModel.Description;
                     project.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
                     project.ModifiedOn = DateTime.Now;
