@@ -48,23 +48,58 @@ namespace ReviewMe.Bal
         }
 
         // Get Reviewee List
-        public ReviewMapViewModel GetRevieweeBalList(Int64 ReviewerId)
+        public ReviewMapViewModel GetRevieweeBalList(Int64 ReviewerId, string IsEdit)
         {
             try
             {
                 List<User> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
                 List<Int64> lstDevelopers = new ReviewMapBal().GetAlreadyReviewedList();
 
-                var reviewMapViewModel = new ReviewMapViewModel()
+                // Create
+                if (IsEdit == "2")
                 {
-                    DropDownForReviewee = userList.Where(p => p.Id != ReviewerId && !lstDevelopers.Contains(p.Id)).Select(p => new SerializableSelectListItem()
+                    var reviewMapViewModel = new ReviewMapViewModel()
                     {
-                        Text = p.FName,
-                        Value = p.Id.ToString(CultureInfo.InvariantCulture)
-                    })
-                };
+                        DropDownForReviewee = userList.Where(p => p.Id != ReviewerId && !lstDevelopers.Contains(p.Id)).Select(p => new SerializableSelectListItem()
+                        {
+                            Text = p.FName,
+                            Value = p.Id.ToString(CultureInfo.InvariantCulture)
+                        })
+                    };
 
-                return reviewMapViewModel;
+                    return reviewMapViewModel;
+                }
+                else // Edit
+                {
+                    List<Int64> lstReviewee = _reviewMapRepository.GetAll().Where(p => p.ReviewerId == ReviewerId && p.IsActive == true).Select(r => r.DevloperId).ToList();
+
+                    // Get list of all the users who are not yet assigned any Reviewer
+                    List<Int64> alreadyAssignedList = _reviewMapRepository.GetAll().Where(p => p.IsActive == true).Select(q => q.DevloperId).ToList();
+
+                    List<User> lstAllUsers = new UserBal().GetListOfUsersExceptAdmin();
+                    foreach (User rec in lstAllUsers)
+                    {
+                        if (!alreadyAssignedList.Contains(rec.Id))
+                        {
+                            lstReviewee.Add(rec.Id);
+                        }
+                    }
+
+                    var reviewMapViewModel = new ReviewMapViewModel()
+                    {
+                        DropDownForReviewer = null,
+                        ReviewerId = ReviewerId,
+                        DropDownForReviewee = userList.Where(r => lstReviewee.Contains(r.Id)).Select(p => new SerializableSelectListItem()
+                        {
+                            Text = p.FName,
+                            Value = p.Id.ToString(CultureInfo.InvariantCulture)
+                        })
+                    };
+
+                    return reviewMapViewModel;
+                }
+
+                
             }
             catch (Exception ex)
             {
@@ -206,7 +241,52 @@ namespace ReviewMe.Bal
             {
                 throw ex;
             }
-            return false;
+        }
+
+        // Edit ReviewMap
+        public bool EditReviewMap(ReviewMapViewModel reviewMapViewModel)
+        {
+            try
+            {
+                List<Int64> lstOriginal = reviewMapViewModel.EditOriginalReviewee.Split(',').Select(Int64.Parse).ToList();
+                List<Int64> lstSelected = reviewMapViewModel.SelectedListValues.Split(',').Select(Int64.Parse).ToList();
+                Int64 ReviewerId = reviewMapViewModel.ReviewerId;
+
+                foreach (Int64 item in lstSelected)
+                {
+                    if (!lstOriginal.Contains(item))
+                    {
+                        var reviewMapModel = new ReviewMap
+                        {
+                            ReviewerId = ReviewerId,
+                            DevloperId = item,
+                            CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
+                            CreatedOn = DateTime.Now,
+                            IsActive = true
+                        };
+
+                        ReviewMap responseModel = _reviewMapRepository.Add(reviewMapModel);
+                        _reviewMapRepository.SaveChanges();
+                    }
+                }
+
+                List<ReviewMap> lstReviewMap = _reviewMapRepository.GetAll();
+                foreach (Int64 item in lstOriginal)
+                {
+                    if (!lstSelected.Contains(item))
+                    {
+                        ReviewMap reviewMap = lstReviewMap.FirstOrDefault(p => p.DevloperId == item && p.ReviewerId == ReviewerId && p.IsActive == true);
+                        _reviewMapRepository.Delete(reviewMap);
+                        _reviewMapRepository.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // Update ReviewMap
@@ -256,7 +336,7 @@ namespace ReviewMe.Bal
             try
             {
                 List<ReviewGroupViewModel> lstReviewGroupDetails = new List<ViewModel.ReviewGroupViewModel>();
-                List<ReviewMap> lstReviewer = _reviewMapRepository.GetAll();
+                List<ReviewMap> lstReviewer = _reviewMapRepository.GetAll().Where(p => p.IsActive == true).ToList();
 
                 foreach (ReviewMap item in lstReviewer)
                 {
@@ -270,20 +350,73 @@ namespace ReviewMe.Bal
                     }
                 }
 
-                //EntityContext entity = new EntityContext();
-                //var v = (from t in entity.ReviewMaps
-                //         group t by t.ReviewerId into rg
-                //        join t1 in entity.Users
-                //        on rg.FirstOrDefault().ReviewerId equals t1.Id
-                //        select new 
-                //        { 
-                //            Id = rg.FirstOrDefault().ReviewerId,
-                //            Name = t1.FName+" "+t1.LName
-                //        }).ToList();
-
                 return lstReviewGroupDetails;
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // Delete UserMap by ReviewerId
+        public bool DeleteUserMapByReviewerId(Int64 id)
+        {
+            try
+            {
+                List<ReviewMap> lstRev = _reviewMapRepository.GetAll().Where(p => p.ReviewerId == id && p.IsActive == true).ToList();
+                foreach (ReviewMap rec in lstRev)
+                {
+                    _reviewMapRepository.Delete(rec);
+                    _reviewMapRepository.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // Get Edit ReviewerMap group Edit Details
+        public ReviewMapViewModel GetEditReviewMapById(long id)
+        {
+            try
+            {
+                UserViewModel reviewer = new UserBal().GetUserById(id);
+                List<Int64> lstReviewee = _reviewMapRepository.GetAll().Where(p => p.ReviewerId == id && p.IsActive == true).Select(r => r.DevloperId).ToList();
+
+                string OriginalReviewees = string.Join(",", lstReviewee);
+
+                // Get list of all the users who are not yet assigned any Reviewer
+                List<Int64> alreadyAssignedList = _reviewMapRepository.GetAll().Where(p => p.IsActive == true).Select(q => q.DevloperId).ToList();
+
+                List<User> lstAllUsers = new UserBal().GetListOfUsersExceptAdmin();
+                foreach (User rec in lstAllUsers)
+                {
+                    if (!alreadyAssignedList.Contains(rec.Id))
+                    {
+                        lstReviewee.Add(rec.Id);
+                    }
+                }
+
+                List<User> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
+
+                var reviewMapViewModel = new ReviewMapViewModel()
+                {
+                    DropDownForReviewer = new List<SerializableSelectListItem>() { new SerializableSelectListItem(){ Text = reviewer.FName, Value = reviewer.Id.ToString(CultureInfo.InvariantCulture) } },
+                    ReviewerId = id,
+                    DropDownForReviewee = userList.Where(r => lstReviewee.Contains(r.Id)).Select(p => new SerializableSelectListItem()
+                    {
+                        Text = p.FName,
+                        Value = p.Id.ToString(CultureInfo.InvariantCulture)
+                    }),
+                    EditOriginalReviewee = OriginalReviewees
+                };
+
+                return reviewMapViewModel;
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

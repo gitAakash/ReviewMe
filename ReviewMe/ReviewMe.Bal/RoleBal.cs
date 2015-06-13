@@ -46,17 +46,22 @@ namespace ReviewMe.Bal
             try
             {
                 Role role = _roleRepository.GetById(id);
-                var roleModel = new RoleViewModel
+                // Added By : Ramchandra Rane, 13th Jun 2015, Issue was exception throws,if role id came to 0
+                if(role!=null)
                 {
-                    Id = role.Id,
-                    RoleName = role.RoleName,
-                    CreatedBy = role.CreatedBy,
-                    ModifiedBy = role.ModifiedBy,
-                    CreatedOn = role.CreatedOn,
-                    ModifiedOn = role.ModifiedOn,
-                    IsActive = role.IsActive
-                };
-                return roleModel;
+                    var roleModel = new RoleViewModel
+                    {
+                        Id = role.Id,
+                        RoleName = role.RoleName,
+                        CreatedBy = role.CreatedBy,
+                        ModifiedBy = role.ModifiedBy,
+                        CreatedOn = role.CreatedOn,
+                        ModifiedOn = role.ModifiedOn,
+                        IsActive = role.IsActive
+                    };
+                    return roleModel;
+                }
+                return null;               
             }
             catch (Exception ex)
             {

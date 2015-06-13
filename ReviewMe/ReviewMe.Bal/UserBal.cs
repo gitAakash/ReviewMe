@@ -9,6 +9,7 @@ using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
 using ReviewMe.Common.Authorization;
+using ReviewMe.Common.Enums;
 
 namespace ReviewMe.Bal
 {
@@ -219,8 +220,10 @@ namespace ReviewMe.Bal
                     userViewModel.CreatedOn = user.CreatedOn;
                     userViewModel.ModifiedOn = user.ModifiedOn;
                     userViewModel.IsActive = user.IsActive;
+                    return userViewModel;
                 }
-                return userViewModel;
+                //Added By : Ramchadra Rane, 13th June 2015
+                return null;
             }
             catch (Exception ex)
             {
@@ -335,11 +338,24 @@ namespace ReviewMe.Bal
         {
             try
             {
-                List<User> lstReviewer = _userRepository.GetAll().Where(m => m.IsActive && (m.TeamLeaderId == id || m.Id == id)).ToList();
-                //List<User> lstReviewer = _userRepository.GetAll().Where(m => m.IsActive).ToList();
+                List<User> lstReviewer = _userRepository.GetAll().Where(m => m.IsActive == true && (m.TeamLeaderId == id || m.Id == id)).ToList();
                 return lstReviewer;
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // Get all UsersList Who are not Admin
+        public List<User> GetListOfUsersExceptAdmin()
+        {
+            try
+            {
+                List<User> lstReviewer = _userRepository.GetAll().Where(m => m.IsActive == true && m.Role.RoleName != UserRoleEnum.Admin.ToString()).ToList();
+                return lstReviewer;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

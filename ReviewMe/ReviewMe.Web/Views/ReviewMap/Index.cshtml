@@ -11,9 +11,6 @@
             list-style-type: none;
         }
     </style>
-    <script type="text/javascript">
-        
-    </script>
 
     <ul class="breadcrumb breadcrumb-page">
         <div class="breadcrumb-label text-light-gray">You are here: </div>
@@ -54,16 +51,15 @@
             @foreach (var item in lstGroup)
             {
                 <div class="col-sm-4">
-                    <div class="panel panel-primary" style="height: 150px; margin-top: 10px; overflow-y: hidden;">
+                    <div class="panel panel-primary" style="height: 150px; margin-top: 10px; overflow-y: hidden;" id="@item.Reviewer.Id">
                         <div class="panel-heading">
                             @item.Reviewer.Name
                             <div class="widget-comments">
                                 <div class="panel-padding no-padding-vr">
                                     <div class="comment-body">
                                         <div class="comment-actions" style="float: right;">
-                                            <a href="#" id="btnEdit" style="position: relative; top: -18px;"><i class="fa fa-pencil"></i>Edit</a>
-                                            <a href="#" id="btnDelete" style="position: relative; top: -18px;"><i class="fa fa-times"></i>Remove</a>
-                                            <input type="hidden" value="@item.Reviewer.Id"></input>
+                                            <a href="#" onclick="editGroup(@item.Reviewer.Id)" style="position: relative; top: -18px; color: white;"><i class="fa fa-pencil"></i>Edit</a>
+                                            <a href="#" onclick="deleteGroup(@item.Reviewer.Id)" style="position: relative; top: -18px; color: white;"><i class="fa fa-times"></i>Remove</a>
                                         </div>
                                     </div>
                                 </div>
@@ -91,6 +87,6 @@
             </div>
         </div>
     </div>
-
+    <input type="hidden" id="hdnEditFlag" />
+    <input type="hidden" id="hdnReviewerId" />
     <script src="~/Scripts/Custom/ReviewMap.js"></script>
-    <script src="~/Scripts/Custom/ReviewGroup.js"></script>

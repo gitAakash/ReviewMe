@@ -16,6 +16,7 @@ namespace ReviewMe.ViewModel
         public Int64 ReviewerId { get; set; }
         public Int64 DevloperId { get; set; }
         public string SelectedListValues { get; set; }
-        
+        public string IsEdit { get; set; }
+        public string EditOriginalReviewee { get; set; }
     }
 }

@@ -21,33 +21,62 @@ namespace ReviewMe.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddEditGroup()
+        public ActionResult AddEditGroup(Int64? revId)
         {
             ReviewMapViewModel reviewMapViewModel;
 
-            reviewMapViewModel = new ReviewMapBal().GetAddReviewMapDetails();
+            if (revId != null && revId != 0)
+            {
+                reviewMapViewModel = new ReviewMapBal().GetEditReviewMapById(Convert.ToInt64(revId));
+            }
+            else
+            {
+                reviewMapViewModel = new ReviewMapBal().GetAddReviewMapDetails();
+            }
 
             return PartialView("AddEditGroup", reviewMapViewModel);
         }
+
 
         [HttpPost]
         public ActionResult AddEditGroup(ReviewMapViewModel reviewMapViewModel)
         {
             if (ModelState.IsValid)
             {
-                bool status = new ReviewMapBal().AddReviewMap(reviewMapViewModel);
+                if (reviewMapViewModel.IsEdit == "1")
+                {
+                    bool status = new ReviewMapBal().EditReviewMap(reviewMapViewModel);
+                }
+                else
+                {
+                    bool status = new ReviewMapBal().AddReviewMap(reviewMapViewModel);
+                }
             }
             return RedirectToAction("Index", "ReviewMap");
         }
 
         [HttpGet]
-        public ActionResult GetRevieweeList(string id)
+        public ActionResult GetRevieweeList(string id, string IsEdit)
         {
             Int64 ReviewerId = Convert.ToInt64(id);
-            ReviewMapViewModel reviewMapViewModel;
+            ReviewMapViewModel reviewMapViewModel = new ReviewMapViewModel();
 
-            reviewMapViewModel = new ReviewMapBal().GetRevieweeBalList(ReviewerId);
+            reviewMapViewModel = new ReviewMapBal().GetRevieweeBalList(ReviewerId, IsEdit);
             return PartialView("GetRevieweeList", reviewMapViewModel);
         }
-	}
+
+        [HttpPost]
+        public bool DeleteGroup(string id)
+        {
+            try
+            {
+                bool response = new ReviewMapBal().DeleteUserMapByReviewerId(Convert.ToInt64(id));
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
 }
