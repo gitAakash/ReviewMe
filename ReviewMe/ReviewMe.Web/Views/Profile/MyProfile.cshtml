@@ -1,30 +1,26 @@
-﻿@using ReviewMe.Common.Extensions
-@model ReviewMe.ViewModel.UserViewModel
+﻿@model ReviewMe.ViewModel.UserViewModel
 @{
-    Layout = null;
+    ViewBag.Title = "MyProfile";
 }
 @Scripts.Render("~/bundles/jqueryval")
+<h2>MyProfile</h2>
+<script src="~/Scripts/Custom/User.js"></script>
+
 <link href="~/CSS/datepicker.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-datepicker.js"></script>
+@*<script src="~/Scripts/jquery-1.9.0.min.js"></script>*@
+@*<script src="~/Scripts/jquery.min.js"></script>*@
+<fieldset>
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    @if (Model.Id != 0)
+    @using (Html.BeginForm("AddEditUser", "Profile", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
     {
-        <h4 class="modal-title">Edit User</h4>
-    }
-    else
-    {
-        <h4 class="modal-title">Add User</h4>
-    }
-</div>
-<div class="modal-body">
-    @using (Html.BeginForm("AddEditUser", "User", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
-    {
+
+
         <div class="col-sm-3 profile-row">
             <div class="left-col">
                 <div class="profile-block">
                     <div class=" profile-photo">
+
                         @if (!string.IsNullOrEmpty(Model.UserImage))
                         {
                             var path = Path.Combine(Server.MapPath("~/ProfileImages/"), Model.UserImage);
@@ -48,6 +44,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-sm-9 ">
             <div class="row">
                 @Html.ValidationSummary(true)
@@ -89,6 +86,7 @@
                                     <label>
 
 
+
                                         @Html.RadioButtonFor(model => model.Gender, true, new { id = "male", @class = "px" })
                                         <span class="lbl">Male</span>
                                     </label>
@@ -110,28 +108,7 @@
                         </div><!-- col-sm-6 -->
 
                     </div><!-- row -->
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Role<span style="color: red">*</span></label>
-                                @Html.DropDownListFor(m => m.SelectedRoleId, Model.DropDownForRoles.ToSelectList(a => a.Value, a => a.Text, a => a.Selected), "Select Role", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.SelectedRoleId)
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Technology<span style="color: red">*</span></label>
-                                @Html.DropDownListFor(m => m.SelectedTechnologyId, Model.DropDownForTechnology.ToSelectList(a => a.Value, a => a.Text, a => a.Selected), "Select Technology", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.SelectedTechnologyId)
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">TeamLeader</label>
-                                @Html.DropDownListFor(m => m.SelectedTeamLeadId, Model.DropDownForTeamLeader.ToSelectList(a => a.Value, a => a.Text, a => a.Selected), "Select TeamLeader", new { @class = "form-control" })
-                            </div>
-                        </div><!-- col-sm-6 -->
-                    </div><!-- row -->
+
 
                     <div class="row">
                         <div class="col-sm-4">
@@ -150,12 +127,12 @@
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-4">
                             <div class="form-group no-margin-hr">
-                                <label class="control-label">Dob<span style="color: red">*</span></label>
-                                @*@Html.TextBox(string.Empty, @Model.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
-
-
-                                @Html.TextBoxFor(m => m.Dob, new { @placeholder = "dd/mm/yyyy", @class = "form-control", id = "Dob" })
-                                @Html.ValidationMessageFor(m => m.Dob)
+                                <div class="Dob">
+                                    <label class="control-label">Dob<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.Dob, new { @placeholder = "dd/mm/yyyy", @class = "form-control", @style = "width: 100%;" })
+                                    @*@Html.TextBoxFor(m => m.Dob, new { @class = "form-control", @value = "dd/mm/yyyy" })*@
+                                    @Html.ValidationMessageFor(m => m.Dob)
+                                </div>
                             </div>
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
@@ -184,24 +161,36 @@
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
+
     }
-</div>
+</fieldset>
+
 <script type="text/javascript">
     $(function () {
         debugger;
+
+
+        $("#Dob").keypress(function (event) { event.preventDefault(); });
+        var currentDate = new Date();
         $('#Dob').datepicker({
             format: "dd/mm/yyyy",
-            defaultDate: new Date(),
-        }).on('changeDate', function (e) {
-            $(this).datepicker('hide');
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '-45:-15',
+            //defaultDate: new Date('04/23/1986')
         });
+        //    format: "dd/mm/yyyy"
 
+        //}).on('changeDate', function (e) {
+        //    $(this).datepicker('hide');
     });
+
+
 
 </script>

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityBaseView.cs" />
+    <Compile Include="MyMailViewModal.cs" />
     <Compile Include="ProjectViewModel.cs" />
     <Compile Include="ProjectViewModelLong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

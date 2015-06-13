@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using ReviewMe.Bal;
 using ReviewMe.ViewModel;
 using ReviewMe.Web.Attributes;
+using System.Web;
 
 namespace ReviewMe.Web.Controllers
 {
@@ -32,17 +33,20 @@ namespace ReviewMe.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddEditUser(UserViewModel userViewModel)
+        public ActionResult AddEditUser(UserViewModel userViewModel, HttpPostedFileBase FilePath)
         {
             if (ModelState.IsValid)
             {
-                if (userViewModel.FilePath.ContentLength > 0)
+                if (FilePath != null)
                 {
-                    string fileName = Path.GetFileNameWithoutExtension(userViewModel.FilePath.FileName);
-                    fileName += DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(userViewModel.FilePath.FileName);
-                    string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
-                    userViewModel.FilePath.SaveAs(fileSavePath);
-                    userViewModel.UserImage = fileName;
+                    if (userViewModel.FilePath.ContentLength > 0)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(userViewModel.FilePath.FileName);
+                        fileName += DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(userViewModel.FilePath.FileName);
+                        string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
+                        userViewModel.FilePath.SaveAs(fileSavePath);
+                        userViewModel.UserImage = fileName;
+                    }
                 }
                 if (userViewModel.Id != 0)
                 {
