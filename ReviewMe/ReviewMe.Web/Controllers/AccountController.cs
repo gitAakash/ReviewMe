@@ -108,7 +108,12 @@ namespace ReviewMe.Web.Controllers
                // model.Password = encryptionHelper.Encrypt(model.Password);
 
                 var userModel = new UserBal().GetAuthenticateUserViewModel(model.Email, model.Password);
-                var roleModel = new RoleBal().GetRoleById(userModel.SelectedRoleId);
+                var roleModel=new RoleViewModel();
+                if(userModel != null)
+                {
+                    roleModel = new RoleBal().GetRoleById(userModel.SelectedRoleId);
+                }
+             
 
                 if (SessionManager.GetSessionInformation() == null)
                 {
@@ -156,7 +161,8 @@ namespace ReviewMe.Web.Controllers
                 {
                     SessionManager.RemoveSessionInformation();
                 }
-                ViewBag.ReturnUrl = returnUrl;
+                Session["LOGIN_FAILED"] = "Oops!!! Invalid username or password, Please Try Again.";
+                              ViewBag.ReturnUrl = returnUrl;
                 return View(model);
             }
             catch (Exception ex)

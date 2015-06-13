@@ -20,9 +20,11 @@
         <link href="~/Content/rtl.min.css" rel="stylesheet" />
         <link href="~/Content/themes.min.css" rel="stylesheet" />
         @Scripts.Render("~/bundles/modernizr")
+     
+        @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/bootstrap")
+        @*<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
         <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
         <!--[if lt IE 9]>
             <script src="assets/javascripts/ie.min.js"></script>
@@ -85,6 +87,7 @@
                 text-align: left;
             }
         </style>
+
         <style>
             #demo-themes {
                 border-bottom-left-radius: 5px;
@@ -301,17 +304,9 @@
                 right: auto;
             }
         </style>
+
     </head>
 
-
-    <!-- 1. $BODY ======================================================================================
-
-        Body
-
-        Classes:
-        * 'theme-{THEME NAME}'
-        * 'right-to-left'     - Sets text direction to right-to-left
-        -->
     <body class="theme-default page-signin" style="">
 
         <script>
@@ -335,15 +330,18 @@
                 $('body').append($div);
             });
         </script>
+
         <!-- Demo script -->
         <script src="~/Scripts/Custom/demo.js"></script> <!-- / Demo script -->
         <!-- Page background -->
+
         <div id="page-signin-bg">
             <!-- Background overlay -->
             <div class="overlay"></div>
             <!-- Replace this with your bg image -->
             <img src="http://infinite-woodland-5276.herokuapp.com/assets/demo/signin-bg-8.jpg" alt="" style="">
         </div>
+
         <!-- / Page background -->
         <!-- Container -->
         @* <div class="signin-container">
@@ -440,6 +438,7 @@
                     <li><i class="fa fa-heart signin-icon"></i> Crafted with love</li>
                 </ul> <!-- / Info list -->
             </div>
+
             <!-- / Left side -->
             <!-- Right side -->
             <div class="signin-form">
@@ -448,7 +447,7 @@
                 @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post))
                 {
                 @*<form action="index.html" id="signin-form_id" novalidate="novalidate">*@
-                   @* @Html.AntiForgeryToken()*@
+                    @*@Html.AntiForgeryToken()*@
                     if (HttpContext.Current.Session["LOGIN_FAILED"] != null)
                     {
                         @Session["LOGIN_FAILED"].ToString()
@@ -462,6 +461,7 @@
                     <div class="form-group w-icon">
                         @*<input type="text" name="signin_username" id="username_id" class="form-control input-lg" placeholder="Username or email">*@
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeHolder = "Username or email" })
+                        @Html.ValidationMessageFor(m => m.Email)
                         <span class="fa fa-user signin-form-icon"></span>
                     </div>
                     <!-- / Username -->
@@ -469,7 +469,9 @@
                     <div class="form-group w-icon">
                         @*<input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="Password">*@
                         @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control input-lg", @placeHolder = "Password" })*@
+
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", @placeHolder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password)
                         <span class="fa fa-lock signin-form-icon"></span>
                     </div>
                     <!-- / Password -->
@@ -531,7 +533,7 @@
         <script src="~/assets/javascripts/pixel-admin.min.js"></script>*@
                     }
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
             // Resize BG
             init.push(function() {
                 var $ph = $('#page-signin-bg'),
@@ -589,7 +591,7 @@
             });
 
             window.PixelAdmin.start(init);
-    </script>
+    </script>*@
 
     <h5 class="header">THEMES</h5>
     @* <div id="demo-themes">
@@ -684,6 +686,7 @@
         </div>*@
 </body>
 </html>
+
 @*@using NeoDailyReviews.Web.Models
     @model LoginViewModel
     @{
