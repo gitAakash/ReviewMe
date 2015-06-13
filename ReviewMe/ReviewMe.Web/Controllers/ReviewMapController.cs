@@ -1,4 +1,5 @@
 ﻿using ReviewMe.Bal;
+using ReviewMe.Common.Extensions;
 using ReviewMe.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,9 @@ namespace ReviewMe.Web.Controllers
         // GET: /ReviewMap/
         public ActionResult Index()
         {
-            return View();
+            List<ReviewGroupViewModel> lstReviewGroupViewModel;
+            lstReviewGroupViewModel = new ReviewMapBal().GetReviewGroupDetails();
+            return View(lstReviewGroupViewModel);
         }
 
         [HttpGet]
@@ -35,6 +38,16 @@ namespace ReviewMe.Web.Controllers
                 bool status = new ReviewMapBal().AddReviewMap(reviewMapViewModel);
             }
             return RedirectToAction("Index", "ReviewMap");
+        }
+
+        [HttpGet]
+        public ActionResult GetRevieweeList(string id)
+        {
+            Int64 ReviewerId = Convert.ToInt64(id);
+            ReviewMapViewModel reviewMapViewModel;
+
+            reviewMapViewModel = new ReviewMapBal().GetRevieweeBalList(ReviewerId);
+            return PartialView("GetRevieweeList", reviewMapViewModel);
         }
 	}
 }

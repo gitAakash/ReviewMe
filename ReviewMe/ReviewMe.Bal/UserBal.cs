@@ -314,6 +314,45 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
+        public bool UpdateUser(UserViewModel userViewModel)
+        {
+            try
+            {
+                User user = _userRepository.GetById(userViewModel.Id);
+
+                if (user != null)
+                {
+                    user.FName = userViewModel.FName;
+                    user.LName = userViewModel.LName;
+                    user.MName = userViewModel.MName;
+                    user.Dob = userViewModel.Dob;
+                    user.Gender = userViewModel.Gender;
+                    user.EmailId = userViewModel.EmailId;
+                    user.MobileNo = userViewModel.MobileNo;
+                    user.AlternateContactNo = userViewModel.AlternateContactNo;
+                    user.UserImage = userViewModel.UserImage;
+                    user.Address = userViewModel.Address;
+
+                    user.OnClient = userViewModel.OnClient;
+                    user.OnProject = userViewModel.OnProject;
+                    user.OnTask = userViewModel.OnTask;
+
+                    user.ModifiedBy = 1;
+                    user.ModifiedOn = DateTime.Now;
+
+                    User responsemodel = _userRepository.SaveOrUpdate(user);
+
+                    if (responsemodel != null)
+                        return true;
+                };
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         // Delete User
         public bool DeleteUser(long id)
