@@ -1,6 +1,9 @@
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
+
 [Bb]in/Debug/
 [Oo]bj/Debug/
+bin/Debug/
+obj/Debug/
 
 # mstest test results
 TestResults
