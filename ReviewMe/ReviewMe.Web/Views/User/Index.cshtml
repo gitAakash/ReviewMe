@@ -7,7 +7,7 @@
     Layout = "../Shared/_Layout.cshtml";
 }
 
-@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+
 <script src="~/Scripts/Custom/User.js"></script>
 
 <ul class="breadcrumb breadcrumb-page">
@@ -32,84 +32,72 @@
 
                 <!-- Margin -->
                 <div class="visible-xs clearfix form-group-margin"></div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                                  
+                        debugger;
+                      
+
+                        $('#Search').on('click', function () {
+                            debugger;
+                   
+                            var strSearch = $('#strSearch').val();
+                            if (strSearch == "")
+                            {
+                                location.reload();
+                            }
+                            else
+                                debugger;
+                                $.ajax({
+                                    url: "/User/Search",
+                                    type: "GET",
+                                    data: { 'strSearch': strSearch },
+                                    success: function (data) {
+                                        debugger;
+                                        $('#lstuser').html(data);
+                                        $('#strSearch').val("");
+
+                                    },
+                                    error: function (response) {
+                                        debugger;
+
+                                    }
+
+                                });
+                            
+                            });
+                        
+                    $("#strSearch").keypress(function (event) {
+                        debugger;
+                        if (event.keyCode == 13) {
+                            $("#Search").click();
+                            return false;
+                        }
+                    });
+                    });
+                   
+                </script>
+
 
                 <!-- Search field -->
-                <form action="" class="pull-right col-xs-12 col-sm-6">
+                <form class="pull-right col-xs-12 col-sm-6">
                     <div class="input-group no-margin">
                         <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
                             <i class="fa fa-search"></i>
                         </span>
-                        <input type="text" placeholder="Search..." class="form-control no-padding-hr" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
+                        <input type="text" placeholder="Search.." id="strSearch"  class="form-control no-padding-hr" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
+                        <div class="input-group-btn">
+                            <button name="search_b" id="Search" class="btn btn-primary btn-labeled" type="button">Search</button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">User</span>
-            </div>
-            <div class="panel-body ">
-                <div class="table-info">
-                    <div class="table-header">
-                        <div class="table-caption">
-                            User Table
-                        </div>
-                    </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Date of Birth</th>
-                                <th>Email</th>
-                                <th>Contact Number</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (UserViewModel item in Model.UserViewModelList)
-                            {
-                                <tr>
-                                    <td>@item.FName @item.LName</td>
-                                    <td style="word-break:break-all;width: 300px;">
-                                        @item.Address
-                                    </td>
-                                    <td>@String.Format("{0:d}", item.Dob)</td>
-                                    <td>@item.EmailId</td>
-                                    <td>@item.MobileNo</td>
-                                    <td>
-                                        <a href="javascript:void(0)" id="@(item.Id)" class="btn btn-primary btn-labeled " onclick=" EditUser(this) ">
-                                            <span class="btn-label icon fa fa-edit"></span> Edit
-                                        </a>
 
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-labeled " id="@(item.Id)_@(item.FName)" onclick=" DeleteUser(this) ">
-                                            <span class=" btn-label icon fa fa-warning">
-                                            </span> Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <div>
-                        <ul class="pagination pagination-xs">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="lstuser">
+    @Html.Partial("Search", Model)
 </div>
 <div id="userAddDetails" class="modal  fade" tabindex="-1" role="dialog" style="display: none;">
     <div class="modal-dialog modal-lg">

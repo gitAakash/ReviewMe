@@ -86,12 +86,12 @@
         </div>
     </div>
 </div>
+
 <script>
 
     $(document).ready(function () {
-
-
-        if ('@ViewBag.ineditmode' == "True") {
+    
+        if ('@ViewBag.EditMode' == "True") {
             $("#btnaction").addClass('btn-label icon fa fa-edit');
             $("#btnaction").text("Update");
         }

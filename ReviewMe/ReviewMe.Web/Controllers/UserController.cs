@@ -6,6 +6,10 @@ using ReviewMe.ViewModel;
 using ReviewMe.Web.Attributes;
 using System.Web;
 
+using ReviewMe.Model;
+using System.Linq;
+using System.Collections.Generic;
+
 namespace ReviewMe.Web.Controllers
 {
     [ReviewMeAuthorize]
@@ -24,12 +28,30 @@ namespace ReviewMe.Web.Controllers
             UserViewModel userViewModel;
             if (userId != null && userId != 0)
             {
-                userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));                
+                userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));
             }
             else
                 userViewModel = new UserBal().GetAddUserViewModel();
 
             return PartialView("AddEditUser", userViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Search(string strSearch)
+        {
+            UserViewModel user = new UserViewModel();
+            UserViewModelLong userViewModelLong = new UserBal().GetAllUsers();
+            int aa = userViewModelLong.UserViewModelList.Count();
+            List<UserViewModel> userViewModel = new List<UserViewModel>();
+            if (!string.IsNullOrEmpty(strSearch))
+           
+                userViewModel = (List<UserViewModel>)userViewModelLong.UserViewModelList.Where(p => ((p.FName + ' ' + p.LName)).Contains(strSearch) || (p.Address != null && p.Address.Contains(strSearch) || (p.EmailId != null && p.EmailId.Contains(strSearch) || (p.MobileNo != null && p.MobileNo.Contains(strSearch))))).ToList();
+
+                userViewModelLong.UserViewModelList = userViewModel;
+               
+                                 
+            return PartialView("Search", userViewModelLong);
+
         }
 
         [HttpPost]

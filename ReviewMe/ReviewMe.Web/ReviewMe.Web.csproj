@@ -324,6 +324,7 @@
     <Content Include="Views\ReviewMap\AddEditGroup.cshtml" />
     <Content Include="Views\Email\MyEmail.cshtml" />
     <Content Include="Views\Profile\MyProfile.cshtml" />
+    <Content Include="Views\Shared\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -341,6 +342,10 @@
     <ProjectReference Include="..\ReviewMe.Common\ReviewMe.Common.csproj">
       <Project>{49ab3b16-2a21-43b9-ada2-c205c398a2a6}</Project>
       <Name>ReviewMe.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReviewMe.Model\ReviewMe.Model.csproj">
+      <Project>{8e8e18be-9c94-4bff-9c86-25ef8869dab0}</Project>
+      <Name>ReviewMe.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\ReviewMe.ViewModel\ReviewMe.ViewModel.csproj">
       <Project>{3e6adc4f-ce08-4bfb-93a2-1e2afc9d1080}</Project>
