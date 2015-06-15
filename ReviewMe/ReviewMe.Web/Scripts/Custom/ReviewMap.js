@@ -69,7 +69,7 @@ function deleteGroup(id)
                     success: function (data) {
                         //debugger;
                         if (data == "True") {
-                            $("#" + id).remove();
+                            $("#" + id).parent().remove();
                         }
                     },
                     error: function (response) {
