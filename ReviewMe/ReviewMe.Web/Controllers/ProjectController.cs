@@ -44,7 +44,23 @@ namespace ReviewMe.Web.Controllers
             }
             return RedirectToAction("Index", "Project");
         }
+        [HttpGet]
+        public ActionResult SearchProject(string strSearch)
+        {
+          
+            ProjectViewModelLong projectViewModelLong = new ProjectBal().GetAllProjects();
+            int aa = projectViewModelLong.ProjectViewModelList.Count();
+            List<ProjectViewModel> projectViewModel = new List<ProjectViewModel>();
+            if (!string.IsNullOrEmpty(strSearch))
 
+                projectViewModel = (List<ProjectViewModel>)projectViewModelLong.ProjectViewModelList.Where(p => (p.ProjectTitle != null && p.ProjectTitle.Contains(strSearch)) || (p.Description != null && p.Description.Contains(strSearch))).ToList();
+
+            projectViewModelLong.ProjectViewModelList = projectViewModel;
+
+
+            return PartialView("SearchProject", projectViewModelLong);
+
+        }
         [HttpPost]
         public string DeleteProject(long id)
         {

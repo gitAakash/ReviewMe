@@ -1,0 +1,69 @@
+﻿@model ReviewMe.ViewModel.ProjectViewModelLong
+@using ReviewMe.Common.Extensions
+@using ReviewMe.ViewModel
+@using ReviewMe.Web.Controllers
+
+<div class="col-sm-12">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Project</span>
+        </div>
+        <div class="panel-body ">
+            <div class="table-info">
+                <div class="table-header">
+                    <div class="table-caption">
+                        Project Table
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Project Title</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ProjectViewModel item in Model.ProjectViewModelList)
+                        {
+                            <tr>
+                                <td>@item.ProjectTitle</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    <a href="@Url.Action("Index", "Project", new { id = item.Id })" class="btn btn-primary btn-labeled ">
+                                        <span class="btn-label icon fa fa-edit"></span> Edit
+                                    </a>
+
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-labeled " id="@(item.Id)_@(item.ProjectTitle)" onclick=" DeleteProject(this) ">
+                                        <span class=" btn-label icon fa fa-warning">
+                                        </span> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+
+        if ('@ViewBag.EditMode' == "True") {
+            $("#btnaction").addClass('btn-label icon fa fa-edit');
+            $("#btnaction").text("Update");
+        }
+
+        else {
+            $("#btnaction").addClass('btn-label icon fa fa-plus');
+            $("#btnaction").text("Add");
+        }
+
+    });
+</script>
+
+
+
+
