@@ -24,7 +24,23 @@ namespace ReviewMe.Web.Controllers
             }
             return View(technologyViewModelLong);
         }
+        [HttpGet]
+        public ActionResult SearchTechnology(string strSearch)
+        {
 
+            TechnologyViewModelLong technologyViewModelLong = new TechnologyBal().GetAllTechnologies();
+            int aa = technologyViewModelLong.TechnologyViewModelList.Count();
+            List<TechnologyViewModel> technologyViewModel = new List<TechnologyViewModel>();
+            if (!string.IsNullOrEmpty(strSearch))
+
+                technologyViewModel = (List<TechnologyViewModel>)technologyViewModelLong.TechnologyViewModelList.Where(p => (p.TechnologyName!=null && p.TechnologyName.Contains(strSearch) )).ToList();
+
+            technologyViewModelLong.TechnologyViewModelList = technologyViewModel;
+
+
+            return PartialView("SearchTechnology", technologyViewModelLong);
+
+        }
         [HttpPost]
         public ActionResult AddEditTechnology(TechnologyViewModel technologyViewModel)
         {
