@@ -17,3 +17,15 @@ E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\System.Web.Mvc.xml
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.csprojResolveAssemblyReference.cache
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.dll
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.pdb
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\ReviewMe.ViewModel.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\ReviewMe.ViewModel.pdb
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\Microsoft.DataAnnotations.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\ReviewMe.Common.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\System.Web.Mvc.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\Microsoft.Web.Mvc.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\ReviewMe.Common.pdb
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\Microsoft.DataAnnotations.xml
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\bin\Debug\System.Web.Mvc.xml
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.csprojResolveAssemblyReference.cache
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.ViewModel\obj\Debug\ReviewMe.ViewModel.pdb
