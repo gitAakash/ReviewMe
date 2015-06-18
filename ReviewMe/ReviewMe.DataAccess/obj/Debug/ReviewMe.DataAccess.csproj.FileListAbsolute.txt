@@ -62,3 +62,17 @@ E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.csproj.GenerateResource.Cache
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.dll
 E:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.pdb
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.DataAccess.dll.config
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.DataAccess.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.DataAccess.pdb
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\EntityFramework.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.Model.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\ReviewMe.Model.pdb
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\EntityFramework.xml
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.csprojResolveAssemblyReference.cache
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.dll
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.pdb
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.Migrations.InitialCreate.resources
+F:\Projects\ReviewMe\ReviewMe\ReviewMe.DataAccess\obj\Debug\ReviewMe.DataAccess.csproj.GenerateResource.Cache

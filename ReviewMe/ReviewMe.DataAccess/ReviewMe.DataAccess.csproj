@@ -48,10 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityContext.cs" />
+    <Compile Include="EntityContextInitializer.cs" />
     <Compile Include="IEntityContext.cs" />
-    <Compile Include="Migrations\201503041103119_addDesription.cs" />
-    <Compile Include="Migrations\201503041103119_addDesription.Designer.cs">
-      <DependentUpon>201503041103119_addDesription.cs</DependentUpon>
+    <Compile Include="Migrations\201506180907550_InitialCreate.cs" />
+    <Compile Include="Migrations\201506180907550_InitialCreate.Designer.cs">
+      <DependentUpon>201506180907550_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,8 +70,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201503041103119_addDesription.resx">
-      <DependentUpon>201503041103119_addDesription.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506180907550_InitialCreate.resx">
+      <DependentUpon>201506180907550_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

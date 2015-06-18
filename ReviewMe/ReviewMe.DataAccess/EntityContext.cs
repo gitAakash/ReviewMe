@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Diagnostics;
 using System.Linq;
 using ReviewMe.Model;
 
@@ -9,15 +10,17 @@ namespace ReviewMe.DataAccess
     {
         static EntityContext()
         {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<EntityContext>());
             //Database.SetInitializer(new DropCreateDatabaseAlways<EntityContext>());
         }
 
-        public EntityContext()
+       public EntityContext()
             : base("Name=NeoDailyReviewsContext")
         {
+           // Database.SetInitializer(new EntityContextInitializer()<EntityContext>());
+            Database.SetInitializer<EntityContext>(new MigrateDatabaseToLatestVersion<EntityContext, DataAccess.Migrations.Configuration>());
         }
-
+       
         #region IQueryable
 
         public IQueryable<Role> Rolees

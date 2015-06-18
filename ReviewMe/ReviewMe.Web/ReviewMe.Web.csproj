@@ -345,6 +345,10 @@
       <Project>{49ab3b16-2a21-43b9-ada2-c205c398a2a6}</Project>
       <Name>ReviewMe.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReviewMe.DataAccess\ReviewMe.DataAccess.csproj">
+      <Project>{FDC30DDF-53E4-433E-96EB-C4FA82167FA1}</Project>
+      <Name>ReviewMe.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReviewMe.Model\ReviewMe.Model.csproj">
       <Project>{8e8e18be-9c94-4bff-9c86-25ef8869dab0}</Project>
       <Name>ReviewMe.Model</Name>
