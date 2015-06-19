@@ -15,7 +15,7 @@ namespace ReviewMe.DataAccess.Migrations
 
         protected override void Seed(EntityContext context)
         {
-            base.Seed(context);
+            /*base.Seed(context);
 
             var roles = new List<Role>
             {
@@ -54,7 +54,7 @@ namespace ReviewMe.DataAccess.Migrations
                 }
             };
             users.ForEach(user => context.Users.Add(user));
-            context.SaveChanges();
+            context.SaveChanges();*/
         }
     }
 }

@@ -158,6 +158,20 @@
                                 @Html.ValidationMessageFor(m => m.Dob)
                             </div>
                         </div><!-- col-sm-6 -->
+                        <div class="col-sm-4">
+                            <div class="form-group no-margin-hr">
+                                <label class="control-label">Password<span style="color: red">*</span></label>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-4">
+                            <div class="form-group no-margin-hr">
+                                <label class="control-label">Confirm Password<span style="color: red">*</span></label>
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+                        </div><!-- col-sm-6 -->
                     </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-4">
@@ -196,7 +210,7 @@
     $(function () {
         debugger;
         $('#Dob').datepicker({
-            format: "dd/mm/yyyy",
+            format: "mm/dd/yyyy",
             defaultDate: new Date(),
         }).on('changeDate', function (e) {
             $(this).datepicker('hide');

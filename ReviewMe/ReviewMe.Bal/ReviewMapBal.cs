@@ -1,4 +1,5 @@
-﻿using ReviewMe.DataAccess;
+﻿using AutoMapper;
+using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
@@ -17,6 +18,7 @@ namespace ReviewMe.Bal
     public class ReviewMapBal
     {
         private readonly Repository<ReviewMap> _reviewMapRepository = new Repository<ReviewMap>(new EntityContext());
+        private readonly Repository<ReviewDetails> _reviewDetailsRepository = new Repository<ReviewDetails>(new EntityContext()); 
 
         // Get details for Add Group form
         public ReviewMapViewModel GetAddReviewMapDetails()
@@ -184,6 +186,27 @@ namespace ReviewMe.Bal
                 };
 
                 return reviewMapModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ReviewMapViewModel> GetRevieweeByReviewerId(long id)
+        {
+            var ReviewMapViewModelList = new List<ReviewMapViewModel>();
+            
+            try
+            {
+                var reviewMapList = _reviewMapRepository.GetAll().Where(a => a.ReviewerId == id).ToList();
+                foreach (var item in reviewMapList)
+                {
+                    ReviewMapViewModel reviewMapViewModel =
+                       Mapper.Map<ReviewMap, ReviewMapViewModel>(item);
+                    ReviewMapViewModelList.Add(reviewMapViewModel);
+                }
+                return ReviewMapViewModelList;
             }
             catch (Exception ex)
             {
@@ -421,5 +444,7 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
+
+
     }
 }

@@ -1,5 +1,8 @@
-﻿using ReviewMe.Bal;
+﻿using System.Diagnostics;
+using System.IO;
+using ReviewMe.Bal;
 using ReviewMe.Common.Extensions;
+using ReviewMe.Model;
 using ReviewMe.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -77,6 +80,35 @@ namespace ReviewMe.Web.Controllers
             {
                 throw ex;
             }
+        }
+
+        [HttpGet]
+        public ActionResult GetRevieweeListByReviewerId(string id)
+        {
+            Int64 ReviewerId = Convert.ToInt64(id);
+            /*ReviewMapViewModel reviewMapViewModel = new ReviewMapViewModel();*/
+
+           var reviewMapViewModel = new ReviewMapBal().GetRevieweeByReviewerId(ReviewerId);
+           return View("GetRevieweeListByReviewerId", reviewMapViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult ReviewDetails(long revieweeId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddDayReviewDetails(Int64? userId)
+        {
+            return PartialView("AddDayReviewDetails");
+        }
+
+        [HttpPost]
+        public ActionResult AddDayReviewDetails(ReviewDetailsViewModel reviewDetailsViewModel)
+        {
+           // bool status = new ReviewMapBal().SaveOrUpdateUser(reviewDetailsViewModel);
+            return RedirectToAction("GetRevieweeListByReviewerId");
         }
     }
 }

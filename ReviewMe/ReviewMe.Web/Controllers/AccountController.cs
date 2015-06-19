@@ -114,7 +114,6 @@ namespace ReviewMe.Web.Controllers
                     roleModel = new RoleBal().GetRoleById(userModel.SelectedRoleId);
                 }
              
-
                 if (SessionManager.GetSessionInformation() == null)
                 {
                     if (userModel != null)

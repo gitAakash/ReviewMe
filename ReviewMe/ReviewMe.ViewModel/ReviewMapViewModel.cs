@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReviewMe.Model;
 
 namespace ReviewMe.ViewModel
 {
@@ -18,5 +19,7 @@ namespace ReviewMe.ViewModel
         public string SelectedListValues { get; set; }
         public string IsEdit { get; set; }
         public string EditOriginalReviewee { get; set; }
+        public virtual UserViewModel ReviewerUser { get; set; }
+        public virtual UserViewModel DeveloperUser { get; set; }
     }
 }

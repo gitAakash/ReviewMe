@@ -51,6 +51,7 @@
     <Compile Include="Review.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ReviewDetails.cs" />
     <Compile Include="ReviewMap.cs" />
     <Compile Include="ReviewSetting.cs" />
     <Compile Include="Role.cs" />

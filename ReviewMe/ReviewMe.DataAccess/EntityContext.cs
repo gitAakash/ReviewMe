@@ -71,6 +71,12 @@ namespace ReviewMe.DataAccess
             set { ReviewMaps = (IDbSet<ReviewMap>)value; }
         }
 
+        public IQueryable<ReviewDetails> ReviewDetailss
+        {
+            get { return ReviewDetails; }
+            set { ReviewDetails = (IDbSet<ReviewDetails>)value; }
+        }
+
         #endregion 
 
         #region IDbSet
@@ -82,6 +88,7 @@ namespace ReviewMe.DataAccess
         public IDbSet<ReviewSetting> ReviewSettings { get; set; }
         public IDbSet<User> Users { get; set; }
         public IDbSet<ReviewMap> ReviewMaps { get; set; }
+        public IDbSet<ReviewDetails> ReviewDetails { get; set; }
         #endregion
 
         #region Besic Methods
@@ -157,6 +164,8 @@ namespace ReviewMe.DataAccess
                 HasRequired(x => x.Role).
                 WithMany(x => x.Users).
                 HasForeignKey(x => x.RoleId);
+
+           // modelBuilder.Entity<ReviewDetails>().HasRequired(x=>x.ReviewerId).WithMany(x=>x.)
 
             // User and Comment
             modelBuilder.Entity<Comment>(). 
