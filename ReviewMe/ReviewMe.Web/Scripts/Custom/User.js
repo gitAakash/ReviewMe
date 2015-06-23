@@ -42,10 +42,10 @@ function EditUser(element) {
     });
 }
 
-$(function() {
-    $('#AddUser').click(function() {
+$(function () {
+
+    $('#AddUser').click(function() {      
         debugger;
-   
         $('#userAddDetails').modal({
             backdrop: 'static',
             keyboard: false

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ReviewMe.Model
 {
-    public class User : EntityBase
+    public partial class User : EntityBase
     {
         public User()
         {
@@ -23,7 +23,6 @@ namespace ReviewMe.Model
         public bool Gender { get; set; }
         public string EmailId { get; set; }
         public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
         public string MobileNo { get; set; }
         public string AlternateContactNo { get; set; }
         public string UserImage { get; set; }
@@ -41,7 +40,6 @@ namespace ReviewMe.Model
         public virtual User TeamLeader { get; set; }
         public virtual Role Role { get; set; }
         public virtual Technology Technology { get; set; }
-        
 
         public List<Review> Reviews { get; set; }
         public List<Comment> Comments { get; set; }
@@ -51,6 +49,6 @@ namespace ReviewMe.Model
         public List<ReviewSetting> ReviewSettings { get; set; }
         public List<ReviewMap> ReviewerMapUsers { get; set; }
         public List<ReviewMap> DeveloperMapUsers { get; set; }
-
     }
+
 }

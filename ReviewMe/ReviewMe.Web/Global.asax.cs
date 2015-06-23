@@ -23,7 +23,7 @@ namespace ReviewMe.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             CreateMappings();
-            // Database.SetInitializer<EntityContext>(new EntityContextInitializer());
+             Database.SetInitializer<EntityContext>(new EntityContextInitializer());
         }
 
         private void CreateMappings()

@@ -2,6 +2,7 @@
 @using ReviewMe.ViewModel
 @using ReviewMe.Web.Controllers
 @model ReviewMe.ViewModel.UserViewModelLong
+
 @{
     ViewBag.Title = "User-Management";
     Layout = "../Shared/_Layout.cshtml";
@@ -29,63 +30,55 @@
                         <span class="btn-label icon fa fa-plus"></span> Create User
                     </button>
                 </div>
-
                 <!-- Margin -->
                 <div class="visible-xs clearfix form-group-margin"></div>
                 <script type="text/javascript">
                     $(document).ready(function () {
-                                  
-                        debugger;
-                      
 
                         $('#Search').on('click', function () {
-                            debugger;
-                   
                             var strSearch = $('#strSearch').val();
-                            if (strSearch == "")
-                            {
-                                location.reload();
-                            }
-                            else
-                                debugger;
-                                $.ajax({
-                                    url: "/User/Search",
-                                    type: "GET",
-                                    data: { 'strSearch': strSearch },
-                                    success: function (data) {
-                                        debugger;
-                                        $('#lstuser').html(data);
-                                        $('#strSearch').val("");
+                            // Commeneted by : Ramchandra Rane,19th Jun 2015
 
-                                    },
-                                    error: function (response) {
-                                        debugger;
+                            //if (strSearch == "") {
+                            //    location.reload();
+                            //}
+                            //else
+                             
+                            $.ajax({
+                                url: "/User/Search",
+                                type: "GET",
+                                data: { 'strSearch': strSearch },
+                                success: function (data) {
+                                    debugger;
+                                    $('#lstuser').html(data);
+                                    $('#strSearch').val("");
 
-                                    }
+                                },
+                                error: function (response) {
+                                    debugger;
 
-                                });
-                            
+                                }
+
                             });
-                        
-                    $("#strSearch").keypress(function (event) {
-                        debugger;
-                        if (event.keyCode == 13) {
-                            $("#Search").click();
-                            return false;
-                        }
+
+                        });
+                        $("#strSearch").keypress(function (event) {
+                            debugger;
+                            if (event.keyCode == 13) {
+                                $("#Search").click();
+                                return false;
+                            }
+                        });
                     });
-                    });
-                   
+
                 </script>
-
-
                 <!-- Search field -->
                 <form class="pull-right col-xs-12 col-sm-6">
                     <div class="input-group no-margin">
                         <span class="input-group-addon" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
                             <i class="fa fa-search"></i>
                         </span>
-                        <input type="text" placeholder="Search.." id="strSearch"  class="form-control no-padding-hr" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
+                        <input type="text" placeholder="Search.." id="strSearch" class="form-control no-padding-hr" style="border:none;background: #fff;background: rgba(0,0,0,.05);">
                         <div class="input-group-btn">
                             <button name="search_b" id="Search" class="btn btn-primary btn-labeled" type="button">Search</button>
                         </div>

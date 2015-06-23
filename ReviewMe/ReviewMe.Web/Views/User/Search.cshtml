@@ -9,9 +9,9 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="panel">
-            <div class="panel-heading">
+            @*<div class="panel-heading">
                 <span class="panel-title"<div class="panel-body ">User</span>
-            </div>
+            </div>*@
             <div class="table-info">
                 <div class="table-header">
                     <div class="table-caption">
@@ -26,6 +26,7 @@
                             <th>Date of Birth</th>
                             <th>Email</th>
                             <th>Contact Number</th>
+                            <th>Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                                 <td>@String.Format("{0:d}", item.Dob)</td>
                                 <td>@item.EmailId</td>
                                 <td>@item.MobileNo</td>
+                                <td>@item.RoleName </td>
                                 <td>
                                     <a href="javascript:void(0)" id="@(item.Id)" class="btn btn-primary btn-labeled " onclick=" EditUser(this) ">
                                         <span class="btn-label icon fa fa-edit"></span> Edit

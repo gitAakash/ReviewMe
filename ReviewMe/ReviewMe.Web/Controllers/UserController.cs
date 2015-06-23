@@ -39,17 +39,24 @@ namespace ReviewMe.Web.Controllers
         [HttpGet]
         public ActionResult Search(string strSearch)
         {
-            UserViewModel user = new UserViewModel();
-            UserViewModelLong userViewModelLong = new UserBal().GetAllUsers();
-            int aa = userViewModelLong.UserViewModelList.Count();
-            List<UserViewModel> userViewModel = new List<UserViewModel>();
-            if (!string.IsNullOrEmpty(strSearch))
-           
-                userViewModel = (List<UserViewModel>)userViewModelLong.UserViewModelList.Where(p => ((p.FName + ' ' + p.LName)).Contains(strSearch) || (p.Address != null && p.Address.Contains(strSearch) || (p.EmailId != null && p.EmailId.Contains(strSearch) || (p.MobileNo != null && p.MobileNo.Contains(strSearch))))).ToList();
+            UserViewModelLong userViewModelLong = null;
+            if(!string.IsNullOrEmpty(strSearch))
+            {
+                UserViewModel user = new UserViewModel();
+                 userViewModelLong = new UserBal().GetAllUsers();
+                int aa = userViewModelLong.UserViewModelList.Count();
+                List<UserViewModel> userViewModel = new List<UserViewModel>();
+                if (!string.IsNullOrEmpty(strSearch))
+                    userViewModel = (List<UserViewModel>)userViewModelLong.UserViewModelList.Where(p => ((p.FName + ' ' + p.LName)).Contains(strSearch) || (p.Address != null && p.Address.Contains(strSearch) || (p.EmailId != null && p.EmailId.Contains(strSearch) || (p.MobileNo != null && p.MobileNo.Contains(strSearch))))).ToList();
 
-                userViewModelLong.UserViewModelList = userViewModel;
-               
-                                 
+                userViewModelLong.UserViewModelList = userViewModel;    
+            }
+            else
+            {
+                 userViewModelLong = new UserBal().GetAllUsers();
+                return View(userViewModelLong);
+            }
+        
             return PartialView("Search", userViewModelLong);
 
         }
@@ -57,6 +64,12 @@ namespace ReviewMe.Web.Controllers
         [HttpPost]
         public ActionResult AddEditUser(UserViewModel userViewModel, HttpPostedFileBase FilePath)
         {
+            // Modified By : Ramchandra Rane, 19th Jun 2015,Description : Added if condition
+            if(userViewModel.Id !=0)
+            {
+                ModelState.Remove("Password");
+                ModelState.Remove("ConfirmPassword");               
+            }
             if (ModelState.IsValid)
             {
                 if (FilePath != null)
