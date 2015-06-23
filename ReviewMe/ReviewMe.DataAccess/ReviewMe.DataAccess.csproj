@@ -48,11 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityContext.cs" />
+    <Compile Include="EntityContextInitializer.cs" />
     <Compile Include="IEntityContext.cs" />
-    <Compile Include="Migrations\201503041103119_addDesription.cs" />
-    <Compile Include="Migrations\201503041103119_addDesription.Designer.cs">
-      <DependentUpon>201503041103119_addDesription.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
@@ -67,11 +64,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201503041103119_addDesription.resx">
-      <DependentUpon>201503041103119_addDesription.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -26,33 +26,24 @@
     }
 
     $(document).ready(function () {
-
         $("#test").change(function () {
             var a = $("#test :selected").text();
             $("#selectedlist").html(a);
         });
-
         $("#s-all").click(function () {
-
             var a = $("#test option");
-
             $.each(a, function (i, val) {
                 $(val).change();
             });
-
             var b = $("#test option").text();
             $("#selectedlist").html(b);
-
         });
 
         $("#c-all").click(function () {
-
             $("#test option:selected").removeAttr("selected");
-
             var a = $("#test :selected").text();
             $("#selectedlist").html(a);
             $(".chosen-choices").find("li.search-choice").remove();
-
         });
     });
 </script>

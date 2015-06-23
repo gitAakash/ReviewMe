@@ -10,6 +10,7 @@ namespace ReviewMe.DataAccess
         IDbSet<Project> Projects { get; set; }
         IDbSet<Comment> Comments { get; set; }
         IDbSet<Technology> Technologies { get; set; }
+        IDbSet<ReviewDetails> ReviewDetails { get; set; }
         //IDbSet<ReviewTechnology> ReviewTechnologies { get; set; }
        // IDbSet<ReviewSetting> ReviewSettings { get; set; }
         IDbSet<User> Users { get; set; }

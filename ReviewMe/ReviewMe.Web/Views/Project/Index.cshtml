@@ -27,12 +27,49 @@
 
                 <!-- Margin -->
                 <div class="visible-xs clearfix form-group-margin"></div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        debugger;
+
+                        $("#strSearch").keypress(function (event) {
+                            debugger;
+                            if (event.keyCode == 13) {
+                            var strSearch = $('#strSearch').val();
+                            if (strSearch == "") {
+                                location.reload();
+                            }
+                            else
+                                debugger;
+                            $.ajax({
+                                url: "/Project/SearchProject",
+                                type: "GET",
+                                data: { 'strSearch': strSearch },
+                                success: function (data) {
+                                    debugger;
+                                    $('#lstuser').html(data);
+                                    $('#strSearch').val("");
+
+                                },
+                                error: function (response) {
+                                    debugger;
+
+                                }
+
+                            });
+                            return false;
+                            }
+                        });
+                                            
+                    });
+
+                </script>
 
                 <!-- Search field -->
                 <form action="" class="pull-right col-xs-12 col-sm-6">
                     <div class="input-group no-margin">
                         <span class="input-group-addon" style="background: #fff; background: rgba(0, 0, 0, .05); border: none;"><i class="fa fa-search"></i></span>
-                        <input type="text" placeholder="Search..." class="form-control no-padding-hr" style="background: #fff; background: rgba(0, 0, 0, .05); border: none;">
+                        <input type="text" id="strSearch"  placeholder="Search..." class="form-control no-padding-hr" style="background: #fff; background: rgba(0, 0, 0, .05); border: none;">
                     </div>
                 </form>
             </div>
@@ -41,67 +78,12 @@
 </div> 
 <div class="row">
     @Html.Partial("AddEditProject", Model.ProjectViewModel)
-    <div class="col-sm-12">
-        <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">Project</span>
-            </div>
-            <div class="panel-body ">
-                <div class="table-info">
-                    <div class="table-header">
-                        <div class="table-caption">
-                            Project Table
-                        </div>
-                    </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Project Title</th>
-                                <th>Description</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (ProjectViewModel item in Model.ProjectViewModelList)
-                            {
-                                <tr>
-                                    <td>@item.ProjectTitle</td>
-                                    <td>@item.Description</td>
-                                    <td>
-                                        <a href="@Url.Action("Index", "Project", new { id = item.Id })" class="btn btn-primary btn-labeled ">
-                                            <span class="btn-label icon fa fa-edit"></span> Edit
-                                        </a>
-
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-labeled " id="@(item.Id)_@(item.ProjectTitle)" onclick=" DeleteProject(this) ">
-                                            <span class=" btn-label icon fa fa-warning">
-                                            </span> Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
-<script>
+<div id="lstuser">
+    @Html.Partial("SearchProject", Model)
+</div>
 
-    $(document).ready(function () {
 
-
-        if ('@ViewBag.ineditmode' == "True") {
-            $("#btnaction").addClass('btn-label icon fa fa-edit');
-            $("#btnaction").text("Update");
-        }
-
-        else {
-            $("#btnaction").addClass('btn-label icon fa fa-plus');
-            $("#btnaction").text("Add");
-        }
-
-    });
-</script>
 
 

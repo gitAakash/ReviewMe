@@ -16,26 +16,35 @@ namespace ReviewMe.Web.Controllers
     {
         //
         // GET: /Email/
-        string HostAdd = ConfigurationManager.AppSettings["Host"].ToString();
-        string frommail = ConfigurationManager.AppSettings["FromEmailId"].ToString();
+        string hostAdd = ConfigurationManager.AppSettings["Host"].ToString();
+        string fromEmailId = ConfigurationManager.AppSettings["FromEmailId"].ToString();
         string pass = ConfigurationManager.AppSettings["Password"].ToString();
         string port = ConfigurationManager.AppSettings["smtpport"].ToString();
+
         public ActionResult Index()
         {
             return View();
         }
+
         public ActionResult MyEmail()
         {
             return View();
         }
+
+        /// <summary>
+        /// send Email to reviewer 
+        /// </summary>
+        /// <param name="objModelMail"></param>
+        /// <param name="fileUploader"></param>
+        /// <returns></returns>
+        /// created by prerna khandelwal
         [HttpPost]
         public ActionResult MyEmail(MyMailViewModal objModelMail, HttpPostedFileBase fileUploader)
         {
-
             if (ModelState.IsValid)
             {
                 string body;
-                string from = frommail; //any valid GMail ID
+                string from = fromEmailId; //any valid GMail ID
                 try
                 {
                     using (MailMessage mail = new MailMessage(from, objModelMail.To))
@@ -61,7 +70,7 @@ namespace ReviewMe.Web.Controllers
 
                         mail.IsBodyHtml = true;
                         SmtpClient smtp = new SmtpClient();
-                        smtp.Host = HostAdd;
+                        smtp.Host = hostAdd;
                         smtp.EnableSsl = true;
                         NetworkCredential networkCredential = new NetworkCredential(from, pass);
                         smtp.UseDefaultCredentials = true;

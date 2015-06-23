@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "ReviewDetails";
+}
+
+<link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+@*<script src='lib/jquery.min.js'></script>*@
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/fullcalendar.js"></script>
+
+<div id='calendar'>
+    
+</div>
+
+
+
+<div id="createEventModal" class="modal fade in" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="userAddEditModalBody">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>ReviewDetails</h3>
+            </div>
+            <div class="modal-body">
+                <form class="contact" name="contact">
+                    <label class="label" for="name">Title</label><br>
+                    <input type="email" name="email" class="input-xlarge"><br>
+                    <label class="label" for="message">Comment</label><br>
+                    <textarea name="Comment" class="input-xlarge"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-success" type="submit" value="Save" id="submit">
+                <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Custom/ReviewDetails.js"></script>

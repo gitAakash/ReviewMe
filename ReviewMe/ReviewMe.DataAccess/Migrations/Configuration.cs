@@ -1,31 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using ReviewMe.Model;
+
 namespace ReviewMe.DataAccess.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<ReviewMe.DataAccess.EntityContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<EntityContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+          //  AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true;
+            ContextKey = "ReviewMe.DataAccess.EntityContext";
         }
 
-        protected override void Seed(ReviewMe.DataAccess.EntityContext context)
+        protected override void Seed(EntityContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            //base.Seed(context);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            //var roles = new List<Role>
+            //{
+            //    new Role {RoleName = "Admin", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true},
+            //    new Role {RoleName = "Team Leader", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true},
+            //    new Role {RoleName = "Developer", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true}
+            //};
+            //roles.ForEach(role => context.Roles.Add(role));
+
+            //var technologies = new List<Technology>
+            //{
+            //    new Technology {TechnologyName = "ASP.NET", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true},
+            //    new Technology {TechnologyName = "JAVA", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true}
+            //};
+            //technologies.ForEach(technology => context.Technologies.Add(technology));
+
+            //var users = new List<User>
+            //{
+            //    new User
+            //    {
+            //        FName = "admin",
+            //        LName = "admin",
+            //        Address = "Pune",
+            //        Gender = true,
+            //        Dob = DateTime.Now,
+            //        EmailId = "admin@admin.com",
+            //        Password = "password",
+            //        RoleId = 1,
+            //        TechnologyId = 1,
+            //        CreatedBy = 1,
+            //        CreatedOn = DateTime.Now,
+            //        IsActive = true,
+            //        OnClient = false,
+            //        OnProject = false,
+            //        OnTask = false
+            //    }
+            //};
+            //users.ForEach(user => context.Users.Add(user));
+            //context.SaveChanges();
         }
     }
 }

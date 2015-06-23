@@ -39,7 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net20\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -103,9 +113,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -213,6 +220,7 @@
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\dd.css" />
     <Content Include="Content\flags.css" />
+    <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\pages.min.css" />
     <Content Include="Content\pixel-admin.min.css" />
     <Content Include="Content\prism.css" />
@@ -245,6 +253,7 @@
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\countries.js" />
     <Content Include="Scripts\Custom\demo.js" />
+    <Content Include="Scripts\Custom\GetRevieweeListByReviewer.js" />
     <Content Include="Scripts\Custom\pixel-admin.min.js" />
     <Content Include="Content\chosen.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -254,6 +263,7 @@
     <Content Include="Scripts\Custom\Role.js" />
     <Content Include="Scripts\Custom\Technology.js" />
     <Content Include="Scripts\Custom\User.js" />
+    <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery.ajax.chosen.min.js" />
@@ -266,10 +276,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\Custom\ReviewDetails.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -324,6 +336,12 @@
     <Content Include="Views\ReviewMap\AddEditGroup.cshtml" />
     <Content Include="Views\Email\MyEmail.cshtml" />
     <Content Include="Views\Profile\MyProfile.cshtml" />
+    <Content Include="Views\User\Search.cshtml" />
+    <Content Include="Views\Project\SearchProject.cshtml" />
+    <Content Include="Views\Technology\SearchTechnology.cshtml" />
+    <Content Include="Views\ReviewMap\GetRevieweeListByReviewerId.cshtml" />
+    <Content Include="Views\ReviewMap\ReviewDetails.cshtml" />
+    <Content Include="Views\ReviewMap\AddDayReviewDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -342,10 +360,21 @@
       <Project>{49ab3b16-2a21-43b9-ada2-c205c398a2a6}</Project>
       <Name>ReviewMe.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReviewMe.DataAccess\ReviewMe.DataAccess.csproj">
+      <Project>{FDC30DDF-53E4-433E-96EB-C4FA82167FA1}</Project>
+      <Name>ReviewMe.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReviewMe.Model\ReviewMe.Model.csproj">
+      <Project>{8e8e18be-9c94-4bff-9c86-25ef8869dab0}</Project>
+      <Name>ReviewMe.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReviewMe.ViewModel\ReviewMe.ViewModel.csproj">
       <Project>{3e6adc4f-ce08-4bfb-93a2-1e2afc9d1080}</Project>
       <Name>ReviewMe.ViewModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

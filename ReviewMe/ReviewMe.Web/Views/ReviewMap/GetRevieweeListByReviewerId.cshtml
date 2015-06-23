@@ -1,0 +1,35 @@
+﻿@using ReviewMe.ViewModel;
+@model List<ReviewMapViewModel>
+
+    @{
+
+    }
+
+    <ul class="breadcrumb breadcrumb-page">
+        <div class="breadcrumb-label text-light-gray">You are here: </div>
+        <li><a href="#">Home</a></li>
+        <li class="active"><a href="#">My Reviewees</a></li>
+    </ul>
+
+    <div class="page-header">
+        <div class="row">
+            <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="fa fa-random page-header-icon"></i> My Reviewees</h1>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <a href="javascript:void(0)" onclick="ReviewDetails(@item.ReviewerId)">
+                <div class="col col-lg-3" style="  width: 12% !important;">
+                    <div class="stat-cell bg-warning" style="cursor: pointer;">
+                        <!-- Big text -->
+                        <span class="text-bg">@item.DeveloperUser.FName</span><br>
+                        <!-- Small text -->
+                        <span class="text-sm">@item.DeveloperUser.LName</span>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+
+    <script src="~/Scripts/Custom/GetRevieweeListByReviewer.js"></script>
