@@ -24,7 +24,8 @@ namespace ReviewMe.Bal
             {
                 List<User> userList = _userRepository.GetAll().Where(m => m.IsActive).ToList();
                 var userViewModelLong = new UserViewModelLong();
-                foreach (User user in userList)
+                //Modified By : Ramchandra Rane, 19th June 2015, Description: Added Where condition.
+                foreach (User user in userList.Where(r=>r.Id != SessionManager.GetCurrentlyLoggedInUserId()))
                 {
                     userViewModelLong.UserViewModelList.Add(new UserViewModel
                     {
@@ -36,7 +37,6 @@ namespace ReviewMe.Bal
                         Gender = user.Gender,
                         EmailId = user.EmailId,
                         Password = user.Password,
-                        ConfirmPassword = user.ConfirmPassword,
                         MobileNo = user.MobileNo,
                         AlternateContactNo = user.AlternateContactNo,
                         UserImage = user.UserImage,
@@ -53,7 +53,8 @@ namespace ReviewMe.Bal
                         ModifiedBy = user.ModifiedBy,
                         CreatedOn = user.CreatedOn,
                         ModifiedOn = user.ModifiedOn,
-                        IsActive = user.IsActive
+                        IsActive = user.IsActive,
+                        RoleName = user.Role.RoleName
                     });
                 }
                 return userViewModelLong;
@@ -102,7 +103,6 @@ namespace ReviewMe.Bal
                     Gender = user.Gender,
                     EmailId = user.EmailId,
                     Password = user.Password,
-                    ConfirmPassword = user.ConfirmPassword,
                     MobileNo = user.MobileNo,
                     AlternateContactNo = user.AlternateContactNo,
                     UserImage = user.UserImage,
@@ -173,7 +173,8 @@ namespace ReviewMe.Bal
                         {
                             Text = c.FName,
                             Value = c.Id.ToString(CultureInfo.InvariantCulture)
-                        })
+                        }),
+                        Gender=true
                 };
 
                 return userViewModel;
@@ -202,7 +203,6 @@ namespace ReviewMe.Bal
                     userViewModel.Gender = user.Gender;
                     userViewModel.EmailId = user.EmailId;
                     userViewModel.Password = user.Password;
-                    userViewModel.ConfirmPassword = user.ConfirmPassword;
                     userViewModel.MobileNo = user.MobileNo;
                     userViewModel.AlternateContactNo = user.AlternateContactNo;
                     userViewModel.UserImage = user.UserImage;
@@ -246,7 +246,6 @@ namespace ReviewMe.Bal
                     Gender = userViewModel.Gender,
                     EmailId = userViewModel.EmailId,
                     Password = userViewModel.Password,
-                    ConfirmPassword = userViewModel.ConfirmPassword,
                     MobileNo = userViewModel.MobileNo,
                     AlternateContactNo = userViewModel.AlternateContactNo,
                     UserImage = userViewModel.UserImage,

@@ -1,4 +1,5 @@
-﻿@using ReviewMe.Common.Extensions
+﻿@using ReviewMe.Common.Extensions;
+@using ReviewMe.ViewModel;
 @model ReviewMe.ViewModel.UserViewModel
 @{
     Layout = null;
@@ -87,8 +88,6 @@
                                 <label class="control-label">Gender<span style="color: red">*</span></label>
                                 <div class="radio" style="margin-top: 0;">
                                     <label>
-
-
                                         @Html.RadioButtonFor(model => model.Gender, true, new { id = "male", @class = "px" })
                                         <span class="lbl">Male</span>
                                     </label>
@@ -158,20 +157,25 @@
                                 @Html.ValidationMessageFor(m => m.Dob)
                             </div>
                         </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Password<span style="color: red">*</span></label>
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Password)
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Confirm Password<span style="color: red">*</span></label>
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                            </div>
-                        </div><!-- col-sm-6 -->
+                        @if (((ReviewMe.ViewModel.UserViewModel)Model).EmailId == null)
+                        {
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Password<span style="color: red">*</span></label>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password)
+                                </div>
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Confirm Password<span style="color: red">*</span></label>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                                </div>
+                            </div><!-- col-sm-6 -->
+                        }
+
+
                     </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-4">
@@ -215,7 +219,9 @@
         }).on('changeDate', function (e) {
             $(this).datepicker('hide');
         });
-
+        $('#SelectedRoleId').unbind("change").bind("change", function () {
+          //  alert("ok");
+        });
     });
 
 </script>
