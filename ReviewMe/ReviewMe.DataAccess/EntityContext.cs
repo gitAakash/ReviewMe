@@ -10,7 +10,7 @@ namespace ReviewMe.DataAccess
     {
         static EntityContext()
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<EntityContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityContext>());
             //Database.SetInitializer(new DropCreateDatabaseAlways<EntityContext>());
         }
 

@@ -1,10 +1,8 @@
 ﻿@using ReviewMe.ViewModel;
 @model List<ReviewMapViewModel>
-
     @{
-
+        ViewBag.Title = "Review";
     }
-
     <ul class="breadcrumb breadcrumb-page">
         <div class="breadcrumb-label text-light-gray">You are here: </div>
         <li><a href="#">Home</a></li>
@@ -19,7 +17,7 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <a href="javascript:void(0)" onclick="ReviewDetails(@item.ReviewerId)">
+            <a href="javascript:void(0)" onclick="ReviewDetails(@item.DevloperId)">
                 <div class="col col-lg-3" style="  width: 12% !important;">
                     <div class="stat-cell bg-warning" style="cursor: pointer;">
                         <!-- Big text -->
@@ -31,5 +29,4 @@
             </a>
         }
     </div>
-
     <script src="~/Scripts/Custom/GetRevieweeListByReviewer.js"></script>

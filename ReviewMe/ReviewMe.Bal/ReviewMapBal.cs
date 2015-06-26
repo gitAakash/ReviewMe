@@ -18,7 +18,7 @@ namespace ReviewMe.Bal
     public class ReviewMapBal
     {
         private readonly Repository<ReviewMap> _reviewMapRepository = new Repository<ReviewMap>(new EntityContext());
-        private readonly Repository<ReviewDetails> _reviewDetailsRepository = new Repository<ReviewDetails>(new EntityContext()); 
+        private readonly Repository<ReviewDetails> _reviewDetailsRepository = new Repository<ReviewDetails>(new EntityContext());
 
         // Get details for Add Group form
         public ReviewMapViewModel GetAddReviewMapDetails()
@@ -101,7 +101,7 @@ namespace ReviewMe.Bal
                     return reviewMapViewModel;
                 }
 
-                
+
             }
             catch (Exception ex)
             {
@@ -120,7 +120,7 @@ namespace ReviewMe.Bal
 
                 foreach (ReviewMap reviewMap in reviewMapList)
                 {
-                    reviewMapViewModelLong.ReviewMapViewModelList.Add(new ReviewMapViewModel 
+                    reviewMapViewModelLong.ReviewMapViewModelList.Add(new ReviewMapViewModel
                     {
                         Id = reviewMap.Id,
                         ReviewerId = reviewMap.ReviewerId,
@@ -147,7 +147,7 @@ namespace ReviewMe.Bal
             {
                 ReviewMap reviewMap = _reviewMapRepository.GetById(id);
 
-                var reviewMapModel = new ReviewMapViewModel 
+                var reviewMapModel = new ReviewMapViewModel
                 {
                     Id = reviewMap.Id,
                     ReviewerId = reviewMap.ReviewerId,
@@ -161,7 +161,7 @@ namespace ReviewMe.Bal
 
                 return reviewMapModel;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -174,7 +174,8 @@ namespace ReviewMe.Bal
             {
                 ReviewMap reviewMap = _reviewMapRepository.GetAll().FirstOrDefault(a => a.ReviewerId == id);
 
-                var reviewMapModel = new ReviewMapViewModel { 
+                var reviewMapModel = new ReviewMapViewModel
+                {
                     Id = reviewMap.Id,
                     ReviewerId = reviewMap.ReviewerId,
                     DevloperId = reviewMap.DevloperId,
@@ -196,10 +197,10 @@ namespace ReviewMe.Bal
         public List<ReviewMapViewModel> GetRevieweeByReviewerId(long id)
         {
             var ReviewMapViewModelList = new List<ReviewMapViewModel>();
-            
+
             try
             {
-                var reviewMapList = _reviewMapRepository.GetAll().Where(a => a.ReviewerId == id).ToList();
+                var reviewMapList = _reviewMapRepository.GetAll().Where(a => a.ReviewerId == id && a.IsActive==true).ToList();
                 foreach (var item in reviewMapList)
                 {
                     ReviewMapViewModel reviewMapViewModel =
@@ -227,8 +228,8 @@ namespace ReviewMe.Bal
                 {
                     RevieweeId = Convert.ToInt64(item);
 
-                    var reviewMapModel = new ReviewMap 
-                    { 
+                    var reviewMapModel = new ReviewMap
+                    {
                         ReviewerId = ReviewerId,
                         DevloperId = RevieweeId,
                         CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
@@ -306,7 +307,7 @@ namespace ReviewMe.Bal
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -365,7 +366,7 @@ namespace ReviewMe.Bal
                 {
                     if (lstReviewGroupDetails.Select(p => p.Reviewer.Id).Contains(item.ReviewerId))
                     {
-                        lstReviewGroupDetails.FirstOrDefault(p => p.Reviewer.Id == item.ReviewerId).Reviewees.Add(new UserGroupViewModel { Id = item.Id, Name = item.DeveloperUser.FName+" "+item.DeveloperUser.LName });
+                        lstReviewGroupDetails.FirstOrDefault(p => p.Reviewer.Id == item.ReviewerId).Reviewees.Add(new UserGroupViewModel { Id = item.Id, Name = item.DeveloperUser.FName + " " + item.DeveloperUser.LName });
                     }
                     else
                     {
@@ -427,7 +428,7 @@ namespace ReviewMe.Bal
 
                 var reviewMapViewModel = new ReviewMapViewModel()
                 {
-                    DropDownForReviewer = new List<SerializableSelectListItem>() { new SerializableSelectListItem(){ Text = reviewer.FName, Value = reviewer.Id.ToString(CultureInfo.InvariantCulture) } },
+                    DropDownForReviewer = new List<SerializableSelectListItem>() { new SerializableSelectListItem() { Text = reviewer.FName, Value = reviewer.Id.ToString(CultureInfo.InvariantCulture) } },
                     ReviewerId = id,
                     DropDownForReviewee = userList.Where(r => lstReviewee.Contains(r.Id)).Select(p => new SerializableSelectListItem()
                     {
@@ -439,12 +440,144 @@ namespace ReviewMe.Bal
 
                 return reviewMapViewModel;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
 
+        /// <summary>
+        /// Added By    : Ramchandra Rane, 23rd June 2015
+        /// Description : Get All Review by using reviewee id.
+        /// </summary>
+        /// <param name="revieweeId"></param>
+        /// <returns></returns>
+        public ReviewDetailsViewModel GetReviewDetailsByRevieweeId(long revieweeId, long reviewerId,DateTime startDate,DateTime endDate)
+        {
+            try
+            {
+                List<ReviewDetails> reviewDetailsList = _reviewDetailsRepository.GetAll().Where(a => a.IsActive && a.RevieweeId == revieweeId && a.ReviewerId == reviewerId && a.ReviewDate >= startDate && a.ReviewDate <= endDate).ToList();
+
+                var reviewDetailsViewModel = new ReviewDetailsViewModel();
+
+                foreach (ReviewDetails reviewDetails in reviewDetailsList)
+                {
+                    reviewDetailsViewModel.ReviewDetailsViewModelList.Add(new ReviewDetailsViewModel
+                    {
+                        Id = reviewDetails.Id,
+                        ReviewerId = reviewDetails.ReviewerId,
+                        Title = reviewDetails.Title,
+                        Comment = reviewDetails.Comment,
+                        CreatedBy = reviewDetails.CreatedBy,
+                        ReviewDateString = reviewDetails.ReviewDate.Year + "-" + (reviewDetails.ReviewDate.Month <= 9 ? "0" + reviewDetails.ReviewDate.Month : reviewDetails.ReviewDate.Month.ToString()) + "-" + (reviewDetails.ReviewDate.Day <= 9 ? "0" + reviewDetails.ReviewDate.Day : reviewDetails.ReviewDate.Day.ToString()),                      
+                        CreatedOn = reviewDetails.CreatedOn,
+                        //ModifiedBy = reviewDetails.ModifiedBy,
+                        //ModifiedOn = reviewDetails.ModifiedOn,
+
+                    });
+                }
+
+                return reviewDetailsViewModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // Add New ReviewDetails
+        public bool AddReviewDetails(ReviewDetailsViewModel reviewDetailsViewModel)
+        {
+            try
+            {
+                ReviewDetails model=new ReviewDetails{
+                    Title=reviewDetailsViewModel.Title,
+                    Comment=reviewDetailsViewModel.Comment,
+                    CreatedBy=SessionManager.GetCurrentlyLoggedInUserId(),
+                    CreatedOn=System.DateTime.Now,
+                    RevieweeId=reviewDetailsViewModel.RevieweeId,
+                    ReviewerId=reviewDetailsViewModel.ReviewerId,
+                    ReviewDate=reviewDetailsViewModel.ReviewDate,
+                    IsActive=true
+                };           
+
+                ReviewDetails responseModel = _reviewDetailsRepository.Add(model);
+                _reviewMapRepository.SaveChanges();
+                return true;
+
+                //var reviewMapModel1 = new ReviewMap
+                //{
+                //    Id = reviewMapViewModel.Id,
+                //    ReviewerId = reviewMapViewModel.ReviewerId,
+                //    DevloperId = reviewMapViewModel.DevloperId,
+                //    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
+                //    CreatedOn = DateTime.Now,
+                //    //ModifiedBy = 1,
+                //    //ModifiedOn = DateTime.Now,
+                //    IsActive = true
+                //};
+                //ReviewMap responseModel1 = _reviewMapRepository.Add(reviewMapModel1);
+                //_reviewMapRepository.SaveChanges();
+
+                //if (responseModel1 != null)
+                //    return true;
+                //return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                return false;
+            }
+        }
+
+        public bool EditReviewDetails(ReviewDetailsViewModel reviewDetailsViewModel)
+        {
+            try
+            {
+                ReviewDetails reviewDetails = _reviewDetailsRepository.GetById(reviewDetailsViewModel.Id);
+                if (reviewDetails != null)
+                {
+                    reviewDetails.Comment = reviewDetailsViewModel.Comment;
+                    reviewDetails.Title = reviewDetailsViewModel.Title;
+
+                    reviewDetails.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
+                    reviewDetails.ModifiedOn = DateTime.Now;
+
+                    ReviewDetails responseModel = _reviewDetailsRepository.SaveOrUpdate(reviewDetails);
+
+                    if (responseModel != null)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+     
+        // Delete Review by ReviewId
+        public bool DeleteReviewById(Int64 id)
+        {
+            try
+            {
+                ReviewDetails reviewDetails = _reviewDetailsRepository.GetById(id);
+                if (reviewDetails != null)
+                {                   
+                    reviewDetails.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
+                    reviewDetails.ModifiedOn = DateTime.Now;
+                    reviewDetails.IsActive = false;
+                    ReviewDetails responseModel = _reviewDetailsRepository.SaveOrUpdate(reviewDetails);
+                    if (responseModel != null)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

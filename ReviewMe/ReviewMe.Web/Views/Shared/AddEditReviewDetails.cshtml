@@ -1,0 +1,61 @@
+﻿@using ReviewMe.ViewModel;
+@using ReviewMe.Common.Extensions;
+@model ReviewMe.ViewModel.ReviewDetailsViewModel
+@{
+    Layout = null;
+}
+@*@Scripts.Render("~/bundles/jqueryval")*@
+
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<script src="~/Scripts/Custom/ReviewDetailsJS.js"></script>
+
+<div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>ReviewDetails</h3>
+</div>
+
+@*@using (Ajax.BeginForm("AddEditReviewDetails", new AjaxOptions { Confirm = "Confirm", HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))*@
+@using (Html.BeginForm("AddEditReviewDetails", "ReviewMap", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", @id = "addEditReviewForm" }))
+{
+
+    @Html.ValidationSummary(true)
+    <div class="modal-body">
+        @Html.HiddenFor(m => m.Id)
+        @Html.Hidden("RevieweeId", (Int64)ViewBag.RevieweeId)
+        @Html.Hidden("hdnRevieweeDate", (String)ViewBag.RevieweeDate)
+        <label class="label" for="name">Title</label><br />
+
+        @Html.TextBoxFor(m => m.Title, new { @class = "input-xlarge", @style = "width:600px" })
+        @Html.ValidationMessageFor(m => m.Title)
+        <br /> <br />
+        <label class="label" for="message">Comment</label><br />
+        @Html.TextAreaFor(m => m.Comment, new { @class = "input-xlarge", @style = "width:600px;height:100px;" })
+        @Html.ValidationMessageFor(m => m.Comment)
+        <br />  <br />
+
+        <label class="label" for="message">Review Date</label> <br />
+        @Html.TextBoxFor(m => m.ReviewDate, new { @class = "input-xlarge", @readonly = true })
+        @Html.ValidationMessageFor(m => m.ReviewDate)
+    </div>
+
+    <div class="modal-footer">
+        @if (Model.Id != 0)
+        {
+            <input id="btnEditReview" class="btn btn-success" type="button"  value="Update">
+            <input id="btnReviewDelete" class="btn btn-danger" data-dismiss="modal" type="button" value="Delete" deleteid="@Model.Id">
+        }
+        else
+        {
+               @*<input class="btn btn-success" type="button" data-dismiss="modal" value="Save" id="btnSaveReviewDetail">*@
+            <input class="btn btn-success" type="button"  value="Save" id="btnSaveReviewDetail">
+       
+        }
+
+        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+    </div>
+}
