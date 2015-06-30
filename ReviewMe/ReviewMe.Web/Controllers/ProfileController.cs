@@ -27,6 +27,7 @@ namespace ReviewMe.Web.Controllers
             if (userId != 0)
             {
                 userViewModel = new UserBal().GetUserById(Convert.ToInt64(userId));
+               
             }
             else
                 userViewModel = new UserBal().GetAddUserViewModel();
@@ -36,6 +37,8 @@ namespace ReviewMe.Web.Controllers
         [HttpPost]
         public ActionResult AddEditUser(UserViewModel userViewModel, HttpPostedFileBase FilePath)
         {
+            ModelState.Remove("ConfirmPassword");
+            ModelState.Remove("Password");
 
             if (ModelState.IsValid)
             {

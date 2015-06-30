@@ -46,6 +46,7 @@
     <Compile Include="Comment.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="ISoftDelete.cs" />
+    <Compile Include="Notifications.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Review.cs">
@@ -54,6 +55,7 @@
     <Compile Include="ReviewDetails.cs" />
     <Compile Include="ReviewMap.cs" />
     <Compile Include="ReviewSetting.cs" />
+    <Compile Include="ReviewTechnology.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Technology.cs" />
     <Compile Include="User.cs" />

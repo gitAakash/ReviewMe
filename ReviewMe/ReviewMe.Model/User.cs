@@ -14,6 +14,8 @@ namespace ReviewMe.Model
             UsersToBeReviewed = new List<ReviewSetting>();
             ReviewerUsers = new List<ReviewSetting>();
             ReviewSettings = new List<ReviewSetting>();
+            NotificationsBy = new List<Notifications>();
+            NotificationsFor = new List<Notifications>();
         }
 
         public string FName { get; set; }
@@ -49,6 +51,9 @@ namespace ReviewMe.Model
         public List<ReviewSetting> ReviewSettings { get; set; }
         public List<ReviewMap> ReviewerMapUsers { get; set; }
         public List<ReviewMap> DeveloperMapUsers { get; set; }
+        public List<Notifications> NotificationsBy { get; set; }
+        public List<Notifications> NotificationsFor { get; set; }
+
     }
 
 }

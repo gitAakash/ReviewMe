@@ -171,6 +171,7 @@
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
@@ -221,6 +222,7 @@
     <Content Include="Content\dd.css" />
     <Content Include="Content\flags.css" />
     <Content Include="Content\fullcalendar.min.css" />
+    <Content Include="Content\notifIt.css" />
     <Content Include="Content\pages.min.css" />
     <Content Include="Content\pixel-admin.min.css" />
     <Content Include="Content\prism.css" />
@@ -254,11 +256,13 @@
     <Content Include="Scripts\countries.js" />
     <Content Include="Scripts\Custom\demo.js" />
     <Content Include="Scripts\Custom\GetRevieweeListByReviewer.js" />
+    <Content Include="Scripts\Custom\MyReviewsJS.js" />
     <Content Include="Scripts\Custom\pixel-admin.min.js" />
     <Content Include="Content\chosen.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom\Project.js" />
     <Content Include="Scripts\Custom\Review.js" />
+    <Content Include="Scripts\Custom\ReviewDetailsJS.js" />
     <Content Include="Scripts\Custom\ReviewMap.js" />
     <Content Include="Scripts\Custom\Role.js" />
     <Content Include="Scripts\Custom\Technology.js" />
@@ -271,12 +275,14 @@
     <Content Include="Scripts\jquery.dd.js" />
     <Content Include="Scripts\jquery.dd.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\notifIt.js" />
     <Content Include="Scripts\prism.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -342,6 +348,13 @@
     <Content Include="Views\ReviewMap\GetRevieweeListByReviewerId.cshtml" />
     <Content Include="Views\ReviewMap\ReviewDetails.cshtml" />
     <Content Include="Views\ReviewMap\AddDayReviewDetails.cshtml" />
+    <Content Include="Views\ReviewMap\AddEditReviewDetails.cshtml" />
+    <Content Include="Views\ReviewMap\AddReviewMapGroup.cshtml" />
+    <Content Include="Views\ReviewMap\GetRevieweeList.cshtml" />
+    <Content Include="Views\ReviewMap\GetMyReviewList.cshtml" />
+    <Content Include="Views\ReviewMap\ViewReviewDetails.cshtml" />
+    <Content Include="Views\Shared\UsersNotifications.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

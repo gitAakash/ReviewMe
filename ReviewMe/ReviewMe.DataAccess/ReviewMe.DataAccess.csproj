@@ -50,6 +50,10 @@
     <Compile Include="EntityContext.cs" />
     <Compile Include="EntityContextInitializer.cs" />
     <Compile Include="IEntityContext.cs" />
+    <Compile Include="Migrations\201506300658006_First.cs" />
+    <Compile Include="Migrations\201506300658006_First.Designer.cs">
+      <DependentUpon>201506300658006_First.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
@@ -64,6 +68,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506300658006_First.resx">
+      <DependentUpon>201506300658006_First.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

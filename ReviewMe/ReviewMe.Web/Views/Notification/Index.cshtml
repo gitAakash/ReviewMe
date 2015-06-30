@@ -1,0 +1,63 @@
+﻿@using ReviewMe.Common.Extensions
+@using ReviewMe.ViewModel
+@using ReviewMe.Web.Controllers
+@using ReviewMe.Common.Helpers
+@using ReviewMe.Common.Authorization
+@model IEnumerable<ReviewMe.Model.Notifications>
+
+
+    <style type="text/css" >
+        .cust-message-avatar
+        {
+            width:100px;
+            height:100px;
+        }
+    </style>
+@{
+
+}
+<div class="messages-list" id="main-navbar-messages" style="height:auto; overflow-y: scroll; width: auto;">
+     @if (Model.Count() > 0)
+     {
+         foreach (var item in Model)
+         {
+             @Html.Raw("<div class='message'>")
+
+             if (!string.IsNullOrEmpty(item.CreatedByUser.UserImage))
+                 {
+                     var path = Path.Combine(Server.MapPath("~/ProfileImages/"), item.CreatedByUser.UserImage);
+                     if (File.Exists(path))
+                     {
+                         @Html.Raw("<img id='profileImage' src='/ProfileImages/" + @item.CreatedByUser.UserImage + "' class='cust-message-avatar' />")
+                     }
+                     else
+                     {
+                         @Html.Raw("<img id='profileImage' src='~/ProfileImages/default.jpg' class='message-avatar' />");
+                     }
+                 }
+                 else
+                 {
+                     @Html.Raw("<img id='profileImage' src='~/ProfileImages/default.jpg' class='message-avatar' />");
+                 }
+                 @Html.Raw("<a href='#' class='message-subject' id=" + @item.Id + ">")
+                 if (item.IsRead)
+                 {
+                     @item.NotificationMessage
+                 }
+                 else
+                 {
+                     <b>@item.NotificationMessage </b>
+                 }
+                 @Html.Raw("</a>")
+                 @Html.Raw("<div class='message-description'>")
+                     @*from <a href="#">Robert Jang</a>
+                         &nbsp;&nbsp;·&nbsp;&nbsp;*@
+                     @*2h ago*@
+                     @CalculateDateDiffrenceHelper.DifferenceBetTwoDates(item.CreatedOn, System.DateTime.Now)
+                 @Html.Raw("</div>")
+             @Html.Raw("</div>") <!-- / .message -->
+         }
+     }
+ </div>
+<div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 109.841827768014px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
+       

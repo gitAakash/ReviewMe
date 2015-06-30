@@ -8,7 +8,6 @@
     Layout = "../Shared/_Layout.cshtml";
 }
 
-
 <script src="~/Scripts/Custom/User.js"></script>
 
 <ul class="breadcrumb breadcrumb-page">
@@ -16,6 +15,7 @@
     <li><a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">Home</a></li>
     <li class="active"><a href="#">User</a></li>
 </ul>
+
 <div class="page-header">
     <div class="row">
         <!-- Page header, center on small screens -->
@@ -32,9 +32,9 @@
                 </div>
                 <!-- Margin -->
                 <div class="visible-xs clearfix form-group-margin"></div>
+
                 <script type="text/javascript">
                     $(document).ready(function () {
-
                         $('#Search').on('click', function () {
                             var strSearch = $('#strSearch').val();
                             // Commeneted by : Ramchandra Rane,19th Jun 2015
@@ -42,8 +42,7 @@
                             //if (strSearch == "") {
                             //    location.reload();
                             //}
-                            //else
-                             
+                            //else                             
                             $.ajax({
                                 url: "/User/Search",
                                 type: "GET",
@@ -52,15 +51,11 @@
                                     debugger;
                                     $('#lstuser').html(data);
                                     $('#strSearch').val("");
-
                                 },
                                 error: function (response) {
                                     debugger;
-
                                 }
-
                             });
-
                         });
                         $("#strSearch").keypress(function (event) {
                             debugger;
@@ -70,8 +65,8 @@
                             }
                         });
                     });
-
                 </script>
+
                 <!-- Search field -->
                 <form class="pull-right col-xs-12 col-sm-6">
                     <div class="input-group no-margin">
@@ -84,6 +79,7 @@
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

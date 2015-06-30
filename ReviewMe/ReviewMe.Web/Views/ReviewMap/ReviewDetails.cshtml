@@ -1,39 +1,90 @@
-﻿
+﻿@using ReviewMe.Common.Extensions
+@using ReviewMe.ViewModel
+@using ReviewMe.Web.Controllers
+@*@model ReviewMe.ViewModel.ReviewDetailsViewModel*@
+
 @{
     ViewBag.Title = "ReviewDetails";
+    Layout = "../Shared/_Layout.cshtml";
 }
 
+<input id="RevieweeId" type="hidden" value='@ViewBag.RevieweeId' />
+
 <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
-@*<script src='lib/jquery.min.js'></script>*@
+
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/fullcalendar.js"></script>
 
+<ul class="breadcrumb breadcrumb-page">
+    <div class="breadcrumb-label text-light-gray">You are here: </div>
+    <li><a href="#">Home</a></li>
+    <li class="active"><a href="#">My Reviewees</a></li>
+</ul>
 <div id='calendar'>
-    
+
 </div>
 
-
-
-<div id="createEventModal" class="modal fade in" style="display: none;">
+<div id="userAddReviewDetails" class="modal  fade" tabindex="-1" role="dialog" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" id="userAddEditModalBody">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal">×</a>
-                <h3>ReviewDetails</h3>
-            </div>
-            <div class="modal-body">
-                <form class="contact" name="contact">
-                    <label class="label" for="name">Title</label><br>
-                    <input type="email" name="email" class="input-xlarge"><br>
-                    <label class="label" for="message">Comment</label><br>
-                    <textarea name="Comment" class="input-xlarge"></textarea>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <input class="btn btn-success" type="submit" value="Save" id="submit">
-                <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-            </div>
         </div>
     </div>
 </div>
+
 <script src="~/Scripts/Custom/ReviewDetails.js"></script>
+
+<script type="text/javascript">
+   
+    var deletedItem = null;
+    //DON'T MOVE THIS CODE IN JS FILE,VIEWBAG VAlUE CAN'T ACCESS IN JS FILE.
+    $('#calendar').fullCalendar({
+        defaultView: 'month',
+        editable: true,
+        selectable: true,
+        //header and other values
+        select: function (start, end, allDay) {
+            var endtime = end;
+            var starttime = start;
+            var mywhen = starttime + ' - ' + endtime;
+            $('#createEventModal #apptStartTime').val(start);
+            $('#createEventModal #apptEndTime').val(end);
+            $('#createEventModal #apptAllDay').val(allDay);
+            $('#createEventModal #when').text(mywhen);
+        },
+        dayClick: function () {
+
+            $('#userAddReviewDetails').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            deletedItem = $(this);
+            var id = $(this).find('a').attr('id');
+            debugger;
+            if (id == undefined)
+            {
+                id =0;
+            }
+            $.ajax({
+                url: "/ReviewMap/AddEditReviewDetails",
+                type: "GET",
+                data: { 'revieweeDate': $(this).attr('data-date'), 'revieweeId': $('#RevieweeId').val(), 'id': id },
+                success: function (data) {             
+                    $('#userAddEditModalBody').empty();
+                    $('#userAddEditModalBody').append(data);
+                },
+                error: function (data) {
+                  
+                }
+            });
+        }
+    });
+
+    $('#calendar').find('.fc-left h2').text('@ViewBag.RevieweeName -' + $('#calendar').find('.fc-left h2').text());
+
+    //Added By : Ramchandra rane
+    function clearDeletedItemText()
+    {     
+        deletedItem.text("");      
+    }
+
+</script>
