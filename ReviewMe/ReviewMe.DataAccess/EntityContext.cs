@@ -10,12 +10,11 @@ namespace ReviewMe.DataAccess
     {
         static EntityContext()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EntityContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<EntityContext>());
             //Database.SetInitializer(new DropCreateDatabaseAlways<EntityContext>());
         }
 
-       public EntityContext()
-            : base("Name=NeoDailyReviewsContext")
+       public EntityContext() : base("Name=NeoDailyReviewsContext")
         {
            // Database.SetInitializer(new EntityContextInitializer()<EntityContext>());
             Database.SetInitializer<EntityContext>(new MigrateDatabaseToLatestVersion<EntityContext, DataAccess.Migrations.Configuration>());
@@ -77,6 +76,12 @@ namespace ReviewMe.DataAccess
             set { ReviewDetails = (IDbSet<ReviewDetails>)value; }
         }
 
+        public IQueryable<Notifications> Notificationss
+        {
+            get { return Notifications; }
+            set { Notifications = (IDbSet<Notifications>)value; }
+        }
+
         #endregion 
 
         #region IDbSet
@@ -89,6 +94,7 @@ namespace ReviewMe.DataAccess
         public IDbSet<User> Users { get; set; }
         public IDbSet<ReviewMap> ReviewMaps { get; set; }
         public IDbSet<ReviewDetails> ReviewDetails { get; set; }
+        public IDbSet<Notifications> Notifications { get; set; }
         #endregion
 
         #region Besic Methods
@@ -147,11 +153,16 @@ namespace ReviewMe.DataAccess
                 .HasForeignKey(s => s.DevloperId);
                 
 
-            //// User and ReviewMap
-            //modelBuilder.Entity<ReviewMap>()
-            //    .HasMany<ReviewMap>(s => s.ReviewerUsers)
-            //    .WithRequired(s => s.Users)
-            //    .HasForeignKey(s => s.Id);
+            //// User and notifications for user
+            modelBuilder.Entity<Notifications>()
+                .HasRequired<User>(s => s.User)
+                .WithMany(s=>s.NotificationsFor)
+                .HasForeignKey(s => s.UserId);
+
+            modelBuilder.Entity<Notifications>()
+               .HasRequired<User>(s => s.CreatedByUser)
+               .WithMany(s => s.NotificationsBy)
+               .HasForeignKey(s => s.CreatedBy);
 
            // User and Technology
             modelBuilder.Entity<User>()
@@ -207,6 +218,7 @@ namespace ReviewMe.DataAccess
                     m.ToTable("UsersProjects");
                     m.MapLeftKey("UserId");
                     m.MapRightKey("ProjectId");
+                  
                 });
 
             base.OnModelCreating(modelBuilder);

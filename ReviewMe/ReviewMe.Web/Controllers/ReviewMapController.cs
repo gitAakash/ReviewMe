@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReviewMe.Common.Authorization;
+using ReviewMe.Common.Enums;
 
 namespace ReviewMe.Web.Controllers
 {
@@ -94,6 +95,21 @@ namespace ReviewMe.Web.Controllers
         }
 
         [HttpGet]
+        public ActionResult AddDayReviewDetails(Int64? userId)
+        {
+            return PartialView("AddDayReviewDetails");
+        }
+
+        [HttpPost]
+        public ActionResult AddDayReviewDetails(ReviewDetailsViewModel reviewDetailsViewModel)
+        {
+            // bool status = new ReviewMapBal().SaveOrUpdateUser(reviewDetailsViewModel);
+            return RedirectToAction("GetRevieweeListByReviewerId");
+        }
+
+        #region User Reviews
+
+        [HttpGet]
         public ActionResult ReviewDetails(long revieweeId)
         {
             ViewBag.RevieweeId = revieweeId;
@@ -116,22 +132,15 @@ namespace ReviewMe.Web.Controllers
             DateTime startDate = new DateTime(RevieweeDate.Year, RevieweeDate.Month, 1);
             DateTime endDate = startDate.AddMonths(1).AddDays(-1);
             ReviewDetailsViewModel reviewDetailsViewModel = new ReviewMapBal().GetReviewDetailsByRevieweeId(revieweeId, reviewerId, startDate, endDate);
-
             return Json(new { status = "S", Result = reviewDetailsViewModel.ReviewDetailsViewModelList }, JsonRequestBehavior.AllowGet);
-
         }
 
-
         [HttpGet]
-        public ActionResult AddEditReviewDetails(long revieweeId, string revieweeDate)
+        public ActionResult AddEditReviewDetails(long revieweeId, string revieweeDate, long id)
         {
             long reviewerId = SessionManager.GetCurrentlyLoggedInUserId();
-            DateTime RevieweeDate = Convert.ToDateTime(revieweeDate);
 
-            DateTime startDate = RevieweeDate;
-            DateTime endDate = RevieweeDate;
-
-            ReviewDetailsViewModel reviewDetailsViewModel = new ReviewMapBal().GetReviewDetailsByRevieweeId(revieweeId, reviewerId, startDate, endDate);
+            ReviewDetailsViewModel reviewDetailsViewModel = new ReviewMapBal().GetReviewDetailsById(id);
             if (reviewDetailsViewModel.ReviewDetailsViewModelList.Count > 0)
             {
                 reviewDetailsViewModel.Title = reviewDetailsViewModel.ReviewDetailsViewModelList.FirstOrDefault(R => R.ReviewerId == reviewerId).Title;
@@ -167,6 +176,7 @@ namespace ReviewMe.Web.Controllers
                 return Json(new { Status = "F", Message = "Thre are some problem with server! Try Again later. . " }, JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpPost]
         public ActionResult AddEditReviewDetails(ReviewDetailsViewModel model)
         {
@@ -180,7 +190,9 @@ namespace ReviewMe.Web.Controllers
                         bool status = new ReviewMapBal().EditReviewDetails(model);
                         if (status)
                         {
+
                             return Json(new { Status = "S", Message = "Review has been updated successfully." }, JsonRequestBehavior.AllowGet);
+
                         }
                         else
                         {
@@ -195,6 +207,16 @@ namespace ReviewMe.Web.Controllers
                         //return RedirectToAction("ReviewDetails", "ReviewMap", new { revieweeId = model.RevieweeId });
                         if (status)
                         {
+                            Notifications notifications = new Notifications();
+                            notifications.CreatedBy = SessionManager.GetCurrentlyLoggedInUserId();
+                            notifications.CreatedOn = System.DateTime.Now;
+                            notifications.IsActive = true;
+                            notifications.IsRead = false;
+                            //notifications.NotificationType = 1;
+                            notifications.UserId = model.RevieweeId;
+                            notifications.NotificationMessage = string.Format(NotificationEnum.ReviewAddedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
+
+                            status = new NotificationBal().AddNewNotification(notifications);
                             return Json(new { Status = "S", Message = "Review has been added successfully." }, JsonRequestBehavior.AllowGet);
                         }
                         else
@@ -215,19 +237,47 @@ namespace ReviewMe.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Added By    : Ramchandra Rane,26th June 2015
+        /// Description : For displaying only login Users review.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult AddDayReviewDetails(Int64? userId)
+        public ActionResult GetMyReviewList()
         {
-            return PartialView("AddDayReviewDetails");
+            long reviewerId = SessionManager.GetCurrentlyLoggedInUserId();
+
+            DateTime RevieweeDate = System.DateTime.Now;
+            //RevieweeDate = RevieweeDate.AddDays(1);
+            DateTime startDate = new DateTime(RevieweeDate.Year, RevieweeDate.Month, 1);
+            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+            ReviewDetailsViewModel reviewDetailsViewModel = new ReviewMapBal().GetAllReviewDetailsByRevieweeId(reviewerId, startDate, endDate);
+            //return Json(new { status = "S", Result = reviewDetailsViewModel.ReviewDetailsViewModelList }, JsonRequestBehavior.AllowGet);
+            return View(reviewDetailsViewModel);
         }
 
-        [HttpPost]
-        public ActionResult AddDayReviewDetails(ReviewDetailsViewModel reviewDetailsViewModel)
+        /// <summary>
+        /// Added By    : Ramchandra Rane
+        /// Description : View for displaying details of the review
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ViewReviewDetails(long Id)
         {
-            // bool status = new ReviewMapBal().SaveOrUpdateUser(reviewDetailsViewModel);
-            return RedirectToAction("GetRevieweeListByReviewerId");
+            ReviewDetailsViewModel reviewDetailsViewModel = null;
+            try
+            {
+                reviewDetailsViewModel = new ReviewMapBal().GetReviewDetailsById(Id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(reviewDetailsViewModel);
         }
 
-
+        #endregion
     }
 }

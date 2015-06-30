@@ -19,6 +19,7 @@ namespace ReviewMe.Bal
     {
         private readonly Repository<ReviewMap> _reviewMapRepository = new Repository<ReviewMap>(new EntityContext());
         private readonly Repository<ReviewDetails> _reviewDetailsRepository = new Repository<ReviewDetails>(new EntityContext());
+        private readonly Repository<User> _UserRepository = new Repository<User>(new EntityContext());
 
         // Get details for Add Group form
         public ReviewMapViewModel GetAddReviewMapDetails()
@@ -200,7 +201,7 @@ namespace ReviewMe.Bal
 
             try
             {
-                var reviewMapList = _reviewMapRepository.GetAll().Where(a => a.ReviewerId == id && a.IsActive==true).ToList();
+                var reviewMapList = _reviewMapRepository.GetAll().Where(a => a.ReviewerId == id && a.IsActive == true).ToList();
                 foreach (var item in reviewMapList)
                 {
                     ReviewMapViewModel reviewMapViewModel =
@@ -452,7 +453,7 @@ namespace ReviewMe.Bal
         /// </summary>
         /// <param name="revieweeId"></param>
         /// <returns></returns>
-        public ReviewDetailsViewModel GetReviewDetailsByRevieweeId(long revieweeId, long reviewerId,DateTime startDate,DateTime endDate)
+        public ReviewDetailsViewModel GetReviewDetailsByRevieweeId(long revieweeId, long reviewerId, DateTime startDate, DateTime endDate)
         {
             try
             {
@@ -469,10 +470,41 @@ namespace ReviewMe.Bal
                         Title = reviewDetails.Title,
                         Comment = reviewDetails.Comment,
                         CreatedBy = reviewDetails.CreatedBy,
-                        ReviewDateString = reviewDetails.ReviewDate.Year + "-" + (reviewDetails.ReviewDate.Month <= 9 ? "0" + reviewDetails.ReviewDate.Month : reviewDetails.ReviewDate.Month.ToString()) + "-" + (reviewDetails.ReviewDate.Day <= 9 ? "0" + reviewDetails.ReviewDate.Day : reviewDetails.ReviewDate.Day.ToString()),                      
+                        ReviewDateString = reviewDetails.ReviewDate.Year + "-" + (reviewDetails.ReviewDate.Month <= 9 ? "0" + reviewDetails.ReviewDate.Month : reviewDetails.ReviewDate.Month.ToString()) + "-" + (reviewDetails.ReviewDate.Day <= 9 ? "0" + reviewDetails.ReviewDate.Day : reviewDetails.ReviewDate.Day.ToString()),
                         CreatedOn = reviewDetails.CreatedOn,
                         //ModifiedBy = reviewDetails.ModifiedBy,
                         //ModifiedOn = reviewDetails.ModifiedOn,
+
+                    });
+                }
+
+                return reviewDetailsViewModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ReviewDetailsViewModel GetAllReviewDetailsByRevieweeId(long reviewerId, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                List<ReviewDetails> reviewDetailsList = _reviewDetailsRepository.GetAll().Where(a => a.IsActive && a.RevieweeId == reviewerId && a.ReviewDate >= startDate && a.ReviewDate <= endDate).ToList();
+
+                var reviewDetailsViewModel = new ReviewDetailsViewModel();
+
+                foreach (ReviewDetails reviewDetails in reviewDetailsList)
+                {
+                    reviewDetailsViewModel.ReviewDetailsViewModelList.Add(new ReviewDetailsViewModel
+                    {
+                        Id = reviewDetails.Id,
+                        ReviewerId = reviewDetails.ReviewerId,
+                        Title = reviewDetails.Title,
+                        Comment = reviewDetails.Comment,
+                        CreatedBy = reviewDetails.CreatedBy,
+                        ReviewDateString = reviewDetails.ReviewDate.Year + "-" + (reviewDetails.ReviewDate.Month <= 9 ? "0" + reviewDetails.ReviewDate.Month : reviewDetails.ReviewDate.Month.ToString()) + "-" + (reviewDetails.ReviewDate.Day <= 9 ? "0" + reviewDetails.ReviewDate.Day : reviewDetails.ReviewDate.Day.ToString()),
+                        CreatedOn = reviewDetails.CreatedOn,
 
                     });
                 }
@@ -490,16 +522,17 @@ namespace ReviewMe.Bal
         {
             try
             {
-                ReviewDetails model=new ReviewDetails{
-                    Title=reviewDetailsViewModel.Title,
-                    Comment=reviewDetailsViewModel.Comment,
-                    CreatedBy=SessionManager.GetCurrentlyLoggedInUserId(),
-                    CreatedOn=System.DateTime.Now,
-                    RevieweeId=reviewDetailsViewModel.RevieweeId,
-                    ReviewerId=reviewDetailsViewModel.ReviewerId,
-                    ReviewDate=reviewDetailsViewModel.ReviewDate,
-                    IsActive=true
-                };           
+                ReviewDetails model = new ReviewDetails
+                {
+                    Title = reviewDetailsViewModel.Title,
+                    Comment = reviewDetailsViewModel.Comment,
+                    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
+                    CreatedOn = System.DateTime.Now,
+                    RevieweeId = reviewDetailsViewModel.RevieweeId,
+                    ReviewerId = reviewDetailsViewModel.ReviewerId,
+                    ReviewDate = reviewDetailsViewModel.ReviewDate,
+                    IsActive = true
+                };
 
                 ReviewDetails responseModel = _reviewDetailsRepository.Add(model);
                 _reviewMapRepository.SaveChanges();
@@ -555,15 +588,15 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
-     
-        // Delete Review by ReviewId
+
+        // Delete Review by Id
         public bool DeleteReviewById(Int64 id)
         {
             try
             {
                 ReviewDetails reviewDetails = _reviewDetailsRepository.GetById(id);
                 if (reviewDetails != null)
-                {                   
+                {
                     reviewDetails.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
                     reviewDetails.ModifiedOn = DateTime.Now;
                     reviewDetails.IsActive = false;
@@ -578,6 +611,37 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
+        
+        /// <summary>
+        ///  Added By : Ramchandra Rane
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ReviewDetailsViewModel GetReviewDetailsById(long id)
+        {
+            try
+            {
+                ReviewDetails reviewDetails = _reviewDetailsRepository.GetAll().SingleOrDefault(a => a.IsActive && a.Id == id);
+
+                var reviewDetailsViewModel = new ReviewDetailsViewModel();
+
+                if (reviewDetails!=null)
+                {
+                    reviewDetailsViewModel.Id = reviewDetails.Id;
+                    reviewDetailsViewModel.Comment = reviewDetails.Comment;
+                    reviewDetailsViewModel.Title = reviewDetails.Title;
+                    reviewDetailsViewModel.ReviewDateString = reviewDetails.ReviewDate.ToShortDateString();
+                    reviewDetailsViewModel.ReviewerName = _UserRepository.GetAll().SingleOrDefault(r => r.Id == reviewDetails.CreatedBy).FName +" "+_UserRepository.GetAll().SingleOrDefault(r => r.Id == reviewDetails.CreatedBy).LName;
+                }
+
+                return reviewDetailsViewModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
     }
 }

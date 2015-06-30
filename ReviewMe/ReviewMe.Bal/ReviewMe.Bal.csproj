@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommentBal.cs" />
+    <Compile Include="NotificationBal.cs" />
     <Compile Include="ProjectBal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewBal.cs" />

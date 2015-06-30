@@ -54,7 +54,7 @@ namespace ReviewMe.Web.Controllers
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
-        {
+       {
             try
             {
                 //var userBal = new UserBal();

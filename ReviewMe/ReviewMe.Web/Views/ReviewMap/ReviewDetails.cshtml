@@ -12,20 +12,6 @@
 
 <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
 
-<style type="text/css">
-    .dayreview {
-        /*left: 156px;*/
-        border-color: rgb(154, 45, 45);
-        color: rgb(255, 255, 255);
-        width: 120px;
-        /*top: 25px;*/
-        background-color: rgb(154, 45, 45);
-        border-right-width: 1px;
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-    }
-</style>
-
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/fullcalendar.js"></script>
 
@@ -46,7 +32,9 @@
 </div>
 
 <script src="~/Scripts/Custom/ReviewDetails.js"></script>
+
 <script type="text/javascript">
+   
     var deletedItem = null;
     //DON'T MOVE THIS CODE IN JS FILE,VIEWBAG VAlUE CAN'T ACCESS IN JS FILE.
     $('#calendar').fullCalendar({
@@ -70,11 +58,16 @@
                 keyboard: false
             });
             deletedItem = $(this);
-
+            var id = $(this).find('a').attr('id');
+            debugger;
+            if (id == undefined)
+            {
+                id =0;
+            }
             $.ajax({
                 url: "/ReviewMap/AddEditReviewDetails",
                 type: "GET",
-                data: { 'revieweeDate': $(this).attr('data-date'), 'revieweeId': $('#RevieweeId').val() },
+                data: { 'revieweeDate': $(this).attr('data-date'), 'revieweeId': $('#RevieweeId').val(), 'id': id },
                 success: function (data) {             
                     $('#userAddEditModalBody').empty();
                     $('#userAddEditModalBody').append(data);

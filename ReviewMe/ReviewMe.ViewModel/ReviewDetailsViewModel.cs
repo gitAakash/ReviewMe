@@ -25,6 +25,7 @@ namespace ReviewMe.ViewModel
 
         public string ReviewDateString { get; set; }
 
+        public string ReviewerName { get; set; }
         //Added By : Ramchandra Rane, 23rd June 2015
         public List<ReviewDetailsViewModel> ReviewDetailsViewModelList { get; set; }
     }

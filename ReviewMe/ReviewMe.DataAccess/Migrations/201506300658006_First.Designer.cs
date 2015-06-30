@@ -7,13 +7,13 @@ namespace ReviewMe.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class reviewDateStringField : IMigrationMetadata
+    public sealed partial class First : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(reviewDateStringField));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(First));
         
         string IMigrationMetadata.Id
         {
-            get { return "201506240659445_reviewDateStringField"; }
+            get { return "201506300658006_First"; }
         }
         
         string IMigrationMetadata.Source

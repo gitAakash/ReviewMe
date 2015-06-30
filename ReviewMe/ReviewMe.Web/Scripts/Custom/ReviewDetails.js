@@ -39,7 +39,7 @@ function formatItem(item) {
             temp+=" <div style='float:left; margin:0px 5px 5px 0px;'> ";
             temp += " </div>" + item.Comment;
             temp += " </div> </div>";
-            $(tda).html(" <br/> <a href='#' class='dayreview' > " + item.Title + " </a> " + temp + " <br/>");
+            $(tda).html(" <br/> <a href='#' class='dayreview' id='"+item.Id+"' > " + item.Title + " </a> " + temp + " <br/>");
 
             // Assigning an action to the mouseover event
             $('.dayreview').unbind('mouseover').bind("mouseover", function (e) {             

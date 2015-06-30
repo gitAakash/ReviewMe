@@ -14,8 +14,6 @@
 
     @using (Html.BeginForm("AddEditUser", "Profile", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
     {
-
-
         <div class="col-sm-3 profile-row">
             <div class="left-col">
                 <div class="profile-block">
@@ -49,6 +47,8 @@
             <div class="row">
                 @Html.ValidationSummary(true)
                 @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.SelectedRoleId)
+                @Html.HiddenFor(model => model.SelectedTechnologyId)
                 <div class="">
                     <div class="row">
                         <div class="col-sm-4">

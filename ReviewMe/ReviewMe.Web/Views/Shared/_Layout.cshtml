@@ -16,11 +16,10 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @*<script src="~/Scripts/chosen.jquery.min.js"></script>*@   
+    @*<script src="~/Scripts/chosen.jquery.min.js"></script>*@
     <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
     <script src="~/Scripts/notifIt.js"></script>
     <link href="~/Content/notifIt.css" rel="stylesheet" />
-    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
     @RenderSection("scripts", false)
     <style type="text/css">
         .jqstooltip {
@@ -56,77 +55,77 @@
             width: 100%;
         }
 
-        #demo-themes .demo-themes-row {
-            display: block;
-        }
+            #demo-themes .demo-themes-row {
+                display: block;
+            }
 
-        #demo-themes .demo-theme {
-            color: #888;
-            display: block;
-            float: left;
-            overflow: hidden;
-            padding: 25px 0;
-            position: relative;
-            text-align: center;
-            width: 50%;
-        }
+            #demo-themes .demo-theme {
+                color: #888;
+                display: block;
+                float: left;
+                overflow: hidden;
+                padding: 25px 0;
+                position: relative;
+                text-align: center;
+                width: 50%;
+            }
 
-        #demo-themes .demo-theme:hover {
-            color: #fff;
-        }
+                #demo-themes .demo-theme:hover {
+                    color: #fff;
+                }
 
-        #demo-themes .theme-preview {
-            bottom: 0;
-            left: 0;
-            overflow: hidden !important;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
+            #demo-themes .theme-preview {
+                bottom: 0;
+                left: 0;
+                overflow: hidden !important;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
 
-        #demo-themes .theme-preview img {
-            display: block;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
+                #demo-themes .theme-preview img {
+                    display: block;
+                    left: 0;
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                }
 
-        #demo-themes .demo-theme .overlay {
-            background: #1d1d1d;
-            background: rgba(0, 0, 0, .8);
-            bottom: 0;
-            left: -100%;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
+            #demo-themes .demo-theme .overlay {
+                background: #1d1d1d;
+                background: rgba(0, 0, 0, .8);
+                bottom: 0;
+                left: -100%;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
 
-        #demo-themes .demo-theme span {
-            color: #fff;
-            color: rgba(255, 255, 255, 0);
-            position: relative;
-        }
+            #demo-themes .demo-theme span {
+                color: #fff;
+                color: rgba(255, 255, 255, 0);
+                position: relative;
+            }
 
-        #demo-themes .demo-theme span,
-        #demo-themes .demo-theme .overlay {
-            -moz-transition: all .3s;
-            -ms-transition: all .3s;
-            -o-transition: all .3s;
-            -webkit-transition: all .3s;
-            transition: all .3s;
-        }
+            #demo-themes .demo-theme span,
+            #demo-themes .demo-theme .overlay {
+                -moz-transition: all .3s;
+                -ms-transition: all .3s;
+                -o-transition: all .3s;
+                -webkit-transition: all .3s;
+                transition: all .3s;
+            }
 
-        #demo-themes .demo-theme.active span,
-        #demo-themes .demo-theme:hover span {
-            color: #fff;
-            color: rgba(255, 255, 255, 1);
-        }
+            #demo-themes .demo-theme.active span,
+            #demo-themes .demo-theme:hover span {
+                color: #fff;
+                color: rgba(255, 255, 255, 1);
+            }
 
-        #demo-themes .demo-theme.active .overlay,
-        #demo-themes .demo-theme:hover .overlay {
-            left: 0;
-        }
+            #demo-themes .demo-theme.active .overlay,
+            #demo-themes .demo-theme:hover .overlay {
+                left: 0;
+            }
 
         #demo-settings {
             -khtml-user-select: none;
@@ -150,29 +149,29 @@
             z-index: 999998;
         }
 
-        #demo-settings.open {
-            right: -10px;
-        }
+            #demo-settings.open {
+                right: -10px;
+            }
 
-        #demo-settings > .header {
-            background: #444;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 600;
-            line-height: 20px;
-            margin: 0;
-            padding: 10px 20px;
-            position: relative;
-            z-index: 100000;
-        }
+            #demo-settings > .header {
+                background: #444;
+                color: #fff;
+                font-size: 11px;
+                font-weight: 600;
+                line-height: 20px;
+                margin: 0;
+                padding: 10px 20px;
+                position: relative;
+                z-index: 100000;
+            }
 
-        #demo-settings > div {
-            background: #282828;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            position: relative;
-            z-index: 100000;
-        }
+            #demo-settings > div {
+                background: #282828;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                position: relative;
+                z-index: 100000;
+            }
 
         #demo-settings-toggler {
             -moz-transition: color .3s;
@@ -201,37 +200,37 @@
             font-size: 16px;
         }
 
-        #demo-settings.open #demo-settings-toggler:hover {
-            color: #fff;
-        }
+            #demo-settings.open #demo-settings-toggler:hover {
+                color: #fff;
+            }
 
-        #demo-settings.open #demo-settings-toggler:before {
-            content: "\f00d";
-        }
+            #demo-settings.open #demo-settings-toggler:before {
+                content: "\f00d";
+            }
 
         #demo-settings-list {
             margin: 0;
             padding: 0;
         }
 
-        #demo-settings-list li {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            position: relative;
-        }
+            #demo-settings-list li {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                position: relative;
+            }
 
-        #demo-settings-list li > span {
-            color: #fff;
-            cursor: pointer;
-            display: block;
-            line-height: 20px;
-            padding: 12px 20px;
-        }
+                #demo-settings-list li > span {
+                    color: #fff;
+                    cursor: pointer;
+                    display: block;
+                    line-height: 20px;
+                    padding: 12px 20px;
+                }
 
-        #demo-settings-list li + li {
-            border-top: 1px solid #333;
-        }
+                #demo-settings-list li + li {
+                    border-top: 1px solid #333;
+                }
 
         #demo-settings .demo-checkbox {
             position: absolute;
@@ -246,10 +245,10 @@
             right: auto;
         }
 
-        .right-to-left #demo-settings.open {
-            left: -10px;
-            right: auto;
-        }
+            .right-to-left #demo-settings.open {
+                left: -10px;
+                right: auto;
+            }
 
         .right-to-left #demo-settings-toggler {
             left: auto;
@@ -262,14 +261,97 @@
             left: 20px;
             right: auto;
         }
+        /*Addded By : Ramchandra Rane*/
+        .dayreview {
+            /*left: 156px;*/
+            border-color: rgb(154, 45, 45);
+            color: rgb(255, 255, 255);
+            width: 120px;
+            /*top: 25px;*/
+            background-color: rgb(154, 45, 45);
+            border-right-width: 1px;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
     </style>
-    
-@{
-    var sessionInfo = SessionManager.GetSessionInformation();
-}
+
+    <script type="text/javascript">
+
+        setTimeout(function () { GetNotifications(); }, 5000);
+
+        function GetNotifications() {
+
+            $.ajax({
+                type: "GET",
+                url: "../Notification/UsersNotifications",
+                async: true
+            }).success(function (data) {
+
+                var notificationScroll = $("#main-navbar-messages");
+                var scrollvalue = notificationScroll.scrollTop();
+
+                $('#liNotification').html(data);
+
+                $("#main-navbar-messages").scrollTop(scrollvalue);
+
+                $(".message-subject").hover(function (e) {
+                    counter = 0;
+                    myInterval = setInterval(function () {
+                        ++counter;
+                    }, 1000);
+                }, function (e) {                   
+                    if (myInterval > 200) {
+
+                        var id = $(this).attr('id');
+
+                        $.ajax({
+                            type: "GET",
+                            url: "../Notification/ReadUserNotification?Id=" + id,
+                            async: true
+                        }).success(function (data) {
+                            GetNotifications();
+                            myInterval = 0;
+                            counter = 0;
+                        });
+
+
+
+                    }
+                    clearInterval(myInterval);
+                });
+
+                setTimeout(function () { GetNotifications(); }, 5000);
+            });
+        }
+
+        $(document).ready(function () {
+
+            $('#liNotification').click(function (e) {
+
+                setTimeout(function () { ReadNotification(0); }, 1000);
+
+            });
+
+            function ReadNotification(Id) {
+                $.ajax({
+                    type: "GET",
+                    url: "../Notification/ReadUserNotification?Id=" + Id,
+                    async: true
+                }).success(function (data) {
+
+                });
+            }
+        });
+
+    </script>
+
+    @{
+        var sessionInfo = SessionManager.GetSessionInformation();
+    }
 </head>
 <body class="theme-default main-menu-animated animate-mm-sm animate-mm-md animate-mm-lg">
     <script> var init = []; </script>
+
     <script type="text/javascript">
         window.init.push(function () {
             // Javascript code here
@@ -309,35 +391,24 @@
                 <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
                     <div>
                         @* <ul class="nav navbar-nav">
-                            <li>
-                                <a href="#">Home</a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">First item</a></li>
-                                    <li><a href="#">Second item</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Third item</a></li>
-                                </ul>
-                            </li>
-                        </ul> <!-- / .navbar-nav -->*@
+                                <li>
+                                    <a href="#">Home</a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">First item</a></li>
+                                        <li><a href="#">Second item</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Third item</a></li>
+                                    </ul>
+                                </li>
+                            </ul> <!-- / .navbar-nav -->*@
 
                         <div class="right clearfix">
                             <ul class="nav navbar-nav pull-right right-navbar-nav">
 
-                                <!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
 
-                                    Navbar Icon Buttons
-
-                                    NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
-
-                                    Classes:
-                                    * 'nav-icon-btn-info'
-                                    * 'nav-icon-btn-success'
-                                    * 'nav-icon-btn-warning'
-                                    * 'nav-icon-btn-danger'
-                                    -->
                                 <li class="nav-icon-btn nav-icon-btn-danger dropdown">
                                     <a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="label">5</span>
@@ -353,7 +424,6 @@
                                         });
                                     </script>
                                     <!-- / Javascript -->
-
                                     <div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
                                         <div class="slimScrollDiv" style="height: 250px; overflow: hidden; position: relative; width: auto;">
                                             <div class="notifications-list" id="main-navbar-notifications" style="height: 250px; overflow: hidden; width: auto;">
@@ -398,130 +468,13 @@
                                         <a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
                                     </div> <!-- / .dropdown-menu -->
                                 </li>
-                                <li class="nav-icon-btn nav-icon-btn-success dropdown">
-                                    <a href="#messages" class="dropdown-toggle" data-toggle="dropdown">
-                                        <span class="label">10</span>
-                                        <i class="nav-icon fa fa-envelope"></i>
-                                        <span class="small-screen-text">Income messages</span>
-                                    </a>
 
-                                    <!-- MESSAGES -->
-                                    <!-- Javascript -->
-                                    <script>
-                                        init.push(function () {
-                                            $('#main-navbar-messages').slimScroll({ height: 250 });
-                                        });
-                                    </script>
-                                    <!-- / Javascript -->
+                                <li class="nav-icon-btn nav-icon-btn-success dropdown" id="liNotification">
 
-                                    <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
-                                        <div class="slimScrollDiv" style="height: 250px; overflow: hidden; position: relative; width: auto;">
-                                            <div class="messages-list" id="main-navbar-messages" style="height: 250px; overflow: hidden; width: auto;">
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Robert Jang</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
+                                    @Html.Action("UsersNotifications", "Notification")
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/3.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Michelle Bortz</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
 
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/4.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Timothy Owens</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
-
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/5.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Denise Steiner</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
-
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Robert Jang</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
-
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Robert Jang</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
-
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/3.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Michelle Bortz</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
-
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/4.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Timothy Owens</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
-
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/5.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Denise Steiner</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
-
-                                                <div class="message">
-                                                    <img src="~/assets/demo/avatars/2.jpg" alt="" class="message-avatar">
-                                                    <a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
-                                                    <div class="message-description">
-                                                        from <a href="#">Robert Jang</a>
-                                                        &nbsp;&nbsp;·&nbsp;&nbsp;
-                                                        2h ago
-                                                    </div>
-                                                </div> <!-- / .message -->
-
-                                            </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 109.841827768014px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-                                        </div> <!-- / .messages-list -->
-                                        <a href="#" class="messages-link">MORE MESSAGES</a>
-                                    </div> <!-- / .dropdown-menu -->
                                 </li>
                                 <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
 
@@ -540,11 +493,11 @@
                                                 dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
                                                 if (File.Exists(path))
                                                 {
-                                                    <img src="/ProfileImages/@sessionInfo.UserLogo"  />
+                                                    <img src="/ProfileImages/@sessionInfo.UserLogo" />
                                                 }
                                                 else
                                                 {
-                                                    <img src="~/ProfileImages/default.jpg"  />
+                                                    <img src="~/ProfileImages/default.jpg" />
                                                 }
                                             }
                                             else
@@ -557,7 +510,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="../Profile/Myprofile">Profile</a></li>
                                             <li><a href="javascript:void(0)">Account</a></li>
-                                           @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
+                                            @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
                                             <li class="divider"></li>
                                             <li><a href="@(Url.ActionLink<AccountController>(controller => controller.LogOff()))"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
                                         </ul>
@@ -605,11 +558,14 @@
                             CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
                             Javascript: html/assets/demo/demo.js
                             -->
-                        @if (sessionInfo != null) { 
+                        @if (sessionInfo != null)
+                        {
                             <div>
-                            
-                                <div class="text-bg"><span class="text-slim">Welcome,</span> 
-                                    <div class="text-semibold" style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">@sessionInfo.UserName</div></div>
+
+                                <div class="text-bg">
+                                    <span class="text-slim">Welcome,</span>
+                                    <div class="text-semibold" style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">@sessionInfo.UserName</div>
+                                </div>
                                 @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
                                 {
                                     dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
@@ -626,14 +582,14 @@
                                 {
                                     <img src="~/ProfileImages/default.jpg" />
                                 }
-                                
-                              @*  <div class="btn-group">
-                                    <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
-                                    <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
-                                    <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
-                                    <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
-                                </div>
-                                <a href="#" class="close">×</a>*@
+
+                                @*  <div class="btn-group">
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+                                        <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+                                    </div>
+                                    <a href="#" class="close">×</a>*@
                             </div>
                         }
                     </div>
@@ -661,17 +617,22 @@
                                 <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
                             </a>
                         </li>
-                    @if(SessionManager.GetSessionInformation().UserRoleId==2)
-                    {
-                          <li class="mm-dropdown mm-dropdown-root">
-                            @*<a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>*@
-                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
-                                <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
+                        <li>
+                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
                             </a>
                         </li>
-                        
-                    }
-                      
+                        @if (SessionManager.GetSessionInformation().UserRoleId == 2)
+                        {
+                            <li class="mm-dropdown mm-dropdown-root">
+                                @*<a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>*@
+                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
+                                    <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
+                                </a>
+                            </li>
+
+                        }
+
                     </ul> <!-- / .navigation -->
                 </div>
                 <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 741px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
@@ -693,6 +654,7 @@
         <div id="demo-settings">
         </div>
     </div>
+
     <!-- Success -->
     <div id="uidemo-modals-alerts-success" class="modal modal-alert modal-success fade in" aria-hidden="false" style="display: none;">
         <div class="modal-dialog">
@@ -708,7 +670,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Danger -->
     <div id="uidemo-modals-alerts-danger" class="modal modal-alert modal-danger fade" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -721,8 +683,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
                 </div>
-            </div> 
-        </div> 
+            </div>
+        </div>
     </div>
 
     <!-- Warning -->
@@ -738,9 +700,9 @@
                     <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
-    
+
     <!-- Info -->
     <div id="uidemo-modals-alerts-info" class="modal modal-alert modal-info fade" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -753,12 +715,10 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
                 </div>
-            </div> 
-        </div> 
+            </div>
+        </div>
     </div>
-    
-    
-    
+
     <script src="~/Scripts/Custom/demo.js"></script>
 
 </body>

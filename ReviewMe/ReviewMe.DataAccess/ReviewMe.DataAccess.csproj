@@ -50,13 +50,9 @@
     <Compile Include="EntityContext.cs" />
     <Compile Include="EntityContextInitializer.cs" />
     <Compile Include="IEntityContext.cs" />
-    <Compile Include="Migrations\201506240515352_reviewDateField.cs" />
-    <Compile Include="Migrations\201506240515352_reviewDateField.Designer.cs">
-      <DependentUpon>201506240515352_reviewDateField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506240659445_reviewDateStringField.cs" />
-    <Compile Include="Migrations\201506240659445_reviewDateStringField.Designer.cs">
-      <DependentUpon>201506240659445_reviewDateStringField.cs</DependentUpon>
+    <Compile Include="Migrations\201506300658006_First.cs" />
+    <Compile Include="Migrations\201506300658006_First.Designer.cs">
+      <DependentUpon>201506300658006_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,11 +70,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506240515352_reviewDateField.resx">
-      <DependentUpon>201506240515352_reviewDateField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506240659445_reviewDateStringField.resx">
-      <DependentUpon>201506240659445_reviewDateStringField.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506300658006_First.resx">
+      <DependentUpon>201506300658006_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

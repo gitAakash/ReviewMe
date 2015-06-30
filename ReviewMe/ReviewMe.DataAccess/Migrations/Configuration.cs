@@ -18,7 +18,6 @@ namespace ReviewMe.DataAccess.Migrations
         protected override void Seed(EntityContext context)
         {
             //base.Seed(context);
-
             //var roles = new List<Role>
             //{
             //    new Role {RoleName = "Admin", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true},

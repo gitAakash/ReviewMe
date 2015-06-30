@@ -1,0 +1,37 @@
+﻿@using ReviewMe.Common.Extensions
+@using ReviewMe.ViewModel
+@using ReviewMe.Web.Controllers
+
+@model ReviewMe.ViewModel.ReviewDetailsViewModel
+
+@{
+    ViewBag.Title = "ReviewDetails";
+    Layout = "../Shared/_Layout.cshtml";
+    var modeldatatemp = Model.ReviewDetailsViewModelList;
+}
+
+@Html.Hidden("ReviewData", Json.Encode(modeldatatemp))
+
+<link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
+
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/fullcalendar.js"></script>
+
+<script src="~/Scripts/Custom/MyReviewsJS.js" type="text/javascript"></script>
+
+<ul class="breadcrumb breadcrumb-page">
+    <div class="breadcrumb-label text-light-gray">You are here: </div>
+    <li><a href="#">Home</a></li>
+    <li class="active"><a href="#">My Reviewees</a></li>
+</ul>
+<div id='calendar'>
+
+</div>
+
+<div id="userAddReviewDetails" class="modal  fade" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="userAddEditModalBody">
+        </div>
+    </div>
+</div>
+

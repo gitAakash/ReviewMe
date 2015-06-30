@@ -1,0 +1,53 @@
+﻿@using ReviewMe.ViewModel;
+@using ReviewMe.Common.Extensions;
+@model ReviewMe.ViewModel.ReviewDetailsViewModel
+@{
+    Layout = null;
+}
+@*@Scripts.Render("~/bundles/jqueryval")*@
+
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+@*<script src="~/Scripts/Custom/ReviewDetailsJS.js"></script>*@
+
+<div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>ReviewDetails</h3>
+</div>
+
+@*@using (Ajax.BeginForm("AddEditReviewDetails", new AjaxOptions { Confirm = "Confirm", HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))*@
+@using (Html.BeginForm("AddEditReviewDetails", "ReviewMap", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", @id = "addEditReviewForm" }))
+{
+
+    @Html.ValidationSummary(true)
+    <div class="modal-body">     
+        @Html.Hidden("hdnRevieweeDate", (String)ViewBag.RevieweeDate)
+       
+        <label class="label" for="name">Reviewer Name</label><br />
+
+        @Html.TextBoxFor(m => m.ReviewerName, new { @class = "input-xlarge", @style = "width:600px", @readonly = true })
+        
+        <br/><br/>
+        <label class="label" for="name">Title</label><br />
+
+        @Html.TextBoxFor(m => m.Title, new { @class = "input-xlarge", @style = "width:600px", @readonly = true })
+        <br /> <br />
+        <label class="label" for="message">Comment</label><br />
+        @Html.TextAreaFor(m => m.Comment, new { @class = "input-xlarge", @style = "width:600px;height:100px;", @readonly = true })
+ 
+        <br />  <br />
+        
+        <label class="label" for="message">Review Date</label> <br />
+        @Html.TextBoxFor(m => m.ReviewDateString, new { @class = "input-xlarge", @readonly = true })
+
+    </div>
+
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+    </div>
+}
+
