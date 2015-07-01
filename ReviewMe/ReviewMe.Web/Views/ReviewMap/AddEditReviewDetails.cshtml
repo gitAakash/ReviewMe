@@ -4,57 +4,79 @@
 @{
     Layout = null;
 }
-@*@Scripts.Render("~/bundles/jqueryval")*@
+@Scripts.Render("~/bundles/jqueryval")
 
-@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-
 <script src="~/Scripts/Custom/ReviewDetailsJS.js"></script>
 
 <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>ReviewDetails</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    @*<a class="close" data-dismiss="modal">×</a>*@
+    @*<h3>ReviewDetails</h3>*@
+    @if (Model.Id != 0)
+    {
+        <h4 class="modal-title">Edit Review</h4>
+    }
+    else
+    {
+        <h4 class="modal-title">Add Review</h4>
+    }
 </div>
 
-@*@using (Ajax.BeginForm("AddEditReviewDetails", new AjaxOptions { Confirm = "Confirm", HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))*@
 @using (Html.BeginForm("AddEditReviewDetails", "ReviewMap", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", @id = "addEditReviewForm" }))
 {
-
+    @Html.HiddenFor(m => m.Id)
+    @Html.Hidden("RevieweeId", (Int64)ViewBag.RevieweeId)
+    @Html.Hidden("hdnRevieweeDate", (String)ViewBag.RevieweeDate)         
     @Html.ValidationSummary(true)
     <div class="modal-body">
-        @Html.HiddenFor(m => m.Id)
-        @Html.Hidden("RevieweeId", (Int64)ViewBag.RevieweeId)
-        @Html.Hidden("hdnRevieweeDate", (String)ViewBag.RevieweeDate)
-        <label class="label" for="name">Title</label><br />
+        <div class=" ">
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="form-group no-margin-hr">
+                        <label class="control-label">Title<span style="color: red">*</span></label>
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Title)
+                    </div>
+                </div><!-- col-sm-6 -->
+                </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="form-group no-margin-hr">
+                        <label class="control-label">Comment<span style="color: red">*</span></label>
+                        @Html.TextAreaFor(m => m.Comment, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Comment)
+                    </div>
+                </div><!-- col-sm-6 -->
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="form-group no-margin-hr">
+                        <label class="control-label">ReviewDate<span style="color: red">*</span></label>
+                        @Html.TextBoxFor(m => m.ReviewDate, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ReviewDate)
+                    </div>
+                </div><!-- col-sm-6 -->
+            </div>
+            <div class="modal-footer">
+                @if (Model.Id != 0)
+                {
+                    @*<input id="btnEditReview" class="btn btn-success" type="button" value="Update">*@
+                    <button type="button" id="btnEditReview" class="btn btn-primary">Update</button>
+                    @*<input id="btnReviewDelete" class="btn btn-danger" data-dismiss="modal" type="button" value="Delete" deleteid="@Model.Id">*@
+                     <button id="btnReviewDelete" type="button" class="btn btn-danger" deleteid="@Model.Id" >Delete</button>
+                }
+                else
+                {
 
-        @Html.TextBoxFor(m => m.Title, new { @class = "input-xlarge", @style = "width:600px" })
-        @Html.ValidationMessageFor(m => m.Title)
-        <br /> <br />
-        <label class="label" for="message">Comment</label><br />
-        @Html.TextAreaFor(m => m.Comment, new { @class = "input-xlarge", @style = "width:600px;height:100px;" })
-        @Html.ValidationMessageFor(m => m.Comment)
-        <br />  <br />
-
-        <label class="label" for="message">Review Date</label> <br />
-        @Html.TextBoxFor(m => m.ReviewDate, new { @class = "input-xlarge", @readonly = true })
-        @Html.ValidationMessageFor(m => m.ReviewDate)
-    </div>
-
-    <div class="modal-footer">
-        @if (Model.Id != 0)
-        {
-            <input id="btnEditReview" class="btn btn-success" type="button"  value="Update">
-            <input id="btnReviewDelete" class="btn btn-danger" data-dismiss="modal" type="button" value="Delete" deleteid="@Model.Id">
-        }
-        else
-        {
-               @*<input class="btn btn-success" type="button" data-dismiss="modal" value="Save" id="btnSaveReviewDetail">*@
-            <input class="btn btn-success" type="button"  value="Save" id="btnSaveReviewDetail">
-       
-        }
-        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-    </div>
+                    @*<input class="btn btn-success" type="button" value="Save" id="btnSaveReviewDetail">*@
+                    <button type="button" id="btnSaveReviewDetail" class="btn btn-primary">Save</button>
+                }
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>    
+            </div>
+            </div>
+    </div>     
 }

@@ -9,17 +9,17 @@
 }
 
 <input id="RevieweeId" type="hidden" value='@ViewBag.RevieweeId' />
-
 <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
-
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/fullcalendar.js"></script>
+<script src="~/Scripts/ellipsisJs.js"></script>
 
 <ul class="breadcrumb breadcrumb-page">
     <div class="breadcrumb-label text-light-gray">You are here: </div>
     <li><a href="#">Home</a></li>
     <li class="active"><a href="#">My Reviewees</a></li>
 </ul>
+
 <div id='calendar'>
 
 </div>
@@ -34,7 +34,7 @@
 <script src="~/Scripts/Custom/ReviewDetails.js"></script>
 
 <script type="text/javascript">
-   
+  
     var deletedItem = null;
     //DON'T MOVE THIS CODE IN JS FILE,VIEWBAG VAlUE CAN'T ACCESS IN JS FILE.
     $('#calendar').fullCalendar({
@@ -57,9 +57,10 @@
                 backdrop: 'static',
                 keyboard: false
             });
+
             deletedItem = $(this);
-            var id = $(this).find('a').attr('id');
-            debugger;
+
+            var id = $(this).find('div').attr('id');        
             if (id == undefined)
             {
                 id =0;

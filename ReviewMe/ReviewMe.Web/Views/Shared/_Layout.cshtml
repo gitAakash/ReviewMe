@@ -45,6 +45,10 @@
             font: 10px arial, san serif;
             text-align: left;
         }
+        .cust-message-avatar {
+            width: 100px;
+            height: 100px;
+        }
     </style>
     <style>
         #demo-themes {
@@ -268,16 +272,17 @@
             color: rgb(255, 255, 255);
             width: 120px;
             /*top: 25px;*/
-            background-color: rgb(154, 45, 45);
+            background-color: chocolate;
             border-right-width: 1px;
             border-top-right-radius: 3px;
             border-bottom-right-radius: 3px;
+            word-break:break-all;
         }
     </style>
 
     <script type="text/javascript">
 
-        setTimeout(function () { GetNotifications(); }, 5000);
+        setTimeout(function () { GetNotifications(); }, 10000);
 
         function GetNotifications() {
 
@@ -320,7 +325,7 @@
                     clearInterval(myInterval);
                 });
 
-                setTimeout(function () { GetNotifications(); }, 5000);
+                setTimeout(function () { GetNotifications(); }, 10000);
             });
         }
 
@@ -406,83 +411,14 @@
                             </ul> <!-- / .navbar-nav -->*@
 
                         <div class="right clearfix">
-                            <ul class="nav navbar-nav pull-right right-navbar-nav">
-
-
-                                <li class="nav-icon-btn nav-icon-btn-danger dropdown">
-                                    <a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
-                                        <span class="label">5</span>
-                                        <i class="nav-icon fa fa-bullhorn"></i>
-                                        <span class="small-screen-text">Notifications</span>
-                                    </a>
-
-                                    <!-- NOTIFICATIONS -->
-                                    <!-- Javascript -->
-                                    <script>
-                                        init.push(function () {
-                                            $('#main-navbar-notifications').slimScroll({ height: 250 });
-                                        });
-                                    </script>
-                                    <!-- / Javascript -->
-                                    <div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
-                                        <div class="slimScrollDiv" style="height: 250px; overflow: hidden; position: relative; width: auto;">
-                                            <div class="notifications-list" id="main-navbar-notifications" style="height: 250px; overflow: hidden; width: auto;">
-
-                                                <div class="notification">
-                                                    <div class="notification-title text-danger">SYSTEM</div>
-                                                    <div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-hdd-o bg-danger"></div>
-                                                </div> <!-- / .notification -->
-
-                                                <div class="notification">
-                                                    <div class="notification-title text-info">STORE</div>
-                                                    <div class="notification-description">You have <strong>9</strong> new orders.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-truck bg-info"></div>
-                                                </div> <!-- / .notification -->
-
-                                                <div class="notification">
-                                                    <div class="notification-title text-default">CRON DAEMON</div>
-                                                    <div class="notification-description">Job <strong>"Clean DB"</strong> has been completed.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-clock-o bg-default"></div>
-                                                </div> <!-- / .notification -->
-
-                                                <div class="notification">
-                                                    <div class="notification-title text-success">SYSTEM</div>
-                                                    <div class="notification-description">Server <strong>up</strong>.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-hdd-o bg-success"></div>
-                                                </div> <!-- / .notification -->
-
-                                                <div class="notification">
-                                                    <div class="notification-title text-warning">SYSTEM</div>
-                                                    <div class="notification-description"><strong>Warning</strong>: Processor load <strong>92%</strong>.</div>
-                                                    <div class="notification-ago">12h ago</div>
-                                                    <div class="notification-icon fa fa-hdd-o bg-warning"></div>
-                                                </div> <!-- / .notification -->
-
-                                            </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: block; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-                                        </div> <!-- / .notifications-list -->
-                                        <a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
-                                    </div> <!-- / .dropdown-menu -->
-                                </li>
+                            <ul class="nav navbar-nav pull-right right-navbar-nav">                                
 
                                 <li class="nav-icon-btn nav-icon-btn-success dropdown" id="liNotification">
 
-
                                     @Html.Action("UsersNotifications", "Notification")
 
-
                                 </li>
-                                <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
-
-                                <li>
-                                    <form class="navbar-form pull-left">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </form>
-                                </li>
+                                <!-- /3. $END_NAVBAR_ICON_BUTTONS -->                            
 
                                 <li class="dropdown">
                                     @if (sessionInfo != null)
@@ -555,9 +491,9 @@
                 <div id="main-menu-inner" style="height: 100%; overflow: hidden; width: auto;">
                     <div class="menu-content top animated fadeIn" id="menu-content-demo">
                         <!-- Menu custom content demo
-                            CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
-                            Javascript: html/assets/demo/demo.js
-                            -->
+            CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+            Javascript: html/assets/demo/demo.js
+            -->
                         @if (sessionInfo != null)
                         {
                             <div>
@@ -584,56 +520,100 @@
                                 }
 
                                 @*  <div class="btn-group">
-                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
-                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
-                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
-                                        <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
-                                    </div>
-                                    <a href="#" class="close">×</a>*@
+                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+                    </div>
+                    <a href="#" class="close">×</a>*@
                             </div>
                         }
                     </div>
-                    <ul class="navigation">
-                        <li class=" active">
-                            <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
-                                <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
-                                <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
-                        </li>
-                        <li>
-                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
-                            </a>
-                        </li>
-                        @if (SessionManager.GetSessionInformation().UserRoleId == 2)
-                        {
-                            <li class="mm-dropdown mm-dropdown-root">
+                    @if (SessionManager.GetSessionInformation().UserRoleId == 1)              // if role is admin
+                    {
+                        <ul class="navigation">
+                            <li class=" active">
+                                <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                    <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
+                                    <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
+                                    <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
+                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                </a>
+                            </li>
+                        </ul> <!-- / .navigation -->
+                    }
+                    else if (SessionManager.GetSessionInformation().UserRoleId == 2)        // if role is teamLeader
+                    {
+                        <ul class="navigation">
+                            <li class=" active">
+                                <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                    <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
+                                    <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
+                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                </a>
+                            </li>
+                            <li>
                                 @*<a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>*@
                                 <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
                                     <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
                                 </a>
                             </li>
+                        </ul>
+                    }
 
-                        }
-
-                    </ul> <!-- / .navigation -->
+                    else
+                    {
+                        <ul class="navigation">
+                            <li class=" active">
+                                <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                    <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
+                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                </a>
+                            </li>
+                        </ul>                                       // if role is developer
+                    }
                 </div>
                 <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 741px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
             </div> <!-- / #main-menu-inner -->
@@ -651,8 +631,7 @@
                 <p>&copy; @DateTime.Now.Year - ReviewMe </p>
             </footer>
         </div>
-        <div id="demo-settings">
-        </div>
+     
     </div>
 
     <!-- Success -->
@@ -719,7 +698,7 @@
         </div>
     </div>
 
-    <script src="~/Scripts/Custom/demo.js"></script>
+    @*<script src="~/Scripts/Custom/demo.js"></script>*@
 
 </body>
 </html>

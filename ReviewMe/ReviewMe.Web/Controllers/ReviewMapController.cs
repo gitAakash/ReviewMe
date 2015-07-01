@@ -249,7 +249,7 @@ namespace ReviewMe.Web.Controllers
             long reviewerId = SessionManager.GetCurrentlyLoggedInUserId();
 
             DateTime RevieweeDate = System.DateTime.Now;
-            //RevieweeDate = RevieweeDate.AddDays(1);
+            RevieweeDate = RevieweeDate.AddDays(1);
             DateTime startDate = new DateTime(RevieweeDate.Year, RevieweeDate.Month, 1);
             DateTime endDate = startDate.AddMonths(1).AddDays(-1);
             ReviewDetailsViewModel reviewDetailsViewModel = new ReviewMapBal().GetAllReviewDetailsByRevieweeId(reviewerId, startDate, endDate);

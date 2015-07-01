@@ -1,14 +1,15 @@
 ﻿$(document).ready(function () {  
- 
+    $('[data-toggle="popover"]').popover()
+
     // Commented By : Ramchandra Rane, 23rd June 2015
+
     //$('#calendar').fullCalendar('next');
-  
+    //setTimeout(function () { alert("After 5 second. . . "); $(".ellipsis").ellipsis();  }, 5000);
+    //$(".ellipsis").ellipsis();
 });
 
 function ReviewDayDetails() {
-
 }
-
 
 //Fill  reviews in calender
 function fillCalender(date) {
@@ -20,7 +21,7 @@ function fillCalender(date) {
         $.each(result.Result, function (key, item) {        
             formatItem(item);          
         });
-        
+       
     }).fail(function () {
         alert("error");
     });
@@ -32,27 +33,32 @@ function formatItem(item) {
     var tdCollections = $('.fc-bg').find('table').find('tbody').find('tr').find('td');
     var lines = tdCollections.map(function (index, tda) {
         
-        if ($(tda).attr('data-date') == item.ReviewDateString) {
-            //$(tda).html(" <br/> <a href='#' class='dayreview' id=" + item.Id + " > " + item.Title + " </a> <br/>");
-            var temp= "<div  class='ui-tooltip qtip ui-helper-reset ui-tooltip-default ui-tooltip-light ui-tooltip-pos-tc ui-tooltip-focus' style='display:none;z-index:999999999 !important;' > ";
-            temp+=" <div class='ui-tooltip-content' id='ui-tooltip-0-content' aria-atomic='true'>";
-            temp+=" <div style='float:left; margin:0px 5px 5px 0px;'> ";
-            temp += " </div>" + item.Comment;
-            temp += " </div> </div>";
-            $(tda).html(" <br/> <a href='#' class='dayreview' id='"+item.Id+"' > " + item.Title + " </a> " + temp + " <br/>");
+        if ($(tda).attr('data-date') == item.ReviewDateString) {         
 
+
+            $(tda).html(" <br/> <div style='max-height:95px' class='ellipsis dayreview' data-trigger='hover' data-toggle='popover' data-content='" + item.Comment + "' id='" + item.Id + "' > " + item.Title + " </div>  <br/>");
+            
             // Assigning an action to the mouseover event
-            $('.dayreview').unbind('mouseover').bind("mouseover", function (e) {             
-                $(this).next().attr('style', 'display:block');
-                e.preventDefault();
-            });
+            //$('.dayreview').unbind('mouseover').bind("mouseover", function (e) {
+             
+            //    $(this).next().attr('style', 'display:block');
+            //    e.preventDefault();
+            //});
 
-            // Assigning an action to the mouseout event
-            $('.dayreview').unbind('mouseout').bind("mouseout", function (e) {
-                $(this).next().attr('style', 'display:none');
-                e.preventDefault();
-            });
+           //  Assigning an action to the mouseout event
+            //$('.dayreview').unbind('mouseout').bind("mouseout", function (e) {
+             
+            //    $(this).next().attr('style', 'display:none');
+            //    e.preventDefault();
+            //});
 
         }
+        //$('.dayreview').popover('show');
+        $('[data-toggle="popover"]').popover({
+            trigger:'hover',
+            animation: true,
+            placement:'bottom'
+        });
+        //$('.dayreview').popover('show');
     });
 }
