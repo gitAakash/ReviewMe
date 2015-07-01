@@ -6,48 +6,63 @@
 }
 @*@Scripts.Render("~/bundles/jqueryval")*@
 
-@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 
-@*<script src="~/Scripts/Custom/ReviewDetailsJS.js"></script>*@
-
 <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>ReviewDetails</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+     <h4 class="modal-title">Review Details</h4>
 </div>
 
-@*@using (Ajax.BeginForm("AddEditReviewDetails", new AjaxOptions { Confirm = "Confirm", HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }))*@
-@using (Html.BeginForm("AddEditReviewDetails", "ReviewMap", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", @id = "addEditReviewForm" }))
-{
+@Html.Hidden("hdnRevieweeDate", (String)ViewBag.RevieweeDate)
+<div class="modal-body">
+    <div class=" ">
 
-    @Html.ValidationSummary(true)
-    <div class="modal-body">     
-        @Html.Hidden("hdnRevieweeDate", (String)ViewBag.RevieweeDate)
-       
-        <label class="label" for="name">Reviewer Name</label><br />
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="form-group no-margin-hr">
+                    <label class="control-label">Reviewer Name</label>
+                    @Html.TextBoxFor(m => m.ReviewerName, new { @class = "form-control", @readonly = true })
+                </div>
+            </div><!-- col-sm-6 -->
+        </div>
 
-        @Html.TextBoxFor(m => m.ReviewerName, new { @class = "input-xlarge", @style = "width:600px", @readonly = true })
-        
-        <br/><br/>
-        <label class="label" for="name">Title</label><br />
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="form-group no-margin-hr">
+                    <label class="control-label">Title</label>
+                    @Html.TextAreaFor(m => m.Title, new { @class = "form-control", @readonly = true })
+                </div>
+            </div><!-- col-sm-6 -->
+        </div>
 
-        @Html.TextBoxFor(m => m.Title, new { @class = "input-xlarge", @style = "width:600px", @readonly = true })
-        <br /> <br />
-        <label class="label" for="message">Comment</label><br />
-        @Html.TextAreaFor(m => m.Comment, new { @class = "input-xlarge", @style = "width:600px;height:100px;", @readonly = true })
- 
-        <br />  <br />
-        
-        <label class="label" for="message">Review Date</label> <br />
-        @Html.TextBoxFor(m => m.ReviewDateString, new { @class = "input-xlarge", @readonly = true })
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="form-group no-margin-hr">
+                    <label class="control-label">Comment</label>
+                    @Html.TextBoxFor(m => m.Comment, new { @class = "form-control", @readonly = true })
 
+                </div>
+            </div><!-- col-sm-6 -->
+        </div>
+
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="form-group no-margin-hr">
+                    <label class="control-label">Review Date</label>
+                    @Html.TextBoxFor(m => m.ReviewDateString, new { @class = "form-control", @readonly = true })
+
+                </div>
+            </div><!-- col-sm-6 -->
+        </div>
+
+        <div class="modal-footer">
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
     </div>
+</div>
 
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-    </div>
-}
 
