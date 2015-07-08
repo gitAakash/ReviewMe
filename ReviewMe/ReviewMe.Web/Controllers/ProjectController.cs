@@ -17,6 +17,7 @@ namespace ReviewMe.Web.Controllers
         // GET: /Project/
         public ActionResult Index(Int64? id)
         {
+            ViewBag.Status = TempData["Status"];
             ProjectViewModelLong projectViewModelLong = new ProjectBal().GetAllProjects();
             projectViewModelLong.ProjectViewModel = new ProjectViewModel();
             if (id != null && id != 0)
@@ -31,14 +32,17 @@ namespace ReviewMe.Web.Controllers
         [HttpPost]
         public ActionResult AddEditProject(ProjectViewModel projectViewModel)
         {
+            TempData["Status"] = "Opps! Some error has occurred";
             if (ModelState.IsValid)
             {
                 if (projectViewModel.Id != 0)
                 {
+                    TempData["Status"] = "Project has been updated successfully.";
                     bool status = new ProjectBal().SaveOrUpdateProject(projectViewModel);
                 }
                 else
                 {
+                    TempData["Status"] = "Project has been added successfully.";
                     bool status = new ProjectBal().AddProject(projectViewModel);
                 }
             }
@@ -62,13 +66,13 @@ namespace ReviewMe.Web.Controllers
 
         }
         [HttpPost]
-        public string DeleteProject(long id)
+        public ActionResult DeleteProject(long id)
         {
             var status = new ProjectBal().DeleteProject(Convert.ToInt64(id));
             if (status)
-                return "Data deleted successfully.";
+                return Json(new { Status = "S", Message = "Project has been deleted successfully." }, JsonRequestBehavior.AllowGet);
             else
-                return "Some error has occurred";
+                return Json(new { Status = "F", Message = "Some error has occurred" }, JsonRequestBehavior.AllowGet);        
         }
 	}
 }

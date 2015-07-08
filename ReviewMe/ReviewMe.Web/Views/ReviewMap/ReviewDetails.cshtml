@@ -13,12 +13,19 @@
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/fullcalendar.js"></script>
 <script src="~/Scripts/ellipsisJs.js"></script>
+<script src="~/Scripts/Custom/ReviewDetails.js"></script>
 
 <ul class="breadcrumb breadcrumb-page">
     <div class="breadcrumb-label text-light-gray">You are here: </div>
     <li><a href="#">Home</a></li>
     <li class="active"><a href="#">My Reviewees</a></li>
 </ul>
+
+<div class="page-header">
+    <div class="row">
+        <h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><i class="fa fa-random page-header-icon"></i> @ViewBag.RevieweeName's Review</h1>
+    </div>
+</div>
 
 <div id='calendar'>
 
@@ -30,8 +37,6 @@
         </div>
     </div>
 </div>
-
-<script src="~/Scripts/Custom/ReviewDetails.js"></script>
 
 <script type="text/javascript">
   
@@ -59,8 +64,8 @@
             });
 
             deletedItem = $(this);
+            var id = $(this).find('div').attr('id');
 
-            var id = $(this).find('div').attr('id');        
             if (id == undefined)
             {
                 id =0;
@@ -78,9 +83,7 @@
                 }
             });
         }
-    });
-
-    $('#calendar').find('.fc-left h2').text('@ViewBag.RevieweeName -' + $('#calendar').find('.fc-left h2').text());
+    });  
 
     //Added By : Ramchandra rane
     function clearDeletedItemText()

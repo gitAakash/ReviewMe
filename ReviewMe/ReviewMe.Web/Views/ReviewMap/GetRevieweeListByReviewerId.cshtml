@@ -16,9 +16,9 @@
     </div>
     <div class="row">
         @foreach (var item in Model)
-        {
+        {          
             <a href="javascript:void(0)" onclick="ReviewDetails(@item.DevloperId)">
-                <div class="col col-lg-3" style="  width: 12% !important;">
+                <div class="col col-lg-2" style="  width: 12% !important;">
                     <div class="stat-cell bg-warning" style="cursor: pointer;">
                         <!-- Big text -->
                         <span class="text-bg">@item.DeveloperUser.FName</span><br>
@@ -26,7 +26,7 @@
                         <span class="text-sm">@item.DeveloperUser.LName</span>
                     </div>
                 </div>
-            </a>
+            </a><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         }
     </div>
     <script src="~/Scripts/Custom/GetRevieweeListByReviewer.js"></script>

@@ -4,9 +4,10 @@
 @model ReviewMe.ViewModel.TechnologyViewModelLong
 @{
     ViewBag.Title = "Technology-Management";
+    Layout = "../Shared/_Layout.cshtml"; 
 }
 
-<script src="~/Scripts/jquery-1.10.2.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
 <script src="~/Scripts/Custom/Technology.js"></script>
 
 <ul class="breadcrumb breadcrumb-page">
@@ -82,6 +83,18 @@
 <div id="lstuser">
     @Html.Partial("SearchTechnology", Model)
 </div>
+
+<script type="text/javascript">
+
+    if ('@ViewBag.Status' != '') {
+        debugger;
+        notif({
+            msg: "<b>@ViewBag.Status",
+            type: "success"
+        });
+    }
+
+</script>
 
 
 

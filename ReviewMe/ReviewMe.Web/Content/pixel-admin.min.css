@@ -10487,7 +10487,7 @@ label, optgroup {
 .stat-cell {
     display: table-cell !important;
     overflow: hidden;
-    padding: 20px;
+    padding: 6px;
     position: relative;
 }
 

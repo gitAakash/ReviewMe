@@ -9,19 +9,13 @@
     Layout = "../Shared/_Layout.cshtml";
     var modeldatatemp = Model.ReviewDetailsViewModelList;
 }
-<style type="text/css" >
-    .ellipsis {
-        white-space: nowrap;
-        overflow: hidden;
-    }
-</style>
-<script src="~/Scripts/ellipsisJs.js"></script>
+
 @Html.Hidden("ReviewData", Json.Encode(modeldatatemp))
 
 <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
-
 <script src="~/Scripts/moment.min.js"></script>
 <script src="~/Scripts/fullcalendar.js"></script>
+<script src="~/Scripts/ellipsisJs.js"></script>
 
 <script src="~/Scripts/Custom/MyReviewsJS.js" type="text/javascript"></script>
 

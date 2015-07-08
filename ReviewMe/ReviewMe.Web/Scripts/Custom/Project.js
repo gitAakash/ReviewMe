@@ -11,8 +11,21 @@
                     data: { 'id': projectId },
                     success: function (data) {
                         debugger;
-                        element.parentElement.parentElement.remove();
-                        $('#uidemo-modals-alerts-success').modal('show');
+                        if (data.Status == "S") {
+                            notif({
+                                msg: "<b>" + data.Message,
+                                type: "success"
+                            });
+                            element.parentElement.parentElement.remove();
+                            //$('#uidemo-modals-alerts-success').modal('show');
+                        }
+                        else {
+                            notif({
+                                msg: "<b>" + data.Message,
+                                type: "errro"
+                            });
+                        }
+                      
                     },
                     error: function (data) {
                     }

@@ -4,9 +4,9 @@
 @using ReviewMe.Web.Controllers
 @{
     ViewBag.Title = "Project-Management";
+    Layout = "../Shared/_Layout.cshtml"; 
 }
 
-<script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/Custom/Project.js"></script>
 <ul class="breadcrumb breadcrumb-page">
     <div class="breadcrumb-label text-light-gray">You are here: </div>
@@ -62,7 +62,6 @@
                         });
                                             
                     });
-
                 </script>
 
                 <!-- Search field -->
@@ -76,13 +75,28 @@
         </div>
     </div>
 </div> 
+
 <div class="row">
     @Html.Partial("AddEditProject", Model.ProjectViewModel)
     
 </div>
+
 <div id="lstuser">
     @Html.Partial("SearchProject", Model)
 </div>
+
+<script type="text/javascript">
+
+    if ('@ViewBag.Status' != '') {
+        debugger;
+        notif({
+            msg: "<b>@ViewBag.Status",
+            type: "success"
+        });
+    }
+
+</script>
+
 
 
 

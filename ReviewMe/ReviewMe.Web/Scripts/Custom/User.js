@@ -10,8 +10,23 @@
                     type: "POST",
                     data: { 'id': userId },
                     success: function(data) {
-                        debugger;
-                        element.parentElement.parentElement.remove();
+                        if (data.Status == "S")
+                        {
+                            notif({
+                                msg: "<b>" + data.Message,
+                                type: "success"
+                            });
+                            element.parentElement.parentElement.remove();
+                        }
+                        else
+                        {
+                            notif({
+                                msg: "<b>" + data.Message,
+                                type: "errro"
+                            });
+                        }
+
+                        
                     },
                     error: function(data) {
                     }
@@ -44,8 +59,8 @@ function EditUser(element) {
 
 $(function () {
 
-    $('#AddUser').click(function() {      
-        debugger;
+    $('#AddUser').click(function() {     
+     
         $('#userAddDetails').modal({
             backdrop: 'static',
             keyboard: false
@@ -55,13 +70,11 @@ $(function () {
             url: "/User/AddEditUser",
             type: "GET",
             data: {},
-            success: function(data) {
-                debugger;
+            success: function(data) {            
                 $('#userAddEditModalBody').empty();
                 $('#userAddEditModalBody').append(data);
             },
             error: function (data) {
-                debugger;
             }
         });
     });

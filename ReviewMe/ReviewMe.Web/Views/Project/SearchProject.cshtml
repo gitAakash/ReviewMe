@@ -2,19 +2,20 @@
 @using ReviewMe.Common.Extensions
 @using ReviewMe.ViewModel
 @using ReviewMe.Web.Controllers
+@{
+    Layout = null;
+    bool isodd = false;
+}
 
-<div class="col-sm-12">
+
+@*<div class="col-sm-12">
     <div class="panel">
         <div class="panel-heading">
             <span class="panel-title">Project</span>
         </div>
         <div class="panel-body ">
             <div class="table-info">
-                <div class="table-header">
-                    <div class="table-caption">
-                        Project Table
-                    </div>
-                </div>
+              
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -46,23 +47,64 @@
             </div>
         </div>
     </div>
-</div>
-<script>
+</div>*@
 
-    $(document).ready(function () {
+<div class="table-primary">
+    <div role="grid" id="jq-datatables-example_wrapper" class="dataTables_wrapper form-inline no-footer">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable no-footer" id="jq-datatables-example" aria-describedby="jq-datatables-example_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="jq-datatables-example" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 179px;" aria-sort="ascending">Project Title</th>
+                    <th class="sorting" tabindex="0" aria-controls="jq-datatables-example" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending" style="width: 365px;">Description</th>
+                    <th class="sorting" tabindex="0" aria-controls="jq-datatables-example" rowspan="1" colspan="1" aria-label="Date of Birth: activate to sort column ascending" style="width: 50px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ProjectViewModel item in Model.ProjectViewModelList)
+                {
+                    if (isodd)
+                    {
+                        @Html.Raw("<tr class='gradeA odd'>")
+                        isodd = false;
+                    }
+                    else
+                    {
+                        @Html.Raw("<tr class='gradeA even'>")
+                        isodd = true;
+                    }
+                    <td class="sorting_1">@item.ProjectTitle </td>
+                    <td> @item.Description   </td>                   
+                    <td> 
+                        <a href="@Url.Action("Index", "Project", new { id = item.Id })" title="Edit" id="@(item.Id)" class=" fa fa-edit fa-lg" style="margin: 4px 0px 0px 0px;">
 
-        if ('@ViewBag.EditMode' == "True") {
-            $("#btnaction").addClass('btn-label icon fa fa-edit');
-            $("#btnaction").text("Update");
-        }
+                        </a>
 
-        else {
-            $("#btnaction").addClass('btn-label icon fa fa-plus');
-            $("#btnaction").text("Add");
-        }
+                        <a href="javascript:void(0)" class="fa fa-trash-o fa-lg" title="Delete" id="@(item.Id)_@(item.ProjectTitle)" onclick=" DeleteProject(this)" style="margin: 4px 0px 0px 0px;">
 
-    });
-</script>
+                        </a>
+
+                    </td>
+                    @Html.Raw("</tr>")
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jq-datatables-example').dataTable();
+            if ('@ViewBag.EditMode' == "True") {
+                $("#btnaction").addClass('btn-label icon fa fa-edit');
+                $("#btnaction").text("Update");
+            }
+
+            else {
+                $("#btnaction").addClass('btn-label icon fa fa-plus');
+                $("#btnaction").text("Add");
+            }
+        });
+    </script>
 
 
 

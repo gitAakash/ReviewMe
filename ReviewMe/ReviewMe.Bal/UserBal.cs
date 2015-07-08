@@ -291,7 +291,10 @@ namespace ReviewMe.Bal
                     user.EmailId = userViewModel.EmailId;
                     user.MobileNo = userViewModel.MobileNo;
                     user.AlternateContactNo = userViewModel.AlternateContactNo;
-                    user.UserImage = userViewModel.UserImage;
+                    if (userViewModel.UserImage != null)
+                    {                   
+                        user.UserImage = userViewModel.UserImage;
+                    }
                     user.Address = userViewModel.Address;
                     user.TeamLeaderId = userViewModel.SelectedTeamLeadId;
                     user.RoleId = userViewModel.SelectedRoleId;

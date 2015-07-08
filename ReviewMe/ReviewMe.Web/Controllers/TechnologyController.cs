@@ -16,6 +16,7 @@ namespace ReviewMe.Web.Controllers
         // GET: /Technology/
         public ActionResult Index(Int64? id)
         {
+            ViewBag.Status = TempData["Status"];
             TechnologyViewModelLong technologyViewModelLong = new TechnologyBal().GetAllTechnologies();
             technologyViewModelLong.TechnologyViewModel = new TechnologyViewModel();
             if (id != null && id != 0)
@@ -46,12 +47,15 @@ namespace ReviewMe.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                TempData["Status"] = "Opps! Some error has occurred";
                 if (technologyViewModel.Id != 0)
                 {
+                    TempData["Status"] = "Technology has been updated successfully.";
                     bool status = new TechnologyBal().SaveOrUpdateTechnology(technologyViewModel);
                 }
                 else
                 {
+                    TempData["Status"] = "Technology has been added successfully.";
                     bool status = new TechnologyBal().AddTechnology(technologyViewModel);
                 }
             }
@@ -63,9 +67,9 @@ namespace ReviewMe.Web.Controllers
         {
             var status = new TechnologyBal().DeleteTechnology(Convert.ToInt64(id));
             if (status)
-                return "Data deleted successfully.";
+                return "Technology deleted successfully.";
             else
-                return "Some error has occurred";
+                return "Some error has occurred while deleting";
         }
 	}
 }
