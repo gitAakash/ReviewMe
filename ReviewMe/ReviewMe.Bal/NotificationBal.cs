@@ -53,6 +53,21 @@ namespace ReviewMe.Bal
             }
         }
 
+
+        public IEnumerable<Notifications> GetAllNotification(bool status)
+        {
+            try
+            {
+                //List<Notifications> notificationlist = _notificationsRepository.GetAll().Where(r=>r.IsActive==true && r.UserId== SessionManager.GetCurrentlyLoggedInUserId()).OrderBy(r=>r.CreatedOn).ToList();
+
+                IEnumerable<Notifications> notificationlist = _notificationsRepository.GetAll().Where(r => r.IsActive == status).OrderByDescending(r => r.CreatedOn);
+                return notificationlist;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         // Read User Notification
 
         public bool ReadUserNotifications(int Id)
@@ -93,6 +108,7 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
+
         public bool ReadAllUserNotifications()
         {
             try

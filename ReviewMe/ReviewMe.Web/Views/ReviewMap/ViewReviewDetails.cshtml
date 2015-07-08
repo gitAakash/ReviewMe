@@ -4,12 +4,13 @@
 @{
     Layout = null;
 }
-@*@Scripts.Render("~/bundles/jqueryval")*@
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+
+
+<script src="~/Scripts/star-rating.js" type="text/javascript"></script>
+<script src="~/Scripts/ViewReviewDetailsJS.js" type="text/javascript"></script>
+<link href="~/Content/star-rating.css" rel="stylesheet" />
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -18,38 +19,80 @@
 
 @Html.Hidden("hdnRevieweeDate", (String)ViewBag.RevieweeDate)
 <div class="modal-body">
-    <div class=" ">
+    <div class=" col-sm-4">
 
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
+                <div class="form-group no-margin-hr">
+                    <label class="control-label">Coding Standard Rating<span style="color: red">*</span></label>
+                    <input class="input-21f" value="@Model.CodingStandardRating" type="number" min=0 max=5 step=0.1 data-size="xs" name-to-bind="CodingStandardRating">
+                
+                    @*@Html.TextBoxFor(m => m.CodingStandardRating, new { @class = "input-21f",@value="0", @type="number", @min=0 ,@max=5 ,@step=0.1,@data-size="xs",@name-to-bind="CodingStandardRating" })*@
+                </div>
+            </div><!-- col-sm-6 -->
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group no-margin-hr">
+                    <label class="control-label">Project Architecture<span style="color: red">*</span></label>
+                    <input class="input-21f" value="@Model.ProjectArchitecture" type="number" min=0 max=5 step=0.1 data-size="xs" name-to-bind="ProjectArchitecture">
+
+                </div>
+            </div><!-- col-sm-6 -->
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group no-margin-hr">
+                    <label class="control-label">Code Optimization Rating<span style="color: red">*</span></label>
+
+                    <input class="input-21f" value="@Model.CodeOptimizationRating" type="number" min=0 max=5 step=0.1 data-size="xs" name-to-bind="CodeOptimizationRating">
+
+                </div>
+            </div><!-- col-sm-6 -->
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group no-margin-hr">
+                    <label class="control-label">Query Optimization Rating<span style="color: red">*</span></label>
+                    <input class="input-21f" value="@Model.QueryOptimizationRating" type="number" min=0 max=5 step=0.1 data-size="xs" name-to-bind="QueryOptimizationRating">
+
+                </div>
+            </div><!-- col-sm-6 -->
+        </div>
+
+    </div>
+    <div class=" col-sm-8">
+        <div class="row">
+            <div class="col-sm-12">
                 <div class="form-group no-margin-hr">
                     <label class="control-label">Reviewer Name</label>
                     @Html.TextBoxFor(m => m.ReviewerName, new { @class = "form-control", @readonly = true })
                 </div>
             </div><!-- col-sm-6 -->
         </div>
-
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <div class="form-group no-margin-hr">
                     <label class="control-label">Title</label>
-                    @Html.TextAreaFor(m => m.Title, new { @class = "form-control", @readonly = true })
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @readonly = true })
+                 
                 </div>
             </div><!-- col-sm-6 -->
         </div>
-
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <div class="form-group no-margin-hr">
                     <label class="control-label">Comment</label>
-                    @Html.TextBoxFor(m => m.Comment, new { @class = "form-control", @readonly = true })
-
+                    @Html.TextAreaFor(m => m.Comment, new { @class = "form-control", @style = "height:130px", @readonly = true })
+              
                 </div>
             </div><!-- col-sm-6 -->
         </div>
-
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <div class="form-group no-margin-hr">
                     <label class="control-label">Review Date</label>
                     @Html.TextBoxFor(m => m.ReviewDateString, new { @class = "form-control", @readonly = true })
@@ -57,12 +100,12 @@
                 </div>
             </div><!-- col-sm-6 -->
         </div>
-
-        <div class="modal-footer">
-
+    
+        <div class="modal-footer">          
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
     </div>
 </div>
+
 
 

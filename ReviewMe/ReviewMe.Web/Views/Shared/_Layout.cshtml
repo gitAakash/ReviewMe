@@ -45,6 +45,7 @@
             font: 10px arial, san serif;
             text-align: left;
         }
+
         .cust-message-avatar {
             width: 100px;
             height: 100px;
@@ -276,7 +277,8 @@
             border-right-width: 1px;
             border-top-right-radius: 3px;
             border-bottom-right-radius: 3px;
-            word-break:break-all;
+            word-break: break-all;
+            vertical-align: top;
         }
     </style>
 
@@ -304,8 +306,8 @@
                     myInterval = setInterval(function () {
                         ++counter;
                     }, 1000);
-                }, function (e) {                   
-                    if (myInterval > 200) {
+                }, function (e) {
+                    if (myInterval > 20) {
 
                         var id = $(this).attr('id');
 
@@ -329,7 +331,7 @@
             });
         }
 
-        $(document).ready(function () {
+        $(document).ready(function () {         
 
             $('#liNotification').click(function (e) {
 
@@ -343,7 +345,7 @@
                     url: "../Notification/ReadUserNotification?Id=" + Id,
                     async: true
                 }).success(function (data) {
-
+                    GetNotifications();
                 });
             }
         });
@@ -411,14 +413,14 @@
                             </ul> <!-- / .navbar-nav -->*@
 
                         <div class="right clearfix">
-                            <ul class="nav navbar-nav pull-right right-navbar-nav">                                
+                            <ul class="nav navbar-nav pull-right right-navbar-nav">
 
                                 <li class="nav-icon-btn nav-icon-btn-success dropdown" id="liNotification">
 
                                     @Html.Action("UsersNotifications", "Notification")
 
                                 </li>
-                                <!-- /3. $END_NAVBAR_ICON_BUTTONS -->                            
+                                <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
 
                                 <li class="dropdown">
                                     @if (sessionInfo != null)
@@ -445,7 +447,7 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a href="../Profile/Myprofile">Profile</a></li>
-                                            <li><a href="javascript:void(0)">Account</a></li>
+                                            @*<li><a href="javascript:void(0)">Account</a></li>*@
                                             @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
                                             <li class="divider"></li>
                                             <li><a href="@(Url.ActionLink<AccountController>(controller => controller.LogOff()))"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
@@ -491,9 +493,9 @@
                 <div id="main-menu-inner" style="height: 100%; overflow: hidden; width: auto;">
                     <div class="menu-content top animated fadeIn" id="menu-content-demo">
                         <!-- Menu custom content demo
-            CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
-            Javascript: html/assets/demo/demo.js
-            -->
+                        CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+                        Javascript: html/assets/demo/demo.js
+                        -->
                         @if (sessionInfo != null)
                         {
                             <div>
@@ -519,13 +521,14 @@
                                     <img src="~/ProfileImages/default.jpg" />
                                 }
 
-                                @*  <div class="btn-group">
-                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
-                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
-                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
-                        <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
-                    </div>
-                    <a href="#" class="close">×</a>*@
+                                @*
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+                                        <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+                                    </div>
+                                    <a href="#" class="close">×</a>*@
                             </div>
                         }
                     </div>
@@ -550,7 +553,8 @@
                             <li>
                                 <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
                             </li>
-                            <li>
+
+                            @*<li>
                                 <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
                                     <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
                                 </a>
@@ -559,7 +563,8 @@
                                 <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
                                     <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
                                 </a>
-                            </li>
+                            </li>*@
+
                         </ul> <!-- / .navigation -->
                     }
                     else if (SessionManager.GetSessionInformation().UserRoleId == 2)        // if role is teamLeader
@@ -631,7 +636,7 @@
                 <p>&copy; @DateTime.Now.Year - ReviewMe </p>
             </footer>
         </div>
-     
+
     </div>
 
     <!-- Success -->

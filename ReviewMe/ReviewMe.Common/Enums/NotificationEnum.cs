@@ -10,7 +10,9 @@ namespace ReviewMe.Common.Enums
     {
         public static string ReviewerNotification= "You have do code review of @RevieweeName's for dated ";
         public static string RevieweeNotification = "@ReviewerName will do your code review of dated";
-        public static string ReviewAddedToReviwee = "{0} have added your's review of code  of dated {1}"; 
+        public static string ReviewAddedToReviwee = "{0} have added your's review of code  of dated {1}";
+        public static string ReviewEditedToReviwee = "{0} have updated your's review of code  of dated {1}";
+        public static string ReviewDeletedToReviwee = "{0} have deleted your's review of code  of dated {1}"; 
 
 
         //RevieweeNotification = "@ReviewerName will do your code review of dated "

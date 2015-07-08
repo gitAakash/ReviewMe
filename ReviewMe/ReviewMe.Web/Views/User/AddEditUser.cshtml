@@ -22,7 +22,7 @@
     }
 </div>
 <div class="modal-body">
-    @using (Html.BeginForm("AddEditUser", "User", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("AddEditUser", "User", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", @id = "frmAddEditUser" }))
     {
         <div class="col-sm-3 profile-row">
             <div class="left-col">
@@ -101,31 +101,53 @@
                                     </label>
                                 </div>
                             </div>
-                        </div><!--col-sm-6-->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Email<span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.EmailId, new { @placeholder = "ex: xyz@xyz.com", @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.EmailId)
-                            </div>
-                        </div><!-- col-sm-6 -->
-
-                    </div><!-- row -->
-                    <div class="row">
+                        </div>
                         <div class="col-sm-4">
                             <div class="form-group no-margin-hr">
                                 <label class="control-label">Role<span style="color: red">*</span></label>
                                 @Html.DropDownListFor(m => m.SelectedRoleId, Model.DropDownForRoles.ToSelectList(a => a.Value, a => a.Text, a => a.Selected), "Select Role", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.SelectedRoleId)
                             </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
+                        </div>
+
+                    </div><!-- row -->
+                    <div class="row">
+                        
+                        <div class="col-sm-8">                         
                             <div class="form-group no-margin-hr">
-                                <label class="control-label">Technology<span style="color: red">*</span></label>
-                                @Html.DropDownListFor(m => m.SelectedTechnologyId, Model.DropDownForTechnology.ToSelectList(a => a.Value, a => a.Text, a => a.Selected), "Select Technology", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.SelectedTechnologyId)
+                                <label class="control-label">Email<span style="color: red">*</span></label>
+                                <div class="input-group">  
+                                    @if (((ReviewMe.ViewModel.UserViewModel)Model).EmailId == null)
+                                    {
+                                           @Html.TextBoxFor(m => m.EmailId, new { @placeholder = "ex: xyz", @class = "form-control",  })                              
+                                    <span class="input-group-addon" id="basic-addon2">
+                                        <button  id="btnEmail" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            &#64;wwindia.com <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" id="1">&#64;wwindia.com</a></li>
+                                            <li><a href="#" id="2">&#64;neosofttech.com</a></li>
+                                        </ul>                                  
+                                    </span>
+                                    }
+                                    else
+                                    {
+                                           @Html.TextBoxFor(m => m.EmailId, new { @placeholder = "ex: xyz", @class = "form-control", @readonly=true })                              
+                                    <span class="input-group-addon" id="basic-addon2">
+                                        <button  id="btnEmail" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            .wwindia.com <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu email" style="display:none">
+                                            <li><a href="#" id="1">.wwindia.com</a></li>
+                                            <li><a href="#" id="2">.neosofttech.com</a></li>
+                                        </ul>                                  
+                                    </span>
+                                    }
+                                 
+                                </div>
+                                @Html.ValidationMessageFor(m => m.EmailId)
                             </div>
-                        </div><!-- col-sm-6 -->
+                            </div>                    
                         <div class="col-sm-4">
                             <div class="form-group no-margin-hr">
                                 <label class="control-label">TeamLeader</label>
@@ -135,6 +157,13 @@
                     </div><!-- row -->
 
                     <div class="row">
+                        <div class="col-sm-4">
+                              <div class="form-group no-margin-hr">
+                              <label class="control-label">Technology<span style="color: red">*</span></label>
+                              @Html.DropDownListFor(m => m.SelectedTechnologyId, Model.DropDownForTechnology.ToSelectList(a => a.Value, a => a.Text, a => a.Selected), "Select Technology", new { @class = "form-control" })
+                              @Html.ValidationMessageFor(m => m.SelectedTechnologyId)
+                              </div>
+                        </div>
                         <div class="col-sm-4">
                             <div class="form-group no-margin-hr">
                                 <label class="control-label">Mobile Number<span style="color: red">*</span></label>
@@ -153,14 +182,24 @@
                             <div class="form-group no-margin-hr">
                                 <label class="control-label">Dob<span style="color: red">*</span></label>
                                 @*@Html.TextBox(string.Empty, @Model.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
+                                @*@Html.TextBoxFor(m => m.Dob, new { @class = "datepicker form-control" })*@
+                               @if (((ReviewMe.ViewModel.UserViewModel)Model).EmailId == null)
+                               {
+                                    <input class="datepicker form-control valid" placeholder="MM/dd/yyyy" data-val="true" readonly="true" data-val-required="Please enter birth date" id="Dob" name="Dob" type="text" value="">
 
-
-                                @Html.TextBoxFor(m => m.Dob, new { @placeholder = "dd/mm/yyyy", @class = "form-control", id = "Dob" })
-                                @Html.ValidationMessageFor(m => m.Dob)
+                               }
+                               else
+                               {
+                                <input class="datepicker form-control valid" placeholder="MM/dd/yyyy" data-val="true" readonly="true" data-val-required="Please enter birth date" id="Dob" name="Dob" type="text" value="@String.Format("{0:d}",Model.Dob)">
+                               }
+                                     @Html.ValidationMessageFor(m => m.Dob)
+                                @*<br/>*@
+                             
                             </div>
                         </div><!-- col-sm-6 -->
+
                         @if (((ReviewMe.ViewModel.UserViewModel)Model).EmailId == null)
-                        {
+                        { 
                             <div class="col-sm-4">
                                 <div class="form-group no-margin-hr">
                                     <label class="control-label">Password<span style="color: red">*</span></label>
@@ -206,24 +245,90 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+                <button id="btnSaveUser"  type="submit" class="btn btn-primary">Save changes</button>
             </div>
         </div>
+        
     }
 </div>
 <script type="text/javascript">
     $(function () {
-        debugger;
-        $('#Dob').datepicker({
-            format: "mm/dd/yyyy",
-            defaultDate: new Date(),
+
+        var isFormvalid = false;
+
+        $('.dropdown-menu a').click(function () {
+             $('#btnEmail').text($(this).text());
+        });
+
+        $('#frmAddEditUser').validate();
+
+        $('.input-group-addon').css('padding', '3px')
+
+        $('.datepicker').datepicker({
+            startDate: '-3d'
+
         }).on('changeDate', function (e) {
             $(this).datepicker('hide');
         });
-        $('#SelectedRoleId').unbind("change").bind("change", function () {
-          //  alert("ok");
+
+        $('#btnSaveUser').click(function () {
+            if($('#frmAddEditUser').valid())
+            {
+                //Checking whether email address is valid or not.            
+                var domail_id = $('#btnEmail').text().trim();
+                var emailAddress = $('#EmailId').val() + domail_id;
+                debugger;
+                var status = IsValidEmailAddress(emailAddress);
+                if (status)
+                {
+                    $('#EmailId').val(emailAddress);
+                }
+                return status;
+            }
         });
+
+        $('#SelectedRoleId').unbind("change").bind("change", function () {
+
+        });
+
+        $("#EmailId").keydown(function (e) {
+
+            if (e.which == 9)
+            {                   
+                //Checking whether email address is valid or not.            
+                var domail_id = $('#btnEmail').text().trim();
+                var emailAddress = $('#EmailId').val() + domail_id;
+                var status = IsValidEmailAddress(emailAddress);
+                return status;
+            }
+        });
+
     });
+
+    function IsValidEmailAddress(emailAddress)
+    {
+        var status = false;
+        $.ajax({
+            url: "/User/IsValidEmailAddress?emailAddress=" + emailAddress,
+            type: "GET",
+            data: {},
+            async: false,
+            success: function (data) {
+                debugger;
+                if (data.Status == "Error") {
+                    $('#EmailId').parent().next().html("<span class='field-validation-error' data-valmsg-for='EmailId' data-valmsg-replace='true'><span for='EmailId' class='' >Please enter a valid email address</span></span>");
+                    status =false;
+                }
+                if(data.Status=="Success")
+                {
+                    status= true;
+                }
+            },
+            error: function (data) {
+            }
+        });
+        return status;
+    }
 
 </script>

@@ -531,6 +531,10 @@ namespace ReviewMe.Bal
                     RevieweeId = reviewDetailsViewModel.RevieweeId,
                     ReviewerId = reviewDetailsViewModel.ReviewerId,
                     ReviewDate = reviewDetailsViewModel.ReviewDate,
+                    CodeOptimizationRating=reviewDetailsViewModel.CodeOptimizationRating,
+                    CodingStandardRating=reviewDetailsViewModel.CodingStandardRating,
+                    ProjectArchitecture=reviewDetailsViewModel.ProjectArchitecture,
+                    QueryOptimizationRating=reviewDetailsViewModel.QueryOptimizationRating,
                     IsActive = true
                 };
 
@@ -575,6 +579,10 @@ namespace ReviewMe.Bal
 
                     reviewDetails.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
                     reviewDetails.ModifiedOn = DateTime.Now;
+                    reviewDetails.CodeOptimizationRating = reviewDetailsViewModel.CodeOptimizationRating;
+                    reviewDetails.CodingStandardRating = reviewDetailsViewModel.CodingStandardRating;
+                    reviewDetails.ProjectArchitecture = reviewDetailsViewModel.ProjectArchitecture;
+                    reviewDetails.QueryOptimizationRating = reviewDetailsViewModel.QueryOptimizationRating;
 
                     ReviewDetails responseModel = _reviewDetailsRepository.SaveOrUpdate(reviewDetails);
 
@@ -632,6 +640,12 @@ namespace ReviewMe.Bal
                     reviewDetailsViewModel.Title = reviewDetails.Title;
                     reviewDetailsViewModel.ReviewDateString = reviewDetails.ReviewDate.ToShortDateString();
                     reviewDetailsViewModel.ReviewerName = _UserRepository.GetAll().SingleOrDefault(r => r.Id == reviewDetails.CreatedBy).FName +" "+_UserRepository.GetAll().SingleOrDefault(r => r.Id == reviewDetails.CreatedBy).LName;
+
+                    reviewDetailsViewModel.CodeOptimizationRating = reviewDetails.CodeOptimizationRating;
+                    reviewDetailsViewModel.CodingStandardRating = reviewDetails.CodingStandardRating;
+                    reviewDetailsViewModel.ProjectArchitecture = reviewDetails.ProjectArchitecture;
+                    reviewDetailsViewModel.QueryOptimizationRating = reviewDetails.QueryOptimizationRating;
+
                 }
 
                 return reviewDetailsViewModel;

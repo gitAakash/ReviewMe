@@ -20,16 +20,16 @@
                      var path = Path.Combine(Server.MapPath("~/ProfileImages/"), item.CreatedByUser.UserImage);
                      if (File.Exists(path))
                      {
-                         @Html.Raw("<img id='profileImage' src='/ProfileImages/" + @item.CreatedByUser.UserImage + "' class='cust-message-avatar' />")
+                         @Html.Raw("<img id='profileImage' src='/ProfileImages/" + @item.CreatedByUser.UserImage + "' class='cust-message-avatar img-circle' />")
                      }
                      else
                      {
-                         @Html.Raw("<img id='profileImage' src='~/ProfileImages/default.jpg' class='message-avatar' />");
+                         @Html.Raw("<img id='profileImage' src='~/ProfileImages/default.jpg' class='message-avatar img-cirle' />");
                      }
                  }
                  else
                  {
-                     @Html.Raw("<img id='profileImage' src='~/ProfileImages/default.jpg' class='message-avatar' />");
+                     @Html.Raw("<img id='profileImage' src='~/ProfileImages/default.jpg' class='message-avatar img-circle' />");
                  }
                  @Html.Raw("<a href='#' class='message-subject' id=" + @item.Id + ">")
                  if (item.IsRead)

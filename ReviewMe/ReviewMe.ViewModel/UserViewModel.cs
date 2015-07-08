@@ -22,8 +22,10 @@ namespace ReviewMe.ViewModel
         public bool Gender { get; set; }
 
         [Required(ErrorMessage = "Please enter emailId")]
-        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",ErrorMessage = "Invalid Email")]
-        public string EmailId { get; set; }
+        //[RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",ErrorMessage = "Invalid Email")]
+        //[RegularExpression(@"^[\w{.,'}+:?®©-]+$", ErrorMessage = "Invalid Email")]
+      
+         public string EmailId { get; set; }
 
         [Required(ErrorMessage = "Please enter password")]
         public string Password { get; set; }

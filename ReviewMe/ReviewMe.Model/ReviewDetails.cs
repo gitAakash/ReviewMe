@@ -17,6 +17,11 @@ namespace ReviewMe.Model
 
        public DateTime ReviewDate { get; set; }
 
+       public decimal CodingStandardRating { get; set; }
+       public decimal ProjectArchitecture { get; set; }
+       public decimal CodeOptimizationRating { get; set; }
+       public decimal QueryOptimizationRating { get; set; }
+
        public virtual User Reviewer { get; set; }
        public virtual User Reviewee { get; set; }
     }

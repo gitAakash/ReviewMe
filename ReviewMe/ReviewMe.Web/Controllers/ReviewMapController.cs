@@ -162,7 +162,7 @@ namespace ReviewMe.Web.Controllers
             {
                 bool response = new ReviewMapBal().DeleteReviewById(Id);
                 if (response)
-                {
+                {           
                     return Json(new { Status = "S", Message = "Record has been deleted successfully." }, JsonRequestBehavior.AllowGet);
                 }
                 else
@@ -189,17 +189,24 @@ namespace ReviewMe.Web.Controllers
                     {
                         bool status = new ReviewMapBal().EditReviewDetails(model);
                         if (status)
-                        {
+                        {                           
+                            Notifications notifications = new Notifications();
+                            notifications.CreatedBy = SessionManager.GetCurrentlyLoggedInUserId();
+                            notifications.CreatedOn = System.DateTime.Now;
+                            notifications.IsActive = true;
+                            notifications.IsRead = false;
+                            //notifications.NotificationType = 1;
+                            notifications.UserId = model.RevieweeId;
+                            notifications.NotificationMessage = string.Format(NotificationEnum.ReviewEditedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
 
+                            status = new NotificationBal().AddNewNotification(notifications);
                             return Json(new { Status = "S", Message = "Review has been updated successfully." }, JsonRequestBehavior.AllowGet);
 
                         }
                         else
                         {
                             return Json(new { Status = "F", Message = "Thre are some problem with server! Try Again later" }, JsonRequestBehavior.AllowGet);
-                        }
-
-                        //return RedirectToAction("ReviewDetails", "ReviewMap", new { revieweeId = model.RevieweeId });
+                        }                       
                     }
                     else
                     {
@@ -217,6 +224,7 @@ namespace ReviewMe.Web.Controllers
                             notifications.NotificationMessage = string.Format(NotificationEnum.ReviewAddedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
 
                             status = new NotificationBal().AddNewNotification(notifications);
+
                             return Json(new { Status = "S", Message = "Review has been added successfully." }, JsonRequestBehavior.AllowGet);
                         }
                         else
@@ -278,6 +286,17 @@ namespace ReviewMe.Web.Controllers
             return View(reviewDetailsViewModel);
         }
 
+        [HttpGet]
+        public ActionResult GetMonthWiseLoginuserReviewDetails(string revieweeDate)
+        {
+            long reviewerId = SessionManager.GetCurrentlyLoggedInUserId();
+            DateTime RevieweeDate = Convert.ToDateTime(revieweeDate);
+            RevieweeDate = RevieweeDate.AddDays(1);
+            DateTime startDate = new DateTime(RevieweeDate.Year, RevieweeDate.Month, 1);
+            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+            ReviewDetailsViewModel reviewDetailsViewModel = new ReviewMapBal().GetAllReviewDetailsByRevieweeId(reviewerId, startDate, endDate);
+            return Json(new { status = "S", Result = reviewDetailsViewModel.ReviewDetailsViewModelList }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }

@@ -12,13 +12,20 @@
                     success: function (data) {
                         debugger;
                         element.parentElement.parentElement.remove();
+                        notif({
+                            msg: "<b>" + data,
+                            type: "success"
+                        });
                     },
                     error: function (data) {
+                        notif({
+                            msg: "<b>" + data,
+                            type: "Error"
+                        });
                     }
                 });
             }
         },
         className: "bootbox-sm"
     });
-
 }

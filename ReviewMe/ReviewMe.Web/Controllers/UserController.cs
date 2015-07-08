@@ -18,6 +18,7 @@ namespace ReviewMe.Web.Controllers
         // GET: /User/
         public ActionResult Index()
         {
+            ViewBag.Status = TempData["Status"];
             UserViewModelLong userViewModelLong = new UserBal().GetAllUsers();
             return View(userViewModelLong);
         }
@@ -70,6 +71,7 @@ namespace ReviewMe.Web.Controllers
                 ModelState.Remove("Password");
                 ModelState.Remove("ConfirmPassword");               
             }
+            TempData["Status"] = "Opps! Some error has occurred";
             if (ModelState.IsValid)
             {
                 if (FilePath != null)
@@ -85,24 +87,62 @@ namespace ReviewMe.Web.Controllers
                 }
                 if (userViewModel.Id != 0)
                 {
+                    TempData["Status"] = "Records has been updated successfully.";
+                    string ProfileImagePath = new UserBal().GetUserById(userViewModel.Id).UserImage;
+                    if (!string.IsNullOrEmpty(ProfileImagePath) && FilePath != null)
+                    {
+                       string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), ProfileImagePath);
+                        //Check whether file is exist or not on location
+                       if(System.IO.File.Exists(fileSavePath))
+                       {
+                           System.IO.File.Delete(fileSavePath);
+                       }
+                    }
                     bool status = new UserBal().SaveOrUpdateUser(userViewModel);
+
                 }
                 else
                 {
+                    TempData["Status"] = "User has been added successfully.";
                     bool status = new UserBal().AddUser(userViewModel);
                 }
             }
+         
             return RedirectToAction("Index", "User");
         }
 
         [HttpPost]
-        public string DeleteUser(long id)
+        public ActionResult DeleteUser(long id)
         {
             bool status = new UserBal().DeleteUser(Convert.ToInt64(id));
             if (status)
-                return "Data deleted successfully.";
-
-            return "Some error has occurred";
+            {
+                string ProfileImagePath = new UserBal().GetUserById(id).UserImage;
+                if (!string.IsNullOrEmpty(ProfileImagePath))
+                {
+                    string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), ProfileImagePath);
+                    //Check whether file is exist or not on location
+                    if (System.IO.File.Exists(fileSavePath))
+                    {
+                        System.IO.File.Delete(fileSavePath);
+                    }
+                }       
+                return Json(new { Status = "S", Message = "Records has been deleted successfully." }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { Status = "F", Message = "Some error has occurred" }, JsonRequestBehavior.AllowGet);        
+        }
+        public ActionResult IsValidEmailAddress(string emailAddress)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(emailAddress);
+                return Json(new { Status = "Success", Message = "Successfull" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { Status = "Error", Message = "EmailId Not a valid" }, JsonRequestBehavior.AllowGet);
+            }
+          
         }
     }
 }

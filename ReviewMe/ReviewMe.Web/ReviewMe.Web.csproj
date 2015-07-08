@@ -228,6 +228,7 @@
     <Content Include="Content\prism.css" />
     <Content Include="Content\rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\star-rating.css" />
     <Content Include="Content\themes.min.css" />
     <Content Include="Content\widgets.min.css" />
     <Content Include="CSS\datepicker.css" />
@@ -259,6 +260,7 @@
     <Content Include="Scripts\Custom\MyReviewsJS.js" />
     <Content Include="Scripts\Custom\pixel-admin.min.js" />
     <Content Include="Content\chosen.css" />
+    <None Include="Properties\PublishProfiles\ReviewMe.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom\Project.js" />
     <Content Include="Scripts\Custom\Review.js" />
@@ -289,6 +291,8 @@
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\Custom\ReviewDetails.js" />
+    <Content Include="Scripts\star-rating.js" />
+    <Content Include="Scripts\ViewReviewDetailsJS.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
