@@ -9,7 +9,7 @@
                     type: "POST",
                     data: { 'id': roleId },
                     success: function (data) {
-                        debugger;
+                       
                         element.parentElement.parentElement.remove();
                     },
                     error: function (data) {

@@ -30,37 +30,31 @@
                 <script type="text/javascript">
                     $(document).ready(function () {
 
-                        debugger;
-
                         $("#strSearch").keypress(function (event) {
-                            debugger;
                             if (event.keyCode == 13) {
-                            var strSearch = $('#strSearch').val();
-                            if (strSearch == "") {
-                                location.reload();
-                            }
-                            else
-                                debugger;
-                            $.ajax({
-                                url: "/Project/SearchProject",
-                                type: "GET",
-                                data: { 'strSearch': strSearch },
-                                success: function (data) {
-                                    debugger;
-                                    $('#lstuser').html(data);
-                                    $('#strSearch').val("");
-
-                                },
-                                error: function (response) {
-                                    debugger;
-
+                                var strSearch = $('#strSearch').val();
+                                if (strSearch == "") {
+                                    location.reload();
                                 }
+                                else {
+                                    $.ajax({
+                                        url: "/Project/SearchProject",
+                                        type: "GET",
+                                        data: { 'strSearch': strSearch },
+                                        success: function (data) {
+                                          
+                                            $('#lstuser').html(data);
+                                            $('#strSearch').val("");
 
-                            });
-                            return false;
+                                        },
+                                        error: function (response) {
+                                         }
+
+                                    });
+                                    return false;
+                                }
                             }
                         });
-                                            
                     });
                 </script>
 
@@ -87,8 +81,7 @@
 
 <script type="text/javascript">
 
-    if ('@ViewBag.Status' != '') {
-        debugger;
+    if ('@ViewBag.Status' != '') {    
         notif({
             msg: "<b>@ViewBag.Status",
             type: "success"

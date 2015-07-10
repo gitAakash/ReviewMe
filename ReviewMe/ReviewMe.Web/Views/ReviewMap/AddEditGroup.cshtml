@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        //debugger;
+    
         if ($("#hdnEditFlag").val() == "1") // Edit
         {
             $("#IsEdit").val('1');
@@ -16,12 +16,12 @@
                 type: "GET",
                 data: { 'IsEdit': '1'},
                 success: function (data) {
-                    //debugger;
+                 
                     $('#RevieweeId').empty();
                     $('#RevieweeId').append(data);
 
                     //$("#RevieweeList > option").each(function () {
-                    //    //debugger;
+                    //    
                     //    var i = 1;
                     //    if ($(this).val() != "")
                     //    {
@@ -30,19 +30,19 @@
                     //    }
                     //});
 
-                    //debugger;
+                  
                     //$(".chosen-results").find('li').each(function () {
-                    //    debugger;
+                    //    
                     //});
                 },
                 error: function (response) {
-                    //debugger;
+                 
                 }
             });
         }
 
         $("#ReviewerId").change(function () {
-            //debugger;
+          
             var ReviewerId = $(this).val();
             if (ReviewerId == "")
             {
@@ -55,12 +55,12 @@
                 type: "GET",
                 data: { 'IsEdit': '2' },
                 success: function (data) {
-                    //debugger;
+                  
                     $('#RevieweeId').empty();
                     $('#RevieweeId').append(data);
                 },
                 error: function (response) {
-                    //debugger;
+                   
                 }
             });
         });
@@ -124,15 +124,15 @@
 <script type="text/javascript">
     var selectList = "";
     $("#btnSave").click(function () {
-        ////debugger;
+      
         var revieweeList = "";
         $('li.search-choice').each(function () {
-            ////debugger;
+          
             revieweeList += $(this).find("span").attr("id") + ",";
         });
         revieweeList = revieweeList.substring(0, revieweeList.length - 1);
         $('#SelectedListValues').val(revieweeList);
-        //debugger;
+      
         if (revieweeList.length == 0) {
             $('.RevieweeErrorMessage').html("Please select alteast one Reviewee.");
             return false;

@@ -1,6 +1,8 @@
 ﻿@using ReviewMe.Common.Authorization
 @using ReviewMe.Common.Extensions
 @using ReviewMe.Web.Controllers
+
+@Html.Hidden("TodayDate",System.DateTime.Now)
 <!DOCTYPE html>
 <html class="gt-ie8 gt-ie9 not-ie pxajs">
 <head>
@@ -283,7 +285,12 @@
     </style>
 
     <script type="text/javascript">
+              
+        //var todayDate = new Date(2015, 06, 09);
+        //Getting current Date of server
 
+        var todayDate = new Date($('#TodayDate').val());
+        
         setTimeout(function () { GetNotifications(); }, 10000);
 
         function GetNotifications() {

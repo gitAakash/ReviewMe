@@ -2025,6 +2025,7 @@
 
         // Called when drag listening has started (but a real drag has not necessarily began)
         listenStart: function (ev) {
+          //  alert('listenStart');
             this.trigger('listenStart', ev);
         },
 
@@ -2088,6 +2089,7 @@
 
         // Called when the user does a mouseup
         mouseup: function (ev) {
+            
             this.stopListening(ev);
         },
 
@@ -2141,6 +2143,7 @@
                 this.isListening = false;
                 this.listenStop(ev);
             }
+           
         },
 
 

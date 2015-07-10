@@ -42,6 +42,10 @@ namespace ReviewMe.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                if (userViewModel.Id !=0)
+                {
+                   ReviewMe.Model.User userModel = new UserBal().AddUser(userViewModel);
+                }
                 if (FilePath != null)
                 {
                     if (userViewModel.FilePath.ContentLength > 0)
@@ -53,14 +57,15 @@ namespace ReviewMe.Web.Controllers
                         userViewModel.UserImage = fileName;
                     }
                 }
-                bool status = new UserBal().UpdateUser(userViewModel);
+
+                ReviewMe.Model.User userModel1 = new UserBal().UpdateUser(userViewModel);
                 var sessionInfo = SessionManager.GetSessionInformation();
                 sessionInfo.UserName = userViewModel.FName;
                 sessionInfo.UserLogo = userViewModel.UserImage;
             }
             else
             {
-                bool status = new UserBal().AddUser(userViewModel);
+                return View();
             }
 
             return RedirectToAction("Index", "User");

@@ -3,7 +3,7 @@
     $(window).load(function () {
         $('#AddGroup').click(function () {
             $("#hdnEditFlag").val("2");
-            ////debugger;
+         
             $('#reviewMapAddDetails').modal({
                 backdrop: 'static',
                 keyboard: false
@@ -13,12 +13,12 @@
                 url: "/ReviewMap/AddEditGroup",
                 type: "GET",
                 success: function (data) {
-                    ////debugger;
+                  
                     $('#reviewMapModalBody').empty();
                     $('#reviewMapModalBody').append(data);
                 },
                 error: function (response) {
-                    //debugger;
+                 
                 }
             });
         });
@@ -27,13 +27,10 @@
 });
 
 function editGroup(id)
-{
-    //debugger;
-
+{  
     $("#hdnEditFlag").val("1");
     $("#IsEdit").val("1");
     $("#hdnReviewerId").val(id);
-
     $('#reviewMapAddDetails').modal({
         backdrop: 'static',
         keyboard: false
@@ -43,13 +40,11 @@ function editGroup(id)
         url: "/ReviewMap/AddEditGroup",
         type: "GET",
         data: { 'revId' : id },
-        success: function (data) {
-            //debugger;
+        success: function (data) {          
             $('#reviewMapModalBody').empty();
             $('#reviewMapModalBody').append(data);
         },
-        error: function (response) {
-            //debugger;
+        error: function (response) {          
 
         }
     });
@@ -57,23 +52,22 @@ function editGroup(id)
 
 function deleteGroup(id)
 {
-    ////debugger;
     bootbox.confirm({
         message: "Do you want to delete ?",
         callback: function (result) {
-            //debugger;
+        
             if (result) {
                 $.ajax({
                     url: "/ReviewMap/DeleteGroup/" + id,
                     type: "POST",
                     success: function (data) {
-                        //debugger;
+                    
                         if (data == "True") {
                             $("#" + id).parent().remove();
                         }
                     },
                     error: function (response) {
-                        //debugger;
+                      
                     }
                 });
             }

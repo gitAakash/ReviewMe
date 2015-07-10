@@ -232,7 +232,7 @@ namespace ReviewMe.Bal
         }
 
         // Add User
-        public bool AddUser(UserViewModel userViewModel)
+        public User AddUser(UserViewModel userViewModel)
         {
             try
             {
@@ -265,9 +265,10 @@ namespace ReviewMe.Bal
                     IsActive = true
                 };
                 User responsemodel = _userRepository.Add(user);
-                if (responsemodel != null)
-                    return true;
-                return false;
+                //if (responsemodel != null)
+                //    return true;
+                //return false;
+                return responsemodel;
             }
             catch (Exception ex)
             {
@@ -319,7 +320,8 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
-        public bool UpdateUser(UserViewModel userViewModel)
+
+        public User UpdateUser(UserViewModel userViewModel)
         {
             try
             {
@@ -347,11 +349,10 @@ namespace ReviewMe.Bal
 
                     User responsemodel = _userRepository.SaveOrUpdate(user);
 
-                    if (responsemodel != null)
-                        return true;
+                    return responsemodel;
                 };
 
-                return false;
+                return null;
             }
             catch (Exception ex)
             {

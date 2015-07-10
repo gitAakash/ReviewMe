@@ -3,7 +3,7 @@
     bootbox.confirm({
         message: "Do you want to delete \"" + $(element).attr('id').split('_')[1] + "\" ?",
         callback: function(result) {
-            debugger;
+         
             if (result) {
                 $.ajax({
                     url: "/User/DeleteUser",
@@ -38,7 +38,7 @@
 }
 
 function EditUser(element) {
-    debugger;
+   
     var userId = $(element).attr('id');
     $('#userAddDetails').modal({
         backdrop: 'static',
@@ -81,7 +81,7 @@ $(function () {
 });
 
 function readURL(input) {
-    debugger;
+
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
