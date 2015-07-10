@@ -7,7 +7,6 @@
     ViewBag.Title = "ReviewDetails";
     Layout = "../Shared/_Layout.cshtml";
 }
-
 <input id="RevieweeId" type="hidden" value='@ViewBag.RevieweeId' />
 <link href="~/Content/fullcalendar.min.css" rel="stylesheet" />
 <script src="~/Scripts/moment.min.js"></script>
@@ -39,13 +38,13 @@
 </div>
 
 <script type="text/javascript">
-  
     var deletedItem = null;
     //DON'T MOVE THIS CODE IN JS FILE,VIEWBAG VAlUE CAN'T ACCESS IN JS FILE.
     $('#calendar').fullCalendar({
         defaultView: 'month',
         editable: true,
         selectable: true,
+        //defaultDate: moment('2014-02-01'),
         //header and other values
         select: function (start, end, allDay) {
             var endtime = end;
@@ -56,32 +55,44 @@
             $('#createEventModal #apptAllDay').val(allDay);
             $('#createEventModal #when').text(mywhen);
         },
-        dayClick: function () {
-
-            $('#userAddReviewDetails').modal({
-                backdrop: 'static',
-                keyboard: false
-            });
-
-            deletedItem = $(this);
-            var id = $(this).find('div').attr('id');
-
-            if (id == undefined)
+        dayClick: function () {          
+            var revieweeDate = new Date($(this).attr('data-date'));         
+          
+            if (revieweeDate > todayDate && revieweeDate != todayDate)
             {
-                id =0;
+                notif({
+                    msg: "<b> You can not add review of feature date.",
+                    type: "error"
+                });
             }
-            $.ajax({
-                url: "/ReviewMap/AddEditReviewDetails",
-                type: "GET",
-                data: { 'revieweeDate': $(this).attr('data-date'), 'revieweeId': $('#RevieweeId').val(), 'id': id },
-                success: function (data) {             
-                    $('#userAddEditModalBody').empty();
-                    $('#userAddEditModalBody').append(data);
-                },
-                error: function (data) {
-                  
+            else
+            {
+                $('#userAddReviewDetails').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+                deletedItem = $(this);
+                var id = $(this).find('div').attr('id');
+
+                if (id == undefined) {
+                    id = 0;
                 }
-            });
+                $.ajax({
+                    url: "/ReviewMap/AddEditReviewDetails",
+                    type: "GET",
+                    data: { 'revieweeDate': $(this).attr('data-date'), 'revieweeId': $('#RevieweeId').val(), 'id': id },
+                    success: function (data) {
+                        $('#userAddEditModalBody').empty();
+                        $('#userAddEditModalBody').append(data);
+                    },
+                    error: function (data) {
+
+                    }
+                });
+            }
+            
+           
         }
     });  
 

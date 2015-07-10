@@ -46,17 +46,17 @@
                                 type: "GET",
                                 data: { 'strSearch': strSearch },
                                 success: function (data) {
-                                    debugger;
+                                 
                                     $('#lstuser').html(data);
                                     $('#strSearch').val("");
                                 },
                                 error: function (response) {
-                                    debugger;
+                                
                                 }
                             });
                         });
                         $("#strSearch").keypress(function (event) {
-                            debugger;
+                           
                             if (event.keyCode == 13) {
                                 $("#Search").click();
                                 return false;
@@ -83,7 +83,7 @@
 <script type="text/javascript" >
 
     if ('@ViewBag.Status' != '') {
-        debugger;
+    
         notif({
             msg: "<b>@ViewBag.Status",
             type: "success"

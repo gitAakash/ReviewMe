@@ -3,14 +3,14 @@
     bootbox.confirm({
         message: "Do you want to delete \"" + $(element).attr('id').split('_')[1] + "\" ?",
         callback: function (result) {
-            debugger;
+       
             if (result) {
                 $.ajax({
                     url: "/Project/DeleteProject",
                     type: "POST",
                     data: { 'id': projectId },
                     success: function (data) {
-                        debugger;
+                     
                         if (data.Status == "S") {
                             notif({
                                 msg: "<b>" + data.Message,

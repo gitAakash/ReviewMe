@@ -29,40 +29,33 @@
                 <div class="visible-xs clearfix form-group-margin"></div>
                 <script type="text/javascript">
                     $(document).ready(function () {
-
-                        debugger;
-
-                        $("#strSearch").keypress(function (event) {
-                            debugger;
-                            if (event.keyCode == 13) {
+                        $("#strSearch").keypress(function (event)
+                        {
+                            if (event.keyCode == 13)
+                            {
                                 var strSearch = $('#strSearch').val();
-                                if (strSearch == "") {
+                                if (strSearch == "")
+                                {
                                     location.reload();
                                 }
                                 else
-                                    debugger;
-                                $.ajax({
-                                    url: "/Technology/SearchTechnology",
-                                    type: "GET",
-                                    data: { 'strSearch': strSearch },
-                                    success: function (data) {
-                                        debugger;
-                                        $('#lstuser').html(data);
-                                        $('#strSearch').val("");
-
-                                    },
-                                    error: function (response) {
-                                        debugger;
-
-                                    }
-
-                                });
-                                return false;
+                                {
+                                    $.ajax({
+                                        url: "/Technology/SearchTechnology",
+                                        type: "GET",
+                                        data: { 'strSearch': strSearch },
+                                        success: function (data) {
+                                            $('#lstuser').html(data);
+                                            $('#strSearch').val("");
+                                        },
+                                        error: function (response) {
+                                        }
+                                    });
+                                    return false;
+                                }
                             }
                         });
-
                     });
-
                 </script>
                 <!-- Search field -->
                 <form action="" class="pull-right col-xs-12 col-sm-6">
@@ -87,7 +80,7 @@
 <script type="text/javascript">
 
     if ('@ViewBag.Status' != '') {
-        debugger;
+   
         notif({
             msg: "<b>@ViewBag.Status",
             type: "success"

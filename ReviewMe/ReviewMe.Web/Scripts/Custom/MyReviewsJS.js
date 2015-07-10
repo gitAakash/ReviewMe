@@ -60,7 +60,7 @@ function fillCalender(date) {
         IsFirstRequest = false;
     }
     else {
-        debugger;
+    
         var par_date = date._d.getUTCMonth() + 1 + "/" + date._d.getUTCDate() + "/" + date._d.getUTCFullYear();
         var url = "GetMonthWiseLoginuserReviewDetails?revieweeDate=" + par_date;
         var jqxhr = $.getJSON(url, function (result) {

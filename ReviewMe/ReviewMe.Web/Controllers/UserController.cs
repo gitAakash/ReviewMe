@@ -73,38 +73,63 @@ namespace ReviewMe.Web.Controllers
             }
             TempData["Status"] = "Opps! Some error has occurred";
             if (ModelState.IsValid)
-            {
-                if (FilePath != null)
-                {
-                    if (userViewModel.FilePath.ContentLength > 0)
-                    {
-                        string fileName = Path.GetFileNameWithoutExtension(userViewModel.FilePath.FileName);
-                        fileName += DateTime.Now.ToString("yyyyMMddHHmmssfff") + Path.GetExtension(userViewModel.FilePath.FileName);
-                        string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
-                        userViewModel.FilePath.SaveAs(fileSavePath);
-                        userViewModel.UserImage = fileName;
-                    }
-                }
+            {               
                 if (userViewModel.Id != 0)
-                {
-                    TempData["Status"] = "Records has been updated successfully.";
-                    string ProfileImagePath = new UserBal().GetUserById(userViewModel.Id).UserImage;
-                    if (!string.IsNullOrEmpty(ProfileImagePath) && FilePath != null)
+                {                   
+                    //string ProfileImagePath = new UserBal().GetUserById(userViewModel.Id).UserImage;
+                    //if (!string.IsNullOrEmpty(ProfileImagePath) && FilePath != null)
+                    //{
+                    //   string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), ProfileImagePath);
+                    //    //Check whether file is exist or not on location
+                    //   if(System.IO.File.Exists(fileSavePath))
+                    //   {
+                    //       System.IO.File.Delete(fileSavePath);
+                    //   }
+                    //}
+                    bool status=false;
+                    if (FilePath != null)
                     {
-                       string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), ProfileImagePath);
-                        //Check whether file is exist or not on location
-                       if(System.IO.File.Exists(fileSavePath))
-                       {
-                           System.IO.File.Delete(fileSavePath);
-                       }
-                    }
-                    bool status = new UserBal().SaveOrUpdateUser(userViewModel);
+                        if (userViewModel.FilePath.ContentLength > 0)
+                        {
+                            string fileName = Path.GetFileName(userViewModel.FilePath.FileName);
+                            fileName = userViewModel.Id + Path.GetExtension(fileName);
+                            string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
+                            userViewModel.FilePath.SaveAs(fileSavePath);
+                            userViewModel.UserImage = fileName;                     
 
+                            //Updating UserProfile image name;
+                             status = new UserBal().SaveOrUpdateUser(userViewModel);
+
+                             TempData["Status"] = "Records has been updated successfully";
+                        }
+                    }
+                    else
+                    {
+                        status = new UserBal().SaveOrUpdateUser(userViewModel);
+                        TempData["Status"] = "Records has been updated successfully.";
+                    }                  
                 }
                 else
                 {
+                
+                    User returnModel = new UserBal().AddUser(userViewModel);
+
+                    if (FilePath != null)
+                    {
+                        if (userViewModel.FilePath.ContentLength > 0)
+                        {
+                            string fileName = Path.GetFileName(userViewModel.FilePath.FileName);
+                            fileName = returnModel.Id + Path.GetExtension(fileName);
+                            string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
+                            userViewModel.FilePath.SaveAs(fileSavePath);
+                            userViewModel.UserImage = fileName;
+                            userViewModel.Id = returnModel.Id;
+                            
+                            //Updating UserProfile image name;
+                            bool status = new UserBal().SaveOrUpdateUser(userViewModel);                          
+                        }
+                    }
                     TempData["Status"] = "User has been added successfully.";
-                    bool status = new UserBal().AddUser(userViewModel);
                 }
             }
          

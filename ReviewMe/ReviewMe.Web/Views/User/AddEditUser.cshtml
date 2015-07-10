@@ -135,11 +135,11 @@
                                            @Html.TextBoxFor(m => m.EmailId, new { @placeholder = "ex: xyz", @class = "form-control", @readonly=true })                              
                                     <span class="input-group-addon" id="basic-addon2">
                                         <button  id="btnEmail" class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            .wwindia.com <span class="caret"></span>
+                                            &#64;wwindia.com <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu email" style="display:none">
-                                            <li><a href="#" id="1">.wwindia.com</a></li>
-                                            <li><a href="#" id="2">.neosofttech.com</a></li>
+                                            <li><a href="#" id="1">&#64;wwindia.com</a></li>
+                                            <li><a href="#" id="2">&#64;neosofttech.com</a></li>
                                         </ul>                                  
                                     </span>
                                     }
@@ -276,9 +276,14 @@
             if($('#frmAddEditUser').valid())
             {
                 //Checking whether email address is valid or not.            
+                var emailAddress = $('#EmailId').val()
                 var domail_id = $('#btnEmail').text().trim();
-                var emailAddress = $('#EmailId').val() + domail_id;
-                debugger;
+                var id = $('#Id').val();
+            
+                if (id == 0)
+                {
+                    emailAddress = emailAddress + domail_id;
+                }  
                 var status = IsValidEmailAddress(emailAddress);
                 if (status)
                 {
@@ -315,7 +320,7 @@
             data: {},
             async: false,
             success: function (data) {
-                debugger;
+               
                 if (data.Status == "Error") {
                     $('#EmailId').parent().next().html("<span class='field-validation-error' data-valmsg-for='EmailId' data-valmsg-replace='true'><span for='EmailId' class='' >Please enter a valid email address</span></span>");
                     status =false;
