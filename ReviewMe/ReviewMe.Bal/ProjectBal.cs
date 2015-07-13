@@ -50,24 +50,28 @@ namespace ReviewMe.Bal
             try
             {
                 Project project = _projectRepository.GetById(id);
-                var projectViewModel = new ProjectViewModel()
+                if (project != null)
                 {
-                    Id = project.Id,
-                    UserId = project.UserId,
-                    ProjectTitle = project.ProjectTitle,
-                    Description = project.Description,
-                    CreatedBy = project.CreatedBy,
-                    ModifiedBy = project.ModifiedBy,
-                    CreatedOn = project.CreatedOn,
-                    ModifiedOn = project.ModifiedOn,
-                    IsActive = project.IsActive
-                };
-                return projectViewModel;
+                    var projectViewModel = new ProjectViewModel()
+                    {
+                        Id = project.Id,
+                        UserId = project.UserId,
+                        ProjectTitle = project.ProjectTitle,
+                        Description = project.Description,
+                        CreatedBy = project.CreatedBy,
+                        ModifiedBy = project.ModifiedBy,
+                        CreatedOn = project.CreatedOn,
+                        ModifiedOn = project.ModifiedOn,
+                        IsActive = project.IsActive
+                    };
+                    return projectViewModel;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Add Project

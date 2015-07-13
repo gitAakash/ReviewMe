@@ -92,59 +92,62 @@ namespace ReviewMe.Bal
                 UserViewModelLong userViewModelLong = GetAllTeamLeaders();
 
                 TechnologyViewModelLong technologyViewModelLong = new TechnologyBal().GetAllTechnologies();
-                var userViewModel = new UserViewModel
+                if (user != null)
                 {
-                    Id = user.Id,
-                    FName = user.FName,
-                    LName = user.LName,
-                    MName = user.MName,
-                    Dob = user.Dob,
-                    Gender = user.Gender,
-                    EmailId = user.EmailId,
-                    Password = user.Password,
-                    MobileNo = user.MobileNo,
-                    AlternateContactNo = user.AlternateContactNo,
-                    UserImage = user.UserImage,
-                    Address = user.Address,
-                    EmployeeCode = user.EmployeeCode,
-                    SelectedTeamLeadId = user.TeamLeaderId,
-                    SelectedRoleId = user.RoleId,
-                    SelectedTechnologyId = user.TechnologyId,
-                    OnClient = user.OnClient,
-                    OnProject = user.OnProject,
-                    OnTask = user.OnTask,
-                    Rating = user.Rating,
-                    CreatedBy = user.CreatedBy,
-                    ModifiedBy = user.ModifiedBy,
-                    CreatedOn = user.CreatedOn,
-                    ModifiedOn = user.ModifiedOn,
-                    IsActive = user.IsActive,
-                    ResetPassword = user.ResetPassword,
-                    DropDownForRoles = roleViewModelLong.RoleViewModelList.Select(c => new SerializableSelectListItem
+                    var userViewModel = new UserViewModel
                     {
-                        Text = c.RoleName,
-                        Value = c.Id.ToString(CultureInfo.InvariantCulture)
-                    }),
-                    DropDownForTechnology =
-                        technologyViewModelLong.TechnologyViewModelList.Select(c => new SerializableSelectListItem
+                        Id = user.Id,
+                        FName = user.FName,
+                        LName = user.LName,
+                        MName = user.MName,
+                        Dob = user.Dob,
+                        Gender = user.Gender,
+                        EmailId = user.EmailId,
+                        Password = user.Password,
+                        MobileNo = user.MobileNo,
+                        AlternateContactNo = user.AlternateContactNo,
+                        UserImage = user.UserImage,
+                        Address = user.Address,
+                        EmployeeCode = user.EmployeeCode,
+                        SelectedTeamLeadId = user.TeamLeaderId,
+                        SelectedRoleId = user.RoleId,
+                        SelectedTechnologyId = user.TechnologyId,
+                        OnClient = user.OnClient,
+                        OnProject = user.OnProject,
+                        OnTask = user.OnTask,
+                        Rating = user.Rating,
+                        CreatedBy = user.CreatedBy,
+                        ModifiedBy = user.ModifiedBy,
+                        CreatedOn = user.CreatedOn,
+                        ModifiedOn = user.ModifiedOn,
+                        IsActive = user.IsActive,
+                        ResetPassword = user.ResetPassword,
+                        DropDownForRoles = roleViewModelLong.RoleViewModelList.Select(c => new SerializableSelectListItem
                         {
-                            Text = c.TechnologyName,
+                            Text = c.RoleName,
                             Value = c.Id.ToString(CultureInfo.InvariantCulture)
                         }),
-                    DropDownForTeamLeader =
-                        userViewModelLong.UserViewModelList.Select(c => new SerializableSelectListItem
-                        {
-                            Text = c.FName,
-                            Value = c.Id.ToString(CultureInfo.InvariantCulture)
-                        })
-                };
-
-                return userViewModel;
+                        DropDownForTechnology =
+                            technologyViewModelLong.TechnologyViewModelList.Select(c => new SerializableSelectListItem
+                            {
+                                Text = c.TechnologyName,
+                                Value = c.Id.ToString(CultureInfo.InvariantCulture)
+                            }),
+                        DropDownForTeamLeader =
+                            userViewModelLong.UserViewModelList.Select(c => new SerializableSelectListItem
+                            {
+                                Text = c.FName,
+                                Value = c.Id.ToString(CultureInfo.InvariantCulture)
+                            })
+                    };
+                    return userViewModel;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         public UserViewModel GetAddUserViewModel()
@@ -265,15 +268,14 @@ namespace ReviewMe.Bal
                     IsActive = true
                 };
                 User responsemodel = _userRepository.Add(user);
-                //if (responsemodel != null)
-                //    return true;
-                //return false;
+               if (responsemodel != null)
                 return responsemodel;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Update User
@@ -385,12 +387,16 @@ namespace ReviewMe.Bal
             {
                 List<User> lstReviewer =
                     _userRepository.GetAll().Where(m => m.IsActive && (m.TeamLeaderId == id || m.Id == id)).ToList();
+                if (lstReviewer != null)
+                {
                 return lstReviewer;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Get all UsersList Who are not Admin
@@ -402,12 +408,16 @@ namespace ReviewMe.Bal
                     _userRepository.GetAll()
                         .Where(m => m.IsActive && m.Role.RoleName != UserRoleEnum.Admin.ToString())
                         .ToList();
+                if (lstReviewer != null)
+                {
                 return lstReviewer;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Get User By EmailId for ForgotPassword functionality

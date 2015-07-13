@@ -180,7 +180,7 @@
                 $('body').append($div);
             });
         </script>
-
+       
         <div id="page-signin-bg">
         
             <div class="overlay"></div>
@@ -207,6 +207,7 @@
             <div class="signin-form">
                 @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post))
                 {
+                     @Html.AntiForgeryToken()
                     <div style="color: red">
                         @if (HttpContext.Current.Session["LOGIN_FAILED"] != null)
                         {

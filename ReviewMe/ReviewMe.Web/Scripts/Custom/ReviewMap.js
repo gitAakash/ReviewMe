@@ -1,7 +1,9 @@
 ﻿$(function () {
 
     $(window).load(function () {
+        debugger;
         $('#AddGroup').click(function () {
+            debugger;
             $("#hdnEditFlag").val("2");
          
             $('#reviewMapAddDetails').modal({
@@ -26,8 +28,8 @@
 
 });
 
-function editGroup(id)
-{  
+function editGroup(id) {
+    debugger;
     $("#hdnEditFlag").val("1");
     $("#IsEdit").val("1");
     $("#hdnReviewerId").val(id);

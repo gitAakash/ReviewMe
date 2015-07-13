@@ -60,33 +60,37 @@ namespace ReviewMe.Bal
             try
             {
                 Review review = _reviewRepository.GetById(id);
-                var reviewViewModel = new ReviewViewModel()
+                if (review != null)
                 {
-                    Id = review.Id,
-                    UserId = review.UserId,
-                    ReviewDate = review.ReviewDate,
-                    ProjectId = review.ProjectId,
-                    ModuleName = review.ModuleName,
-                    FileReviewed = review.FileReviewed,
-                    MethodsReviewed = review.MethodsReviewed,
-                    Remarks = review.Remarks,
-                    Status = review.Status,
-                    CodeOptimizationRating = review.CodeOptimizationRating,
-                    CodingStandardRating = review.CodingStandardRating,
-                    QueryOptimizationRating = review.QueryOptimizationRating,
-                    ProjectArchitecture = review.ProjectArchitecture,
-                    CreatedBy = review.CreatedBy,
-                    ModifiedBy = review.ModifiedBy,
-                    CreatedOn = review.CreatedOn,
-                    ModifiedOn = review.ModifiedOn,
-                    IsActive = review.IsActive,
-                };
-                return reviewViewModel;
+                    var reviewViewModel = new ReviewViewModel()
+                    {
+                        Id = review.Id,
+                        UserId = review.UserId,
+                        ReviewDate = review.ReviewDate,
+                        ProjectId = review.ProjectId,
+                        ModuleName = review.ModuleName,
+                        FileReviewed = review.FileReviewed,
+                        MethodsReviewed = review.MethodsReviewed,
+                        Remarks = review.Remarks,
+                        Status = review.Status,
+                        CodeOptimizationRating = review.CodeOptimizationRating,
+                        CodingStandardRating = review.CodingStandardRating,
+                        QueryOptimizationRating = review.QueryOptimizationRating,
+                        ProjectArchitecture = review.ProjectArchitecture,
+                        CreatedBy = review.CreatedBy,
+                        ModifiedBy = review.ModifiedBy,
+                        CreatedOn = review.CreatedOn,
+                        ModifiedOn = review.ModifiedOn,
+                        IsActive = review.IsActive,
+                    };
+                    return reviewViewModel;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Add New Review
@@ -134,8 +138,8 @@ namespace ReviewMe.Bal
             try
             {
                 Review review = _reviewRepository.GetById(reviewViewModel.Id);
-                if( review!= null)
-                {                    
+                if (review != null)
+                {
                     review.UserId = 1; // Need to discuss
                     review.ReviewDate = reviewViewModel.ReviewDate;
                     review.ProjectId = 1; // Need to discuss
@@ -149,12 +153,12 @@ namespace ReviewMe.Bal
                     review.QueryOptimizationRating = reviewViewModel.QueryOptimizationRating;
                     review.ProjectArchitecture = reviewViewModel.ProjectArchitecture;
                     review.ModifiedBy = SessionManager.GetCurrentlyLoggedInUserId();
-                    review.ModifiedOn = DateTime.Now;                    
-                
+                    review.ModifiedOn = DateTime.Now;
+
                     Review responseModel = _reviewRepository.SaveOrUpdate(review);
-                    if (responseModel != null)                   
+                    if (responseModel != null)
                         return true;
-                }                
+                }
                 return false;
             }
             catch (Exception ex)
@@ -177,6 +181,6 @@ namespace ReviewMe.Bal
             }
         }
 
-        
+
     }
 }

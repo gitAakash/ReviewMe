@@ -49,22 +49,27 @@ namespace ReviewMe.Bal
             try
             {
                 Technology technology = _technologyRepository.GetById(id);
-                var technologyViewModel = new TechnologyViewModel()
+                if (technology != null)
                 {
-                    Id = technology.Id,
-                    TechnologyName = technology.TechnologyName,
-                    CreatedBy = technology.CreatedBy,
-                    ModifiedBy = technology.ModifiedBy,
-                    CreatedOn = technology.CreatedOn,
-                    ModifiedOn = technology.ModifiedOn,
-                    IsActive = technology.IsActive,
-                };
-                return technologyViewModel;
+
+                    var technologyViewModel = new TechnologyViewModel()
+                    {
+                        Id = technology.Id,
+                        TechnologyName = technology.TechnologyName,
+                        CreatedBy = technology.CreatedBy,
+                        ModifiedBy = technology.ModifiedBy,
+                        CreatedOn = technology.CreatedOn,
+                        ModifiedOn = technology.ModifiedOn,
+                        IsActive = technology.IsActive,
+                    };
+                    return technologyViewModel;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Add new Technology
@@ -88,7 +93,7 @@ namespace ReviewMe.Bal
                     _technologyRepository.SaveChanges();
                     return true;
                 }
-                    return false;
+                return false;
             }
             catch (Exception ex)
             {
@@ -102,7 +107,7 @@ namespace ReviewMe.Bal
             try
             {
                 Technology technology = _technologyRepository.GetById(technologyViewModel.Id);
-                if(technology != null)
+                if (technology != null)
                 {
                     technology.Id = technologyViewModel.Id;
                     technology.TechnologyName = technologyViewModel.TechnologyName;
