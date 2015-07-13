@@ -2,69 +2,67 @@
 @using ReviewMe.Common.Extensions
 @using ReviewMe.Web.Controllers
 
-@Html.Hidden("TodayDate",System.DateTime.Now)
+@Html.Hidden("TodayDate", DateTime.Now)
 <!DOCTYPE html>
 <html class="gt-ie8 gt-ie9 not-ie pxajs">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - ReviewMe</title>
-    @Styles.Render("~/Content/css")
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&amp;subset=latin" rel="stylesheet" type="text/css">
-    <link href="~/Content/pixel-admin.min.css" rel="stylesheet" />
-    <link href="~/Content/widgets.min.css" rel="stylesheet" />
-    <link href="~/Content/rtl.min.css" rel="stylesheet" />
-    <link href="~/Content/themes.min.css" rel="stylesheet" />
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @*<script src="~/Scripts/chosen.jquery.min.js"></script>*@
-    <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
-    <script src="~/Scripts/notifIt.js"></script>
-    <link href="~/Content/notifIt.css" rel="stylesheet" />
-    @RenderSection("scripts", false)
-    <style type="text/css">
-        .jqstooltip {
-            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
-            background: rgb(0, 0, 0) transparent;
-            background-color: rgba(0, 0, 0, 0.6);
-            border: 1px solid white;
-            color: white;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
-            font: 10px arial, san serif;
-            left: 0px;
-            padding: 5px;
-            position: absolute;
-            text-align: left;
-            top: 0px;
-            visibility: hidden;
-            white-space: nowrap;
-            z-index: 10000;
-        }
-
-        .jqsfield {
-            color: white;
-            font: 10px arial, san serif;
-            text-align: left;
-        }
-
-        .cust-message-avatar {
-            width: 100px;
-            height: 100px;
-        }
-    </style>
-    <style>
-        #demo-themes {
-            border-bottom-left-radius: 5px;
-            display: table;
-            overflow: hidden;
-            table-layout: fixed;
-            width: 100%;
-        }
-
-            #demo-themes .demo-themes-row {
-                display: block;
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - ReviewMe</title>
+        @Styles.Render("~/Content/css")
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&amp;subset=latin" rel="stylesheet" type="text/css">
+        <link href="~/Content/pixel-admin.min.css" rel="stylesheet" />
+        <link href="~/Content/widgets.min.css" rel="stylesheet" />
+        <link href="~/Content/rtl.min.css" rel="stylesheet" />
+        <link href="~/Content/themes.min.css" rel="stylesheet" />
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @*<script src="~/Scripts/chosen.jquery.min.js"></script>*@
+        <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
+        <script src="~/Scripts/notifIt.js"></script>
+        <link href="~/Content/notifIt.css" rel="stylesheet" />
+        @RenderSection("scripts", false)
+        <style type="text/css">
+            .jqstooltip {
+                -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+                background: rgb(0, 0, 0) transparent;
+                background-color: rgba(0, 0, 0, 0.6);
+                border: 1px solid white;
+                color: white;
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+                font: 10px arial, san serif;
+                left: 0px;
+                padding: 5px;
+                position: absolute;
+                text-align: left;
+                top: 0px;
+                visibility: hidden;
+                white-space: nowrap;
+                z-index: 10000;
             }
+
+            .jqsfield {
+                color: white;
+                font: 10px arial, san serif;
+                text-align: left;
+            }
+
+            .cust-message-avatar {
+                height: 100px;
+                width: 100px;
+            }
+        </style>
+        <style>
+            #demo-themes {
+                border-bottom-left-radius: 5px;
+                display: table;
+                overflow: hidden;
+                table-layout: fixed;
+                width: 100%;
+            }
+
+            #demo-themes .demo-themes-row { display: block; }
 
             #demo-themes .demo-theme {
                 color: #888;
@@ -77,9 +75,7 @@
                 width: 50%;
             }
 
-                #demo-themes .demo-theme:hover {
-                    color: #fff;
-                }
+            #demo-themes .demo-theme:hover { color: #fff; }
 
             #demo-themes .theme-preview {
                 bottom: 0;
@@ -90,13 +86,13 @@
                 width: 100%;
             }
 
-                #demo-themes .theme-preview img {
-                    display: block;
-                    left: 0;
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                }
+            #demo-themes .theme-preview img {
+                display: block;
+                left: 0;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
 
             #demo-themes .demo-theme .overlay {
                 background: #1d1d1d;
@@ -130,35 +126,31 @@
             }
 
             #demo-themes .demo-theme.active .overlay,
-            #demo-themes .demo-theme:hover .overlay {
-                left: 0;
+            #demo-themes .demo-theme:hover .overlay { left: 0; }
+
+            #demo-settings {
+                -khtml-user-select: none;
+                -moz-transition: all .3s;
+                -moz-user-select: none;
+                -ms-transition: all .3s;
+                -ms-user-select: none;
+                -o-transition: all .3s;
+                -webkit-touch-callout: none;
+                -webkit-transition: all .3s;
+                -webkit-user-select: none;
+                background: #333;
+                border-radius: 5px;
+                padding-right: 10px;
+                position: fixed;
+                right: -270px;
+                top: 70px;
+                transition: all .3s;
+                user-select: none;
+                width: 270px;
+                z-index: 999998;
             }
 
-        #demo-settings {
-            -khtml-user-select: none;
-            -moz-transition: all .3s;
-            -moz-user-select: none;
-            -ms-transition: all .3s;
-            -ms-user-select: none;
-            -o-transition: all .3s;
-            -webkit-touch-callout: none;
-            -webkit-transition: all .3s;
-            -webkit-user-select: none;
-            background: #333;
-            border-radius: 5px;
-            padding-right: 10px;
-            position: fixed;
-            right: -270px;
-            top: 70px;
-            transition: all .3s;
-            user-select: none;
-            width: 270px;
-            z-index: 999998;
-        }
-
-            #demo-settings.open {
-                right: -10px;
-            }
+            #demo-settings.open { right: -10px; }
 
             #demo-settings > .header {
                 background: #444;
@@ -180,45 +172,41 @@
                 z-index: 100000;
             }
 
-        #demo-settings-toggler {
-            -moz-transition: color .3s;
-            -ms-transition: color .3s;
-            -o-transition: color .3s;
-            -webkit-transition: color .3s;
-            background: #444;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 21px;
-            height: 40px;
-            left: -40px;
-            line-height: 40px;
-            padding-right: 10px;
-            position: absolute;
-            text-align: center;
-            text-decoration: none !important;
-            top: 0;
-            transition: color .3s;
-            width: 50px;
-            z-index: 99999;
-        }
-
-        #demo-settings.open #demo-settings-toggler {
-            color: #888;
-            font-size: 16px;
-        }
-
-            #demo-settings.open #demo-settings-toggler:hover {
+            #demo-settings-toggler {
+                -moz-transition: color .3s;
+                -ms-transition: color .3s;
+                -o-transition: color .3s;
+                -webkit-transition: color .3s;
+                background: #444;
+                border-radius: 5px;
                 color: #fff;
+                font-size: 21px;
+                height: 40px;
+                left: -40px;
+                line-height: 40px;
+                padding-right: 10px;
+                position: absolute;
+                text-align: center;
+                text-decoration: none !important;
+                top: 0;
+                transition: color .3s;
+                width: 50px;
+                z-index: 99999;
             }
 
-            #demo-settings.open #demo-settings-toggler:before {
-                content: "\f00d";
+            #demo-settings.open #demo-settings-toggler {
+                color: #888;
+                font-size: 16px;
             }
 
-        #demo-settings-list {
-            margin: 0;
-            padding: 0;
-        }
+            #demo-settings.open #demo-settings-toggler:hover { color: #fff; }
+
+            #demo-settings.open #demo-settings-toggler:before { content: "\f00d"; }
+
+            #demo-settings-list {
+                margin: 0;
+                padding: 0;
+            }
 
             #demo-settings-list li {
                 list-style: none;
@@ -227,184 +215,184 @@
                 position: relative;
             }
 
-                #demo-settings-list li > span {
-                    color: #fff;
-                    cursor: pointer;
-                    display: block;
-                    line-height: 20px;
-                    padding: 12px 20px;
-                }
+            #demo-settings-list li > span {
+                color: #fff;
+                cursor: pointer;
+                display: block;
+                line-height: 20px;
+                padding: 12px 20px;
+            }
 
-                #demo-settings-list li + li {
-                    border-top: 1px solid #333;
-                }
+            #demo-settings-list li + li { border-top: 1px solid #333; }
 
-        #demo-settings .demo-checkbox {
-            position: absolute;
-            right: 20px;
-            top: 12px;
-        }
+            #demo-settings .demo-checkbox {
+                position: absolute;
+                right: 20px;
+                top: 12px;
+            }
 
-        .right-to-left #demo-settings {
-            left: -270px;
-            padding-left: 10px;
-            padding-right: 0;
-            right: auto;
-        }
+            .right-to-left #demo-settings {
+                left: -270px;
+                padding-left: 10px;
+                padding-right: 0;
+                right: auto;
+            }
 
             .right-to-left #demo-settings.open {
                 left: -10px;
                 right: auto;
             }
 
-        .right-to-left #demo-settings-toggler {
-            left: auto;
-            padding-left: 10px;
-            padding-right: 0;
-            right: -40px;
-        }
+            .right-to-left #demo-settings-toggler {
+                left: auto;
+                padding-left: 10px;
+                padding-right: 0;
+                right: -40px;
+            }
 
-        .right-to-left #demo-settings .demo-checkbox {
-            left: 20px;
-            right: auto;
-        }
-        /*Addded By : Ramchandra Rane*/
-        .dayreview {
-            /*left: 156px;*/
-            border-color: rgb(154, 45, 45);
-            color: rgb(255, 255, 255);
-            width: 120px;
-            /*top: 25px;*/
-            background-color: chocolate;
-            border-right-width: 1px;
-            border-top-right-radius: 3px;
-            border-bottom-right-radius: 3px;
-            word-break: break-all;
-            vertical-align: top;
-        }
-    </style>
+            .right-to-left #demo-settings .demo-checkbox {
+                left: 20px;
+                right: auto;
+            }
 
-    <script type="text/javascript">
-              
-        //var todayDate = new Date(2015, 06, 09);
-        //Getting current Date of server
+            /*Addded By : Ramchandra Rane*/
 
-        var todayDate = new Date($('#TodayDate').val());
-        
-        setTimeout(function () { GetNotifications(); }, 10000);
+            .dayreview {
+                /*top: 25px;*/
+                background-color: chocolate;
+                border-bottom-right-radius: 3px;
+                /*left: 156px;*/
+                border-color: rgb(154, 45, 45);
+                border-right-width: 1px;
+                border-top-right-radius: 3px;
+                color: rgb(255, 255, 255);
+                vertical-align: top;
+                width: 120px;
+                word-break: break-all;
+            }
+        </style>
 
-        function GetNotifications() {
+        <script type="text/javascript">
 
-            $.ajax({
-                type: "GET",
-                url: "../Notification/UsersNotifications",
-                async: true
-            }).success(function (data) {
+            //var todayDate = new Date(2015, 06, 09);
+            //Getting current Date of server
 
-                var notificationScroll = $("#main-navbar-messages");
-                var scrollvalue = notificationScroll.scrollTop();
+            var todayDate = new Date($('#TodayDate').val());
 
-                $('#liNotification').html(data);
+            setTimeout(function() { GetNotifications(); }, 10000);
 
-                $("#main-navbar-messages").scrollTop(scrollvalue);
+            function GetNotifications() {
 
-                $(".message-subject").hover(function (e) {
-                    counter = 0;
-                    myInterval = setInterval(function () {
-                        ++counter;
-                    }, 1000);
-                }, function (e) {
-                    if (myInterval > 20) {
-
-                        var id = $(this).attr('id');
-
-                        $.ajax({
-                            type: "GET",
-                            url: "../Notification/ReadUserNotification?Id=" + id,
-                            async: true
-                        }).success(function (data) {
-                            GetNotifications();
-                            myInterval = 0;
-                            counter = 0;
-                        });
-
-
-
-                    }
-                    clearInterval(myInterval);
-                });
-
-                setTimeout(function () { GetNotifications(); }, 10000);
-            });
-        }
-
-        $(document).ready(function () {         
-
-            $('#liNotification').click(function (e) {
-
-                setTimeout(function () { ReadNotification(0); }, 1000);
-
-            });
-
-            function ReadNotification(Id) {
                 $.ajax({
                     type: "GET",
-                    url: "../Notification/ReadUserNotification?Id=" + Id,
+                    url: "../Notification/UsersNotifications",
                     async: true
-                }).success(function (data) {
-                    GetNotifications();
+                }).success(function(data) {
+
+                    var notificationScroll = $("#main-navbar-messages");
+                    var scrollvalue = notificationScroll.scrollTop();
+
+                    $('#liNotification').html(data);
+
+                    $("#main-navbar-messages").scrollTop(scrollvalue);
+
+                    $(".message-subject").hover(function(e) {
+                        counter = 0;
+                        myInterval = setInterval(function() {
+                            ++counter;
+                        }, 1000);
+                    }, function(e) {
+                        if (myInterval > 20) {
+
+                            var id = $(this).attr('id');
+
+                            $.ajax({
+                                type: "GET",
+                                url: "../Notification/ReadUserNotification?Id=" + id,
+                                async: true
+                            }).success(function(data) {
+                                GetNotifications();
+                                myInterval = 0;
+                                counter = 0;
+                            });
+
+
+                        }
+                        clearInterval(myInterval);
+                    });
+
+                    setTimeout(function() { GetNotifications(); }, 10000);
                 });
             }
-        });
 
-    </script>
+            $(document).ready(function() {
 
-    @{
-        var sessionInfo = SessionManager.GetSessionInformation();
-    }
-</head>
-<body class="theme-default main-menu-animated animate-mm-sm animate-mm-md animate-mm-lg">
-    <script> var init = []; </script>
+                $('#liNotification').click(function(e) {
 
-    <script type="text/javascript">
-        window.init.push(function () {
-            // Javascript code here
-        });
-        window.PixelAdmin.start(init);
-    </script>
+                    setTimeout(function() { ReadNotification(0); }, 1000);
 
-    <div id="main-wrapper">
+                });
+
+                function ReadNotification(Id) {
+                    $.ajax({
+                        type: "GET",
+                        url: "../Notification/ReadUserNotification?Id=" + Id,
+                        async: true
+                    }).success(function(data) {
+                        GetNotifications();
+                    });
+                }
+
+            });
+
+        </script>
+
+        @{
+            SessionInformation sessionInfo = SessionManager.GetSessionInformation();
+        }
+    </head>
+    <body class="theme-default main-menu-animated animate-mm-sm animate-mm-md animate-mm-lg">
+        <script> var init = []; </script>
+
+        <script type="text/javascript">
+            window.init.push(function() {
+                // Javascript code here
+            });
+            window.PixelAdmin.start(init);
+        </script>
+
+        <div id="main-wrapper">
 
 
-        <!-- 2. $MAIN_NAVIGATION ===========================================================================
+            <!-- 2. $MAIN_NAVIGATION ===========================================================================
 
-            Main navigation
-            -->
-        <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
-            <!-- Main menu toggle -->
-            <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+                Main navigation
+                -->
+            <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+                <!-- Main menu toggle -->
+                <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
 
-            <div class="navbar-inner">
-                <!-- Main navbar header -->
-                <div class="navbar-header">
+                <div class="navbar-inner">
+                    <!-- Main navbar header -->
+                    <div class="navbar-header">
 
-                    <!-- Logo -->
-                    <a href="/" class="navbar-brand">
-                        <div><img alt="Pixel Admin" src="~/assets/images/pixel-admin/main-navbar-logo.png"></div>
+                        <!-- Logo -->
+                        <a href="/" class="navbar-brand">
+                            <div><img alt="Pixel Admin" src="~/assets/images/pixel-admin/main-navbar-logo.png"></div>
 
-                        ReviewMe
-                    </a>
+                            ReviewMe
+                        </a>
 
-                    <!-- Main navbar toggle -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
-                        <i class="navbar-icon fa fa-bars"></i>
-                    </button>
+                        <!-- Main navbar toggle -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
+                            <i class="navbar-icon fa fa-bars"></i>
+                        </button>
 
-                </div> <!-- / .navbar-header -->
+                    </div> <!-- / .navbar-header -->
 
-                <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
-                    <div>
-                        @* <ul class="nav navbar-nav">
+                    <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+                        <div>
+                            @* <ul class="nav navbar-nav">
                                 <li>
                                     <a href="#">Home</a>
                                 </li>
@@ -419,116 +407,116 @@
                                 </li>
                             </ul> <!-- / .navbar-nav -->*@
 
-                        <div class="right clearfix">
-                            <ul class="nav navbar-nav pull-right right-navbar-nav">
+                            <div class="right clearfix">
+                                <ul class="nav navbar-nav pull-right right-navbar-nav">
 
-                                <li class="nav-icon-btn nav-icon-btn-success dropdown" id="liNotification">
+                                    <li class="nav-icon-btn nav-icon-btn-success dropdown" id="liNotification">
 
-                                    @Html.Action("UsersNotifications", "Notification")
+                                        @Html.Action("UsersNotifications", "Notification")
 
-                                </li>
-                                <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+                                    </li>
+                                    <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
 
-                                <li class="dropdown">
-                                    @if (sessionInfo != null)
-                                    {
-                                        <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                                            @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
-                                            {
-                                                dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
-                                                if (File.Exists(path))
+                                    <li class="dropdown">
+                                        @if (sessionInfo != null)
+                                        {
+                                            <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                                                @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
                                                 {
-                                                    <img src="/ProfileImages/@sessionInfo.UserLogo" />
+                                                    dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
+                                                    if (File.Exists(path))
+                                                    {
+                                                        <img src="/ProfileImages/@sessionInfo.UserLogo" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/ProfileImages/default.jpg" />
+                                                    }
                                                 }
                                                 else
                                                 {
                                                     <img src="~/ProfileImages/default.jpg" />
                                                 }
-                                            }
-                                            else
-                                            {
-                                                <img src="~/ProfileImages/default.jpg" />
-                                            }
-                                            @*<img src="~/assets/demo/avatars/1.jpg" alt="">*@
-                                            <span>@sessionInfo.UserName</span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="../Profile/Myprofile">Profile</a></li>
-                                            @*<li><a href="javascript:void(0)">Account</a></li>*@
-                                            @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
-                                            <li class="divider"></li>
-                                            <li><a href="@(Url.ActionLink<AccountController>(controller => controller.LogOff()))"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
-                                        </ul>
-                                    }
-                                    else
+                                                @*<img src="~/assets/demo/avatars/1.jpg" alt="">*@
+                                                <span>@sessionInfo.UserName</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="../Profile/Myprofile">Profile</a></li>
+                                                @*<li><a href="javascript:void(0)">Account</a></li>*@
+                                                @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
+                                                <li class="divider"></li>
+                                                <li><a href="@(Url.ActionLink<AccountController>(controller => controller.LogOff()))"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <a href="@(Url.ActionLink<AccountController>(controller => controller.Login(null)))" class="user-menu" data-toggle=""> Login</a>
+                                        }
+                                    </li>
+                                </ul> <!-- / .navbar-nav -->
+                            </div> <!-- / .right -->
+                        </div>
+                    </div> <!-- / #main-navbar-collapse -->
+                </div> <!-- / .navbar-inner -->
+            </div> <!-- / #main-navbar -->
+            <!-- /2. $END_MAIN_NAVIGATION -->
+            <!-- 4. $MAIN_MENU =================================================================================
+
+                Main menu
+
+                Notes:
+                * to make the menu item active, add a class 'active' to the <li>
+                example: <li class="active">...</li>
+                * multilevel submenu example:
+                <li class="mm-dropdown">
+                    <a href="#"><span class="mm-text">Submenu item text 1</span></a>
+                    <ul>
+                        <li>...</li>
+                        <li class="mm-dropdown">
+                            <a href="#"><span class="mm-text">Submenu item text 2</span></a>
+                            <ul>
+                                <li>...</li>
+                                ...
+                            </ul>
+                        </li>
+                        ...
+                    </ul>
+                </li>
+                -->
+            <div id="main-menu" role="navigation">
+                <div class="slimScrollDiv" style="height: 100%; overflow: hidden; position: relative; width: auto;">
+                    <div id="main-menu-inner" style="height: 100%; overflow: hidden; width: auto;">
+                        <div class="menu-content top animated fadeIn" id="menu-content-demo">
+                            <!-- Menu custom content demo
+                                CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
+                                Javascript: html/assets/demo/demo.js
+                                -->
+                            @if (sessionInfo != null)
+                            {
+                                <div>
+
+                                    <div class="text-bg">
+                                        <span class="text-slim">Welcome,</span>
+                                        <div class="text-semibold" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%;">@sessionInfo.UserName</div>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
                                     {
-                                        <a href="@(Url.ActionLink<AccountController>(controller => controller.Login(null)))" class="user-menu" data-toggle=""> Login</a>
-                                    }
-                                </li>
-                            </ul> <!-- / .navbar-nav -->
-                        </div> <!-- / .right -->
-                    </div>
-                </div> <!-- / #main-navbar-collapse -->
-            </div> <!-- / .navbar-inner -->
-        </div> <!-- / #main-navbar -->
-        <!-- /2. $END_MAIN_NAVIGATION -->
-        <!-- 4. $MAIN_MENU =================================================================================
-
-            Main menu
-
-            Notes:
-            * to make the menu item active, add a class 'active' to the <li>
-            example: <li class="active">...</li>
-            * multilevel submenu example:
-            <li class="mm-dropdown">
-                <a href="#"><span class="mm-text">Submenu item text 1</span></a>
-                <ul>
-                    <li>...</li>
-                    <li class="mm-dropdown">
-                        <a href="#"><span class="mm-text">Submenu item text 2</span></a>
-                        <ul>
-                            <li>...</li>
-                            ...
-                        </ul>
-                    </li>
-                    ...
-                </ul>
-            </li>
-            -->
-        <div id="main-menu" role="navigation">
-            <div class="slimScrollDiv" style="height: 100%; overflow: hidden; position: relative; width: auto;">
-                <div id="main-menu-inner" style="height: 100%; overflow: hidden; width: auto;">
-                    <div class="menu-content top animated fadeIn" id="menu-content-demo">
-                        <!-- Menu custom content demo
-                        CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
-                        Javascript: html/assets/demo/demo.js
-                        -->
-                        @if (sessionInfo != null)
-                        {
-                            <div>
-
-                                <div class="text-bg">
-                                    <span class="text-slim">Welcome,</span>
-                                    <div class="text-semibold" style="width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">@sessionInfo.UserName</div>
-                                </div>
-                                @if (!string.IsNullOrEmpty(sessionInfo.UserLogo))
-                                {
-                                    dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
-                                    if (File.Exists(path))
-                                    {
-                                        <img src="/ProfileImages/@sessionInfo.UserLogo" />
+                                        dynamic path = Path.Combine(Server.MapPath("~/ProfileImages/"), sessionInfo.UserLogo);
+                                        if (File.Exists(path))
+                                        {
+                                            <img src="/ProfileImages/@sessionInfo.UserLogo" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/ProfileImages/default.jpg" />
+                                        }
                                     }
                                     else
                                     {
                                         <img src="~/ProfileImages/default.jpg" />
                                     }
-                                }
-                                else
-                                {
-                                    <img src="~/ProfileImages/default.jpg" />
-                                }
 
-                                @*
+                                    @*
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
                                         <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
@@ -536,181 +524,183 @@
                                         <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
                                     </div>
                                     <a href="#" class="close">×</a>*@
-                            </div>
-                        }
+                                </div>
+                                if (SessionManager.GetSessionInformation().UserRoleId == 1) // if role is admin
+                                {
+                                    <ul class="navigation">
+                                        <li class=" active">
+                                            <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                                <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
+                                                <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
+                                                <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
+                                        </li>
+
+                                        @*<li>
+                    <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
+                        <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                        <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                    </a>
+                </li>*@
+
+                                    </ul>
+                                    <!-- / .navigation -->
+                                }
+                                else if (SessionManager.GetSessionInformation().UserRoleId == 2) // if role is teamLeader
+                                {
+                                    <ul class="navigation">
+                                        <li class=" active">
+                                            <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                                <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
+                                                <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
+                                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            @*<a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>*@
+                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
+                                                <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                }
+
+                                else
+                                {
+                                    <ul class="navigation">
+                                        <li class=" active">
+                                            <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                                <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
+                                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                            </a>
+                                        </li>
+                                    </ul> // if role is developer
+                                }
+                            }
+                        </div>
+                   
                     </div>
-                    @if (SessionManager.GetSessionInformation().UserRoleId == 1)              // if role is admin
-                    {
-                        <ul class="navigation">
-                            <li class=" active">
-                                <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                    <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
-                                    <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
-                                    <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
-                            </li>
+                    <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 741px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
+                </div> <!-- / #main-menu-inner -->
+            </div> <!-- / #main-menu -->
+            <!-- /4. $MAIN_MENU -->
 
-                            @*<li>
-                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
-                                </a>
-                            </li>*@
+            <div id="content-wrapper">
+                @RenderBody()
+            </div> <!-- / #content-wrapper -->
+            <div id="main-menu-bg"></div>
+            <div class="container body-content">
 
-                        </ul> <!-- / .navigation -->
-                    }
-                    else if (SessionManager.GetSessionInformation().UserRoleId == 2)        // if role is teamLeader
-                    {
-                        <ul class="navigation">
-                            <li class=" active">
-                                <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                    <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
-                                    <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
-                                </a>
-                            </li>
-                            <li>
-                                @*<a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>*@
-                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
-                                    <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
-                                </a>
-                            </li>
-                        </ul>
-                    }
+                <hr />
+                <footer class="pull-right">
+                    <p>&copy; @DateTime.Now.Year - ReviewMe </p>
+                </footer>
+            </div>
 
-                    else
-                    {
-                        <ul class="navigation">
-                            <li class=" active">
-                                <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                    <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                    <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
-                                </a>
-                            </li>
-                        </ul>                                       // if role is developer
-                    }
-                </div>
-                <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 741px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-            </div> <!-- / #main-menu-inner -->
-        </div> <!-- / #main-menu -->
-        <!-- /4. $MAIN_MENU -->
-
-        <div id="content-wrapper">
-            @RenderBody()
-        </div> <!-- / #content-wrapper -->
-        <div id="main-menu-bg"></div>
-        <div class="container body-content">
-
-            <hr />
-            <footer class="pull-right">
-                <p>&copy; @DateTime.Now.Year - ReviewMe </p>
-            </footer>
         </div>
 
-    </div>
-
-    <!-- Success -->
-    <div id="uidemo-modals-alerts-success" class="modal modal-alert modal-success fade in" aria-hidden="false" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-check-circle"></i>
-                </div>
-                <div class="modal-title" id="AlertSuccessTitle"></div>
-                <div class="modal-body" id="AlertSuccessBody"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+        <!-- Success -->
+        <div id="uidemo-modals-alerts-success" class="modal modal-alert modal-success fade in" aria-hidden="false" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                    <div class="modal-title" id="AlertSuccessTitle"></div>
+                    <div class="modal-body" id="AlertSuccessBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Danger -->
-    <div id="uidemo-modals-alerts-danger" class="modal modal-alert modal-danger fade" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-times-circle"></i>
-                </div>
-                <div class="modal-title" id="AlertDangerTitle"></div>
-                <div class="modal-body" id="AlertDangerBody"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+        <!-- Danger -->
+        <div id="uidemo-modals-alerts-danger" class="modal modal-alert modal-danger fade" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-times-circle"></i>
+                    </div>
+                    <div class="modal-title" id="AlertDangerTitle"></div>
+                    <div class="modal-body" id="AlertDangerBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Warning -->
-    <div id="uidemo-modals-alerts-warning" class="modal modal-alert modal-warning fade" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-warning"></i>
-                </div>
-                <div class="modal-title" id="AlertWarningTitle"></div>
-                <div class="modal-body" id="AlertWarningTitle"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Info -->
-    <div id="uidemo-modals-alerts-info" class="modal modal-alert modal-info fade" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <i class="fa fa-info-circle"></i>
-                </div>
-                <div class="modal-title" id="AlertInfoTitle"></div>
-                <div class="modal-body" id="AlertInfoTitle"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+        <!-- Warning -->
+        <div id="uidemo-modals-alerts-warning" class="modal modal-alert modal-warning fade" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-warning"></i>
+                    </div>
+                    <div class="modal-title" id="AlertWarningTitle"></div>
+                    <div class="modal-body" id="AlertWarningTitle"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    @*<script src="~/Scripts/Custom/demo.js"></script>*@
+        <!-- Info -->
+        <div id="uidemo-modals-alerts-info" class="modal modal-alert modal-info fade" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fa fa-info-circle"></i>
+                    </div>
+                    <div class="modal-title" id="AlertInfoTitle"></div>
+                    <div class="modal-body" id="AlertInfoTitle"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</body>
+        @*<script src="~/Scripts/Custom/demo.js"></script>*@
+
+    </body>
 </html>

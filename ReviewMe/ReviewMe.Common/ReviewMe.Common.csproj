@@ -58,6 +58,7 @@
     <Compile Include="Extensions\SerializableSelectListItem.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Helpers\CalculateDateDiffrenceHelper.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\UserRoleHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

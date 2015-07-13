@@ -49,6 +49,7 @@
     <Compile Include="ProjectViewModel.cs" />
     <Compile Include="ProjectViewModelLong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResetPasswordViewModel.cs" />
     <Compile Include="ReviewDetailsViewModel.cs" />
     <Compile Include="ReviewGroupViewModel.cs" />
     <Compile Include="ReviewMapViewModel.cs" />

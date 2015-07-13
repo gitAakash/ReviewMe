@@ -16,7 +16,6 @@
         <link href="~/Content/bootstrap.css" rel="stylesheet" />
         <link href="~/Content/pixel-admin.min.css" rel="stylesheet" />
         <link href="~/Content/pages.min.css" rel="stylesheet" />
-        @* <link href="~/Content/widgets.min.css" rel="stylesheet" />*@
         <link href="~/Content/rtl.min.css" rel="stylesheet" />
         <link href="~/Content/themes.min.css" rel="stylesheet" />
         @Scripts.Render("~/bundles/modernizr")
@@ -24,15 +23,8 @@
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryval")
-        @*<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
         <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
-        <!--[if lt IE 9]>
-            <script src="assets/javascripts/ie.min.js"></script>
-        <![endif]-->
-        <!-- $DEMO =========================================================================================
-
-            Remove this section on production
-            -->
+       
         <style>
             #signin-demo {
                 background: rgba(0, 0, 0, .6);
@@ -49,9 +41,7 @@
                 height: 40px;
             }
 
-            #signin-demo img:hover {
-                opacity: .5;
-            }
+            #signin-demo img:hover { opacity: .5; }
 
             #signin-demo div {
                 color: #fff;
@@ -97,9 +87,7 @@
                 width: 100%;
             }
 
-            #demo-themes .demo-themes-row {
-                display: block;
-            }
+            #demo-themes .demo-themes-row { display: block; }
 
             #demo-themes .demo-theme {
                 color: #888;
@@ -112,9 +100,7 @@
                 width: 50%;
             }
 
-            #demo-themes .demo-theme:hover {
-                color: #fff;
-            }
+            #demo-themes .demo-theme:hover { color: #fff; }
 
             #demo-themes .theme-preview {
                 bottom: 0;
@@ -165,9 +151,7 @@
             }
 
             #demo-themes .demo-theme.active .overlay,
-            #demo-themes .demo-theme:hover .overlay {
-                left: 0;
-            }
+            #demo-themes .demo-theme:hover .overlay { left: 0; }
 
         </style>
 
@@ -197,212 +181,69 @@
             });
         </script>
 
-        <!-- Demo script -->
-        @*<script src="~/Scripts/Custom/demo.js"></script>*@ <!-- / Demo script -->
-        <!-- Page background -->
-
         <div id="page-signin-bg">
-            <!-- Background overlay -->
+        
             <div class="overlay"></div>
-            <!-- Replace this with your bg image -->
             <img src="http://infinite-woodland-5276.herokuapp.com/assets/demo/signin-bg-8.jpg" alt="" style="">
         </div>
 
-        <!-- / Page background -->
-        <!-- Container -->
-        @* <div class="signin-container">
-
-            <!-- Left side -->
-            <div class="signin-info">
-                <a href="index.html" class="logo">
-                    <img src="~/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
-                    PixelAdmin
-                </a> <!-- / .logo -->
-                <div class="slogan">
-                    Simple. Flexible. Powerful.
-                </div> <!-- / .slogan -->
-                <ul>
-                    <li><i class="fa fa-sitemap signin-icon"></i> Flexible modular structure</li>
-                    <li><i class="fa fa-file-text-o signin-icon"></i> LESS &amp; SCSS source files</li>
-                    <li><i class="fa fa-outdent signin-icon"></i> RTL direction support</li>
-                    <li><i class="fa fa-heart signin-icon"></i> Crafted with love</li>
-                </ul> <!-- / Info list -->
-            </div>
-            <!-- / Left side -->
-            <!-- Right side -->
-            <div class="signin-form">
-
-                <!-- Form -->
-                <form action="index.html" id="signin-form_id" novalidate="novalidate">
-                    <div class="signin-text">
-                        <span>Sign In to your account</span>
-                    </div> <!-- / .signin-text -->
-
-                    <div class="form-group w-icon has-error">
-                        <input type="text" name="signin_username" id="username_id" class="form-control input-lg" placeholder="Username or email">
-                        <span class="fa fa-user signin-form-icon"></span>
-                    </div> <!-- / Username -->
-
-                    <div class="form-group w-icon has-error">
-                        <input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="Password">
-                        <span class="fa fa-lock signin-form-icon"></span>
-                    </div> <!-- / Password -->
-
-                    <div class="form-actions">
-                        <input type="submit" value="SIGN IN" class="signin-btn bg-primary">
-                        <a href="#" class="forgot-password" id="forgot-password-link">Forgot your password?</a>
-                    </div> <!-- / .form-actions -->
-                </form>
-                <!-- / Form -->
-                <!-- "Sign In with" block -->
-                <div class="signin-with">
-                    <!-- Facebook -->
-                    <a href="index.html" class="signin-with-btn" style="background: #4f6faa; background: rgba(79, 111, 170, .8);">Sign In with <span>Facebook</span></a>
-                </div>
-                <!-- / "Sign In with" block -->
-                <!-- Password reset form -->
-                <div class="password-reset-form" id="password-reset-form" style="display: block;">
-                    <div class="header">
-                        <div class="signin-text">
-                            <span>Password reset</span>
-                            <div class="close">×</div>
-                        </div> <!-- / .signin-text -->
-                    </div> <!-- / .header -->
-                    <!-- Form -->
-                    <form action="index.html" id="password-reset-form_id" novalidate="novalidate">
-                        <div class="form-group w-icon has-error">
-                            <input type="text" name="password_reset_email" id="p_email_id" class="form-control input-lg" placeholder="Enter your email">
-                            <span class="fa fa-envelope signin-form-icon"></span>
-                        </div> <!-- / Email -->
-
-                        <div class="form-actions">
-                            <input type="submit" value="SEND PASSWORD RESET LINK" class="signin-btn bg-primary">
-                        </div> <!-- / .form-actions -->
-                    </form>
-                    <!-- / Form -->
-                </div>
-                <!-- / Password reset form -->
-            </div>
-            <!-- Right side -->
-        </div>*@
-
         <div class="signin-container">
-
-            <!-- Left side -->
             <div class="signin-info">
                 <a href="#" class="logo">
                     <img src="~/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
                     <strong><span style="color: red">Neo</span>Daily</strong> Reviews
-                </a> <!-- / .logo -->
+                </a> 
                 <div class="slogan">
                     <i>Write programs for people to read, and only incidentally for machines to execute :) </i>
                     <i> Happy Coding...</i>
-                </div> <!-- / .slogan -->
-               @* <ul>
+                </div>
+                @* <ul>
         <li><i class="fa fa-sitemap signin-icon"></i> Flexible modular structure</li>
         <li><i class="fa fa-file-text-o signin-icon"></i> LESS &amp; SCSS source files</li>
         <li><i class="fa fa-outdent signin-icon"></i> RTL direction support</li>
         <li><i class="fa fa-heart signin-icon"></i> Crafted with love</li>
     </ul> <!-- / Info list --> *@
             </div>
-
-            <!-- / Left side -->
-            <!-- Right side -->
             <div class="signin-form">
-
-                <!-- Form -->
                 @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post))
                 {
-                @*<form action="index.html" id="signin-form_id" novalidate="novalidate">*@
-                    @*@Html.AntiForgeryToken()*@
-    <div style="color:red">
-        @if (HttpContext.Current.Session["LOGIN_FAILED"] != null)
-        {
-        @Session["LOGIN_FAILED"].ToString()
-        Session["LOGIN_FAILED"] = null;
-        }
-    </div>
+                    <div style="color: red">
+                        @if (HttpContext.Current.Session["LOGIN_FAILED"] != null)
+                        {
+                            @Session["LOGIN_FAILED"].ToString()
+                            Session["LOGIN_FAILED"] = null;
+                        }
+                    </div>
                     <div class="signin-text">
                         <span>Sign In to your account</span>
                     </div>
-                    <!-- / .signin-text -->
 
                     <div class="form-group w-icon">
-                        @*<input type="text" name="signin_username" id="username_id" class="form-control input-lg" placeholder="Username or email">*@
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeHolder = "Username or email" })
+                        @Html.TextBoxFor(m => m.Email, new {@class = "form-control input-lg", @placeHolder = "Username or email"})
                         @Html.ValidationMessageFor(m => m.Email)
                         <span class="fa fa-user signin-form-icon"></span>
                     </div>
-                    <!-- / Username -->
-
                     <div class="form-group w-icon">
-                        @*<input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="Password">*@
-                        @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control input-lg", @placeHolder = "Password" })*@
-
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", @placeHolder = "Password" })
+                        @Html.PasswordFor(m => m.Password, new {@class = "form-control input-lg", @placeHolder = "Password"})
                         @Html.ValidationMessageFor(m => m.Password)
                         <span class="fa fa-lock signin-form-icon"></span>
                     </div>
-                    <!-- / Password -->
-
                     <div class="form-actions">
                         <input type="submit" value="SIGN IN" class="signin-btn bg-primary">
                         <a href="" class="forgot-password" id="forgot-password-link">Forgot your password?</a>
                     </div>
-                    <!-- / .form-actions -->
-            @*</form>*@
                 }
-            <!-- / Form -->
-            <!-- "Sign In with" block -->
-        @*    <div class="signin-with">
-        <!-- Facebook -->
-        <a href="index.html" class="signin-with-btn" style="background:#4f6faa;background:rgba(79, 111, 170, .8);">Sign In with <span>Facebook</span></a>
-    </div>*@
-            <!-- / "Sign In with" block -->
-            <!-- Password reset form -->
-            <div class="password-reset-form" id="password-reset-form">
-                <div class="header">
-                    <div class="signin-text">
-                        <span>Password reset</span>
-                        <div class="close">×</div>
-                    </div> <!-- / .signin-text -->
-                </div> <!-- / .header -->
-                <!-- Form -->
-                <form action="index.html" id="password-reset-form_id" novalidate="novalidate">
-                    <div class="form-group w-icon">
-                        <input type="text" name="password_reset_email" id="p_email_id" class="form-control input-lg" placeholder="Enter your email">
-                        <span class="fa fa-envelope signin-form-icon"></span>
-                    </div> <!-- / Email -->
-
-                    <div class="form-actions">
-                        <input type="submit" value="SEND PASSWORD RESET LINK" class="signin-btn btn-block bg-primary">
-                    </div> <!-- / .form-actions -->
-                </form>
-                <!-- / Form -->
-            </div>
-            <!-- / Password reset form -->
-        </div>
-        <!-- Right side -->
-    </div>
-
-    <!-- / Container -->
-
-    @*<div class="not-a-member">
-        Not a member? <a href="pages-signup.html">Sign up now</a>
-    </div>*@
-
-    <!-- Get jQuery from Google CDN -->
-    @* <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>*@
-    <!-- <![endif]-->
-    <!--[if lte IE 9]>
-        <script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">' + "<" + "/script>"); </script>
-    <![endif]-->
-    <!-- Pixel Admin's javascripts -->
-    @*    <script src="~/assets/javascripts/bootstrap.min.js"></script>
-        <script src="~/assets/javascripts/pixel-admin.min.js"></script>*@
+                <div class="password-reset-form" id="password-reset-form">
+                    @{
+                        Html.RenderAction("ForgotPassword", "Account");
                     }
-
-    <script type="text/javascript">
+                    
+                </div>
+           
+            </div>
+      
+        </div>
+        <script type="text/javascript">
             // Resize BG
             init.push(function() {
                 var $ph = $('#page-signin-bg'),
@@ -460,10 +301,10 @@
             });
 
             window.PixelAdmin.start(init);
-    </script>
+        </script>
 
-    <h5 class="header">THEMES</h5>
-    @* <div id="demo-themes">
+        <h5 class="header">THEMES</h5>
+        @* <div id="demo-themes">
             <div class="demo-themes-row">
                 <a href="#" class="demo-theme active" data-theme="default">
                     <div class="theme-preview">
@@ -534,14 +375,14 @@
         </div>*@
 
 
-    <div id="small-screen-width-point" style="background: #fff; height: 10px; position: absolute; top: -10000px; width: 10px;">
+        <div id="small-screen-width-point" style="background: #fff; height: 10px; position: absolute; top: -10000px; width: 10px;">
 
-    </div>
-    <div id="tablet-screen-width-point" style="background: #fff; height: 10px; position: absolute; top: -10000px; width: 10px;">
+        </div>
+        <div id="tablet-screen-width-point" style="background: #fff; height: 10px; position: absolute; top: -10000px; width: 10px;">
 
-    </div>
+        </div>
 
-    @* <div id="signin-demo" class="hidden-xs">
+        @* <div id="signin-demo" class="hidden-xs">
             <div>PAGE BACKGROUND</div>
             <img src="~/assets/demo/signin-bg-1.jpg">
             <img src="~/assets/demo/signin-bg-2.jpg">
@@ -553,69 +394,5 @@
             <img src="~/assets/demo/signin-bg-8.jpg">
             <img src="~/assets/demo/signin-bg-9.jpg">
         </div>*@
-</body>
+    </body>
 </html>
-
-@*@using NeoDailyReviews.Web.Models
-    @model LoginViewModel
-    @{
-        ViewBag.Title = "Log in";
-    }
-
-    <h2>@ViewBag.Title.</h2>
-    <div class="row">
-        <div class="col-md-8">
-            <section id="loginForm">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <h4>Use a local account to log in.</h4>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Log in" class="btn btn-default" />
-                        </div>
-                    </div>
-                    <p>
-                        @Html.ActionLink("Register as a new user", "Register")
-                    </p>
-                    $1$ Enable this once you have account confirmation enabled for password reset functionality
-                        <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </p>#1#
-                }
-            </section>
-        </div>
-        <div class="col-md-4">
-            <section id="socialLoginForm">
-                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-            </section>
-        </div>
-    </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
+using ReviewMe.Common.Authorization;
+using ReviewMe.Common.Enums;
 using ReviewMe.Common.Extensions;
 using ReviewMe.DataAccess;
 using ReviewMe.DataAccess.Repository;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
-using ReviewMe.Common.Authorization;
-using ReviewMe.Common.Enums;
 
 namespace ReviewMe.Bal
 {
@@ -25,7 +24,7 @@ namespace ReviewMe.Bal
                 List<User> userList = _userRepository.GetAll().Where(m => m.IsActive).ToList();
                 var userViewModelLong = new UserViewModelLong();
                 //Modified By : Ramchandra Rane, 19th June 2015, Description: Added Where condition.
-                foreach (User user in userList.Where(r=>r.Id != SessionManager.GetCurrentlyLoggedInUserId()))
+                foreach (User user in userList.Where(r => r.Id != SessionManager.GetCurrentlyLoggedInUserId()))
                 {
                     userViewModelLong.UserViewModelList.Add(new UserViewModel
                     {
@@ -120,6 +119,7 @@ namespace ReviewMe.Bal
                     CreatedOn = user.CreatedOn,
                     ModifiedOn = user.ModifiedOn,
                     IsActive = user.IsActive,
+                    ResetPassword = user.ResetPassword,
                     DropDownForRoles = roleViewModelLong.RoleViewModelList.Select(c => new SerializableSelectListItem
                     {
                         Text = c.RoleName,
@@ -132,7 +132,7 @@ namespace ReviewMe.Bal
                             Value = c.Id.ToString(CultureInfo.InvariantCulture)
                         }),
                     DropDownForTeamLeader =
-                        userViewModelLong.UserViewModelList.Select(c => new SerializableSelectListItem()
+                        userViewModelLong.UserViewModelList.Select(c => new SerializableSelectListItem
                         {
                             Text = c.FName,
                             Value = c.Id.ToString(CultureInfo.InvariantCulture)
@@ -169,12 +169,12 @@ namespace ReviewMe.Bal
                             Value = c.Id.ToString(CultureInfo.InvariantCulture)
                         }),
                     DropDownForTeamLeader =
-                        userViewModelLong.UserViewModelList.Select(c => new SerializableSelectListItem()
+                        userViewModelLong.UserViewModelList.Select(c => new SerializableSelectListItem
                         {
                             Text = c.FName,
                             Value = c.Id.ToString(CultureInfo.InvariantCulture)
                         }),
-                        Gender=true
+                    Gender = true
                 };
 
                 return userViewModel;
@@ -283,7 +283,8 @@ namespace ReviewMe.Bal
             {
                 User user = _userRepository.GetById(userViewModel.Id);
 
-                if (user != null) { 
+                if (user != null)
+                {
                     user.FName = userViewModel.FName;
                     user.LName = userViewModel.LName;
                     user.MName = userViewModel.MName;
@@ -293,7 +294,7 @@ namespace ReviewMe.Bal
                     user.MobileNo = userViewModel.MobileNo;
                     user.AlternateContactNo = userViewModel.AlternateContactNo;
                     if (userViewModel.UserImage != null)
-                    {                   
+                    {
                         user.UserImage = userViewModel.UserImage;
                     }
                     user.Address = userViewModel.Address;
@@ -310,9 +311,10 @@ namespace ReviewMe.Bal
                     User responsemodel = _userRepository.SaveOrUpdate(user);
 
                     if (responsemodel != null)
-                    return true;
-                };
-                
+                        return true;
+                }
+                ;
+
                 return false;
             }
             catch (Exception ex)
@@ -350,7 +352,8 @@ namespace ReviewMe.Bal
                     User responsemodel = _userRepository.SaveOrUpdate(user);
 
                     return responsemodel;
-                };
+                }
+                ;
 
                 return null;
             }
@@ -380,10 +383,11 @@ namespace ReviewMe.Bal
         {
             try
             {
-                List<User> lstReviewer = _userRepository.GetAll().Where(m => m.IsActive == true && (m.TeamLeaderId == id || m.Id == id)).ToList();
+                List<User> lstReviewer =
+                    _userRepository.GetAll().Where(m => m.IsActive && (m.TeamLeaderId == id || m.Id == id)).ToList();
                 return lstReviewer;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -394,13 +398,106 @@ namespace ReviewMe.Bal
         {
             try
             {
-                List<User> lstReviewer = _userRepository.GetAll().Where(m => m.IsActive == true && m.Role.RoleName != UserRoleEnum.Admin.ToString()).ToList();
+                List<User> lstReviewer =
+                    _userRepository.GetAll()
+                        .Where(m => m.IsActive && m.Role.RoleName != UserRoleEnum.Admin.ToString())
+                        .ToList();
                 return lstReviewer;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        // Get User By EmailId for ForgotPassword functionality
+        public UserViewModel GetUserByEmailId(string emailId)
+        {
+            try
+            {
+                User user = _userRepository.GetAll().FirstOrDefault(m => m.EmailId == emailId && m.IsActive);
+                var uvModel = new UserViewModel();
+                if (user != null)
+                {
+                    uvModel.Id = user.Id;
+                    uvModel.FName = user.FName;
+                    uvModel.LName = user.LName;
+                    uvModel.MName = user.MName;
+                    uvModel.Dob = user.Dob;
+                    uvModel.Gender = user.Gender;
+                    uvModel.EmailId = user.EmailId;
+                    uvModel.Password = user.Password;
+                    uvModel.MobileNo = user.MobileNo;
+                    uvModel.AlternateContactNo = user.AlternateContactNo;
+                    uvModel.UserImage = user.UserImage;
+                    uvModel.Address = user.Address;
+                    uvModel.EmployeeCode = user.EmployeeCode;
+                    uvModel.SelectedTeamLeadId = user.TeamLeaderId;
+                    uvModel.SelectedRoleId = user.RoleId;
+                    uvModel.SelectedTechnologyId = user.TechnologyId;
+                    uvModel.OnClient = user.OnClient;
+                    uvModel.OnProject = user.OnProject;
+                    uvModel.OnTask = user.OnTask;
+                    uvModel.Rating = user.Rating;
+                    uvModel.ResetPassword = user.ResetPassword;
+                    uvModel.CreatedBy = user.CreatedBy;
+                    uvModel.ModifiedBy = user.ModifiedBy;
+                    uvModel.CreatedOn = user.CreatedOn;
+                    uvModel.ModifiedOn = user.ModifiedOn;
+                    uvModel.IsActive = user.IsActive;
+                    uvModel.RoleName = user.Role.RoleName;
+                }
+
+                return uvModel;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // To update the password
+        public bool UpdatePassword(Int64 id, string password)
+        {
+            try
+            {
+                User user = _userRepository.GetById(id);
+                if (user != null)
+                {
+                    user.Password = password;
+                    user.ResetPassword = false;
+                    user.ModifiedBy = id;
+                    user.ModifiedOn = DateTime.Now;
+                    User responsemodel = _userRepository.SaveOrUpdate(user);
+                    if (responsemodel != null)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateResetPassword(Int64 id, int resetPassword)
+        {
+            try
+            {
+                User user = _userRepository.GetById(id);
+                if (user != null)
+                {
+                    user.ResetPassword = Convert.ToBoolean(resetPassword);
+                    User responsemodel = _userRepository.SaveOrUpdate(user);
+                    if (responsemodel != null)
+                        return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
         }
     }
 }

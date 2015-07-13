@@ -7,13 +7,13 @@ namespace ReviewMe.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class First : IMigrationMetadata
+    public sealed partial class UserResertPassword : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(First));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UserResertPassword));
         
         string IMigrationMetadata.Id
         {
-            get { return "201506300658006_First"; }
+            get { return "201507110539392_UserResertPassword"; }
         }
         
         string IMigrationMetadata.Source

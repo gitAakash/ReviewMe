@@ -36,6 +36,7 @@ namespace ReviewMe.Model
         public bool OnClient { get; set; }
         public bool OnProject { get; set; }
         public bool OnTask { get; set; }
+        public bool ResetPassword { get; set; }
         public double Rating { get; set; }
 
         [ForeignKey("TeamLeaderId")]

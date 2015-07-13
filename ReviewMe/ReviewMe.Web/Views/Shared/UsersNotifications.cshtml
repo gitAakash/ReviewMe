@@ -21,9 +21,9 @@
     </script>
 
     <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
-        <div class="slimScrollDiv" style="height: 250px; overflow: hidden; position: relative; width: auto;">
-            <div class="messages-list" id="main-navbar-messages" style="height: 250px; overflow-y: scroll; width: auto;">
-                @if (Model.Count() > 0)
+        <div class="slimScrollDiv" style="max-height: 250px; overflow: hidden; position: relative; width: auto;">
+            <div class="messages-list" id="main-navbar-messages" style="max-height: 250px; width: auto;">
+                @if (Model.Any())
                 {
                     foreach (var item in Model)
                     {
@@ -56,16 +56,21 @@
                                 }
                             </a>
                             <div class="message-description">
-                                @*from <a href="#">Robert Jang</a>
-                                    &nbsp;&nbsp;·&nbsp;&nbsp;*@
-                                @*2h ago*@
                                 @CalculateDateDiffrenceHelper.DifferenceBetTwoDates(item.CreatedOn, System.DateTime.Now)
                             </div>
-                        </div> <!-- / .message -->
+                        </div>
+                        <!-- / .message -->
                     }
+                }
+                else
+                { <div class="message">
+                      <div class="message-description messages-link">
+                          All Caught Up!!!
+                      </div>
+                </div>
                 }
             </div>
             <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 109.841827768014px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-        </div> <!-- / .messages-list -->
-        <a href="@(Url.ActionLink<NotificationController>(controller => controller.Index()))" class="messages-link">MORE MESSAGES</a>
-    </div> <!-- / .dropdown-menu -->
+        </div> 
+        <a href="@(Url.ActionLink<NotificationController>(controller => controller.Index()))" class="messages-link">All MESSAGES</a>
+    </div> 

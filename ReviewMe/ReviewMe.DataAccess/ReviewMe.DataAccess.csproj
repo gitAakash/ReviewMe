@@ -50,13 +50,13 @@
     <Compile Include="EntityContext.cs" />
     <Compile Include="EntityContextInitializer.cs" />
     <Compile Include="IEntityContext.cs" />
-    <Compile Include="Migrations\201506300658006_First.cs" />
-    <Compile Include="Migrations\201506300658006_First.Designer.cs">
-      <DependentUpon>201506300658006_First.cs</DependentUpon>
+    <Compile Include="Migrations\201507110525516_InitialCreate.cs" />
+    <Compile Include="Migrations\201507110525516_InitialCreate.Designer.cs">
+      <DependentUpon>201507110525516_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201507011027027_ReviewDetailsClass.cs" />
-    <Compile Include="Migrations\201507011027027_ReviewDetailsClass.Designer.cs">
-      <DependentUpon>201507011027027_ReviewDetailsClass.cs</DependentUpon>
+    <Compile Include="Migrations\201507110539392_UserResertPassword.cs" />
+    <Compile Include="Migrations\201507110539392_UserResertPassword.Designer.cs">
+      <DependentUpon>201507110539392_UserResertPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,11 +74,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506300658006_First.resx">
-      <DependentUpon>201506300658006_First.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201507110525516_InitialCreate.resx">
+      <DependentUpon>201507110525516_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507011027027_ReviewDetailsClass.resx">
-      <DependentUpon>201507011027027_ReviewDetailsClass.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201507110539392_UserResertPassword.resx">
+      <DependentUpon>201507110539392_UserResertPassword.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

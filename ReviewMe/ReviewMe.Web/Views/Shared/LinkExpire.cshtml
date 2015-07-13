@@ -1,7 +1,7 @@
 ﻿@model HandleErrorInfo
 
 @{
-    ViewBag.Title = "ReviewME - Error ";
+    ViewBag.Title = "Reset Password - Link Expire";
     Layout = null;
 }
 <html class="gt-ie8 gt-ie9 not-ie pxajs">
@@ -9,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Error 500 - Page - ReviewME</title>
+        <title>Reset Password - Link Expire</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
         <!-- Open Sans font from Google CDN -->
@@ -20,7 +20,6 @@
         <link href="~/Content/pixel-admin.min.css" rel="stylesheet" />
         <link href="~/Content/pages.min.css" rel="stylesheet" />
         <link href="~/Content/rtl.min.css" rel="stylesheet" />
-
 
         <style type="text/css">
             .jqstooltip {
@@ -49,7 +48,7 @@
         </style>
     </head>
 
-    <body class="page-500" style="">
+    <body class="page-404" style="">
 
         <script> var init = []; </script>
 
@@ -57,23 +56,27 @@
             <a href="index.html" class="logo">
                 <div class="demo-logo"><img src="assets/demo/logo-big.png" alt="" style="margin-top: -4px;"></div>&nbsp;
                 <strong>Review</strong>ME
-            </a>
-        </div>
+            </a> 
+        </div> 
 
-        <div class="error-code">500</div>
+        <div class="error-code">403</div>
 
         <div class="error-text">
             <span class="oops">OOPS!</span><br>
             <span class="hr"></span>
             <br>
-            SOMETHING IS NOT QUITE RIGHT
+            THIS LINK HAS EXPIRED !!!
             <br>
-            <span class="solve">We hope to solve it shortly</span>
-        </div>
+            <span class="solve">Click <a href="@(Url.Action("Login", "Account"))">here</a> to go back to login.</span>
+        </div> <!-- / .error-text -->
 
+       @* <form action="" class="search-form">
+            <input type="text" class="search-input" name="s">
+            <input type="submit" value="SEARCH" class="search-btn">
+        </form> *@
         <script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">' + "<" + "/script>"); </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
+    
         <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Scripts/Custom/pixel-admin.min.js"></script>
 
