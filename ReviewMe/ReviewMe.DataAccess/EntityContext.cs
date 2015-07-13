@@ -17,7 +17,7 @@ namespace ReviewMe.DataAccess
        public EntityContext() : base("Name=NeoDailyReviewsContext")
         {
            // Database.SetInitializer(new EntityContextInitializer()<EntityContext>());
-            Database.SetInitializer<EntityContext>(new MigrateDatabaseToLatestVersion<EntityContext, DataAccess.Migrations.Configuration>());
+           // Database.SetInitializer<EntityContext>(new MigrateDatabaseToLatestVersion<EntityContext, DataAccess.Migrations.Configuration>());
         }
        
         #region IQueryable
