@@ -27,27 +27,29 @@ namespace ReviewMe.Bal
             try
             {
                 List<User> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
-
-                var reviewMapViewModel = new ReviewMapViewModel()
+                if (userList != null)
                 {
-                    DropDownForReviewer = userList.Select(p => new SerializableSelectListItem()
+                    var reviewMapViewModel = new ReviewMapViewModel()
                     {
-                        Text = p.FName,
-                        Value = p.Id.ToString(CultureInfo.InvariantCulture)
-                    }),
-                    DropDownForReviewee = userList.Select(p => new SerializableSelectListItem()
-                    {
-                        Text = p.FName,
-                        Value = p.Id.ToString(CultureInfo.InvariantCulture)
-                    })
-                };
-
-                return reviewMapViewModel;
+                        DropDownForReviewer = userList.Select(p => new SerializableSelectListItem()
+                        {
+                            Text = p.FName,
+                            Value = p.Id.ToString(CultureInfo.InvariantCulture)
+                        }),
+                        DropDownForReviewee = userList.Select(p => new SerializableSelectListItem()
+                        {
+                            Text = p.FName,
+                            Value = p.Id.ToString(CultureInfo.InvariantCulture)
+                        })
+                    };
+                    return reviewMapViewModel;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Get Reviewee List
@@ -57,57 +59,66 @@ namespace ReviewMe.Bal
             {
                 List<User> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
                 List<Int64> lstDevelopers = new ReviewMapBal().GetAlreadyReviewedList();
-
-                // Create
-                if (IsEdit == "2")
+                if (userList != null)
                 {
-                    var reviewMapViewModel = new ReviewMapViewModel()
+                    // Create
+                    if (IsEdit == "2")
                     {
-                        DropDownForReviewee = userList.Where(p => p.Id != ReviewerId && !lstDevelopers.Contains(p.Id)).Select(p => new SerializableSelectListItem()
+                        var reviewMapViewModel = new ReviewMapViewModel()
                         {
-                            Text = p.FName,
-                            Value = p.Id.ToString(CultureInfo.InvariantCulture)
-                        })
-                    };
+                            DropDownForReviewee =
+                                userList.Where(p => p.Id != ReviewerId && !lstDevelopers.Contains(p.Id))
+                                    .Select(p => new SerializableSelectListItem()
+                                    {
+                                        Text = p.FName,
+                                        Value = p.Id.ToString(CultureInfo.InvariantCulture)
+                                    })
+                        };
 
-                    return reviewMapViewModel;
-                }
-                else // Edit
-                {
-                    List<Int64> lstReviewee = _reviewMapRepository.GetAll().Where(p => p.ReviewerId == ReviewerId && p.IsActive == true).Select(r => r.DevloperId).ToList();
-
-                    // Get list of all the users who are not yet assigned any Reviewer
-                    List<Int64> alreadyAssignedList = _reviewMapRepository.GetAll().Where(p => p.IsActive == true).Select(q => q.DevloperId).ToList();
-
-                    List<User> lstAllUsers = new UserBal().GetListOfUsersExceptAdmin();
-                    foreach (User rec in lstAllUsers)
-                    {
-                        if (!alreadyAssignedList.Contains(rec.Id))
-                        {
-                            lstReviewee.Add(rec.Id);
-                        }
+                        return reviewMapViewModel;
                     }
-
-                    var reviewMapViewModel = new ReviewMapViewModel()
+                    else // Edit
                     {
-                        DropDownForReviewer = null,
-                        ReviewerId = ReviewerId,
-                        DropDownForReviewee = userList.Where(r => lstReviewee.Contains(r.Id)).Select(p => new SerializableSelectListItem()
+                        List<Int64> lstReviewee =
+                            _reviewMapRepository.GetAll()
+                                .Where(p => p.ReviewerId == ReviewerId && p.IsActive == true)
+                                .Select(r => r.DevloperId)
+                                .ToList();
+
+                        // Get list of all the users who are not yet assigned any Reviewer
+                        List<Int64> alreadyAssignedList =
+                            _reviewMapRepository.GetAll().Where(p => p.IsActive == true).Select(q => q.DevloperId).ToList();
+
+                        List<User> lstAllUsers = new UserBal().GetListOfUsersExceptAdmin();
+                        foreach (User rec in lstAllUsers)
                         {
-                            Text = p.FName,
-                            Value = p.Id.ToString(CultureInfo.InvariantCulture)
-                        })
-                    };
+                            if (!alreadyAssignedList.Contains(rec.Id))
+                            {
+                                lstReviewee.Add(rec.Id);
+                            }
+                        }
 
-                    return reviewMapViewModel;
+                        var reviewMapViewModel = new ReviewMapViewModel()
+                        {
+                            DropDownForReviewer = null,
+                            ReviewerId = ReviewerId,
+                            DropDownForReviewee =
+                                userList.Where(r => lstReviewee.Contains(r.Id)).Select(p => new SerializableSelectListItem()
+                                {
+                                    Text = p.FName,
+                                    Value = p.Id.ToString(CultureInfo.InvariantCulture)
+                                })
+                        };
+
+                        return reviewMapViewModel;
+                    }
                 }
-
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Get all ReviewMaps
@@ -147,25 +158,27 @@ namespace ReviewMe.Bal
             try
             {
                 ReviewMap reviewMap = _reviewMapRepository.GetById(id);
-
-                var reviewMapModel = new ReviewMapViewModel
+                if (reviewMap != null)
                 {
-                    Id = reviewMap.Id,
-                    ReviewerId = reviewMap.ReviewerId,
-                    DevloperId = reviewMap.DevloperId,
-                    CreatedBy = reviewMap.CreatedBy,
-                    ModifiedBy = reviewMap.ModifiedBy,
-                    CreatedOn = reviewMap.CreatedOn,
-                    ModifiedOn = reviewMap.ModifiedOn,
-                    IsActive = reviewMap.IsActive
-                };
-
-                return reviewMapModel;
+                    var reviewMapModel = new ReviewMapViewModel
+                    {
+                        Id = reviewMap.Id,
+                        ReviewerId = reviewMap.ReviewerId,
+                        DevloperId = reviewMap.DevloperId,
+                        CreatedBy = reviewMap.CreatedBy,
+                        ModifiedBy = reviewMap.ModifiedBy,
+                        CreatedOn = reviewMap.CreatedOn,
+                        ModifiedOn = reviewMap.ModifiedOn,
+                        IsActive = reviewMap.IsActive
+                    };
+                    return reviewMapModel;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Get By ReviewerId
@@ -174,25 +187,27 @@ namespace ReviewMe.Bal
             try
             {
                 ReviewMap reviewMap = _reviewMapRepository.GetAll().FirstOrDefault(a => a.ReviewerId == id);
-
-                var reviewMapModel = new ReviewMapViewModel
+                if (reviewMap != null)
                 {
-                    Id = reviewMap.Id,
-                    ReviewerId = reviewMap.ReviewerId,
-                    DevloperId = reviewMap.DevloperId,
-                    CreatedBy = reviewMap.CreatedBy,
-                    ModifiedBy = reviewMap.ModifiedBy,
-                    CreatedOn = reviewMap.CreatedOn,
-                    ModifiedOn = reviewMap.ModifiedOn,
-                    IsActive = reviewMap.IsActive
-                };
-
-                return reviewMapModel;
+                    var reviewMapModel = new ReviewMapViewModel
+                    {
+                        Id = reviewMap.Id,
+                        ReviewerId = reviewMap.ReviewerId,
+                        DevloperId = reviewMap.DevloperId,
+                        CreatedBy = reviewMap.CreatedBy,
+                        ModifiedBy = reviewMap.ModifiedBy,
+                        CreatedOn = reviewMap.CreatedOn,
+                        ModifiedOn = reviewMap.ModifiedOn,
+                        IsActive = reviewMap.IsActive
+                    };
+                    return reviewMapModel;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         public List<ReviewMapViewModel> GetRevieweeByReviewerId(long id)
@@ -241,26 +256,7 @@ namespace ReviewMe.Bal
                     ReviewMap responseModel = _reviewMapRepository.Add(reviewMapModel);
                     _reviewMapRepository.SaveChanges();
                 }
-
                 return true;
-
-                //var reviewMapModel1 = new ReviewMap
-                //{
-                //    Id = reviewMapViewModel.Id,
-                //    ReviewerId = reviewMapViewModel.ReviewerId,
-                //    DevloperId = reviewMapViewModel.DevloperId,
-                //    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
-                //    CreatedOn = DateTime.Now,
-                //    //ModifiedBy = 1,
-                //    //ModifiedOn = DateTime.Now,
-                //    IsActive = true
-                //};
-                //ReviewMap responseModel1 = _reviewMapRepository.Add(reviewMapModel1);
-                //_reviewMapRepository.SaveChanges();
-
-                //if (responseModel1 != null)
-                //    return true;
-                //return false;
             }
             catch (Exception ex)
             {
@@ -305,7 +301,6 @@ namespace ReviewMe.Bal
                         _reviewMapRepository.SaveChanges();
                     }
                 }
-
                 return true;
             }
             catch (Exception ex)
@@ -347,12 +342,16 @@ namespace ReviewMe.Bal
             try
             {
                 List<Int64> lstReviewer = _reviewMapRepository.GetAll().Where(m => m.IsActive == true).Select(p => p.DevloperId).ToList();
-                return lstReviewer;
+                if (lstReviewer != null)
+                {
+                    return lstReviewer;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         // Get ReviewGroup Details
@@ -531,34 +530,16 @@ namespace ReviewMe.Bal
                     RevieweeId = reviewDetailsViewModel.RevieweeId,
                     ReviewerId = reviewDetailsViewModel.ReviewerId,
                     ReviewDate = reviewDetailsViewModel.ReviewDate,
-                    CodeOptimizationRating=reviewDetailsViewModel.CodeOptimizationRating,
-                    CodingStandardRating=reviewDetailsViewModel.CodingStandardRating,
-                    ProjectArchitecture=reviewDetailsViewModel.ProjectArchitecture,
-                    QueryOptimizationRating=reviewDetailsViewModel.QueryOptimizationRating,
+                    CodeOptimizationRating = reviewDetailsViewModel.CodeOptimizationRating,
+                    CodingStandardRating = reviewDetailsViewModel.CodingStandardRating,
+                    ProjectArchitecture = reviewDetailsViewModel.ProjectArchitecture,
+                    QueryOptimizationRating = reviewDetailsViewModel.QueryOptimizationRating,
                     IsActive = true
                 };
 
                 ReviewDetails responseModel = _reviewDetailsRepository.Add(model);
                 _reviewMapRepository.SaveChanges();
                 return true;
-
-                //var reviewMapModel1 = new ReviewMap
-                //{
-                //    Id = reviewMapViewModel.Id,
-                //    ReviewerId = reviewMapViewModel.ReviewerId,
-                //    DevloperId = reviewMapViewModel.DevloperId,
-                //    CreatedBy = SessionManager.GetCurrentlyLoggedInUserId(),
-                //    CreatedOn = DateTime.Now,
-                //    //ModifiedBy = 1,
-                //    //ModifiedOn = DateTime.Now,
-                //    IsActive = true
-                //};
-                //ReviewMap responseModel1 = _reviewMapRepository.Add(reviewMapModel1);
-                //_reviewMapRepository.SaveChanges();
-
-                //if (responseModel1 != null)
-                //    return true;
-                //return false;
             }
             catch (Exception ex)
             {
@@ -619,7 +600,7 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
-        
+
         /// <summary>
         ///  Added By : Ramchandra Rane
         /// </summary>
@@ -633,13 +614,13 @@ namespace ReviewMe.Bal
 
                 var reviewDetailsViewModel = new ReviewDetailsViewModel();
 
-                if (reviewDetails!=null)
+                if (reviewDetails != null)
                 {
                     reviewDetailsViewModel.Id = reviewDetails.Id;
                     reviewDetailsViewModel.Comment = reviewDetails.Comment;
                     reviewDetailsViewModel.Title = reviewDetails.Title;
                     reviewDetailsViewModel.ReviewDateString = reviewDetails.ReviewDate.ToShortDateString();
-                    reviewDetailsViewModel.ReviewerName = _UserRepository.GetAll().SingleOrDefault(r => r.Id == reviewDetails.CreatedBy).FName +" "+_UserRepository.GetAll().SingleOrDefault(r => r.Id == reviewDetails.CreatedBy).LName;
+                    reviewDetailsViewModel.ReviewerName = _UserRepository.GetAll().SingleOrDefault(r => r.Id == reviewDetails.CreatedBy).FName + " " + _UserRepository.GetAll().SingleOrDefault(r => r.Id == reviewDetails.CreatedBy).LName;
 
                     reviewDetailsViewModel.CodeOptimizationRating = reviewDetails.CodeOptimizationRating;
                     reviewDetailsViewModel.CodingStandardRating = reviewDetails.CodingStandardRating;

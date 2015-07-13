@@ -17,24 +17,32 @@ namespace ReviewMe.Bal
         {
             try { 
             List<ReviewSetting> reviewSettingList = _reviewSettingRepository.GetAll();
-            return reviewSettingList;
+                if (reviewSettingList != null)
+                {
+                    return reviewSettingList;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         public ReviewSetting GetReviewSettingById(long id)
         {
             try { 
             ReviewSetting reviewSetting = _reviewSettingRepository.GetById(id);
-            return reviewSetting;
+                if (reviewSetting != null)
+                {
+                    return reviewSetting;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         public bool AddReviewSetting(ReviewSetting reviewSetting)
@@ -58,12 +66,16 @@ namespace ReviewMe.Bal
             try 
             { 
             ReviewSetting entity = _reviewSettingRepository.SaveOrUpdate(reviewSetting);
-            return entity;
+                if (entity != null)
+                {
+                    return entity;
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return null;
         }
 
         public bool DeleteReviewSetting(long id)
