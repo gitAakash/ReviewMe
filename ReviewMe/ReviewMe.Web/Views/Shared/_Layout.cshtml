@@ -362,12 +362,6 @@
         </script>
 
         <div id="main-wrapper">
-
-
-            <!-- 2. $MAIN_NAVIGATION ===========================================================================
-
-                Main navigation
-                -->
             <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
                 <!-- Main menu toggle -->
                 <button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
@@ -415,8 +409,7 @@
                                         @Html.Action("UsersNotifications", "Notification")
 
                                     </li>
-                                    <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
-
+                                 
                                     <li class="dropdown">
                                         @if (sessionInfo != null)
                                         {
@@ -437,13 +430,11 @@
                                                 {
                                                     <img src="~/ProfileImages/default.jpg" />
                                                 }
-                                                @*<img src="~/assets/demo/avatars/1.jpg" alt="">*@
+                                              
                                                 <span>@sessionInfo.UserName</span>
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="../Profile/Myprofile">Profile</a></li>
-                                                @*<li><a href="javascript:void(0)">Account</a></li>*@
-                                                @* <li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>*@
                                                 <li class="divider"></li>
                                                 <li><a href="@(Url.ActionLink<AccountController>(controller => controller.LogOff()))"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
                                             </ul>
@@ -453,44 +444,17 @@
                                             <a href="@(Url.ActionLink<AccountController>(controller => controller.Login(null)))" class="user-menu" data-toggle=""> Login</a>
                                         }
                                     </li>
-                                </ul> <!-- / .navbar-nav -->
-                            </div> <!-- / .right -->
+                                </ul> 
+                            </div>
                         </div>
-                    </div> <!-- / #main-navbar-collapse -->
-                </div> <!-- / .navbar-inner -->
-            </div> <!-- / #main-navbar -->
-            <!-- /2. $END_MAIN_NAVIGATION -->
-            <!-- 4. $MAIN_MENU =================================================================================
-
-                Main menu
-
-                Notes:
-                * to make the menu item active, add a class 'active' to the <li>
-                example: <li class="active">...</li>
-                * multilevel submenu example:
-                <li class="mm-dropdown">
-                    <a href="#"><span class="mm-text">Submenu item text 1</span></a>
-                    <ul>
-                        <li>...</li>
-                        <li class="mm-dropdown">
-                            <a href="#"><span class="mm-text">Submenu item text 2</span></a>
-                            <ul>
-                                <li>...</li>
-                                ...
-                            </ul>
-                        </li>
-                        ...
-                    </ul>
-                </li>
-                -->
+                    </div> 
+                </div> 
+            </div>
+           
             <div id="main-menu" role="navigation">
                 <div class="slimScrollDiv" style="height: 100%; overflow: hidden; position: relative; width: auto;">
                     <div id="main-menu-inner" style="height: 100%; overflow: hidden; width: auto;">
                         <div class="menu-content top animated fadeIn" id="menu-content-demo">
-                            <!-- Menu custom content demo
-                                CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
-                                Javascript: html/assets/demo/demo.js
-                                -->
                             @if (sessionInfo != null)
                             {
                                 <div>
@@ -516,115 +480,93 @@
                                         <img src="~/ProfileImages/default.jpg" />
                                     }
 
-                                    @*
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
-                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
-                                        <a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
-                                        <a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
-                                    </div>
-                                    <a href="#" class="close">×</a>*@
                                 </div>
-                                if (SessionManager.GetSessionInformation().UserRoleId == 1) // if role is admin
-                                {
-                                    <ul class="navigation">
-                                        <li class=" active">
-                                            <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                                <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
-                                                <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
-                                                <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
-                                        </li>
-
-                                        @*<li>
-                    <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                        <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                        <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
-                    </a>
-                </li>*@
-
-                                    </ul>
-                                    <!-- / .navigation -->
-                                }
-                                else if (SessionManager.GetSessionInformation().UserRoleId == 2) // if role is teamLeader
-                                {
-                                    <ul class="navigation">
-                                        <li class=" active">
-                                            <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                                <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
-                                                <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            @*<a href="@(Url.ActionLink<ReviewController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Reviews</span></a>*@
-                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
-                                                <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                }
-
-                                else
-                                {
-                                    <ul class="navigation">
-                                        <li class=" active">
-                                            <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                                <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                                <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
-                                            </a>
-                                        </li>
-                                    </ul> // if role is developer
-                                }
                             }
                         </div>
-                   
+                        @if (SessionManager.GetSessionInformation() != null)
+                        {
+                            if (SessionManager.GetSessionInformation().UserRoleId == 1) // if role is admin
+                            {
+                                <ul class="navigation">
+                                    <li class=" active">
+                                        <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                            <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
+                                            <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
+                                            <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
+                                    </li>
+                                </ul>
+                            }
+                            else if (SessionManager.GetSessionInformation().UserRoleId == 2) // if role is teamLeader
+                            {
+                                <ul class="navigation">
+                                    <li class=" active">
+                                        <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                            <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
+                                            <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
+                                            <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                                            <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
+                                            <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+
+                            else
+                            {
+                                <ul class="navigation">
+                                    <li class=" active">
+                                        <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
+                                            <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
+                                            <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
+                                            <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        }
                     </div>
                     <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 741px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-                </div> <!-- / #main-menu-inner -->
-            </div> <!-- / #main-menu -->
-            <!-- /4. $MAIN_MENU -->
-
+                </div> 
+            </div> 
             <div id="content-wrapper">
                 @RenderBody()
-            </div> <!-- / #content-wrapper -->
+            </div> 
             <div id="main-menu-bg"></div>
             <div class="container body-content">
 
@@ -699,8 +641,5 @@
                 </div>
             </div>
         </div>
-
-        @*<script src="~/Scripts/Custom/demo.js"></script>*@
-
     </body>
 </html>
