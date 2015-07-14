@@ -129,8 +129,10 @@ namespace ReviewMe.Web.Controllers
             long reviewerId = SessionManager.GetCurrentlyLoggedInUserId();
             DateTime RevieweeDate = Convert.ToDateTime(revieweeDate);
             RevieweeDate = RevieweeDate.AddDays(1);
-            DateTime startDate = new DateTime(RevieweeDate.Year, RevieweeDate.Month, 1);
-            DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+            //DateTime startDate = new DateTime(RevieweeDate.Year, RevieweeDate.Month, 1);
+            DateTime startDate = new DateTime(2001, 1, 1);
+            //DateTime endDate = startDate.AddMonths(1).AddDays(-1);
+            DateTime endDate = DateTime.Now;
             ReviewDetailsViewModel reviewDetailsViewModel = new ReviewMapBal().GetReviewDetailsByRevieweeId(revieweeId, reviewerId, startDate, endDate);
             return Json(new { status = "S", Result = reviewDetailsViewModel.ReviewDetailsViewModelList }, JsonRequestBehavior.AllowGet);
         }

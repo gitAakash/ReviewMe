@@ -180,7 +180,5 @@ namespace ReviewMe.Bal
                 throw ex;
             }
         }
-
-
     }
 }

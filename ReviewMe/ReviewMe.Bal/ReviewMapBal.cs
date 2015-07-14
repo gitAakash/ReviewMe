@@ -638,5 +638,33 @@ namespace ReviewMe.Bal
         }
 
 
+        public List<ReviewDetailsViewModel> GetReviewDetailsByUserId(long id, DateTime startDate, DateTime endDate)     // modified added startTime and endTime as parameter
+        {
+            var reviewDetailsModel = new List<ReviewDetailsViewModel>();
+            try
+            {
+                var reviewDetails =
+                    _reviewDetailsRepository.GetAll().Where(m => m.RevieweeId == id && m.IsActive == true && m.ReviewDate >= startDate && m.ReviewDate <= endDate).ToList();
+                if (reviewDetails.Any())
+                {
+                    foreach (var item in reviewDetails)
+                    {
+                        var model = new ReviewDetailsViewModel();
+                        model.RevieweeId = item.RevieweeId;
+                        model.CodingStandardRating = item.CodingStandardRating;
+                        model.ProjectArchitecture = item.ProjectArchitecture;
+                        model.CodeOptimizationRating = item.CodeOptimizationRating;
+                        model.QueryOptimizationRating = item.QueryOptimizationRating;
+                        model.ReviewOn = item.ReviewDate.ToString("yyyy-MM-dd");
+                        reviewDetailsModel.Add(model);
+                    }
+                    return reviewDetailsModel;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return (reviewDetailsModel);
+        }
     }
 }

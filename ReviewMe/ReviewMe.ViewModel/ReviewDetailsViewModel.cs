@@ -36,5 +36,8 @@ namespace ReviewMe.ViewModel
         public string ReviewerName { get; set; }
         //Added By : Ramchandra Rane, 23rd June 2015
         public List<ReviewDetailsViewModel> ReviewDetailsViewModelList { get; set; }
+
+        //For showing only date on Dashboard ReviewStat
+        public string ReviewOn { get; set; }
     }
 }
