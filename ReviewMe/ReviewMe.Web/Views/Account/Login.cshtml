@@ -1,4 +1,5 @@
-﻿@model ReviewMe.Web.Models.LoginViewModel
+﻿@using ReviewMe.Web.Models
+@model ReviewMe.Web.Models.LoginViewModel
 @{
     Layout = null;
 }
@@ -236,7 +237,7 @@
                 }
                 <div class="password-reset-form" id="password-reset-form">
                     @{
-                        Html.RenderAction("ForgotPassword", "Account");
+                        Html.RenderPartial("ForgotPassword", new ForgotPasswordViewModel());
                     }
                     
                 </div>
