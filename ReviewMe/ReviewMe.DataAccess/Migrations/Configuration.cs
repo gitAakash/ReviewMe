@@ -18,7 +18,7 @@ namespace ReviewMe.DataAccess.Migrations
             var roles = new List<Role>
             {
                 new Role {RoleName = "Admin", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true},
-                new Role {RoleName = "Team Leader", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true},
+                new Role {RoleName = "TeamLeader", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true},
                 new Role {RoleName = "Developer", CreatedBy = 1, CreatedOn = DateTime.Now, IsActive = true}
             };
             roles.ForEach(role => context.Roles.Add(role));
