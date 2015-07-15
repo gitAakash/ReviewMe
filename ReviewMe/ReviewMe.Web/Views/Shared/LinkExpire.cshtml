@@ -53,27 +53,25 @@
         <script> var init = []; </script>
 
         <div class="header">
-            <a href="index.html" class="logo">
-                <div class="demo-logo"><img src="assets/demo/logo-big.png" alt="" style="margin-top: -4px;"></div>&nbsp;
+            <a href="@(Url.Action("Index", "Home"))" class="logo">
+                <div class="demo-logo" style="background : none !important;">
+                    <h1><strong>n</strong>eo<span style="color: red">S</span>oft</h1>@*<img src="assets/demo/logo-big.png" alt="" style="margin-top: -4px;">*@
+                </div>&nbsp;
                 <strong>Review</strong>ME
-            </a> 
-        </div> 
+            </a> <!-- / .logo -->
+        </div> <!-- / .header --> 
 
         <div class="error-code">403</div>
 
         <div class="error-text">
-            <span class="oops">OOPS!</span><br>
+            <span class="oops">Oops!</span><br>
             <span class="hr"></span>
             <br>
             THIS LINK HAS EXPIRED !!!
             <br>
             <span class="solve">Click <a href="@(Url.Action("Login", "Account"))">here</a> to go back to login.</span>
         </div> <!-- / .error-text -->
-
-       @* <form action="" class="search-form">
-            <input type="text" class="search-input" name="s">
-            <input type="submit" value="SEARCH" class="search-btn">
-        </form> *@
+       
         <script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js">' + "<" + "/script>"); </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     

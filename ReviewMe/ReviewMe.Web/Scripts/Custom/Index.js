@@ -1,6 +1,5 @@
-﻿$(function () {
-    //$('#usersList').hide();
-    $('#ddlusersList').append($('<option value="0">--Select--</option>'));
+﻿$(function () {   
+    $('#ddlusersList').append($('<option value="0" selected="selected">--Select--</option>'));
     $('#technology').append($('<option value="0" selected="selected">--Select--</option>'));
     $('#technology').change(function () {
         var techId = $('#technology').val();
@@ -30,7 +29,11 @@ $(function() {
             data: { month: $('#month').val(), year: $('#year').val(), id: $('#ddlusersList').val() },
             success: function (data) {
                 $('#line-chart').empty();
-                BindLineChart(data);
+                if (data.reviewDetails.length != 0) {
+                    BindLineChart(data);
+                } else {
+                    $('#line-chart').append('<h3>No Records Available..!!!</h3>');
+                }
             },
             error: function (data) {
 
@@ -98,8 +101,9 @@ function BindLineChart(data) {
                 $('#line-chart').empty();
                 if (data.reviewDetails.length != 0) {
                     BindLineChart(data);
+                } else {
+                    $('#line-chart').append('<h3>No Records Available..!!!</h3>');
                 }
-                $('#line-chart').append('<h3>No Records Available..!!!</h3>');
             },
             error: function (data) {
 
