@@ -29,6 +29,15 @@ namespace ReviewMe.Web.Controllers
                                Value = c.Id.ToString(),
                             }).ToList();
 
+            var TeamMembers = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
+
+            ViewBag.TeamList = TeamMembers.ToList().Select(c => new SelectListItem
+            {
+                Text = c.FName + " " + c.LName,
+                Value = c.Id.ToString()
+            }).ToList();
+            
+
          return View();   
         }
 

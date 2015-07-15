@@ -26,7 +26,7 @@ namespace ReviewMe.Bal
         {
             try
             {
-                List<User> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
+                List<UserViewModel> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
                 if (userList != null)
                 {
                     var reviewMapViewModel = new ReviewMapViewModel()
@@ -57,7 +57,7 @@ namespace ReviewMe.Bal
         {
             try
             {
-                List<User> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
+                List<UserViewModel> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
                 List<Int64> lstDevelopers = new ReviewMapBal().GetAlreadyReviewedList();
                 if (userList != null)
                 {
@@ -424,7 +424,7 @@ namespace ReviewMe.Bal
                     }
                 }
 
-                List<User> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
+                List<UserViewModel> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
 
                 var reviewMapViewModel = new ReviewMapViewModel()
                 {

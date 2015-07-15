@@ -48,6 +48,7 @@ namespace ReviewMe.Bal
                         OnProject = user.OnProject,
                         OnTask = user.OnTask,
                         Rating = user.Rating,
+                        ResetPassword = user.ResetPassword,
                         CreatedBy = user.CreatedBy,
                         ModifiedBy = user.ModifiedBy,
                         CreatedOn = user.CreatedOn,
@@ -381,15 +382,51 @@ namespace ReviewMe.Bal
         }
 
         // Get ReviewerList By TeamLeaderId
-        public List<User> GetListOfUserByTeamLeadId(long id)
+        public List<UserViewModel> GetListOfUserByTeamLeadId(long id)
         {
             try
             {
                 List<User> lstReviewer =
                     _userRepository.GetAll().Where(m => m.IsActive && (m.TeamLeaderId == id || m.Id == id)).ToList();
+                
                 if (lstReviewer != null)
                 {
-                return lstReviewer;
+                    UserViewModelLong userViewModelLong = new UserViewModelLong();
+                    foreach (User user in lstReviewer)
+                    {
+                        userViewModelLong.UserViewModelList.Add(new UserViewModel
+                        {
+                            Id = user.Id,
+                            FName = user.FName,
+                            LName = user.LName,
+                            MName = user.MName,
+                            Dob = user.Dob,
+                            Gender = user.Gender,
+                            EmailId = user.EmailId,
+                            Password = user.Password,
+                            MobileNo = user.MobileNo,
+                            AlternateContactNo = user.AlternateContactNo,
+                            UserImage = user.UserImage,
+                            Address = user.Address,
+                            EmployeeCode = user.EmployeeCode,
+                            SelectedTeamLeadId = user.TeamLeaderId,
+                            SelectedRoleId = user.RoleId,
+                            SelectedTechnologyId = user.TechnologyId,
+                            OnClient = user.OnClient,
+                            OnProject = user.OnProject,
+                            OnTask = user.OnTask,
+                            Rating = user.Rating,
+                            ResetPassword = user.ResetPassword,
+                            CreatedBy = user.CreatedBy,
+                            ModifiedBy = user.ModifiedBy,
+                            CreatedOn = user.CreatedOn,
+                            ModifiedOn = user.ModifiedOn,
+                            IsActive = user.IsActive,
+                            RoleName = user.Role.RoleName
+                        });
+                    }
+
+                    return userViewModelLong.UserViewModelList;
                 }
             }
             catch (Exception ex)

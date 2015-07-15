@@ -32,13 +32,18 @@
                     @if (SessionManager.GetUserRoleOfCurrentlyLoggedInUser() == UserRoleEnum.Admin)
                     {
                         <div class="col-lg-3">
-                            @Html.DropDownList("technology", ViewBag.Technologies as IEnumerable<SelectListItem>, new { @class = "form-control select2" })
-                            @*@Html.DropDownList("technology", ViewBag.Technologies, "-- Month --", new { @class = " form-control " })*@
+                            @Html.DropDownList("technology", ViewBag.Technologies as IEnumerable<SelectListItem>, new { @class = "form-control select2" })                            
                         </div>
                     <div class="col-lg-3" id="usersList">
                         @Html.DropDownList("user", Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @id = "ddlusersList" })
                     </div>
-                    }
+                    }                    
+                    else if (SessionManager.GetUserRoleOfCurrentlyLoggedInUser() == UserRoleEnum.TeamLeader)
+                    {
+                        <div class="col-lg-3">
+                            @Html.DropDownList("user", ViewBag.TeamList as IEnumerable<SelectListItem>, new { @class = "form-control select2", @id = "ddlusersList" })                            
+                        </div>
+                    }                    
                     else
                     {
                         <div class="col-lg-3">
@@ -82,13 +87,16 @@
 
         $.ajax({
             type: "GET",
-            datatype: "application/json",
-            @*url:"@(Url.Action("GetMyRatingStats", "Home"))",*@
+            datatype: "application/json",            
             url: "@(Url.Action("GetRatingsByMonth", "Home"))",
             data: { month: $('#month').val(), year: $('#year').val(), id: $('#ddlusersList').val() },
             success: function (data) {
                 $('#line-chart').empty();
-                BindLineChart(data);
+                if (data.reviewDetails.length != 0) {
+                    BindLineChart(data);
+                } else {
+                    $('#line-chart').append('<h3>No Records Available..!!!</h3>');
+                }
             },
             error: function (data) {
 
