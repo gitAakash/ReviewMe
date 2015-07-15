@@ -54,16 +54,18 @@
         <script> var init = []; </script>
 
         <div class="header">
-            <a href="index.html" class="logo">
-                <div class="demo-logo"><img src="assets/demo/logo-big.png" alt="" style="margin-top: -4px;"></div>&nbsp;
+            <a href="@(Url.Action("Index", "Home"))" class="logo">
+                <div class="demo-logo" style="background : none !important;">
+                    <h1><strong>n</strong>eo<span style="color: red">S</span>oft</h1>@*<img src="assets/demo/logo-big.png" alt="" style="margin-top: -4px;">*@
+                </div>&nbsp;
                 <strong>Review</strong>ME
-            </a>
-        </div>
+            </a> <!-- / .logo -->
+        </div> <!-- / .header --> 
 
         <div class="error-code">500</div>
 
         <div class="error-text">
-            <span class="oops">OOPS!</span><br>
+            <span class="oops">Oops!</span><br>
             <span class="hr"></span>
             <br>
             SOMETHING IS NOT QUITE RIGHT
