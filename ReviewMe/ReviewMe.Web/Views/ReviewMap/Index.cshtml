@@ -50,9 +50,9 @@
 
             @foreach (var item in lstGroup)
             {
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="panel panel-primary" style="height: 150px; margin-top: 10px; overflow-y: hidden;" id="@item.Reviewer.Id">
-                        <div class="panel-heading">
+                        @*<div class="panel-heading">
                             @item.Reviewer.Name
                             <div class="widget-comments">
                                 <div class="panel-padding no-padding-vr">
@@ -64,7 +64,20 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>*@
+                        @* ------------------------------------------- *@
+
+                        <div class="panel-heading">
+                            <span class="panel-title" style="color: white;">@item.Reviewer.Name</span>
+                            <div class="panel-heading-controls">
+                                <ul class="pagination pagination-xs">
+                                    <li><a href="#" onclick="editGroup(@item.Reviewer.Id)" style="position: relative;  color: white;" title="Edit"><i class="fa fa-pencil"></i></a></li>
+                                    <li><a href="#" onclick="deleteGroup(@item.Reviewer.Id)" style="position: relative;  color: white;" title="Delete"><i class="fa fa-times"></i></a></li>                                    
+                                </ul> <!-- / .pagination -->
+                            </div> <!-- / .panel-heading-controls -->
                         </div>
+
+                       @* ------------------------------------------- *@
                         <div class="panel-body">
                             <ul>
                                 @foreach (var reviewee_item in item.Reviewees)

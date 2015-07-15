@@ -382,6 +382,10 @@
     content: "\f02a";
 }
 
+.fa-line-chart:before {
+  content: "\f201";
+}
+
 .fa-tag:before {
     content: "\f02b";
 }
