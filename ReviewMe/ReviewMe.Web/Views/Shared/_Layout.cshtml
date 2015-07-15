@@ -473,21 +473,21 @@
                                 <ul class="navigation">
                                     <li class=" active">
                                         <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                            <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                            <i class="menu-icon fa fa-dashboard" title="Dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
-                                            <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                            <i class="menu-icon fa fa-th" title="User Management"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<ProjectController>(controller => controller.Index(0)))">
-                                            <i class="menu-icon fa fa-tasks"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
+                                            <i class="menu-icon fa fa-tasks" title="Project management"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Project Management</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
+                                        <a href="@(Url.ActionLink<TechnologyController>(controller => controller.Index(0)))"><i class="menu-icon fa fa-flask" title="Technology Management"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Technology Management</span></a>
                                     </li>
                                 </ul>
                             }
@@ -496,27 +496,27 @@
                                 <ul class="navigation">
                                     <li class=" active">
                                         <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                            <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                            <i class="menu-icon fa fa-dashboard" title="Dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<UserController>(controller => controller.Index()))">
-                                            <i class="menu-icon fa fa-th"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
+                                            <i class="menu-icon fa fa-th" title="User Management"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">User Management</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                                            <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                            <i class="menu-icon fa fa-users" title="Reviewees"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                            <i class="menu-icon fa fa-bar-chart-o"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                            <i class="menu-icon fa fa-bar-chart-o" title="My Reviews"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.Index()))">
-                                            <i class="menu-icon fa fa-desktop"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
+                                            <i class="menu-icon fa fa-desktop" title="Review Management"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Review Management</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -527,17 +527,17 @@
                                 <ul class="navigation">
                                     <li class=" active">
                                         <a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">
-                                            <i class="menu-icon fa fa-dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
+                                            <i class="menu-icon fa fa-dashboard" title="Dashboard"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">Dashboard</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetRevieweeListByReviewerId(Convert.ToString(sessionInfo.UserId))))">
-                                            <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
+                                            <i class="menu-icon fa fa-users" title="Reviewees"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviewee</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                            <i class="menu-icon fa fa-users"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                            <i class="menu-icon fa fa-users" title="My Reviews"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
                                         </a>
                                     </li>
                                 </ul>
