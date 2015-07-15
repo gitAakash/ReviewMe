@@ -1,4 +1,7 @@
-﻿@using System.Globalization
+﻿@using System.Collections
+@using System.Globalization
+@using ReviewMe.Common.Authorization
+@using ReviewMe.Common.Enums
 @{
     ViewBag.Title = "Home Page";
     Layout = "../Shared/_Layout.cshtml";
@@ -25,11 +28,27 @@
         <div class="col-xs-12 col-sm-8">
             <div class="row">
                 <hr class="visible-xs no-grid-gutter-h">
-                <div class="pull-right col-xs-12 col-sm-auto">
-                    <div class="col-lg-7">
+                <div class="pull-right col-xs-12 col-sm-auto" style="width:120%;">
+                    @if (SessionManager.GetUserRoleOfCurrentlyLoggedInUser() == UserRoleEnum.Admin)
+                    {
+                        <div class="col-lg-3">
+                            @Html.DropDownList("technology", ViewBag.Technologies as IEnumerable<SelectListItem>, new { @class = "form-control select2" })
+                            @*@Html.DropDownList("technology", ViewBag.Technologies, "-- Month --", new { @class = " form-control " })*@
+                        </div>
+                    <div class="col-lg-3" id="usersList">
+                        @Html.DropDownList("user", Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @id = "ddlusersList" })
+                    </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-3">
+                        @Html.Hidden("user", null, new { @id = "ddlusersList" })
+                        </div>
+                    }
+                    <div class="col-lg-3">
                         @Html.DropDownList("month", Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(CultureInfo.InvariantCulture), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i) }), "-- Month --", new { @class = " form-control " })
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-2">
                         @Html.DropDownList("year", Enumerable.Range(2000, 100).Select(i => new SelectListItem { Value = i.ToString(CultureInfo.InvariantCulture), Text = i.ToString(CultureInfo.InvariantCulture) }), "-- Year --", new { @class = "form-control " })
                     </div>
                 </div>
@@ -47,10 +66,13 @@
         </div>
     </div>
 </div> <!-- / .page-header -->
-<div class="col-sm-12 text-center">
-    @*<label class="label label-success">Line Chart</label>*@
-    <div id="line-chart"></div>
-</div>
+
+    <div class="col-sm-12 text-center">
+        @*<label class="label label-success">Line Chart</label>*@
+        <div id="line-chart"></div>
+    </div>
+
+
 <script type="text/javascript">
     $(function () {
         var date = new Date();
@@ -63,7 +85,7 @@
             datatype: "application/json",
             @*url:"@(Url.Action("GetMyRatingStats", "Home"))",*@
             url: "@(Url.Action("GetRatingsByMonth", "Home"))",
-            data: { month: $('#month').val(), year: $('#year').val() },
+            data: { month: $('#month').val(), year: $('#year').val(), id: $('#ddlusersList').val() },
             success: function (data) {
                 $('#line-chart').empty();
                 BindLineChart(data);

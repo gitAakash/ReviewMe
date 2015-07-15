@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Net.Mime;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Script.Serialization;
 using ReviewMe.Bal;
 using ReviewMe.Common.Authorization;
+using ReviewMe.Common.Extensions;
 using ReviewMe.ViewModel;
 using ReviewMe.Web.Attributes;
 
@@ -18,17 +21,14 @@ namespace ReviewMe.Web.Controllers
     {
         public ActionResult Index()
         {
-           /* DateTimeFormatInfo months = new DateTimeFormatInfo();
-            for (int i = 0; i < 13; i++)
-            {
-                ViewBag.Months.Add(new SelectList(months.GetMonthName(i),i.ToString()));
-            }
+            var a = new TechnologyBal().GetAllTechnologies();
+           
+            ViewBag.Technologies = a.TechnologyViewModelList.ToList().Select(c => new SelectListItem         
+                            {
+                               Text = c.TechnologyName,
+                               Value = c.Id.ToString(),
+                            }).ToList();
 
-            for (int i = 0; i < UPPER; i++)
-            {
-                
-            }
-*/
          return View();   
         }
 
@@ -62,16 +62,22 @@ namespace ReviewMe.Web.Controllers
             return null;
         }
 
-        public JsonResult GetRatingsByMonth(int month, int year)
+        public JsonResult GetRatingsByMonth(int month, int year, long? id)
         {
             long reviewerId = SessionManager.GetCurrentlyLoggedInUserId();
-            //DateTime RevieweeDate = Convert.ToDateTime(revieweeDate);
-          //  RevieweeDate = RevieweeDate.AddDays(1);
+            if ( id != null)
+                reviewerId = Convert.ToInt64(id);
             DateTime startDate = new DateTime(year, month, 1);
             DateTime endDate = startDate.AddMonths(1).AddDays(-1);
             var reviewDetails = new ReviewMapBal().GetReviewDetailsByUserId(reviewerId, startDate, endDate);
-            //return Json(new { status = "S", Result = reviewDetailsViewModel.ReviewDetailsViewModelList }, JsonRequestBehavior.AllowGet);
             return Json(new { reviewDetails }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetUsersByTechnology(string id)
+        {
+            var userBal = new UserBal();
+            var usersList = userBal.GetUsersByTechnology(Convert.ToInt64(id));
+            return Json(new{usersList},JsonRequestBehavior.AllowGet);
         }
     }
 }

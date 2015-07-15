@@ -509,5 +509,21 @@ namespace ReviewMe.Bal
             }
             return false;
         }
+
+        public UserViewModelLong GetUsersByTechnology(long id)
+        {
+            var users = _userRepository.GetAll().Where(m=>m.TechnologyId==id && m.IsActive==true).ToList();
+            UserViewModelLong usersModel = new UserViewModelLong();
+             foreach (User user in users)
+                {
+                    usersModel.UserViewModelList.Add(new UserViewModel
+                    {
+                        Id = user.Id,
+                        FName = user.FName,
+                        LName = user.LName,
+                    });
+                }
+            return usersModel;
+        }
     }
 }
