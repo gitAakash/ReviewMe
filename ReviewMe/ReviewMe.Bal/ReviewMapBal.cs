@@ -58,6 +58,7 @@ namespace ReviewMe.Bal
             try
             {
                 List<UserViewModel> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
+                userList.Remove(userList.FirstOrDefault(m => m.Id == ReviewerId));
                 List<Int64> lstDevelopers = new ReviewMapBal().GetAlreadyReviewedList();
                 if (userList != null)
                 {
@@ -425,6 +426,7 @@ namespace ReviewMe.Bal
                 }
 
                 List<UserViewModel> userList = new UserBal().GetListOfUserByTeamLeadId(SessionManager.GetCurrentlyLoggedInUserId());
+                userList.Remove(userList.FirstOrDefault(m => m.Id == id));
 
                 var reviewMapViewModel = new ReviewMapViewModel()
                 {
