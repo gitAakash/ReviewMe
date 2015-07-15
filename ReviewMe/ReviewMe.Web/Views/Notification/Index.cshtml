@@ -41,10 +41,7 @@
                      <b>@item.NotificationMessage </b>
                  }
                  @Html.Raw("</a>")
-                 @Html.Raw("<div class='message-description'>")
-                     @*from <a href="#">Robert Jang</a>
-                         &nbsp;&nbsp;·&nbsp;&nbsp;*@
-                     @*2h ago*@
+                 @Html.Raw("<div class='message-description'>")                    
                      @CalculateDateDiffrenceHelper.DifferenceBetTwoDates(item.CreatedOn, System.DateTime.Now)
                  @Html.Raw("</div>")
              @Html.Raw("</div>") <!-- / .message -->

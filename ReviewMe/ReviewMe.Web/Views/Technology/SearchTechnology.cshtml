@@ -7,52 +7,6 @@
     bool isodd = false;
 }
 
-@*<div class="col-sm-12">
-    <div class="panel">
-        <div class="panel-heading">
-            <span class="panel-title">Technology</span>
-        </div>
-        <div class="panel-body ">
-            <div class="table-info">
-                <div class="table-header">
-                    <div class="table-caption">
-                        Technology Table
-                    </div>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Technology Name</th>
-
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (TechnologyViewModel item in Model.TechnologyViewModelList)
-                        {
-                            <tr>
-                                <td>@item.TechnologyName</td>
-
-                                <td>
-                                    <a href="@Url.Action("Index", "Technology", new { id = item.Id })" class="btn btn-primary btn-labeled ">
-                                        <span class="btn-label icon fa fa-edit"></span> Edit
-                                    </a>
-
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-labeled " id="@(item.Id)_@(item.TechnologyName)" onclick="DeleteTechnology(this) ">
-                                        <span class=" btn-label icon fa fa-warning">
-                                        </span> Delete
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>*@
-
-
 <div class="table-primary">
     <div role="grid" id="jq-datatables-example_wrapper" class="dataTables_wrapper form-inline no-footer">
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable no-footer" id="jq-datatables-example" aria-describedby="jq-datatables-example_info">

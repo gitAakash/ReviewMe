@@ -75,17 +75,7 @@ namespace ReviewMe.Web.Controllers
             if (ModelState.IsValid)
             {               
                 if (userViewModel.Id != 0)
-                {                   
-                    //string ProfileImagePath = new UserBal().GetUserById(userViewModel.Id).UserImage;
-                    //if (!string.IsNullOrEmpty(ProfileImagePath) && FilePath != null)
-                    //{
-                    //   string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), ProfileImagePath);
-                    //    //Check whether file is exist or not on location
-                    //   if(System.IO.File.Exists(fileSavePath))
-                    //   {
-                    //       System.IO.File.Delete(fileSavePath);
-                    //   }
-                    //}
+                {    
                     bool status=false;
                     if (FilePath != null)
                     {
@@ -95,9 +85,8 @@ namespace ReviewMe.Web.Controllers
                             fileName = userViewModel.Id + Path.GetExtension(fileName);
                             string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
                             userViewModel.FilePath.SaveAs(fileSavePath);
-                            userViewModel.UserImage = fileName;                     
-
-                            //Updating UserProfile image name;
+                            userViewModel.UserImage = fileName; 
+                           
                              status = new UserBal().SaveOrUpdateUser(userViewModel);
 
                              TempData["Status"] = "Records has been updated successfully";
@@ -124,8 +113,7 @@ namespace ReviewMe.Web.Controllers
                             userViewModel.FilePath.SaveAs(fileSavePath);
                             userViewModel.UserImage = fileName;
                             userViewModel.Id = returnModel.Id;
-                            
-                            //Updating UserProfile image name;
+
                             bool status = new UserBal().SaveOrUpdateUser(userViewModel);                          
                         }
                     }

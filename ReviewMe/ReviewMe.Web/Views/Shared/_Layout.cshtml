@@ -1,6 +1,7 @@
 ﻿@using ReviewMe.Common.Authorization
 @using ReviewMe.Common.Extensions
 @using ReviewMe.Web.Controllers
+@using ReviewMe.Common.Enums
 
 @Html.Hidden("TodayDate", DateTime.Now)
 <!DOCTYPE html>
@@ -468,7 +469,7 @@
                         </div>
                         @if (SessionManager.GetSessionInformation() != null)
                         {
-                            if (SessionManager.GetSessionInformation().UserRoleId == 1) // if role is admin
+                            if(SessionManager.GetUserRoleOfCurrentlyLoggedInUser() == UserRoleEnum.Admin)                            
                             {
                                 <ul class="navigation">
                                     <li class=" active">
@@ -491,7 +492,7 @@
                                     </li>
                                 </ul>
                             }
-                            else if (SessionManager.GetSessionInformation().UserRoleId == 2) // if role is teamLeader
+                            else if (SessionManager.GetUserRoleOfCurrentlyLoggedInUser() == UserRoleEnum.TeamLeader) // if role is teamLeader
                             {
                                 <ul class="navigation">
                                     <li class=" active">
@@ -537,7 +538,7 @@
                                     </li>
                                     <li>
                                         <a href="@(Url.ActionLink<ReviewMapController>(controller => controller.GetMyReviewList()))">
-                                            <i class="menu-icon fa fa-users" title="My Reviews"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
+                                            <i class="menu-icon fa fa-bar-chart-o" title="My Reviews"></i><span class="mm-text mmc-dropdown-delay animated fadeIn">My Reviews</span>
                                         </a>
                                     </li>
                                 </ul>

@@ -109,11 +109,9 @@
                 </div>
             <div class="modal-footer">
                 @if (Model.Id != 0)
-                {
-                    @*<input id="btnEditReview" class="btn btn-success" type="button" value="Update">*@
-                    <button type="button" id="btnEditReview" class="btn btn-primary">Update</button>
-                    @*<input id="btnReviewDelete" class="btn btn-danger" data-dismiss="modal" type="button" value="Delete" deleteid="@Model.Id">*@
-    <button id="btnReviewDelete" type="button" data-dismiss="modal"  class="btn btn-danger" deleteid="@Model.Id">Delete</button>
+                {                    
+                    <button type="button" id="btnEditReview" class="btn btn-primary">Update</button>                    
+                    <button id="btnReviewDelete" type="button" data-dismiss="modal"  class="btn btn-danger" deleteid="@Model.Id">Delete</button>
                 }
                 else
                 {

@@ -181,9 +181,7 @@
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-4">
                             <div class="form-group no-margin-hr">
-                                <label class="control-label">Dob<span style="color: red">*</span></label>
-                                @*@Html.TextBox(string.Empty, @Model.ToString("dd/MM/yyyy"), new { @class = "form-control" })*@
-                                @*@Html.TextBoxFor(m => m.Dob, new { @class = "datepicker form-control" })*@
+                                <label class="control-label">Dob<span style="color: red">*</span></label>                                
                                @if (((ReviewMe.ViewModel.UserViewModel)Model).EmailId == null)
                                {
                                     <input class="datepicker form-control valid" placeholder="MM/dd/yyyy" data-val="true" readonly="true" data-val-required="Please enter birth date" id="Dob" name="Dob" type="text" value="">

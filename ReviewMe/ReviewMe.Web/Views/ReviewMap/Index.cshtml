@@ -13,8 +13,7 @@
     </style>
 
     <ul class="breadcrumb breadcrumb-page">
-        <div class="breadcrumb-label text-light-gray">You are here: </div>
-        @*<li><a href="@(Url.ActionLink<HomeController>(controller => controller.Index()))">Home</a></li>*@
+        <div class="breadcrumb-label text-light-gray">You are here: </div>        
         <li><a href="#">Home</a></li>
         <li class="active"><a href="#">Reviews</a></li>
     </ul>
@@ -33,14 +32,7 @@
                         </button>
                     </div>
                     <!-- Margin -->
-                    <div class="visible-xs clearfix form-group-margin"></div>
-                    <!-- Search field -->
-                    @*<form action="" class="pull-right col-xs-12 col-sm-6">
-                        <div class="input-group no-margin">
-                            <span class="input-group-addon" style="background: #fff; background: rgba(0, 0, 0, .05); border: none;"><i class="fa fa-search"></i></span>
-                            <input type="text" placeholder="Search..." class="form-control no-padding-hr" style="background: #fff; background: rgba(0, 0, 0, .05); border: none;">
-                        </div>
-                    </form>*@
+                    <div class="visible-xs clearfix form-group-margin"></div>                    
                 </div>
             </div>
         </div>
@@ -51,22 +43,7 @@
             @foreach (var item in lstGroup)
             {
                 <div class="col-sm-3">
-                    <div class="panel panel-primary" style="height: 150px; margin-top: 10px; overflow-y: hidden;" id="@item.Reviewer.Id">
-                        @*<div class="panel-heading">
-                            @item.Reviewer.Name
-                            <div class="widget-comments">
-                                <div class="panel-padding no-padding-vr">
-                                    <div class="comment-body">
-                                        <div class="comment-actions" style="float: right;">
-                                            <a href="#" onclick="editGroup(@item.Reviewer.Id)" style="position: relative; top: -18px; color: white;"><i class="fa fa-pencil"></i>Edit</a>
-                                            <a href="#" onclick="deleteGroup(@item.Reviewer.Id)" style="position: relative; top: -18px; color: white;"><i class="fa fa-times"></i>Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
-                        @* ------------------------------------------- *@
-
+                    <div class="panel panel-primary" style="height: 150px; margin-top: 10px; overflow-y: hidden;" id="@item.Reviewer.Id">                        
                         <div class="panel-heading">
                             <span class="panel-title" style="color: white;">@item.Reviewer.Name</span>
                             <div class="panel-heading-controls">
@@ -75,9 +52,7 @@
                                     <li><a href="#" onclick="deleteGroup(@item.Reviewer.Id)" style="position: relative;  color: white;" title="Delete"><i class="fa fa-times"></i></a></li>                                    
                                 </ul> <!-- / .pagination -->
                             </div> <!-- / .panel-heading-controls -->
-                        </div>
-
-                       @* ------------------------------------------- *@
+                        </div>                      
                         <div class="panel-body">
                             <ul>
                                 @foreach (var reviewee_item in item.Reviewees)
