@@ -22,7 +22,7 @@
 
     <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
         <div class="slimScrollDiv" style="max-height: 250px; overflow: hidden; position: relative; width: auto;">
-            <div class="messages-list" id="main-navbar-messages" style="max-height: 250px; width: auto;">
+            <div class="messages-list" id="main-navbar-messages" style="max-height: 250px; width: auto; overflow-y:scroll">
                 @if (Model.Any())
                 {
                     foreach (var item in Model)
@@ -34,16 +34,16 @@
                                 var path = Path.Combine(Server.MapPath("~/ProfileImages/"), item.CreatedByUser.UserImage);
                                 if (File.Exists(path))
                                 {
-                                    <img id="profileImage" src="/ProfileImages/@item.CreatedByUser.UserImage" class="message-avatar" />
+                                    <img  src="/ProfileImages/@item.CreatedByUser.UserImage" class="message-avatar" />
                                 }
                                 else
                                 {
-                                    <img id="profileImage" src="~/ProfileImages/default.jpg" class="message-avatar" />
+                                    <img  src="~/ProfileImages/default.jpg" class="message-avatar" />
                                 }
                             }
                             else
                             {
-                                <img id="profileImage" src="~/ProfileImages/default.jpg" class="message-avatar" />
+                                <img  src="~/ProfileImages/default.jpg" class="message-avatar" />
                             }
                             <a href="#" class="message-subject" id="@item.Id">
                                 @if (item.IsRead)

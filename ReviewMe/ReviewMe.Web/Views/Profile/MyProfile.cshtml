@@ -3,192 +3,191 @@
     ViewBag.Title = "MyProfile";
 }
 @Scripts.Render("~/bundles/jqueryval")
-<h2>MyProfile</h2>
+
 <script src="~/Scripts/Custom/User.js"></script>
 
 <link href="~/CSS/datepicker.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-datepicker.js"></script>
-@*<script src="~/Scripts/jquery-1.9.0.min.js"></script>*@
-@*<script src="~/Scripts/jquery.min.js"></script>*@
-<fieldset>
+<ul class="breadcrumb breadcrumb-page">
+    <div class="breadcrumb-label text-light-gray">You are here: </div>
+    <li><a href="#">Home</a></li>
+    <li class="active"><a href="#">My Profile</a></li>
+</ul>
+<div class="">
+    <div class="">
 
-    @using (Html.BeginForm("AddEditUser", "Profile", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
-    {
-        <div class="col-sm-3 profile-row">
-            <div class="left-col">
-                <div class="profile-block">
-                    <div class=" profile-photo">
+        @using (Html.BeginForm("AddEditUser", "Profile", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <div class="col-sm-3 profile-row">
+                <div class="left-col">
+                    <div class="profile-block" style="text-align:center;">
+                        <div class=" profile-photo">
 
-                        @if (!string.IsNullOrEmpty(Model.UserImage))
-                        {
-                            var path = Path.Combine(Server.MapPath("~/ProfileImages/"), Model.UserImage);
-                            if (File.Exists(path))
+                            @if (!string.IsNullOrEmpty(Model.UserImage))
                             {
-                                <img id="profileImage" src="/ProfileImages/@Model.UserImage" width="160" height="160" class="img-circle" />
+                                var path = Path.Combine(Server.MapPath("~/ProfileImages/"), Model.UserImage);
+                                if (File.Exists(path))
+                                {
+                                    <img id="profileImage" src="/ProfileImages/@Model.UserImage" width="160" height="160" class="img-circle" />
+                                }
+                                else
+                                {
+                                    <img id="profileImage" src="~/ProfileImages/default.jpg" width="160" height="160" class="img-circle" />
+                                }
                             }
                             else
                             {
                                 <img id="profileImage" src="~/ProfileImages/default.jpg" width="160" height="160" class="img-circle" />
                             }
-                        }
-                        else
-                        {
-                            <img id="profileImage" src="~/ProfileImages/default.jpg" width="160" height="160" class="img-circle" />
-                        }
-                    </div><br>
-                    <span class="btn btn-info btn-file btn-block">
-                        Upload Dp <input type="file" id="FilePath" name="FilePath" onchange="readURL(this)">
-                    </span>
+                        </div><br>
+                        <span class="btn btn-info btn-file btn-block">
+                            Upload Photo <input type="file" id="FilePath" name="FilePath" onchange="readURL(this)">
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-sm-9 ">
-            <div class="row">
-                @Html.ValidationSummary(true)
-                @Html.HiddenFor(model => model.Id)
-                @Html.HiddenFor(model => model.SelectedRoleId)
-                @Html.HiddenFor(model => model.SelectedTechnologyId)
+            <div class="col-sm-8 ">
                 <div class="">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">First Name<span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.FName, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.FName)
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Middle Name</label>
-                                @Html.TextBoxFor(m => m.MName, new { @class = "form-control" })
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Last Name<span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.LName, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.LName)
-                            </div>
-                        </div><!-- col-sm-6 -->
-                    </div><!-- row -->
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Address</label>
-                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Gender<span style="color: red">*</span></label>
-                                <div class="radio" style="margin-top: 0;">
-                                    <label>
-
-
-
-                                        @Html.RadioButtonFor(model => model.Gender, true, new { id = "male", @class = "px" })
-                                        <span class="lbl">Male</span>
-                                    </label>
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.SelectedRoleId)
+                    @Html.HiddenFor(model => model.SelectedTechnologyId)
+                    <div class="">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">First Name<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.FName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.FName)
                                 </div>
-                                <div class="radio" style="margin-top: 0;">
-                                    <label>
-                                        @Html.RadioButtonFor(model => model.Gender, false, new { id = "female", @class = "px", })
-                                        <span class="lbl">Female</span>
-                                    </label>
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Middle Name</label>
+                                    @Html.TextBoxFor(m => m.MName, new { @class = "form-control" })
                                 </div>
-                            </div>
-                        </div><!--col-sm-6-->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Email<span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.EmailId, new { @placeholder = "ex: xyz@xyz.com", @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.EmailId)
-                            </div>
-                        </div><!-- col-sm-6 -->
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Last Name<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.LName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.LName)
+                                </div>
+                            </div><!-- col-sm-6 -->
+                        </div><!-- row -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Address</label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                                </div>
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Gender<span style="color: red">*</span></label>
+                                    <div class="radio" style="margin-top: 0;">
+                                        <label>
+                                            @Html.RadioButtonFor(model => model.Gender, true, new { id = "male", @class = "px" })
+                                            <span class="lbl">Male</span>
+                                        </label>
+                                    </div>
+                                    <div class="radio" style="margin-top: 0;">
+                                        <label>
+                                            @Html.RadioButtonFor(model => model.Gender, false, new { id = "female", @class = "px", })
+                                            <span class="lbl">Female</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div><!--col-sm-6-->
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Email<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.EmailId, new { @placeholder = "ex: xyz@xyz.com", @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.EmailId)
+                                </div>
+                            </div><!-- col-sm-6 -->
 
-                    </div><!-- row -->
+                        </div><!-- row -->
 
 
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Mobile Number<span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.MobileNo)
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <label class="control-label">Alternate Mobile Number</label>
-                                @Html.TextBoxFor(m => m.AlternateContactNo, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.AlternateContactNo)
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <div class="Dob">
-                                    <label class="control-label">Dob<span style="color: red">*</span></label>
-                                    @Html.TextBoxFor(m => m.Dob, new { @placeholder = "dd/mm/yyyy", @class = "form-control", @style = "width: 100%;" })
-                                    @*@Html.TextBoxFor(m => m.Dob, new { @class = "form-control", @value = "dd/mm/yyyy" })*@
-                                    @Html.ValidationMessageFor(m => m.Dob)
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Mobile Number<span style="color: red">*</span></label>
+                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.MobileNo)
                                 </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
-                    </div><!-- row -->
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group no-margin-hr">
-                                <div class="checkbox" style="margin: 0;">
-                                    <label>
-                                        @Html.CheckBoxFor(m => m.OnClient, false)
-                                        @Html.Label("On Client")
-                                    </label>
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <label class="control-label">Alternate Mobile Number</label>
+                                    @Html.TextBoxFor(m => m.AlternateContactNo, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.AlternateContactNo)
                                 </div>
-                                <div class="checkbox" style="margin: 0;">
-                                    <label>
-                                        @Html.CheckBoxFor(m => m.OnProject, false)
-                                        @Html.Label("On Project")
-                                    </label>
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <div class="Dob">
+                                        <label class="control-label">Dob<span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.Dob, new { @placeholder = "dd/mm/yyyy", @class = "form-control", @style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(m => m.Dob)
+                                    </div>
                                 </div>
-                                <div class="checkbox" style="margin: 0;">
-                                    <label>
-                                        @Html.CheckBoxFor(m => m.OnTask, false)
-                                        @Html.Label("On Task")
-                                    </label>
+                            </div><!-- col-sm-6 -->
+                        </div><!-- row -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group no-margin-hr">
+                                    <div class="checkbox" style="margin: 0;">
+                                        <label>
+                                            @Html.CheckBoxFor(m => m.OnClient, false)
+                                            @Html.Label("On Client")
+                                        </label>
+                                    </div>
+                                    <div class="checkbox" style="margin: 0;">
+                                        <label>
+                                            @Html.CheckBoxFor(m => m.OnProject, false)
+                                            @Html.Label("On Project")
+                                        </label>
+                                    </div>
+                                    <div class="checkbox" style="margin: 0;">
+                                        <label>
+                                            @Html.CheckBoxFor(m => m.OnTask, false)
+                                            @Html.Label("On Task")
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
-                    </div><!-- row -->
-                </div>
-                <div class="modal-footer">
+                            </div><!-- col-sm-6 -->
+                        </div><!-- row -->
+                    </div>
+                    <div class="modal-footer">
 
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+    </div>
+</div>
+    <script type="text/javascript">
+        $(function () {
 
-    }
-</fieldset>
+            $("#Dob").keypress(function (event) { event.preventDefault(); });
+            var currentDate = new Date();
+            $('#Dob').datepicker({
+                format: "dd/mm/yyyy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '-45:-15',
+                //defaultDate: new Date('04/23/1986')
+            });
+            //    format: "dd/mm/yyyy"
 
-<script type="text/javascript">
-    $(function () {     
-
-        $("#Dob").keypress(function (event) { event.preventDefault(); });
-        var currentDate = new Date();
-        $('#Dob').datepicker({
-            format: "dd/mm/yyyy",
-            changeMonth: true,
-            changeYear: true,
-            yearRange: '-45:-15',
-            //defaultDate: new Date('04/23/1986')
+            //}).on('changeDate', function (e) {
+            //    $(this).datepicker('hide');
         });
-        //    format: "dd/mm/yyyy"
-
-        //}).on('changeDate', function (e) {
-        //    $(this).datepicker('hide');
-    });
 
 
 
-</script>
+    </script>
