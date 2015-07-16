@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ReviewMe.Common.Enums;
 
 namespace ReviewMe.Web.Controllers
 {
@@ -42,7 +43,7 @@ namespace ReviewMe.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                if (userViewModel.Id !=0)
+                if (userViewModel.Id == 0)
                 {
                    ReviewMe.Model.User userModel = new UserBal().AddUser(userViewModel);
                 }
@@ -68,7 +69,10 @@ namespace ReviewMe.Web.Controllers
                 return View();
             }
 
+            if(SessionManager.GetUserRoleOfCurrentlyLoggedInUser() == UserRoleEnum.Developer)
+                return RedirectToAction("Index", "Home");
             return RedirectToAction("Index", "User");
+            
         }
 	}
 }

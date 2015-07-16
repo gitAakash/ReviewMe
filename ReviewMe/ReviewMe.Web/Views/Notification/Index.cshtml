@@ -8,45 +8,99 @@
 @{
 
 }
-<div class="messages-list" id="main-navbar-messages" style="height:auto; overflow-y: scroll; width: auto;">
-     @if (Model.Count() > 0)
-     {
-         foreach (var item in Model)
-         {
-             @Html.Raw("<div class='message'>")
+<ul class="breadcrumb breadcrumb-page">
+    <div class="breadcrumb-label text-light-gray">You are here: </div>
+    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="active"><a href="#">Notifications</a></li>
+</ul>
 
-             if (!string.IsNullOrEmpty(item.CreatedByUser.UserImage))
-                 {
-                     var path = Path.Combine(Server.MapPath("~/ProfileImages/"), item.CreatedByUser.UserImage);
-                     if (File.Exists(path))
-                     {
-                         @Html.Raw("<img id='profileImage' src='/ProfileImages/" + @item.CreatedByUser.UserImage + "' class='cust-message-avatar img-circle' />")
-                     }
-                     else
-                     {
-                         @Html.Raw("<img id='profileImage' src='~/ProfileImages/default.jpg' class='message-avatar img-cirle' />");
-                     }
-                 }
-                 else
-                 {
-                     @Html.Raw("<img id='profileImage' src='~/ProfileImages/default.jpg' class='message-avatar img-circle' />");
-                 }
-                 @Html.Raw("<a href='#' class='message-subject' id=" + @item.Id + ">")
-                 if (item.IsRead)
-                 {
-                     @item.NotificationMessage
-                 }
-                 else
-                 {
-                     <b>@item.NotificationMessage </b>
-                 }
-                 @Html.Raw("</a>")
-                 @Html.Raw("<div class='message-description'>")                    
-                     @CalculateDateDiffrenceHelper.DifferenceBetTwoDates(item.CreatedOn, System.DateTime.Now)
-                 @Html.Raw("</div>")
-             @Html.Raw("</div>") <!-- / .message -->
-         }
-     }
- </div>
-<div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 109.841827768014px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
+    @* ---------------------------------------------------------------------------- *@
+
+                      <div class="col-md-10">
+                          @*<div class="panel panel-warning" id="dashboard-recent">
+                              <div>
+                                  <span class="panel-title"><i class="panel-title-icon fa fa-fire text-danger"></i>Recent</span>
+                                  <ul class="nav nav-tabs nav-tabs-xs">
+                                      <li class="active">
+                                          <a href="#dashboard-recent-comments" data-toggle="tab">Comments</a>
+                                      </li>
+                                      <li>
+                                          <a href="#dashboard-recent-threads" data-toggle="tab">Forum threads</a>
+                                      </li>
+                                  </ul>
+                              </div>*@ 
+                              <div class="tab-content">
+                                  <!-- Comments widget -->
+                                  <!-- Without padding -->
+                                  <div class="widget-comments panel-body tab-pane no-padding fade active in" id="dashboard-recent-comments">
+                                      <!-- Panel padding, without vertical padding -->
+                                      <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: auto;">
+                                          <div id="main-navbar-messages" style="overflow: hidden; width: auto; height: auto; ">
+                                              <div class="messages-list" id="main-navbar-messages" style="height:auto; overflow: hidden; width: auto;">
+                                              @*<div class="comment">
+                                                  <img src="assets/demo/avatars/5.jpg" alt="" class="comment-avatar">
+                                                  <div class="comment-body">
+                                                      <div class="comment-by">
+                                                          <a href="#" title="">Denise Steiner</a> commented on <a href="#" title="">Article Name</a>
+                                                      </div>
+                                                      <div class="comment-text">
+                                                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+                                                      </div>
+                                                      <div class="comment-actions">
+                                                          <a href="#"><i class="fa fa-pencil"></i>Edit</a>
+                                                          <a href="#"><i class="fa fa-times"></i>Remove</a>
+                                                          <span class="pull-right">2 hours ago</span>
+                                                      </div>
+                                                  </div> 
+                                              </div>*@                                           
+                                              
+                                                  @if (Model.Count() > 0)
+                                                    {
+
+                                                        foreach (var item in Model)
+                                                            {                                                
+                                                                @Html.Raw("<div class='comment'>")
+                                                                if (!string.IsNullOrEmpty(item.CreatedByUser.UserImage))
+                                                                {
+                                                                    var path = Path.Combine(Server.MapPath("~/ProfileImages/"), item.CreatedByUser.UserImage);
+                                                                    if (File.Exists(path))
+                                                                    {
+                                                                        @Html.Raw("<img id='profileImage' src='/ProfileImages/" + @item.CreatedByUser.UserImage + "' class='comment-avatar img-circle' />")
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.Raw("<img id='profileImage' src='/ProfileImages/" + @item.CreatedByUser.UserImage + "' class='comment-avatar img-circle' />");
+                                                                    }
+                                                                 }
+                                                                 else
+                                                                {
+                                                                    @Html.Raw("<img id='profileImage' src='/ProfileImages/" + @item.CreatedByUser.UserImage + "' class='comment-avatar img-circle' />");
+                                                                }
+                                                                @Html.Raw("<div class='comment-body'>")
+                                                                @Html.Raw("<div class='comment-text'>")
+                                                                @Html.Raw("<a href='#' id=" + @item.Id + ">")
+                                                                if (item.IsRead)
+                                                                {
+                                                                    @item.NotificationMessage
+                                                                }
+                                                                else
+                                                                {
+                                                                    <b>@item.NotificationMessage </b>
+                                                                }
+                                                                  @Html.Raw("</a>")
+                                                                  @Html.Raw("</div>")
+                                                                  @Html.Raw("<div class='comment-actions'>")                                                      
+                                                                  @Html.Raw("<span class='pull-right'>")@CalculateDateDiffrenceHelper.DifferenceBetTwoDates(item.CreatedOn, System.DateTime.Now)@Html.Raw("</span>")
+                                                                  @Html.Raw("</div>")
+                                                                  @Html.Raw("</div>")  
+                                                                  @Html.Raw("</div>") <!-- / .message -->
+                                                      }
+                                                  }
+                                              </div>                                
+                                              </div>
+                                          </div>
+                                     </div>                                   
+                              </div>
+                          </div>                     
+@*<div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 109.841827768014px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>*@
        

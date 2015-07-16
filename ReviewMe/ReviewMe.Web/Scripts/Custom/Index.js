@@ -32,7 +32,12 @@ $(function() {
                 if (data.reviewDetails.length != 0) {
                     BindLineChart(data);
                 } else {
-                    $('#line-chart').append('<h3>No Records Available..!!!</h3>');
+                    var div = $('<div class="alert alert-danger">');
+                    var strong = $('<strong></strong>');
+                    strong.append("Oh snap! ");
+                    div.append(strong);
+                    div.append(" I am feeling alone here.");
+                    $('#line-chart').append(div);
                 }
             },
             error: function (data) {
@@ -84,7 +89,12 @@ function BindLineChart(data) {
                 if (data.reviewDetails.length != 0) {
                     BindLineChart(data);
                 } else {
-                    $('#line-chart').append('<h3>No Records Available..!!!</h3>');
+                    var div = $('<div class="alert alert-danger">');
+                    var strong = $('<strong></strong>');
+                    strong.append("Oh snap! ");
+                    div.append(strong);
+                    div.append(" I am feeling alone here.");
+                    $('#line-chart').append(div);
                 }
             },
             error: function (data) {
@@ -102,7 +112,12 @@ function BindLineChart(data) {
                 if (data.reviewDetails.length != 0) {
                     BindLineChart(data);
                 } else {
-                    $('#line-chart').append('<h3>No Records Available..!!!</h3>');
+                    var div = $('<div class="alert alert-danger">');
+                    var strong = $('<strong></strong>');
+                    strong.append("Oh snap! ");
+                    div.append(strong);
+                    div.append(" I am feeling alone here.");
+                    $('#line-chart').append(div);
                 }
             },
             error: function (data) {

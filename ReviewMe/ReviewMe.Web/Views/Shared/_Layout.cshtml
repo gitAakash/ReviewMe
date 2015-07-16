@@ -286,7 +286,8 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "../Notification/UsersNotifications",
+                    //url: "../Notification/UsersNotifications",
+                    url:"@Url.Action("UsersNotifications", "Notification")",
                     async: true
                 }).success(function(data) {
 
@@ -309,7 +310,9 @@
 
                             $.ajax({
                                 type: "GET",
-                                url: "../Notification/ReadUserNotification?Id=" + id,
+                                //url: "../Notification/ReadUserNotification?Id=" + id,
+                                url: "@Url.Action("ReadUserNotification", "Notification")",
+                                data: {Id:id},
                                 async: true
                             }).success(function(data) {
                                 GetNotifications();
@@ -337,7 +340,9 @@
                 function ReadNotification(Id) {
                     $.ajax({
                         type: "GET",
-                        url: "../Notification/ReadUserNotification?Id=" + Id,
+                        //url: "../Notification/ReadUserNotification?Id=" + Id,
+                        url: "@Url.Action("ReadUserNotification", "Notification")",
+                        data: {Id:id},
                         async: true
                     }).success(function(data) {
                         GetNotifications();
@@ -418,7 +423,7 @@
                                                 <span>@sessionInfo.UserName</span>
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="../Profile/Myprofile">Profile</a></li>
+                                                <li><a href="@(Url.ActionLink<ProfileController>(controller => controller.MyProfile()))">Profile</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="@(Url.ActionLink<AccountController>(controller => controller.LogOff()))"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
                                             </ul>
