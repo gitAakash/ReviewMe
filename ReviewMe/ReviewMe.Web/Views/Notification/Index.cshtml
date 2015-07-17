@@ -1,8 +1,10 @@
-﻿@using ReviewMe.Common.Extensions
+﻿@using ReviewMe.Common.Enums
+@using ReviewMe.Common.Extensions
 @using ReviewMe.ViewModel
 @using ReviewMe.Web.Controllers
 @using ReviewMe.Common.Helpers
 @using ReviewMe.Common.Authorization
+@using EnumHelper = ReviewMe.Common.Enums.EnumHelper
 @model IEnumerable<ReviewMe.ViewModel.NotificationsViewModel>
 
 @{
@@ -51,7 +53,22 @@
                                                               <a href="javascript:void(0)" title="">@item.CreatedByUser.FName  @item.CreatedByUser.LName </a>
                                                           </div>
                                                       <div class="comment-text">
-                                                           @item.NotificationMessage
+                                                          @if (item.NotificationType == (int)NotificationType.AddedReview)
+                                                          {
+                                                              @Html.Raw(EnumHelper.DescriptionAttr<NotificationType>(NotificationType.AddedReview) + " " + item.ReviewForDate.ToString("D"))
+                                                          }
+                                                          else if (item.NotificationType == (int)NotificationType.EditedReview)
+                                                          {
+                                                              @Html.Raw(EnumHelper.DescriptionAttr<NotificationType>(NotificationType.EditedReview) + " " + item.ReviewForDate.ToString("D"))
+                                                          }
+                                                          else if (item.NotificationType == (int)NotificationType.NotifyReviwer)
+                                                          {
+                                                              @Html.Raw(EnumHelper.DescriptionAttr<NotificationType>(NotificationType.NotifyReviwer) )
+                                                          }
+                                                          else if (item.NotificationType == (int)NotificationType.NotifyReviewee)
+                                                          {
+                                                              @Html.Raw(EnumHelper.DescriptionAttr<NotificationType>(NotificationType.NotifyReviewee) )
+                                                          }
                                                       </div>
                                                       <div class="comment-actions " style="margin-bottom:20px;">
                                                           <span class="pull-right">@CalculateDateDiffrenceHelper.DifferenceBetTwoDates(item.CreatedOn, System.DateTime.Now)</span>

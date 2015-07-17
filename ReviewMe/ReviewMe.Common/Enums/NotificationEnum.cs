@@ -14,7 +14,7 @@ namespace ReviewMe.Common.Enums
     {
         [Description("have to do code review")] NotifyReviwer = 1,
         [Description("code will be reviewed ")] NotifyReviewee = 2,
-        [Description("added your code review")] AddedReview = 3,
-        [Description("edited your code review")] EditedReview = 4
+        [Description("added your code review of")] AddedReview = 3,
+        [Description("edited your code review of")] EditedReview = 4
     }
 }

@@ -85,7 +85,8 @@ namespace ReviewMe.Web.Controllers
                         notifications.IsActive = true;
                         notifications.IsRead = false;
                         notifications.UserId = userDetail.Key;
-                        notifications.NotificationType = userDetail.Key == reviewMapViewModel.ReviewerId ? NotificationType.NotifyReviwer : NotificationType.NotifyReviewee;
+                        notifications.ReviewForDate = DateTime.Now;
+                        notifications.NotificationType = userDetail.Key == reviewMapViewModel.ReviewerId ? (int)NotificationType.NotifyReviwer : (int)NotificationType.NotifyReviewee;
                         notifications.NotificationMessage = "";//string.Format(userDetail.Key == reviewMapViewModel.ReviewerId ? NotificationEnum.ReviewerNotification : NotificationEnum.RevieweeNotification, SessionManager.GetSessionInformation().FullName, DateTime.Now);
 
                         notifId = new NotificationBal().AddNewNotification(notifications);
@@ -248,8 +249,9 @@ namespace ReviewMe.Web.Controllers
                             notifications.CreatedOn = System.DateTime.Now;
                             notifications.IsActive = true;
                             notifications.IsRead = false;
-                            notifications.NotificationType = NotificationType.EditedReview;
+                            notifications.NotificationType = (int)NotificationType.EditedReview;
                             notifications.UserId = model.RevieweeId;
+                            notifications.ReviewForDate = model.ReviewDate;
                             notifications.NotificationMessage = "";//string.Format(NotificationEnum.ReviewAddedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
                             var t = new ReviewMeHub();
                             notifId = new NotificationBal().AddNewNotification(notifications);
@@ -272,8 +274,9 @@ namespace ReviewMe.Web.Controllers
                             notifications.CreatedOn = System.DateTime.Now;
                             notifications.IsActive = true;
                             notifications.IsRead = false;
-                            notifications.NotificationType = NotificationType.AddedReview;
+                            notifications.NotificationType = (int)NotificationType.AddedReview;
                             notifications.UserId = model.RevieweeId;
+                            notifications.ReviewForDate = model.ReviewDate;
                             notifications.NotificationMessage = "";//string.Format(NotificationEnum.re, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
                             var t = new ReviewMeHub();
                             notifId = new NotificationBal().AddNewNotification(notifications);

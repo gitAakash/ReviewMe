@@ -438,7 +438,6 @@
     <Content Include="Views\ReviewMap\ViewReviewDetails.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Shared\LinkExpire.cshtml" />
-    <Content Include="Views\Shared\UsersNotifications1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

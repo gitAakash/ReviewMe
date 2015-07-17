@@ -53,6 +53,7 @@
     <Compile Include="Authorization\CookieInformation.cs" />
     <Compile Include="Authorization\SessionInformation.cs" />
     <Compile Include="Authorization\SessionManager.cs" />
+    <Compile Include="Enums\EnumHelper.cs" />
     <Compile Include="Enums\NotificationEnum.cs" />
     <Compile Include="Enums\UserRoleEnum.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />

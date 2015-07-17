@@ -8,6 +8,7 @@ namespace ReviewMe.Model
         public long UserId { get; set; }
         public bool IsRead { get; set; }
         public DateTime? ViewedOn { get; set; }
+        public DateTime ReviewForDate { get; set; }
         public int NotificationType { get; set; }
         public virtual User User { get; set; }
         public virtual User CreatedByUser { get; set; }
