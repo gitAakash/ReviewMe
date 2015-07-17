@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201507110539392_UserResertPassword.Designer.cs">
       <DependentUpon>201507110539392_UserResertPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507171141560_reviewnotification.cs" />
+    <Compile Include="Migrations\201507171141560_reviewnotification.Designer.cs">
+      <DependentUpon>201507171141560_reviewnotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
@@ -79,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507110539392_UserResertPassword.resx">
       <DependentUpon>201507110539392_UserResertPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507171141560_reviewnotification.resx">
+      <DependentUpon>201507171141560_reviewnotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

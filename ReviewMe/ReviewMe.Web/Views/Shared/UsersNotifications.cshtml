@@ -1,15 +1,22 @@
-﻿@using ReviewMe.Common.Extensions
+﻿@using ReviewMe.Common.Enums
+@using ReviewMe.Common.Extensions
 @using ReviewMe.ViewModel
 @using ReviewMe.Web.Controllers
 @using ReviewMe.Common.Helpers
 @using ReviewMe.Common.Authorization
-@model IEnumerable<ReviewMe.Model.Notifications>
+@model IEnumerable<ReviewMe.ViewModel.NotificationsViewModel>
 
     @{
         Layout = null;
     }
+                     @* <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+                      <script src="~/Scripts/jquery.timeago.js"></script>
+                 @*     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+                      <script type='text/javascript' src="https://github.com/petersendidit/jquery-timeago/raw/master/jquery.timeago.js"></script>*@
+     @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+
     <a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
-        <span class="label">@{@Html.Raw(((IEnumerable<ReviewMe.Model.Notifications>)Model).Where(r => r.IsRead == false).Count())}</span>
+        <span class="label">@{@Html.Raw(((IEnumerable<ReviewMe.ViewModel.NotificationsViewModel>)Model).Where(r => r.IsRead == false).Count())}</span>
         <i class="nav-icon fa fa-bullhorn"></i>
         <span class="small-screen-text">Income messages</span>
     </a>
@@ -22,7 +29,7 @@
 
     <div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
         <div class="slimScrollDiv" style="max-height: 250px; overflow: hidden; position: relative; width: auto;">
-            <div class="messages-list" id="main-navbar-messages" style="max-height: 250px; width: auto; overflow-y:scroll">
+            <div class="messages-list" id="main-navbar-messages" style="max-height: 250px; width: auto;">
                 @if (Model.Any())
                 {
                     foreach (var item in Model)
@@ -34,29 +41,47 @@
                                 var path = Path.Combine(Server.MapPath("~/ProfileImages/"), item.CreatedByUser.UserImage);
                                 if (File.Exists(path))
                                 {
-                                    <img  src="/ProfileImages/@item.CreatedByUser.UserImage" class="message-avatar" />
+                                    <img id="profileImage" src="/ProfileImages/@item.CreatedByUser.UserImage" class="message-avatar" />
                                 }
                                 else
                                 {
-                                    <img  src="~/ProfileImages/default.jpg" class="message-avatar" />
+                                    <img id="profileImage" src="~/ProfileImages/default.jpg" class="message-avatar" />
                                 }
                             }
                             else
                             {
-                                <img  src="~/ProfileImages/default.jpg" class="message-avatar" />
+                                <img id="profileImage" src="~/ProfileImages/default.jpg" class="message-avatar" />
                             }
                             <a href="#" class="message-subject" id="@item.Id">
-                                @if (item.IsRead)
+                                @* @if (item.IsRead)
                                 {
                                     @item.NotificationMessage
                                 }
                                 else
                                 {
                                     <b>@item.NotificationMessage </b>
+                                }*@
+                                @if (item.NotificationType == NotificationType.AddedReview)
+                                {
                                 }
+                                else if (item.NotificationType == NotificationType.EditedReview)
+                                {
+                                }
+                                else if (item.NotificationType == NotificationType.NotifyReviwer)
+                                {
+                                }
+                                else if (item.NotificationType == NotificationType.NotifyReviewee)
+                                {
+                                    
+                                }
+                                
+
                             </a>
                             <div class="message-description">
-                                @CalculateDateDiffrenceHelper.DifferenceBetTwoDates(item.CreatedOn, System.DateTime.Now)
+                                @*@{
+                                        var a = CalculateDateDiffrenceHelper.DifferenceBetTwoDates(item.CreatedOn, System.DateTime.Now);
+                                    }*@
+                                <abbr class="timeago" title="@(item.CreatedOn)">@(item.CreatedOn)</abbr>
                             </div>
                         </div>
                         <!-- / .message -->
@@ -64,13 +89,18 @@
                 }
                 else
                 { <div class="message">
-                      <div class="message-description messages-link">
-                          All Caught Up!!!
-                      </div>
+                    <div class="message-description messages-link">
+                        All Caught Up!!!
+                    </div>
                 </div>
                 }
             </div>
             <div class="slimScrollBar" style="background: rgb(0, 0, 0); border-radius: 7px; display: none; height: 109.841827768014px; opacity: 0.4; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 99;"></div><div class="slimScrollRail" style="background: rgb(51, 51, 51); border-radius: 7px; display: none; height: 100%; opacity: 0.2; position: absolute; right: 1px; top: 0px; width: 7px; z-index: 90;"></div>
-        </div> 
+        </div>
         <a href="@(Url.ActionLink<NotificationController>(controller => controller.Index()))" class="messages-link">All MESSAGES</a>
-    </div> 
+    </div>
+<script>
+    $(function () {
+       // $("abbr.timeago").timeago();
+    });
+</script>

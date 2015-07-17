@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ReviewMe.ViewModel;
 
 namespace ReviewMe.Web.Controllers
 {
@@ -15,7 +16,7 @@ namespace ReviewMe.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            IEnumerable<Notifications> notificationList = new NotificationBal().GetAllNotificationByUserId();
+            IEnumerable<NotificationsViewModel> notificationList = new NotificationBal().GetAllNotificationByUserId();
             new NotificationBal().ReadAllUserNotifications();
 
             return View(notificationList);
@@ -24,15 +25,15 @@ namespace ReviewMe.Web.Controllers
         [HttpGet]
         public ActionResult UsersNotifications()
         {
-            IEnumerable<Notifications> notificationList = new NotificationBal().GetAllNotificationByUserId();
-            return PartialView (notificationList);
+            IEnumerable<NotificationsViewModel> notificationList = new NotificationBal().GetAllNotificationByUserId();
+            return PartialView(notificationList);
         }
 
-        [HttpGet]
+      [HttpGet]
         public ActionResult ReadUserNotification(string Id)
         {
             new NotificationBal().ReadUserNotifications(Convert.ToInt32(Id));
-             return null;
+            return null;
         }
-	}
+    }
 }
