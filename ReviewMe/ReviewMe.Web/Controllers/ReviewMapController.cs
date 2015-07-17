@@ -2,6 +2,7 @@
 using System.IO;
 using ReviewMe.Bal;
 using ReviewMe.Common.Extensions;
+using ReviewMe.Hubs;
 using ReviewMe.Model;
 using ReviewMe.ViewModel;
 using System;
@@ -46,15 +47,61 @@ namespace ReviewMe.Web.Controllers
         [HttpPost]
         public ActionResult AddEditGroup(ReviewMapViewModel reviewMapViewModel)
         {
+            bool status = false;
+            long notifId;
+
             if (ModelState.IsValid)
             {
+                var users = reviewMapViewModel.SelectedListValues.Split(',').ToList();
+                users.Add(Convert.ToString(reviewMapViewModel.ReviewerId));
+                var list = users.ToArray();
+                UserBal userBal = new UserBal();
+                var userDetails = new Dictionary<long, string>();
+
+                foreach (var id in list)
+                {
+                    var user = userBal.GetUserById(Convert.ToInt64(id));
+                    userDetails.Add(Convert.ToInt64(id), user.UserImage);
+                }
+
+                var t = new ReviewMeHub();
+
                 if (reviewMapViewModel.IsEdit == "1")
                 {
-                    bool status = new ReviewMapBal().EditReviewMap(reviewMapViewModel);
+                    status = new ReviewMapBal().EditReviewMap(reviewMapViewModel);
                 }
                 else
                 {
-                    bool status = new ReviewMapBal().AddReviewMap(reviewMapViewModel);
+                    status = new ReviewMapBal().AddReviewMap(reviewMapViewModel);
+                }
+
+                if (status)
+                {
+                    foreach (var userDetail in userDetails)
+                    {
+                        var notifications = new NotificationsViewModel();
+                        notifications.CreatedBy = SessionManager.GetCurrentlyLoggedInUserId();
+                        notifications.CreatedOn = System.DateTime.Now;
+                        notifications.IsActive = true;
+                        notifications.IsRead = false;
+                        notifications.UserId = userDetail.Key;
+                        notifications.NotificationType = userDetail.Key == reviewMapViewModel.ReviewerId ? NotificationType.NotifyReviwer : NotificationType.NotifyReviewee;
+                        notifications.NotificationMessage = "";//string.Format(userDetail.Key == reviewMapViewModel.ReviewerId ? NotificationEnum.ReviewerNotification : NotificationEnum.RevieweeNotification, SessionManager.GetSessionInformation().FullName, DateTime.Now);
+
+                        notifId = new NotificationBal().AddNewNotification(notifications);
+                        if (userDetail.Key == reviewMapViewModel.ReviewerId)
+                        {
+                            t.SendNotificationTop(userDetail.Key, userDetail.Value, notifId,
+                                                            string.Format(NotificationEnum.ReviewerNotification,
+                                                                SessionManager.GetSessionInformation().FullName, DateTime.Now));
+                        }
+                        else
+                        {
+                            t.SendNotificationTop(userDetail.Key, userDetail.Value, notifId, string.Format(NotificationEnum.RevieweeNotification, SessionManager.GetSessionInformation().FullName, DateTime.Now));
+                        }
+
+                    }
+
                 }
             }
             return RedirectToAction("Index", "ReviewMap");
@@ -164,7 +211,7 @@ namespace ReviewMe.Web.Controllers
             {
                 bool response = new ReviewMapBal().DeleteReviewById(Id);
                 if (response)
-                {           
+                {
                     return Json(new { Status = "S", Message = "Record has been deleted successfully." }, JsonRequestBehavior.AllowGet);
                 }
                 else
@@ -182,6 +229,9 @@ namespace ReviewMe.Web.Controllers
         [HttpPost]
         public ActionResult AddEditReviewDetails(ReviewDetailsViewModel model)
         {
+            long notifId;
+            var userBal = new UserBal();
+            var user = userBal.GetUserById(Convert.ToInt64(model.RevieweeId));
             if (ModelState.IsValid)
             {
                 model.ReviewerId = SessionManager.GetCurrentlyLoggedInUserId();
@@ -190,25 +240,26 @@ namespace ReviewMe.Web.Controllers
                     if (model.Id != 0)
                     {
                         bool status = new ReviewMapBal().EditReviewDetails(model);
+
                         if (status)
-                        {                           
-                            Notifications notifications = new Notifications();
+                        {
+                            NotificationsViewModel notifications = new NotificationsViewModel();
                             notifications.CreatedBy = SessionManager.GetCurrentlyLoggedInUserId();
                             notifications.CreatedOn = System.DateTime.Now;
                             notifications.IsActive = true;
                             notifications.IsRead = false;
-                            //notifications.NotificationType = 1;
+                            notifications.NotificationType = NotificationType.EditedReview;
                             notifications.UserId = model.RevieweeId;
-                            notifications.NotificationMessage = string.Format(NotificationEnum.ReviewEditedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
-
-                            status = new NotificationBal().AddNewNotification(notifications);
+                            notifications.NotificationMessage = "";//string.Format(NotificationEnum.ReviewAddedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
+                            var t = new ReviewMeHub();
+                            notifId = new NotificationBal().AddNewNotification(notifications);
+                            t.SendNotificationTop(model.RevieweeId, user.UserImage, notifId, string.Format(NotificationEnum.ReviewEditedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString()));
                             return Json(new { Status = "S", Message = "Review has been updated successfully." }, JsonRequestBehavior.AllowGet);
-
                         }
                         else
                         {
                             return Json(new { Status = "F", Message = "Thre are some problem with server! Try Again later" }, JsonRequestBehavior.AllowGet);
-                        }                       
+                        }
                     }
                     else
                     {
@@ -216,16 +267,17 @@ namespace ReviewMe.Web.Controllers
                         //return RedirectToAction("ReviewDetails", "ReviewMap", new { revieweeId = model.RevieweeId });
                         if (status)
                         {
-                            Notifications notifications = new Notifications();
+                            var notifications = new NotificationsViewModel();
                             notifications.CreatedBy = SessionManager.GetCurrentlyLoggedInUserId();
                             notifications.CreatedOn = System.DateTime.Now;
                             notifications.IsActive = true;
                             notifications.IsRead = false;
-                            //notifications.NotificationType = 1;
+                            notifications.NotificationType = NotificationType.AddedReview;
                             notifications.UserId = model.RevieweeId;
-                            notifications.NotificationMessage = string.Format(NotificationEnum.ReviewAddedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
-
-                            status = new NotificationBal().AddNewNotification(notifications);
+                            notifications.NotificationMessage = "";//string.Format(NotificationEnum.re, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString());
+                            var t = new ReviewMeHub();
+                            notifId = new NotificationBal().AddNewNotification(notifications);
+                            t.SendNotificationTop(model.RevieweeId, user.UserImage, notifId, string.Format(NotificationEnum.ReviewEditedToReviwee, SessionManager.GetSessionInformation().FullName, model.ReviewDate.ToShortDateString()));
 
                             return Json(new { Status = "S", Message = "Review has been added successfully." }, JsonRequestBehavior.AllowGet);
                         }

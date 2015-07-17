@@ -2,6 +2,8 @@
 using System.IO;
 using System.Web.Mvc;
 using ReviewMe.Bal;
+using ReviewMe.Common.Authorization;
+/*using ReviewMe.Hubs;*/
 using ReviewMe.ViewModel;
 using ReviewMe.Web.Attributes;
 using System.Web;
@@ -34,6 +36,7 @@ namespace ReviewMe.Web.Controllers
             else
                 userViewModel = new UserBal().GetAddUserViewModel();
 
+
             return PartialView("AddEditUser", userViewModel);
         }
 
@@ -41,23 +44,23 @@ namespace ReviewMe.Web.Controllers
         public ActionResult Search(string strSearch)
         {
             UserViewModelLong userViewModelLong = null;
-            if(!string.IsNullOrEmpty(strSearch))
+            if (!string.IsNullOrEmpty(strSearch))
             {
                 UserViewModel user = new UserViewModel();
-                 userViewModelLong = new UserBal().GetAllUsers();
+                userViewModelLong = new UserBal().GetAllUsers();
                 int aa = userViewModelLong.UserViewModelList.Count();
                 List<UserViewModel> userViewModel = new List<UserViewModel>();
                 if (!string.IsNullOrEmpty(strSearch))
                     userViewModel = (List<UserViewModel>)userViewModelLong.UserViewModelList.Where(p => ((p.FName + ' ' + p.LName)).Contains(strSearch) || (p.Address != null && p.Address.Contains(strSearch) || (p.EmailId != null && p.EmailId.Contains(strSearch) || (p.MobileNo != null && p.MobileNo.Contains(strSearch))))).ToList();
 
-                userViewModelLong.UserViewModelList = userViewModel;    
+                userViewModelLong.UserViewModelList = userViewModel;
             }
             else
             {
-                 userViewModelLong = new UserBal().GetAllUsers();
+                userViewModelLong = new UserBal().GetAllUsers();
                 return View(userViewModelLong);
             }
-        
+
             return PartialView("Search", userViewModelLong);
 
         }
@@ -65,18 +68,20 @@ namespace ReviewMe.Web.Controllers
         [HttpPost]
         public ActionResult AddEditUser(UserViewModel userViewModel, HttpPostedFileBase FilePath)
         {
+            var userId = SessionManager.GetCurrentlyLoggedInUserId();
+           // new ReviewMeHub().NotificationBroadCastToUser(Convert.ToInt32(userId), "abc");
             // Modified By : Ramchandra Rane, 19th Jun 2015,Description : Added if condition
-            if(userViewModel.Id !=0)
+            if (userViewModel.Id != 0)
             {
                 ModelState.Remove("Password");
-                ModelState.Remove("ConfirmPassword");               
+                ModelState.Remove("ConfirmPassword");
             }
             TempData["Status"] = "Opps! Some error has occurred";
             if (ModelState.IsValid)
-            {               
+            {
                 if (userViewModel.Id != 0)
-                {    
-                    bool status=false;
+                {
+                    bool status = false;
                     if (FilePath != null)
                     {
                         if (userViewModel.FilePath.ContentLength > 0)
@@ -85,22 +90,22 @@ namespace ReviewMe.Web.Controllers
                             fileName = userViewModel.Id + Path.GetExtension(fileName);
                             string fileSavePath = Path.Combine(Server.MapPath("~/ProfileImages/"), fileName);
                             userViewModel.FilePath.SaveAs(fileSavePath);
-                            userViewModel.UserImage = fileName; 
-                           
-                             status = new UserBal().SaveOrUpdateUser(userViewModel);
+                            userViewModel.UserImage = fileName;
 
-                             TempData["Status"] = "Records has been updated successfully";
+                            status = new UserBal().SaveOrUpdateUser(userViewModel);
+
+                            TempData["Status"] = "Records has been updated successfully";
                         }
                     }
                     else
                     {
                         status = new UserBal().SaveOrUpdateUser(userViewModel);
                         TempData["Status"] = "Records has been updated successfully.";
-                    }                  
+                    }
                 }
                 else
                 {
-                
+
                     User returnModel = new UserBal().AddUser(userViewModel);
 
                     if (FilePath != null)
@@ -114,13 +119,13 @@ namespace ReviewMe.Web.Controllers
                             userViewModel.UserImage = fileName;
                             userViewModel.Id = returnModel.Id;
 
-                            bool status = new UserBal().SaveOrUpdateUser(userViewModel);                          
+                            bool status = new UserBal().SaveOrUpdateUser(userViewModel);
                         }
                     }
                     TempData["Status"] = "User has been added successfully.";
                 }
             }
-         
+
             return RedirectToAction("Index", "User");
         }
 
@@ -139,10 +144,10 @@ namespace ReviewMe.Web.Controllers
                     {
                         System.IO.File.Delete(fileSavePath);
                     }
-                }       
+                }
                 return Json(new { Status = "S", Message = "Records has been deleted successfully." }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { Status = "F", Message = "Some error has occurred" }, JsonRequestBehavior.AllowGet);        
+            return Json(new { Status = "F", Message = "Some error has occurred" }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult IsValidEmailAddress(string emailAddress)
         {
@@ -155,7 +160,7 @@ namespace ReviewMe.Web.Controllers
             {
                 return Json(new { Status = "Error", Message = "EmailId Not a valid" }, JsonRequestBehavior.AllowGet);
             }
-          
+
         }
     }
 }
