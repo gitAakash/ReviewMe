@@ -44,6 +44,7 @@ $(function () {
 
     // Review Add : Click Event.
     $('#btnSaveReviewDetail').click(function (e) {
+        debugger;
         e.preventDefault();
         if ($("#addEditReviewForm").valid()) { //if you use validation
             //var currentObject = $(this);

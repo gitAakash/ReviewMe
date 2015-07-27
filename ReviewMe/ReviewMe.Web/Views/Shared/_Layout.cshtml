@@ -298,10 +298,10 @@
 
         var todayDate = new Date($('#TodayDate').val());
 
-        setTimeout(function () { GetNotifications(); }, 10000);
+        //setTimeout(function () { GetNotifications(); }, 10000);
 
         function GetNotifications() {
-
+            debugger;
             $.ajax({
                 type: "GET",
                 //url: "../Notification/UsersNotifications",
@@ -674,7 +674,12 @@
             chat.client.NotificationMessage = function (path, notifId, message) {
                 debugger;
                 var parent = $('<div class="message">');
-                var img = $(' <img id="profileImage" src="/ProfileImages/"' + + '" class="message-avatar">');
+                if (path != null)
+                    var img = $(' <img id="profileImage" src="/ProfileImages/"' + path + '" class="message-avatar">');
+                else 
+                    var img = $(' <img id="profileImage" src="/ProfileImages/"' + "default.jpg" + '" class="message-avatar">');
+                var a = parseInt($('.label').html())+1;
+                $('.label').html(a);
                 var anchor = $('<a href="#" class="message-subject" id="' + notifId + '">');
                 anchor.append(message);
                 var messageDesc = $(' <div class="message-description">');

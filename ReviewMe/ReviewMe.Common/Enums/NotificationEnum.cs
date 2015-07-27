@@ -4,7 +4,7 @@ namespace ReviewMe.Common.Enums
 {
     public static class NotificationEnum
     {
-        public static string ReviewerNotification = "You have to do code review of @RevieweeName's for dated ";
+        public static string ReviewerNotification = "You has to do code review of @RevieweeName's for dated ";
         public static string RevieweeNotification = "@ReviewerName will do your code review of dated";
         public static string ReviewAddedToReviwee = "{0} has added your's review of code  of dated {1}";
         public static string ReviewEditedToReviwee = "{0} has updated your's review of code  of dated {1}";

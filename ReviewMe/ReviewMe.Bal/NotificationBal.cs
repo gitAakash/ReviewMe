@@ -32,6 +32,7 @@ namespace ReviewMe.Bal
                     notificationModel.IsActive = notifications.IsActive;
                     notificationModel.UserId = notifications.UserId;
                     notificationModel.NotificationMessage = notifications.NotificationMessage;
+                    notificationModel.ReviewForDate = notifications.ReviewForDate;
                     //notificationModel.NotificationType = notifications.NotificationType;
                     notificationModel.IsRead = notifications.IsRead;
                     notificationModel.NotificationType = (int)notifications.NotificationType;
@@ -61,9 +62,10 @@ namespace ReviewMe.Bal
                 if (notificationlist.Any())
                 {
                     var notificationViewModel = new List<NotificationsViewModel>();
-                    var notification = new NotificationsViewModel();
+        
                     foreach (var notificationse in notificationlist)
                     {
+                        var notification = new NotificationsViewModel();
                         notification.UserId = notificationse.UserId;
                         notification.ViewedOn = notificationse.ViewedOn;
                         notification.CreatedOn = notificationse.CreatedOn;
@@ -210,7 +212,7 @@ namespace ReviewMe.Bal
                     _notificationsRepository.SaveOrUpdate(notification);
 
                 }
-                return true; ;
+                return true; 
             }
             catch (Exception ex)
             {
